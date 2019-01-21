@@ -1,0 +1,17 @@
+name: WhatIsThis
+main: io.github.steve4744.whatisthis.WhatIsThis
+author: steve4744
+version: 0.1
+api-version: 1.13
+description: Tells you what you are looking at.
+commands:
+  whatisthis:
+    aliases: [wit, whatisthat]
+    description: WhatIsThis commands
+permissions:
+  whatisthis.use:
+    description: used to control who can use whatisthis and where.
+    default: true
+  whatisthis.admin:
+    description: will display extra details of what is being looked at.
+    default: op
