@@ -14,6 +14,7 @@ public class WhatIsThis extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		
+		instance = this;
 		this.saveDefaultConfig();
 		version = this.getDescription().getVersion();
 		
@@ -23,7 +24,7 @@ public class WhatIsThis extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
-		getLogger().info("WhatIsThis disabled");
+		getLogger().info("WhatIsThis has been disabled");
 	}
 
 	public static WhatIsThis getPlugin() {

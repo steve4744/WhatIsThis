@@ -21,6 +21,10 @@ public class WhatIsThisCommand implements CommandExecutor {
 		}
 		Player player = (Player) sender;
 		
+		if (!player.hasPermission("whatisthis.use")) {
+			player.sendMessage("You do not have permission to run WhatIsThis");
+			return true;
+		}
 		//get the block the player is looking at
 		BlockIterator iter = new BlockIterator(player, 10);
         Block lastBlock = iter.next();
@@ -30,10 +34,9 @@ public class WhatIsThisCommand implements CommandExecutor {
                 continue;
             break;
         }
-        Bukkit.getLogger().info("DEBUG: Looked at block = " + lastBlock);
-        Material target = lastBlock.getType();
-        player.sendMessage(target.toString());
-        
+        Bukkit.getLogger().info("DEBUG: " + lastBlock.getDrops());
+        WhatIsThis.getScoreboardManager().showTarget(player, lastBlock);
+
 		return false;
 	}
 

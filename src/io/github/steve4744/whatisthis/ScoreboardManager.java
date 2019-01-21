@@ -1,12 +1,14 @@
 package io.github.steve4744.whatisthis;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -25,7 +27,7 @@ public class ScoreboardManager {
 		this.plugin = plugin;
 	}
 
-	public void showProgress(Player player, Material target) {
+	public void showTarget(Player player, Block block) {
 		//kill any previous scheduled tasks
 		cancelTask(player);
 		
@@ -39,8 +41,8 @@ public class ScoreboardManager {
 		resetScoreboard(player);
 		
 		Objective o = scoreboard.getObjective(DisplaySlot.SIDEBAR);
-		o.setDisplayName(ChatColor.GOLD.toString() + ChatColor.BOLD + getDisplayName(target) + ChatColor.WHITE + getPadding(target) + "%");
-		//o.getScore(getText() + ":").setScore(growth);
+		o.setDisplayName(ChatColor.GOLD.toString() + ChatColor.BOLD + getDisplayName(block.getType()));
+		o.getScore(getText() + " : " + ChatColor.RED + getDrops(block)).setScore(block.getDrops().size());
 		player.setScoreboard(scoreboard);
 		
 		BukkitTask task = new BukkitRunnable() {
@@ -55,7 +57,7 @@ public class ScoreboardManager {
 
 	private Scoreboard buildScoreboard() {
 		scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
-		Objective o = scoreboard.registerNewObjective("CropChecker", "showgrowth", "CropChecker");
+		Objective o = scoreboard.registerNewObjective("WhatIsThis", "showblock", "WhatIsThis");
 		o.setDisplaySlot(DisplaySlot.SIDEBAR);
 		return scoreboard;
 	}
@@ -66,7 +68,7 @@ public class ScoreboardManager {
 			scoreboard.resetScores(entry);
 		}
 	}
-	
+
 	private void cancelTask(Player player) {
 		BukkitTask task = null;
 		if (taskMap.containsKey(player.getName())) {
@@ -75,38 +77,25 @@ public class ScoreboardManager {
 			taskMap.remove(player.getName());
 		}
 	}
-	
+
 	private String getDisplayName(Material target) {
-		//FileConfiguration cfg = Configuration.getStringData();
-		//String cropname = crop.name().toLowerCase();
-		//return cfg.getString("crops." + cropname, crop.name());
 		return target.toString();
 	}
-	
-	/*private String getText() {
-		FileConfiguration cfg = Configuration.getStringData();
-		return cfg.getString("text.growth", "Growth");	
-	}*/
-	
-	private String getPadding(Material target) {
-		StringBuilder pad = new StringBuilder();
-		int padlen = 5;
-		String targetname = getDisplayName(target);
-		
-		/*we need extra padding if crop name is shorter than the text
-		if (cropname.length() < getText().length()) {
-			int mismatch = getText().length() - cropname.length();
-			if (mismatch >= 6) {
-				padlen = 12;
-			} else if (mismatch >= 4) {
-				padlen = 8;
-			} 
-		}*/
-		for (int i = 0; i < padlen; i++) {
-			pad.append(" ");
-		}
-		return pad.toString();
+
+	private String getText() {
+		//FileConfiguration cfg = Configuration.getStringData();
+		//return cfg.getString("text.growth", "Growth");
+		return "Drops";
 	}
 
+	private String getDrops(Block block) {
+		Collection<ItemStack> coll = new ArrayList<ItemStack>();
+		coll = block.getDrops();
+		if (coll.isEmpty()) {
+			return "";
+		}
+		ItemStack item = coll.iterator().next();
+		return item.getType().toString() + "  x";
+	}
 
 }
