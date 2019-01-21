@@ -7,7 +7,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class WhatIsThis extends JavaPlugin {
 	
+	private static WhatIsThis instance;
 	private String version;
+	private ScoreboardManager scoreboardManager;
 
 	@Override
 	public void onEnable() {
@@ -17,12 +19,22 @@ public class WhatIsThis extends JavaPlugin {
 		
 		PluginManager pm = Bukkit.getPluginManager();
 		this.getCommand("whatisthis").setExecutor(new WhatIsThisCommand());
-		
 	}
 
 	@Override
 	public void onDisable() {
 		getLogger().info("WhatIsThis disabled");
 	}
+
+	public static WhatIsThis getPlugin() {
+		return instance;
+    }
+
+	public static ScoreboardManager getScoreboardManager() {
+        if (getPlugin().scoreboardManager == null) {
+            getPlugin().scoreboardManager = new ScoreboardManager(instance);
+        }
+        return getPlugin().scoreboardManager;
+    }
 
 }
