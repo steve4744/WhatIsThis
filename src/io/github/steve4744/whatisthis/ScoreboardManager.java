@@ -3,6 +3,8 @@ package io.github.steve4744.whatisthis;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -42,7 +44,9 @@ public class ScoreboardManager {
 		
 		Objective o = scoreboard.getObjective(DisplaySlot.SIDEBAR);
 		o.setDisplayName(ChatColor.GOLD.toString() + ChatColor.BOLD + getDisplayName(block.getType()));
-		o.getScore(getText() + " : " + ChatColor.RED + getDrops(block)).setScore(block.getDrops().size());
+		for (String aa : getDrops(block)) {
+			o.getScore(getFormattedText(aa)).setScore(block.getDrops().size());
+		}
 		player.setScoreboard(scoreboard);
 		
 		BukkitTask task = new BukkitRunnable() {
@@ -88,14 +92,32 @@ public class ScoreboardManager {
 		return "Drops";
 	}
 
-	private String getDrops(Block block) {
+	private List<String> getDrops(Block block) {
+		List<String> itemDrops = new ArrayList<String>();
 		Collection<ItemStack> coll = new ArrayList<ItemStack>();
 		coll = block.getDrops();
 		if (coll.isEmpty()) {
-			return "";
+			itemDrops.add("");
+			return itemDrops;
 		}
+		//TODO some crops drop 2 different itemstacks, so getting the first isn't reliable. block#getDrops doesn't return these correctly.
 		ItemStack item = coll.iterator().next();
-		return item.getType().toString() + "  x";
+		itemDrops.add(item.getType().toString());
+
+		return itemDrops;
+	}
+	
+	private String getFormattedText(String item) {
+		String result = getText() + " : ";
+		// result has to be <=40 char limit for SB
+		if (item.equalsIgnoreCase("HEAVY_WEIGHTED_PRESSURE_PLATE")) {
+			item = "IRON_PRESSURE_PLATE";
+		} else if (item.equalsIgnoreCase("LIGHT_WEIGHTED_PRESSURE_PLATE")) {
+			item = "GOLD_PRESSURE_PLATE";
+		}
+		
+		//return getText() + " : " + ChatColor.RED + item + "  x";
+		return item.isEmpty() ? result : result + ChatColor.RED + item + "  x";
 	}
 
 }

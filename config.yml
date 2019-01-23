@@ -1,0 +1,11 @@
+################################################
+# WhatIsThis configuration file                #
+#                                              #
+# Identify the block you are looking at by     #
+# command, or right-click with empty hand.     #
+# Author: steve4744                            #
+################################################
+use_right_click:
+  enabled: true
+# Check for new version
+check_for_update: true

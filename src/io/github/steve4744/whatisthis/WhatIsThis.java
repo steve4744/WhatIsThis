@@ -16,10 +16,11 @@ public class WhatIsThis extends JavaPlugin {
 		
 		instance = this;
 		this.saveDefaultConfig();
-		version = this.getDescription().getVersion();
+		getConfig().options().copyDefaults(true);
+		saveConfig();
 		
-		PluginManager pm = Bukkit.getPluginManager();
-		this.getCommand("whatisthis").setExecutor(new WhatIsThisCommand());
+		version = this.getDescription().getVersion();
+		setupPlugin();
 	}
 
 	@Override
@@ -37,5 +38,14 @@ public class WhatIsThis extends JavaPlugin {
         }
         return getPlugin().scoreboardManager;
     }
+	
+	private void setupPlugin() {
+		this.getCommand("whatisthis").setExecutor(new WhatIsThisCommand());
+		if (getConfig().getBoolean("use_right_click.enabled")) {
+			PluginManager pm = Bukkit.getPluginManager();
+			pm.registerEvents(new WhatIsThisListener(), this);
+			getLogger().info("DEBUG: enabled listener");
+		}
+	}
 
 }

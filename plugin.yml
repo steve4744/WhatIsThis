@@ -6,7 +6,7 @@ api-version: 1.13
 description: Tells you what you are looking at.
 commands:
   whatisthis:
-    aliases: [wit, whatisthat]
+    aliases: [wt, wit, whatisthat]
     description: WhatIsThis commands
 permissions:
   whatisthis.use:
