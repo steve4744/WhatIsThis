@@ -1,6 +1,5 @@
 package io.github.steve4744.whatisthis;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -14,13 +13,13 @@ public class WhatIsThisCommand implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		
+
 		if (!(sender instanceof Player)){
 			sender.sendMessage(ChatColor.RED + "Command can only be run by a player");
 			return true;	
 		}
 		Player player = (Player) sender;
-		
+
 		if (!player.hasPermission("whatisthis.use")) {
 			player.sendMessage("You do not have permission to run WhatIsThis");
 			return true;
@@ -34,9 +33,8 @@ public class WhatIsThisCommand implements CommandExecutor {
                 continue;
             break;
         }
-        Bukkit.getLogger().info("DEBUG: " + lastBlock.getDrops());
-        WhatIsThis.getScoreboardManager().showTarget(player, lastBlock);
 
+        WhatIsThis.getScoreboardManager().showTarget(player, lastBlock);
 		return false;
 	}
 

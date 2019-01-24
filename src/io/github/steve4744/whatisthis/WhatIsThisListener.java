@@ -1,6 +1,5 @@
 package io.github.steve4744.whatisthis;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -18,12 +17,11 @@ public class WhatIsThisListener implements Listener {
 			return;
 		}
 		Player player = event.getPlayer();
-		if (player.getInventory().getItemInMainHand() != null && player.getInventory().getItemInMainHand().getType() != Material.AIR) {
+		if (player.getInventory().getItemInMainHand().getType() != Material.STICK) { 
 			return;
 		}
-		
+
 		Block block = event.getClickedBlock();
-		Bukkit.getLogger().info("DEBUG: " + block.getDrops());
 		WhatIsThis.getScoreboardManager().showTarget(player, block);
 	}
 }

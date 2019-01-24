@@ -38,13 +38,12 @@ public class WhatIsThis extends JavaPlugin {
         }
         return getPlugin().scoreboardManager;
     }
-	
+
 	private void setupPlugin() {
 		this.getCommand("whatisthis").setExecutor(new WhatIsThisCommand());
 		if (getConfig().getBoolean("use_right_click.enabled")) {
 			PluginManager pm = Bukkit.getPluginManager();
 			pm.registerEvents(new WhatIsThisListener(), this);
-			getLogger().info("DEBUG: enabled listener");
 		}
 	}
 

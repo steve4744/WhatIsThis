@@ -1,0 +1,17 @@
+package io.github.steve4744.whatisthis.enums;
+
+public enum InconsistentDropItems {
+	NETHER_WART,
+	CHORUS_PLANT,
+	CHORUS_FLOWER,
+	DEAD_BUSH,
+	GRASS,
+	TALL_GRASS,
+	FERN,
+	LARGE_FERN,
+	COCOA,
+	RED_MUSHROOM_BLOCK,
+	BROWN_MUSHROOM_BLOCK,
+	BEETROOTS,
+	WHEAT
+}
