@@ -1,7 +1,7 @@
 name: WhatIsThis
 main: io.github.steve4744.whatisthis.WhatIsThis
 author: steve4744
-version: 0.3
+version: 1.0
 api-version: 1.13
 description: Tells you what you are looking at.
 commands:
