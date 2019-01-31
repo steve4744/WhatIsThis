@@ -4,6 +4,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import io.github.steve4744.whatisthis.metrics.Metrics;
+
 
 public class WhatIsThis extends JavaPlugin {
 	
@@ -21,6 +23,8 @@ public class WhatIsThis extends JavaPlugin {
 		
 		version = this.getDescription().getVersion();
 		setupPlugin();
+		
+		new Metrics(this);
 	}
 
 	@Override
@@ -40,7 +44,7 @@ public class WhatIsThis extends JavaPlugin {
     }
 
 	private void setupPlugin() {
-		this.getCommand("whatisthis").setExecutor(new WhatIsThisCommand());
+		this.getCommand("whatisthis").setExecutor(new WhatIsThisCommand(version));
 		if (getConfig().getBoolean("use_right_click.enabled")) {
 			PluginManager pm = Bukkit.getPluginManager();
 			pm.registerEvents(new WhatIsThisListener(), this);

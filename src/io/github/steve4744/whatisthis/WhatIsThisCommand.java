@@ -11,6 +11,12 @@ import org.bukkit.util.BlockIterator;
 
 public class WhatIsThisCommand implements CommandExecutor {
 
+	private final String version;
+	
+	public WhatIsThisCommand(String version) {
+		this.version = version;
+	}
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
@@ -22,6 +28,10 @@ public class WhatIsThisCommand implements CommandExecutor {
 
 		if (!player.hasPermission("whatisthis.use")) {
 			player.sendMessage("You do not have permission to run WhatIsThis");
+			return true;
+		}
+		if (args.length > 0) {
+			player.sendMessage(ChatColor.GREEN + "[WhatIsThis] " + ChatColor.WHITE + "Version " + version + " : plugin by "+ ChatColor.AQUA + "steve4744");
 			return true;
 		}
 		//get the block the player is looking at
