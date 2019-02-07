@@ -1,7 +1,6 @@
 package io.github.steve4744.whatisthis;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -39,13 +38,13 @@ public class WhatIsThisCommand implements CommandExecutor {
         Block lastBlock = iter.next();
         while (iter.hasNext()) {
             lastBlock = iter.next();
-            if (lastBlock.getType() == Material.AIR)
+            if (Utils.isAir(lastBlock.getType()))
                 continue;
             break;
         }
 
         WhatIsThis.getScoreboardManager().showTarget(player, lastBlock);
 		return false;
-	}
+	} 
 
 }

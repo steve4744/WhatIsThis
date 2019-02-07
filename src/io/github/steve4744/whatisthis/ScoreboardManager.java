@@ -207,7 +207,6 @@ public class ScoreboardManager {
 				break;
 			default: amount = 1;
 		}
-
 		return amount;
 	}
 }
