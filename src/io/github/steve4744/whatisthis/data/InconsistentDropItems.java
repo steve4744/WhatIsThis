@@ -1,4 +1,4 @@
-package io.github.steve4744.whatisthis.enums;
+package io.github.steve4744.whatisthis.data;
 
 public enum InconsistentDropItems {
 	NETHER_WART,

@@ -18,7 +18,7 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 
-import io.github.steve4744.whatisthis.enums.InconsistentDropItems;
+import io.github.steve4744.whatisthis.data.InconsistentDropItems;
 
 
 public class ScoreboardManager {
