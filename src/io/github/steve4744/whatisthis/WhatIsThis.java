@@ -37,18 +37,18 @@ public class WhatIsThis extends JavaPlugin {
 		return instance;
     }
 
-	public static ScoreboardManager getScoreboardManager() {
-        if (getPlugin().scoreboardManager == null) {
-            getPlugin().scoreboardManager = new ScoreboardManager(instance);
+	public ScoreboardManager getScoreboardManager() {
+        if (scoreboardManager == null) {
+            scoreboardManager = new ScoreboardManager(this);
         }
-        return getPlugin().scoreboardManager;
+        return scoreboardManager;
     }
 
 	private void setupPlugin() {
-		this.getCommand("whatisthis").setExecutor(new WhatIsThisCommand(version));
+		this.getCommand("whatisthis").setExecutor(new WhatIsThisCommand(version, this));
 		if (getConfig().getBoolean("use_right_click.enabled")) {
 			PluginManager pm = Bukkit.getPluginManager();
-			pm.registerEvents(new WhatIsThisListener(), this);
+			pm.registerEvents(new WhatIsThisListener(this), this);
 		}
 	}
 

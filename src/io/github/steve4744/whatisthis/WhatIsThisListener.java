@@ -11,6 +11,12 @@ import org.bukkit.inventory.EquipmentSlot;
 
 public class WhatIsThisListener implements Listener {
 
+	private final WhatIsThis plugin;
+
+	public WhatIsThisListener(WhatIsThis plugin) {
+		this.plugin = plugin;
+	}
+
 	@EventHandler
 	public void onQueryBlock(PlayerInteractEvent event) {
 		if (event.getAction() != Action.RIGHT_CLICK_BLOCK || event.getHand().equals(EquipmentSlot.OFF_HAND)) {
@@ -22,6 +28,6 @@ public class WhatIsThisListener implements Listener {
 		}
 
 		Block block = event.getClickedBlock();
-		WhatIsThis.getScoreboardManager().showTarget(player, block);
+		plugin.getScoreboardManager().showTarget(player, block);
 	}
 }

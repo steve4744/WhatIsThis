@@ -11,9 +11,11 @@ import org.bukkit.util.BlockIterator;
 public class WhatIsThisCommand implements CommandExecutor {
 
 	private final String version;
+	private final WhatIsThis plugin;
 	
-	public WhatIsThisCommand(String version) {
+	public WhatIsThisCommand(String version, WhatIsThis plugin) {
 		this.version = version;
+		this.plugin = plugin;
 	}
 
 	@Override
@@ -43,7 +45,7 @@ public class WhatIsThisCommand implements CommandExecutor {
             break;
         }
 
-        WhatIsThis.getScoreboardManager().showTarget(player, lastBlock);
+        plugin.getScoreboardManager().showTarget(player, lastBlock);
 		return false;
 	} 
 
