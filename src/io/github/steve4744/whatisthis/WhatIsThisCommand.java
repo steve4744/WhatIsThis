@@ -21,10 +21,12 @@ public class WhatIsThisCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-		if (!(sender instanceof Player)){
-			sender.sendMessage(ChatColor.RED + "Command can only be run by a player");
+		String infoMessage = ChatColor.GREEN + "[WhatIsThis] " + ChatColor.WHITE + "Version " + version + " : plugin by "+ ChatColor.AQUA + "steve4744";
+		if (!(sender instanceof Player)) {
+			sender.sendMessage(infoMessage);
 			return true;	
 		}
+
 		Player player = (Player) sender;
 
 		if (!player.hasPermission("whatisthis.use")) {
@@ -32,7 +34,7 @@ public class WhatIsThisCommand implements CommandExecutor {
 			return true;
 		}
 		if (args.length > 0) {
-			player.sendMessage(ChatColor.GREEN + "[WhatIsThis] " + ChatColor.WHITE + "Version " + version + " : plugin by "+ ChatColor.AQUA + "steve4744");
+			player.sendMessage(infoMessage);
 			return true;
 		}
 		//get the block the player is looking at

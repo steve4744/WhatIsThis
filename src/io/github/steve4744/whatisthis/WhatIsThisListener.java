@@ -23,7 +23,7 @@ public class WhatIsThisListener implements Listener {
 			return;
 		}
 		Player player = event.getPlayer();
-		if (player.getInventory().getItemInMainHand().getType() != Material.STICK) { 
+		if (player.getInventory().getItemInMainHand().getType() != Material.STICK || !player.hasPermission("whatisthis.use")) { 
 			return;
 		}
 
