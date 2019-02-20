@@ -1,3 +1,27 @@
+/*
+ * MIT License
+
+Copyright (c) 2019 steve4744
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+ */
 package io.github.steve4744.whatisthis;
 
 import org.bukkit.Bukkit;
@@ -27,12 +51,14 @@ public class WhatIsThis extends JavaPlugin {
 		setupPlugin();
 
 		new Metrics(this);
+
 		checkForUpdate();
 	}
 
 	@Override
 	public void onDisable() {
 		scoreboardManager = null;
+		dataHandler = null;
 		getLogger().info("WhatIsThis has been disabled");
 	}
 
@@ -58,7 +84,6 @@ public class WhatIsThis extends JavaPlugin {
 			PluginManager pm = Bukkit.getPluginManager();
 			pm.registerEvents(new WhatIsThisListener(this), this);
 		}
-
 		dataHandler = new DataHandler(this);
 	}
 
@@ -71,10 +96,10 @@ public class WhatIsThis extends JavaPlugin {
 			public void run() {
 				String latestVersion = VersionChecker.getVersion();
 				if (latestVersion == "error") {
-					getLogger().info("Error attempting to check for new version. Please report it here: https://www.spigotmc.org/threads/whatisthis.xxxxx/");
+					getLogger().info("Error attempting to check for new version. Please report it here: https://www.spigotmc.org/threads/whatisthis.360832/");
 				} else {
 					if (!version.equals(latestVersion)) {
-						getLogger().info("New version " + latestVersion + " available on Spigot: https://www.spigotmc.org/resources/whatisthis.zzzzz/");
+						getLogger().info("New version " + latestVersion + " available on Spigot: https://www.spigotmc.org/resources/whatisthis.65050//");
 					}
 				}
 			}

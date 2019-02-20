@@ -5,7 +5,11 @@
 # command, or right-click with a STICK.        #
 # Author: steve4744                            #
 ################################################
-use_right_click:
-  enabled: true
 # Check for new version
 check_for_update: true
+# Allow right-click with item
+use_right_click:
+  enabled: true
+# Translatable text
+text:
+  drops: Drops
