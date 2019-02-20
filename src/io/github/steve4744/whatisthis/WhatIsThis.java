@@ -29,6 +29,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import io.github.steve4744.whatisthis.configuration.Settings;
 import io.github.steve4744.whatisthis.data.DataHandler;
 import io.github.steve4744.whatisthis.metrics.Metrics;
 
@@ -38,6 +39,7 @@ public class WhatIsThis extends JavaPlugin {
 	private String version;
 	private ScoreboardManager scoreboardManager;
 	private DataHandler dataHandler;
+	private Settings settings;
 
 	@Override
 	public void onEnable() {
@@ -59,6 +61,7 @@ public class WhatIsThis extends JavaPlugin {
 	public void onDisable() {
 		scoreboardManager = null;
 		dataHandler = null;
+		settings = null;
 		getLogger().info("WhatIsThis has been disabled");
 	}
 
@@ -80,6 +83,7 @@ public class WhatIsThis extends JavaPlugin {
 	private void setupPlugin() {
 		this.getCommand("whatisthis").setExecutor(new WhatIsThisCommand(version, this));
 
+		settings = new Settings(this);
 		if (getConfig().getBoolean("use_right_click.enabled")) {
 			PluginManager pm = Bukkit.getPluginManager();
 			pm.registerEvents(new WhatIsThisListener(this), this);
@@ -87,6 +91,10 @@ public class WhatIsThis extends JavaPlugin {
 		dataHandler = new DataHandler(this);
 	}
 
+	public Settings getSettings() {
+		return settings;
+	}
+	
 	private void checkForUpdate() {
 		if (!getConfig().getBoolean("check_for_update", true)) {
 			return;

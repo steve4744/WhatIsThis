@@ -24,7 +24,6 @@ SOFTWARE.
  */
 package io.github.steve4744.whatisthis;
 
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -47,7 +46,7 @@ public class WhatIsThisListener implements Listener {
 			return;
 		}
 		Player player = event.getPlayer();
-		if (player.getInventory().getItemInMainHand().getType() != Material.STICK || !player.hasPermission("whatisthis.use")) { 
+		if (player.getInventory().getItemInMainHand().getType() != plugin.getSettings().getClickItem() || !player.hasPermission("whatisthis.use")) { 
 			return;
 		}
 

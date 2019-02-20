@@ -22,17 +22,22 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
  */
-package io.github.steve4744.whatisthis;
+package io.github.steve4744.whatisthis.configuration;
 
 import org.bukkit.Material;
 
-public class Utils {
+import io.github.steve4744.whatisthis.WhatIsThis;
 
-	public static boolean isAir(Material material) {
-		return material == Material.AIR || material == Material.CAVE_AIR || material == Material.VOID_AIR;
+public class Settings {
+
+	private final WhatIsThis plugin;
+
+	public Settings(WhatIsThis plugin) {
+		this.plugin = plugin;
 	}
 
-	public static boolean isWater(Material material) {
-		return material == Material.WATER;
+	public Material getClickItem() {
+		Material clickItem = Material.getMaterial(plugin.getConfig().getString("use_right_click.item"));
+		return clickItem != null ? clickItem : Material.STICK;
 	}
 }

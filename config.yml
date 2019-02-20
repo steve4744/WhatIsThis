@@ -2,7 +2,7 @@
 # WhatIsThis configuration file                #
 #                                              #
 # Identify the block you are looking at by     #
-# command, or right-click with a STICK.        #
+# command, or right-click with an item.        #
 # Author: steve4744                            #
 ################################################
 # Check for new version
@@ -10,6 +10,7 @@ check_for_update: true
 # Allow right-click with item
 use_right_click:
   enabled: true
+  item: STICK
 # Translatable text
 text:
   drops: Drops

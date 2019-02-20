@@ -54,19 +54,29 @@ public class WhatIsThisCommand implements CommandExecutor {
 		Player player = (Player) sender;
 
 		if (!player.hasPermission("whatisthis.use")) {
-			player.sendMessage("You do not have permission to run WhatIsThis");
+			player.sendMessage(ChatColor.GREEN + "[WhatIsThis] " + ChatColor.WHITE + "You do not have permission to run the command");
 			return true;
 		}
 		if (args.length > 0) {
+			if (args[0].equalsIgnoreCase("reload")) {
+				if (!player.hasPermission("whatisthis.admin")) {
+					player.sendMessage(ChatColor.GREEN + "[WhatIsThis] " + ChatColor.WHITE + "You do not have permission to reload the plugin");
+					return true;
+				}
+				plugin.reloadConfig();
+				player.sendMessage(ChatColor.GREEN + "[WhatIsThis] " + ChatColor.WHITE + "Config reloaded");
+				return false;
+			}
 			player.sendMessage(infoMessage);
 			return true;
 		}
+
 		//get the block the player is looking at
 		BlockIterator iter = new BlockIterator(player, 10);
         Block lastBlock = iter.next();
         while (iter.hasNext()) {
             lastBlock = iter.next();
-            if (Utils.isAir(lastBlock.getType()))
+            if (Utils.isAir(lastBlock.getType()) || Utils.isWater(lastBlock.getType()))
                 continue;
             break;
         }
