@@ -25,6 +25,7 @@ SOFTWARE.
 package io.github.steve4744.whatisthis;
 
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 
 public class Utils {
 
@@ -34,5 +35,9 @@ public class Utils {
 
 	public static boolean isWater(Material material) {
 		return material == Material.WATER;
+	}
+
+	public static String getLocale(Player player) {
+		return player.getLocale();
 	}
 }

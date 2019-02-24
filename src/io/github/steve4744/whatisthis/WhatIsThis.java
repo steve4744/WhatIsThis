@@ -31,6 +31,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import io.github.steve4744.whatisthis.configuration.Settings;
 import io.github.steve4744.whatisthis.data.DataHandler;
+import io.github.steve4744.whatisthis.lang.EnumLang;
 import io.github.steve4744.whatisthis.metrics.Metrics;
 
 public class WhatIsThis extends JavaPlugin {
@@ -52,6 +53,9 @@ public class WhatIsThis extends JavaPlugin {
 		version = this.getDescription().getVersion();
 		setupPlugin();
 
+		// load language files
+		EnumLang.init();
+		
 		new Metrics(this);
 
 		checkForUpdate();
@@ -59,6 +63,7 @@ public class WhatIsThis extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
+		EnumLang.clean();
 		scoreboardManager = null;
 		dataHandler = null;
 		settings = null;

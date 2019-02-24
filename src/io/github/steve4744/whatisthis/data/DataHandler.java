@@ -32,9 +32,12 @@ import org.apache.commons.lang3.EnumUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import io.github.steve4744.whatisthis.Utils;
 import io.github.steve4744.whatisthis.WhatIsThis;
+import io.github.steve4744.whatisthis.lang.EnumLang;
 
 public class DataHandler {
 
@@ -44,15 +47,26 @@ public class DataHandler {
 		this.plugin = plugin;
 	}
 
-	public String getDisplayName(Material target) {
-		return target.toString();
+	/**
+	 * Get the localised material name. Cater for vanilla issues with WALL_ items.
+	 * @param target material name
+	 * @param player
+	 * @return localised material name
+	 */
+	public String getDisplayName(Material target, Player player) {
+		String targetName = target.toString();
+		// wall_sign and coloured wall_banners are not currently in the Mojang language files
+		if (targetName.contains("WALL_BANNER") || targetName.contains("WALL_SIGN")) {
+			targetName = targetName.replace("WALL_", "");
+		}
+		return translateItemName(targetName, player);
 	}
 
 	private String getText() {
 		return plugin.getConfig().getString("text.drops", "Drops");
 	}
 
-	public List<String> getItemDrops(Block block) {
+	public List<String> getItemDrops(Block block, Player player) {
 		List<String> itemDrops = new ArrayList<String>();
 		Collection<ItemStack> coll = new ArrayList<ItemStack>();
 		coll = block.getDrops();
@@ -106,30 +120,57 @@ public class DataHandler {
 		return itemDrops;
 	}
 
-	public String getFormattedText(Block block, String item) {
-		String separator = "  x";
-		String result = getText() + " : ";
-		// result has to be <=40 char limit for SB
-		if (item.equalsIgnoreCase("HEAVY_WEIGHTED_PRESSURE_PLATE")) {
-			item = "IRON_PRESSURE_PLATE";
+	/**
+	 * Translate the material to its localised name. If not present revert to "en_us".
+	 * @param item
+	 * @param player
+	 * @return localised item name
+	 */
+	private String translateItemName(String item, Player player) {
+		String locale = Utils.getLocale(player);
+		String translated = null;
 
-		} else if (item.equalsIgnoreCase("LIGHT_WEIGHTED_PRESSURE_PLATE")) {
-			item = "GOLD_PRESSURE_PLATE";
+		if (EnumLang.get(locale).getMap().containsKey("item.minecraft." + item.toLowerCase())) {
+			translated = EnumLang.get(locale).getMap().get("item.minecraft." + item.toLowerCase());
+
+		} else if (EnumLang.get(locale).getMap().containsKey("block.minecraft." + item.toLowerCase())) {
+			translated = EnumLang.get(locale).getMap().get("block.minecraft." + item.toLowerCase());
+
+		} else if (EnumLang.get("en_us").getMap().containsKey("item.minecraft." + item.toLowerCase())) {
+			translated = EnumLang.get("en_us").getMap().get("item.minecraft." + item.toLowerCase());
+
+		} else if (EnumLang.get("en_us").getMap().containsKey("block.minecraft." + item.toLowerCase())) {
+			translated = EnumLang.get("en_us").getMap().get("block.minecraft." + item.toLowerCase());
 		}
+
+		return translated == null ? "not found" : translated;
+	}
+
+	public String getFormattedText(Block block, String item, Player player) {
+		String separator = "  x";
+		String result = getText() + " : " + ChatColor.RED;
+		if (item.isEmpty()) {
+			return result;
+		}
+
 		//define range of variable drops
 		if (item.equalsIgnoreCase("NETHER_WART")) {
-			separator = ChatColor.WHITE + " # " + ChatColor.RED + "1  " + ChatColor.WHITE + "->" + ChatColor.RED;
+			separator = " # 1  ->";
 
 		} else if (item.equalsIgnoreCase("CHORUS_FRUIT") || item.equalsIgnoreCase("WHEAT_SEEDS") || item.equalsIgnoreCase("BEETROOT_SEEDS") || item.equalsIgnoreCase("STICK")) {
-			separator = ChatColor.WHITE + " # " + ChatColor.RED + "0  " + ChatColor.WHITE + "->" + ChatColor.RED;
+			separator = " # 0  ->";
 
 		} else if (item.equalsIgnoreCase("RED_MUSHROOM") || item.equalsIgnoreCase("BROWN_MUSHROOM")) {
 			if (block.getType().toString().contains("MUSHROOM_BLOCK")) {
-				separator = ChatColor.WHITE + " # " + ChatColor.RED + "0  " + ChatColor.WHITE + "->" + ChatColor.RED;;
+				separator = " # 0  ->";
 			}
 		}
 
-		return item.isEmpty() ? result : result + ChatColor.RED + item + separator;
+		// Scoreboard max length is 40, so subtract length of result and separator
+		int maxlen = 40 - result.length() - separator.length();
+
+		String translated = translateItemName(item, player);
+		return result + translated.substring(0, Math.min(translated.length(), maxlen)) + separator;
 	}
 
 	private boolean dropsAreInconsistent(Block block) { 
