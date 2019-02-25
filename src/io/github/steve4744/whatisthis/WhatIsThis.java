@@ -72,14 +72,14 @@ public class WhatIsThis extends JavaPlugin {
 
 	public static WhatIsThis getPlugin() {
 		return instance;
-    }
+	}
 
 	public ScoreboardManager getScoreboardManager() {
-        if (scoreboardManager == null) {
-            scoreboardManager = new ScoreboardManager(this);
-        }
-        return scoreboardManager;
-    }
+		if (scoreboardManager == null) {
+			scoreboardManager = new ScoreboardManager(this);
+		}
+		return scoreboardManager;
+	}
 	
 	public DataHandler getDataHandler() {
 		return dataHandler;

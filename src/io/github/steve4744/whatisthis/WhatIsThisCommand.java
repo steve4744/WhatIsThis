@@ -73,15 +73,15 @@ public class WhatIsThisCommand implements CommandExecutor {
 
 		//get the block the player is looking at
 		BlockIterator iter = new BlockIterator(player, 10);
-        Block lastBlock = iter.next();
-        while (iter.hasNext()) {
-            lastBlock = iter.next();
-            if (Utils.isAir(lastBlock.getType()) || Utils.isWater(lastBlock.getType()))
-                continue;
-            break;
-        }
+		Block lastBlock = iter.next();
+		while (iter.hasNext()) {
+			lastBlock = iter.next();
+			if (Utils.isAir(lastBlock.getType()) || Utils.isWater(lastBlock.getType()))
+				continue;
+			break;
+		}
 
-        plugin.getScoreboardManager().showTarget(player, lastBlock);
+		plugin.getScoreboardManager().showTarget(player, lastBlock);
 		return false;
 	} 
 
