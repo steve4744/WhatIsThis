@@ -14,3 +14,13 @@ use_right_click:
 # Translatable text
 text:
   drops: Drops
+# To enable the loading of specific languages only, add them to a list as follows:
+#LoadLanguage = [en_us, es_es, cy_gb]
+# Or
+#LoadLanguage:
+#- en_us
+#- es_es
+#- cy_gb
+# If you want to load all the languages, add "all" to the list:
+LoadLanguage:
+- all

@@ -182,10 +182,9 @@ public enum EnumLang {
      */
     public static void init() {
         for (EnumLang enumLang : EnumLang.values()) {
-            /*if (!LangUtils.plugin.config.getStringList("LoadLanguage").contains("all") && !LangUtils.plugin.config.getStringList("LoadLanguage").contains(enumLang.getLocale())) {
-                LangUtils.plugin.getLogger().fine("Skipped " + enumLang.getLocale());
+            if (!WhatIsThis.getPlugin().getConfig().getStringList("LoadLanguage").contains("all") && !WhatIsThis.getPlugin().getConfig().getStringList("LoadLanguage").contains(enumLang.getLocale())) {
                 continue;
-            }*/
+            }
             try {
                 readFile(enumLang, new BufferedReader(new InputStreamReader(EnumLang.class.getResourceAsStream("/lang/" + enumLang.locale + ".json"), Charset.forName("UTF-8"))));
                 Bukkit.getLogger().info(enumLang.getLocale() + " has been loaded.");
