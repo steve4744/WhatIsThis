@@ -15,7 +15,7 @@ use_right_click:
 text:
   drops: Drops
 # To enable the loading of specific languages only, add them to a list as follows:
-#LoadLanguage = [en_us, es_es, cy_gb]
+#LoadLanguage: [en_us, es_es, cy_gb]
 # Or
 #LoadLanguage:
 #- en_us
