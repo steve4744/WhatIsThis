@@ -28,6 +28,15 @@ This plugin is only supported on Minecraft/Spigot 1.13+
 whatisthis.use - default true
 whatisthis.admin - default op
 ```
+
+## Multi Language Support
+All Minecraft languages are supported. The player's own language (which is set locally in the Minecraft launcher) is used to display the name of the block and the items it drops when broken. The text for the word "Drops" can be changed from English by manually changing the text in the config.yml.
+
+If there is no local language file, then it will revert to "en_us" and display the English equivalent.
+
+As the Scoreboard has a limit of 40 characters, item names which are too long will be truncated to fit.
+
+
 ## Download
 WhatIsThis can be [downloaded from Spigot](https://www.spigotmc.org/resources/whatisthis-identify-the-block-you-are-looking-at.65050/ "WhatIsThis by steve4744")
 
