@@ -28,12 +28,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.commons.lang3.EnumUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
+import com.google.common.base.Enums;
 
 import io.github.steve4744.whatisthis.Utils;
 import io.github.steve4744.whatisthis.WhatIsThis;
@@ -174,7 +175,7 @@ public class DataHandler {
 	}
 
 	private boolean dropsAreInconsistent(Block block) { 
-		return EnumUtils.isValidEnum(InconsistentDropItems.class, block.getType().toString());
+		return Enums.getIfPresent(InconsistentDropItems.class, block.getType().toString()).orNull() != null;
 	}
 
 	public int getAmount(Block block, String name) {
