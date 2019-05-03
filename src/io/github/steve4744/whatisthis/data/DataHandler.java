@@ -26,7 +26,10 @@ package io.github.steve4744.whatisthis.data;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -43,6 +46,7 @@ import io.github.steve4744.whatisthis.lang.EnumLang;
 public class DataHandler {
 
 	private WhatIsThis plugin;
+	private Map<String, Integer> newItemDrops = new HashMap<String, Integer>();  // material -> amount
 
 	public DataHandler(WhatIsThis plugin) {
 		this.plugin = plugin;
@@ -67,8 +71,10 @@ public class DataHandler {
 		return plugin.getConfig().getString("text.drops", "Drops");
 	}
 
-	public List<String> getItemDrops(Block block, Player player) {
-		List<String> itemDrops = new ArrayList<String>();
+	public Set<String> getItemDrops(Block block, Player player) {
+		Set<String> zeroDropItems = new HashSet<String>();
+		
+		newItemDrops.clear();
 		Collection<ItemStack> coll = new ArrayList<ItemStack>();
 		coll = block.getDrops();
 
@@ -76,49 +82,72 @@ public class DataHandler {
 		// block sometimes drops zero items, or if there is a bug (e.g. Bug: Spigot-1478)
 		if (coll.isEmpty() || dropsAreInconsistent(block)) {
 			String name = block.getType().toString();
-			if (name.equalsIgnoreCase("NETHER_WART")) {
-				itemDrops.add(name);
+
+			if (name.equalsIgnoreCase("DEAD_BUSH")) {
+				zeroDropItems.add("STICK");
 
 			} else if (name.equalsIgnoreCase("CHORUS_PLANT")) {
-				itemDrops.add("CHORUS_FRUIT");
+				zeroDropItems.add("CHORUS_FRUIT");
 
-			} else if (name.equalsIgnoreCase("CHORUS_FLOWER")) {
-				itemDrops.add(name);
-
-			} else if (name.equalsIgnoreCase("DEAD_BUSH")) {
-				itemDrops.add("STICK");
-
-			} else if (name.equalsIgnoreCase("GRASS") || name.equalsIgnoreCase("TALL_GRASS") || name.equalsIgnoreCase("FERN") || name.equalsIgnoreCase("LARGE_FERN")) {
-				itemDrops.add("WHEAT_SEEDS");
-
-			} else if (name.equalsIgnoreCase("COCOA")) {
-				itemDrops.add("COCOA_BEANS");
+			} else if (name.equalsIgnoreCase("GRASS") || name.equalsIgnoreCase("TALL_GRASS") || name.equalsIgnoreCase("FERN")) {
+				zeroDropItems.add("WHEAT_SEEDS");
 
 			} else if (name.equalsIgnoreCase("RED_MUSHROOM_BLOCK")) {
-				itemDrops.add("RED_MUSHROOM");
+				zeroDropItems.add("RED_MUSHROOM");
 
 			} else if (name.equalsIgnoreCase("BROWN_MUSHROOM_BLOCK")) {
-				itemDrops.add("BROWN_MUSHROOM");
+				zeroDropItems.add("BROWN_MUSHROOM");
 
-			} else if (name.equalsIgnoreCase("BEETROOTS")) {
-				itemDrops.add("BEETROOTS");
-				itemDrops.add("BEETROOT_SEEDS");
+			} else if (name.equalsIgnoreCase("MELON_STEM")) {
+				zeroDropItems.add("MELON_SEEDS");
 
-			} else if (name.equalsIgnoreCase("WHEAT")) {
-				itemDrops.add(0, "WHEAT");
-				itemDrops.add(1, "WHEAT_SEEDS");
+			} else if (name.equalsIgnoreCase("PUMPKIN_STEM")) {
+				zeroDropItems.add("PUMPKIN_SEEDS");
+
+			} else if (name.equalsIgnoreCase("ACACIA_LEAVES")) {
+				zeroDropItems.add("ACACIA_SAPLING");
+
+			} else if (name.equalsIgnoreCase("BIRCH_LEAVES")) {
+				zeroDropItems.add("BIRCH_SAPLING");
+
+			} else if (name.equalsIgnoreCase("DARK_OAK_LEAVES")) {
+				zeroDropItems.add("DARK_OAK_SAPLING");
+				zeroDropItems.add("APPLE");
+
+			} else if (name.equalsIgnoreCase("JUNGLE_LEAVES")) {
+				zeroDropItems.add("JUNGLE_SAPLING");
+
+			} else if (name.equalsIgnoreCase("OAK_LEAVES")) {
+				zeroDropItems.add("OAK_SAPLING");
+				zeroDropItems.add("APPLE");
+
+			} else if (name.equalsIgnoreCase("SPRUCE_LEAVES")) {
+				zeroDropItems.add("SPRUCE_SAPLING");
 
 			} else {
 				// items like GLASS drop nothing
-				itemDrops.add("");
+				zeroDropItems.add("");
 			}
-			return itemDrops;
+			if (name.contains("LEAVES")) {
+				zeroDropItems.add("STICK");
+			}
+
+			return zeroDropItems;
 		}
-		//TODO check 1.14 for blocks with >1 unique item drop.
-		// get first itemstack (in 1.13 this will be unique as variable drops are listed above).
+
+		/* get first itemstack (in 1.13 this will be unique as variable drops are listed above).
 		ItemStack item = coll.iterator().next();
 		itemDrops.add(item.getType().toString());
-		return itemDrops;
+		return itemDrops;*/
+		
+		for (ItemStack item : coll) {
+			int value = item.getAmount();
+			if (newItemDrops.containsKey(item.getType().toString())) {
+				value += newItemDrops.get(item.getType().toString());
+			}
+			newItemDrops.put(item.getType().toString(), value);
+		}
+		return getItemDropNames();
 	}
 
 	/**
@@ -154,11 +183,16 @@ public class DataHandler {
 			return result;
 		}
 
-		//define range of variable drops
-		if (item.equalsIgnoreCase("NETHER_WART")) {
-			separator = " # 1  ->";
+		//define range of zero drop items
+		if (item.equalsIgnoreCase("CHORUS_FRUIT") || item.equalsIgnoreCase("STICK") || item.equalsIgnoreCase("MELON_SEEDS") || item.equalsIgnoreCase("PUMPKIN_SEEDS")) {
+			separator = " # 0  ->";
 
-		} else if (item.equalsIgnoreCase("CHORUS_FRUIT") || item.equalsIgnoreCase("WHEAT_SEEDS") || item.equalsIgnoreCase("BEETROOT_SEEDS") || item.equalsIgnoreCase("STICK")) {
+		} else if (item.equalsIgnoreCase("APPLE") || item.contains("SAPLING")) {
+			if (block.getType().toString().contains("LEAVES")) {
+				separator = " # 0  ->";
+			}
+
+		} else if (item.equalsIgnoreCase("WHEAT_SEEDS") && block.getType() != Material.WHEAT) {
 			separator = " # 0  ->";
 
 		} else if (item.equalsIgnoreCase("RED_MUSHROOM") || item.equalsIgnoreCase("BROWN_MUSHROOM")) {
@@ -180,31 +214,28 @@ public class DataHandler {
 
 	public int getAmount(Block block, String name) {
 		if (!dropsAreInconsistent(block)) {
-			return block.getDrops().size();
+			return newItemDrops.get(name) != null ? newItemDrops.get(name) : 0;
 		}
 		int amount = 0;
 		switch (block.getType().toString()) {
-			case "NETHER_WART":
-				amount = 4;
-				break;
-			case "COCOA":
-				amount = 3;
-				break;
-			case "WHEAT":
-			case "BEETROOTS":
-				if (name.contains("SEEDS")) {
-					amount = 3;
-				} else {
-					amount = 1;
-				}
-				break;
-			case "DEAD_BUSH":
+		    case "MELON_STEM":
+		    case "PUMPKIN_STEM":
+		    	amount = 3;
+		    	break;
 			case "RED_MUSHROOM_BLOCK":
 			case "BROWN_MUSHROOM_BLOCK":
 				amount = 2;
 				break;
-			default: amount = 1;
+			default: 
+				amount = 1;
+				if (name.equalsIgnoreCase("STICK")) {
+					amount = 2;
+				}
 		}
 		return amount;
+	}
+
+	private Set<String> getItemDropNames() {
+		return newItemDrops.keySet();
 	}
 }
