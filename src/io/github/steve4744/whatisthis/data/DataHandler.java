@@ -31,6 +31,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -46,7 +47,7 @@ import io.github.steve4744.whatisthis.lang.EnumLang;
 public class DataHandler {
 
 	private WhatIsThis plugin;
-	private Map<String, Integer> newItemDrops = new HashMap<String, Integer>();  // material -> amount
+	private Map<String, Integer> itemDrops = new HashMap<String, Integer>();  // material -> amount
 
 	public DataHandler(WhatIsThis plugin) {
 		this.plugin = plugin;
@@ -67,14 +68,26 @@ public class DataHandler {
 		return translateItemName(targetName, player);
 	}
 
+	/**
+	 * Get the text to display the 'Drops'. Can be translated to suit server language.
+	 * @return text for 'Drops'
+	 */
 	private String getText() {
 		return plugin.getConfig().getString("text.drops", "Drops");
 	}
 
+	/**
+	 * Get the names of the items that can be dropped by the block.
+	 * Blocks that can sometimes drop zero items, like LEAVES, are dealt with separately so that
+	 * the range of drops can be displayed.
+	 * @param block
+	 * @param player
+	 * @return names of all the items that the block is capable of dropping
+	 */
 	public Set<String> getItemDrops(Block block, Player player) {
 		Set<String> zeroDropItems = new HashSet<String>();
 		
-		newItemDrops.clear();
+		itemDrops.clear();
 		Collection<ItemStack> coll = new ArrayList<ItemStack>();
 		coll = block.getDrops();
 
@@ -124,28 +137,41 @@ public class DataHandler {
 			} else if (name.equalsIgnoreCase("SPRUCE_LEAVES")) {
 				zeroDropItems.add("SPRUCE_SAPLING");
 
+			} else if (name.equalsIgnoreCase("CHORUS_FLOWER")) {
+				zeroDropItems.add(name);
+
+			// these below are 1.13.only
+			} else if (name.equalsIgnoreCase("COCOA")) {
+				zeroDropItems.add("COCOA_BEANS");
+
+			} else if (name.equalsIgnoreCase("NETHER_WART")) {
+				zeroDropItems.add(name);
+
+			} else if (name.equalsIgnoreCase("BEETROOTS")) {
+				zeroDropItems.add(name);
+				zeroDropItems.add("BEETROOT_SEEDS");
+
+			} else if (name.equalsIgnoreCase("WHEAT")) {
+				zeroDropItems.add(name);
+				zeroDropItems.add("WHEAT_SEEDS");
+
 			} else {
 				// items like GLASS drop nothing
 				zeroDropItems.add("");
 			}
-			if (name.contains("LEAVES")) {
+			if (name.contains("LEAVES") && !Bukkit.getVersion().contains("1.13")) {
 				zeroDropItems.add("STICK");
 			}
 
 			return zeroDropItems;
 		}
 
-		/* get first itemstack (in 1.13 this will be unique as variable drops are listed above).
-		ItemStack item = coll.iterator().next();
-		itemDrops.add(item.getType().toString());
-		return itemDrops;*/
-		
 		for (ItemStack item : coll) {
 			int value = item.getAmount();
-			if (newItemDrops.containsKey(item.getType().toString())) {
-				value += newItemDrops.get(item.getType().toString());
+			if (itemDrops.containsKey(item.getType().toString())) {
+				value += itemDrops.get(item.getType().toString());
 			}
-			newItemDrops.put(item.getType().toString(), value);
+			itemDrops.put(item.getType().toString(), value);
 		}
 		return getItemDropNames();
 	}
@@ -200,6 +226,13 @@ public class DataHandler {
 				separator = " # 0  ->";
 			}
 		}
+		if (Bukkit.getVersion().contains("1.13")) {
+			if (item.equalsIgnoreCase("NETHER_WART")) {
+				separator = " # 1  ->";
+			} else if (item.equalsIgnoreCase("WHEAT_SEEDS") || item.equalsIgnoreCase("BEETROOT_SEEDS")) {
+				separator = " # 0  ->";
+			}
+		}
 
 		// Scoreboard max length is 40, so subtract length of result and separator
 		int maxlen = 40 - result.length() - separator.length();
@@ -208,13 +241,16 @@ public class DataHandler {
 		return result + translated.substring(0, Math.min(translated.length(), maxlen)) + separator;
 	}
 
-	private boolean dropsAreInconsistent(Block block) { 
+	private boolean dropsAreInconsistent(Block block) {
+		if (Bukkit.getVersion().contains("1.13")) {
+			return Enums.getIfPresent(InconsistentDropItems1_13.class, block.getType().toString()).orNull() != null;
+		}
 		return Enums.getIfPresent(InconsistentDropItems.class, block.getType().toString()).orNull() != null;
 	}
 
 	public int getAmount(Block block, String name) {
 		if (!dropsAreInconsistent(block)) {
-			return newItemDrops.get(name) != null ? newItemDrops.get(name) : 0;
+			return itemDrops.get(name) != null ? itemDrops.get(name) : 0;
 		}
 		int amount = 0;
 		switch (block.getType().toString()) {
@@ -226,6 +262,22 @@ public class DataHandler {
 			case "BROWN_MUSHROOM_BLOCK":
 				amount = 2;
 				break;
+			// these below are 1.13 only
+			case "NETHER_WART":
+				amount = 4;
+				break;
+			case "COCOA":
+				amount = 3;
+				break;
+			case "WHEAT":
+			case "BEETROOTS":
+				if (name.contains("SEEDS")) {
+					amount = 3;
+				} else {
+					amount = 1;
+				}
+				break;
+			
 			default: 
 				amount = 1;
 				if (name.equalsIgnoreCase("STICK")) {
@@ -236,6 +288,6 @@ public class DataHandler {
 	}
 
 	private Set<String> getItemDropNames() {
-		return newItemDrops.keySet();
+		return itemDrops.keySet();
 	}
 }

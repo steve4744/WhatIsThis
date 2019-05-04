@@ -24,17 +24,22 @@ SOFTWARE.
  */
 package io.github.steve4744.whatisthis.data;
 
-public enum InconsistentDropItems {
+public enum InconsistentDropItems1_13 {
+	NETHER_WART,
 	CHORUS_PLANT,
 	CHORUS_FLOWER,
 	DEAD_BUSH,
 	GRASS,
 	TALL_GRASS,
 	FERN,
-	MELON_STEM,
-	PUMPKIN_STEM,
+	LARGE_FERN,
+	COCOA,
 	RED_MUSHROOM_BLOCK,
 	BROWN_MUSHROOM_BLOCK,
+	BEETROOTS,
+	WHEAT,
+	MELON_STEM,
+	PUMPKIN_STEM,
 	ACACIA_LEAVES,
 	BIRCH_LEAVES,
 	DARK_OAK_LEAVES,
