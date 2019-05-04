@@ -195,12 +195,14 @@ public enum EnumLang {
             }
         }
         File customizedLangDir = new File(WhatIsThis.getPlugin().getDataFolder(), "lang");
-        if (!customizedLangDir.exists()) customizedLangDir.mkdirs();
+        if (!customizedLangDir.exists()) {
+            customizedLangDir.mkdirs();
+        }
 
         for (File file : Objects.requireNonNull(customizedLangDir.listFiles((dir, name) -> name.toLowerCase().endsWith(".json")))) {
             EnumLang enumLang = get(file.getName()); // Returns EN_US when language not found.
             if (enumLang.getLocale().equals(EN_US.locale) && !file.getName().contains(EN_US.locale)) {
-            	Bukkit.getLogger().info("Failed to load customized language file " + file.getName()); // Language not present
+                Bukkit.getLogger().info("Failed to load customized language file " + file.getName()); // Language not present
             } else {
                 try (FileInputStream fs = new FileInputStream(file)) {
                     readFile(enumLang, new BufferedReader(new InputStreamReader(fs, Charset.forName("UTF-8"))));

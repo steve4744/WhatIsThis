@@ -4,9 +4,9 @@
 
 WhatIsThis is a lightweight utility plugin aimed at providing block information directly to the player without the need to open a UI. This can be helpful in Survival mode to know what a block is without having to break it first, or while looking at other people's builds in Creative mode.
 
-Simply by right-clicking the block with a STICK (default) or running command /wt while looking at a block, the block type and the items it drops will be briefly displayed on the side of the screen.
+Inspired by Forge mods such as WAWLA (What Are We Looking At), WAILA (What Am I Looking At) and HWYLA (Here's What You're Looking At), but without the distraction of the display on the screen constantly, and without utilising PlayerMoveEvent. Simply by right-clicking the block with a STICK (default) or running command /wt while looking at a block, the block type and the items it drops will be briefly displayed on the side of the screen.
 
-You must have a clear view of the block being looked at when running the /wt command. The range is currently set to 10 blocks - I plan to make this configurable in a future release.
+You must have a clear view of the block being looked at when running the /wt command. The range is currently set to 10 blocks - I plan to make this configurable in a future release. Both options can be used underwater as well as on land.
 
 The ability to right-click with an item can be disabled in the config.yml if not required.
 
@@ -16,7 +16,7 @@ The name and number of items dropped reported by the plugin are those obtained f
 
 
 ## Dependencies
-This plugin is only supported on Minecraft/Spigot 1.13+
+This plugin is only supported on Minecraft/Spigot 1.13 and 1.14.
 
 ## Commands & Permissions
 ```
@@ -46,4 +46,4 @@ WhatIsThis can be [downloaded from Spigot](https://www.spigotmc.org/resources/wh
     Copy to your server's 'plugins' folder
     Restart your server
 
-Updated 03 April 2019 by steve4744
+Updated 04 May 2019 by steve4744

@@ -55,9 +55,7 @@ public class WhatIsThis extends JavaPlugin {
 
 		// load language files
 		EnumLang.init();
-		
 		new Metrics(this);
-
 		checkForUpdate();
 	}
 
@@ -80,7 +78,7 @@ public class WhatIsThis extends JavaPlugin {
 		}
 		return scoreboardManager;
 	}
-	
+
 	public DataHandler getDataHandler() {
 		return dataHandler;
 	}
@@ -99,7 +97,7 @@ public class WhatIsThis extends JavaPlugin {
 	public Settings getSettings() {
 		return settings;
 	}
-	
+
 	private void checkForUpdate() {
 		if (!getConfig().getBoolean("check_for_update", true)) {
 			return;
