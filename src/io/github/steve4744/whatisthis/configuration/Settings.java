@@ -24,6 +24,8 @@ SOFTWARE.
  */
 package io.github.steve4744.whatisthis.configuration;
 
+import java.util.List;
+
 import org.bukkit.Material;
 
 import io.github.steve4744.whatisthis.WhatIsThis;
@@ -39,5 +41,17 @@ public class Settings {
 	public Material getClickItem() {
 		Material clickItem = Material.getMaterial(plugin.getConfig().getString("use_right_click.item"));
 		return clickItem != null ? clickItem : Material.STICK;
+	}
+
+	public List<String> getLangs() {
+		String fallback = "en_us";
+		List<String> langs = plugin.getConfig().getStringList("LoadLanguage");
+		if (langs.contains("all")) {
+			return langs;
+		}
+		if (!langs.contains(fallback)) {
+			langs.add(fallback);
+		}
+		return langs;
 	}
 }

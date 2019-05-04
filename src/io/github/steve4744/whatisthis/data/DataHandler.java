@@ -31,7 +31,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -86,7 +85,7 @@ public class DataHandler {
 	 */
 	public Set<String> getItemDrops(Block block, Player player) {
 		Set<String> zeroDropItems = new HashSet<String>();
-		
+
 		itemDrops.clear();
 		Collection<ItemStack> coll = new ArrayList<ItemStack>();
 		coll = block.getDrops();
@@ -159,7 +158,7 @@ public class DataHandler {
 				// items like GLASS drop nothing
 				zeroDropItems.add("");
 			}
-			if (name.contains("LEAVES") && !Bukkit.getVersion().contains("1.13")) {
+			if (name.contains("LEAVES") && !Utils.isMC1_13()) {
 				zeroDropItems.add("STICK");
 			}
 
@@ -202,6 +201,15 @@ public class DataHandler {
 		return translated == null ? "not found" : translated;
 	}
 
+	/**
+	 * Format the text for showing the items that the block can drop. 
+	 * Translate this into the appropriate language.
+	 * Truncate if > 40 chars for scoreboard.
+	 * @param block
+	 * @param item
+	 * @param player
+	 * @return translated string
+	 */
 	public String getFormattedText(Block block, String item, Player player) {
 		String separator = "  x";
 		String result = getText() + " : " + ChatColor.RED;
@@ -226,7 +234,7 @@ public class DataHandler {
 				separator = " # 0  ->";
 			}
 		}
-		if (Bukkit.getVersion().contains("1.13")) {
+		if (Utils.isMC1_13()) {
 			if (item.equalsIgnoreCase("NETHER_WART")) {
 				separator = " # 1  ->";
 			} else if (item.equalsIgnoreCase("WHEAT_SEEDS") || item.equalsIgnoreCase("BEETROOT_SEEDS")) {
@@ -241,13 +249,26 @@ public class DataHandler {
 		return result + translated.substring(0, Math.min(translated.length(), maxlen)) + separator;
 	}
 
+	/**
+	 * Returns whether or not this block drops a variable amount, including zero, of the item?
+	 * Include bugged items like chorus_flower which always drops itself, but getDrops() returns nothing.
+	 * @param block
+	 * @return boolean
+	 */
 	private boolean dropsAreInconsistent(Block block) {
-		if (Bukkit.getVersion().contains("1.13")) {
+		if (Utils.isMC1_13()) {
 			return Enums.getIfPresent(InconsistentDropItems1_13.class, block.getType().toString()).orNull() != null;
 		}
 		return Enums.getIfPresent(InconsistentDropItems.class, block.getType().toString()).orNull() != null;
 	}
 
+	/**
+	 * Get the amount of the item that can be dropped. If the item can sometimes drop zero items,
+	 * then get the maximum number for that item.
+	 * @param block
+	 * @param name
+	 * @return amount
+	 */
 	public int getAmount(Block block, String name) {
 		if (!dropsAreInconsistent(block)) {
 			return itemDrops.get(name) != null ? itemDrops.get(name) : 0;
@@ -277,7 +298,7 @@ public class DataHandler {
 					amount = 1;
 				}
 				break;
-			
+
 			default: 
 				amount = 1;
 				if (name.equalsIgnoreCase("STICK")) {

@@ -182,7 +182,8 @@ public enum EnumLang {
      */
     public static void init() {
         for (EnumLang enumLang : EnumLang.values()) {
-            if (!WhatIsThis.getPlugin().getConfig().getStringList("LoadLanguage").contains("all") && !WhatIsThis.getPlugin().getConfig().getStringList("LoadLanguage").contains(enumLang.getLocale())) {
+
+            if (!WhatIsThis.getPlugin().getSettings().getLangs().contains("all") && !WhatIsThis.getPlugin().getSettings().getLangs().contains(enumLang.getLocale())) {
                 continue;
             }
             try {
