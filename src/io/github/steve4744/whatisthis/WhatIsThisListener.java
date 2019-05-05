@@ -32,6 +32,8 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 
+import io.github.steve4744.whatisthis.bars.ActionBar;
+
 public class WhatIsThisListener implements Listener {
 
 	private final WhatIsThis plugin;
@@ -52,5 +54,9 @@ public class WhatIsThisListener implements Listener {
 
 		Block block = event.getClickedBlock();
 		plugin.getScoreboardManager().showTarget(player, block);
+		
+		String message = plugin.getDataHandler().getDisplayName(block.getType(), player);
+		ActionBar ab = new ActionBar(message);
+		ab.sendBar(player);
 	}
 }
