@@ -81,7 +81,7 @@ public class WhatIsThisCommand implements CommandExecutor {
 			break;
 		}
 
-		plugin.getScoreboardManager().showTarget(player, lastBlock);
+		plugin.getDisplayHandler().getVisualMethod(lastBlock, player);
 		return false;
 	} 
 

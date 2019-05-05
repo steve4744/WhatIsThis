@@ -31,6 +31,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import io.github.steve4744.whatisthis.configuration.Settings;
 import io.github.steve4744.whatisthis.data.DataHandler;
+import io.github.steve4744.whatisthis.display.DisplayHandler;
 import io.github.steve4744.whatisthis.display.ScoreboardManager;
 import io.github.steve4744.whatisthis.lang.EnumLang;
 import io.github.steve4744.whatisthis.metrics.Metrics;
@@ -42,6 +43,7 @@ public class WhatIsThis extends JavaPlugin {
 	private ScoreboardManager scoreboardManager;
 	private DataHandler dataHandler;
 	private Settings settings;
+	private DisplayHandler displayHandler;
 
 	@Override
 	public void onEnable() {
@@ -64,6 +66,7 @@ public class WhatIsThis extends JavaPlugin {
 	public void onDisable() {
 		EnumLang.clean();
 		scoreboardManager = null;
+		displayHandler = null;
 		dataHandler = null;
 		settings = null;
 		getLogger().info("WhatIsThis has been disabled");
@@ -84,6 +87,10 @@ public class WhatIsThis extends JavaPlugin {
 		return dataHandler;
 	}
 
+	public DisplayHandler getDisplayHandler() {
+		return displayHandler;
+	}
+
 	private void setupPlugin() {
 		this.getCommand("whatisthis").setExecutor(new WhatIsThisCommand(version, this));
 
@@ -93,6 +100,7 @@ public class WhatIsThis extends JavaPlugin {
 			pm.registerEvents(new WhatIsThisListener(this), this);
 		}
 		dataHandler = new DataHandler(this);
+		displayHandler = new DisplayHandler(this);
 	}
 
 	public Settings getSettings() {

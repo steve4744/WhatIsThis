@@ -22,32 +22,34 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
  */
-package io.github.steve4744.whatisthis;
+package io.github.steve4744.whatisthis.display;
 
+import org.bukkit.ChatColor;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.EquipmentSlot;
 
-public class WhatIsThisListener implements Listener {
+import io.github.steve4744.whatisthis.WhatIsThis;
 
-	private final WhatIsThis plugin;
+public class DisplayHandler {
 
-	public WhatIsThisListener(WhatIsThis plugin) {
+	private WhatIsThis plugin;
+
+	public DisplayHandler(WhatIsThis plugin) {
 		this.plugin = plugin;
 	}
 
-	@EventHandler
-	public void onQueryBlock(PlayerInteractEvent event) {
-		if (event.getAction() != Action.RIGHT_CLICK_BLOCK || event.getHand().equals(EquipmentSlot.OFF_HAND)) {
-			return;
+	public void getVisualMethod(Block block, Player player) {
+
+		if (plugin.getSettings().isScoreboardEnabled()) {
+			plugin.getScoreboardManager().showTarget(player, block);
 		}
-		Player player = event.getPlayer();
-		if (player.getInventory().getItemInMainHand().getType() != plugin.getSettings().getClickItem() || !player.hasPermission("whatisthis.use")) { 
-			return;
+		if (plugin.getSettings().isActionBarEnabled()) {
+			String message = plugin.getDataHandler().getDisplayName(block.getType(), player);
+			ActionBar actionbar = new ActionBar(ChatColor.valueOf(plugin.getSettings().getActionBarColor()) + message);
+			actionbar.sendBar(player);
 		}
-		plugin.getDisplayHandler().getVisualMethod(event.getClickedBlock(), player);
+		if (plugin.getSettings().isBossbarEnabled()) {
+			//TODO
+		}
 	}
 }

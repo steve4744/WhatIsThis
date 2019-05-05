@@ -24,10 +24,12 @@ text:
 # If you want to load all the languages, add "all" to the list:
 LoadLanguage:
 - all
+# Enable the preferred method(s) to display the block info
 Display:
   scoreboard:
     enabled: true
   actionbar:
-    enabled: true
+    enabled: false
+    textcolor: WHITE
   bossbar: 
-    enabled: true
+    enabled: false

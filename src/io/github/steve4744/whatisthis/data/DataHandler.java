@@ -90,8 +90,6 @@ public class DataHandler {
 		Collection<ItemStack> coll = new ArrayList<ItemStack>();
 		coll = block.getDrops();
 
-		// collection can be empty, e.g. GLASS drops nothing. It can also be empty if the
-		// block sometimes drops zero items, or if there is a bug (e.g. Bug: Spigot-1478)
 		if (coll.isEmpty() || dropsAreInconsistent(block)) {
 			String name = block.getType().toString();
 
