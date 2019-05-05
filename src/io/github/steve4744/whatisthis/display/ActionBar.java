@@ -1,4 +1,4 @@
-package io.github.steve4744.whatisthis.bars;
+package io.github.steve4744.whatisthis.display;
 
 import org.bukkit.craftbukkit.v1_14_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;

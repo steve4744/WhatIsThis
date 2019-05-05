@@ -54,4 +54,17 @@ public class Settings {
 		}
 		return langs;
 	}
+
+	public boolean isScoreboardEnabled() {
+		return plugin.getConfig().getBoolean("Display.scoreboard.enabled", true);
+	}
+
+	public boolean isActionBarEnabled() {
+		return plugin.getConfig().getBoolean("Display.actionbar.enabled", true);
+	}
+
+	public boolean isBossbarEnabled() {
+		return plugin.getConfig().getBoolean("Display.bossbar.enabled", true);
+	}
+
 }

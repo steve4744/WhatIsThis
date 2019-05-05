@@ -31,6 +31,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import io.github.steve4744.whatisthis.configuration.Settings;
 import io.github.steve4744.whatisthis.data.DataHandler;
+import io.github.steve4744.whatisthis.display.ScoreboardManager;
 import io.github.steve4744.whatisthis.lang.EnumLang;
 import io.github.steve4744.whatisthis.metrics.Metrics;
 

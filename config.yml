@@ -24,3 +24,10 @@ text:
 # If you want to load all the languages, add "all" to the list:
 LoadLanguage:
 - all
+Display:
+  scoreboard:
+    enabled: true
+  actionbar:
+    enabled: true
+  bossbar: 
+    enabled: true

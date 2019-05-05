@@ -32,7 +32,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 
-import io.github.steve4744.whatisthis.bars.ActionBar;
+import io.github.steve4744.whatisthis.display.ActionBar;
 
 public class WhatIsThisListener implements Listener {
 
@@ -56,7 +56,7 @@ public class WhatIsThisListener implements Listener {
 		plugin.getScoreboardManager().showTarget(player, block);
 		
 		String message = plugin.getDataHandler().getDisplayName(block.getType(), player);
-		ActionBar ab = new ActionBar(message);
-		ab.sendBar(player);
+		ActionBar actionbar = new ActionBar(message);
+		actionbar.sendBar(player);
 	}
 }
