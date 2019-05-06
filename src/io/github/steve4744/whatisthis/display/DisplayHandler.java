@@ -28,6 +28,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
+import io.github.steve4744.whatisthis.Utils;
 import io.github.steve4744.whatisthis.WhatIsThis;
 
 public class DisplayHandler {
@@ -39,11 +40,10 @@ public class DisplayHandler {
 	}
 
 	public void getVisualMethod(Block block, Player player) {
-
 		if (plugin.getSettings().isScoreboardEnabled()) {
 			plugin.getScoreboardManager().showTarget(player, block);
 		}
-		if (plugin.getSettings().isActionBarEnabled()) {
+		if (plugin.getSettings().isActionBarEnabled() && !Utils.isMC1_13()) {
 			String message = plugin.getDataHandler().getDisplayName(block.getType(), player);
 			ActionBar actionbar = new ActionBar(ChatColor.valueOf(plugin.getSettings().getActionBarColor()) + message);
 			actionbar.sendBar(player);
