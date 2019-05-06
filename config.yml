@@ -33,3 +33,5 @@ Display:
     textcolor: WHITE
   bossbar: 
     enabled: false
+    textcolor: WHITE
+    barcolor: GREEN

@@ -27,6 +27,7 @@ package io.github.steve4744.whatisthis.configuration;
 import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.boss.BarColor;
 import com.google.common.base.Enums;
 
 import io.github.steve4744.whatisthis.WhatIsThis;
@@ -71,6 +72,22 @@ public class Settings {
 	public String getActionBarColor() {
 		String colour = plugin.getConfig().getString("Display.actionbar.textcolor").toUpperCase();
 		if (colour == null || Enums.getIfPresent(ChatColor.class, colour).orNull() == null) {
+			colour = "WHITE";
+		}
+		return colour;
+	}
+
+	public String getBossBarColor() {
+		String colour = plugin.getConfig().getString("Display.bossbar.barcolor").toUpperCase();
+		if (colour == null || Enums.getIfPresent(BarColor.class, colour).orNull() == null) {
+			colour = "GREEN";
+		}
+		return colour;
+	}
+
+	public String getBossBarTextColor() {
+		String colour = plugin.getConfig().getString("Display.bossbar.textcolor").toUpperCase();
+		if (colour == null || Enums.getIfPresent(BarColor.class, colour).orNull() == null) {
 			colour = "WHITE";
 		}
 		return colour;

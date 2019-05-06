@@ -26,6 +26,8 @@ package io.github.steve4744.whatisthis.display;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
@@ -44,8 +46,8 @@ public class ScoreboardManager {
 	private WhatIsThis plugin;
 	private DataHandler dataHandler;
 	
-	private HashMap<String, Scoreboard> scoreboardMap = new HashMap<String, Scoreboard>();
-	private HashMap<String, BukkitTask> taskMap = new HashMap<String, BukkitTask>();
+	private Map<String, Scoreboard> scoreboardMap = new HashMap<String, Scoreboard>();
+	private Map<String, BukkitTask> taskMap = new HashMap<String, BukkitTask>();
 
 	public ScoreboardManager(WhatIsThis plugin) {
 		this.plugin = plugin;
@@ -54,7 +56,7 @@ public class ScoreboardManager {
 
 	public void showTarget(Player player, Block block) {
 		//kill any previous scheduled tasks
-		cancelTask(player);
+		cancelTask(player.getName());
 
 		if (scoreboardMap.containsKey(player.getName())) {
 			scoreboard = scoreboardMap.get(player.getName());
@@ -96,12 +98,12 @@ public class ScoreboardManager {
 		}
 	}
 
-	private void cancelTask(Player player) {
+	private void cancelTask(String playername) {
 		BukkitTask task = null;
-		if (taskMap.containsKey(player.getName())) {
-			task = taskMap.get(player.getName());
+		if (taskMap.containsKey(playername)) {
+			task = taskMap.get(playername);
 			task.cancel();
-			taskMap.remove(player.getName());
+			taskMap.remove(playername);
 		}
 	}
 

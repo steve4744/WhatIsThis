@@ -49,7 +49,9 @@ public class DisplayHandler {
 			actionbar.sendBar(player);
 		}
 		if (plugin.getSettings().isBossbarEnabled()) {
-			//TODO
+			String message = plugin.getDataHandler().getDisplayName(block.getType(), player);
+			BossBarManager bm = new BossBarManager(plugin);
+			bm.setBar(player, message);
 		}
 	}
 }
