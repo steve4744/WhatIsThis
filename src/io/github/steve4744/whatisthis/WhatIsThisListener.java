@@ -45,7 +45,10 @@ public class WhatIsThisListener implements Listener {
 			return;
 		}
 		Player player = event.getPlayer();
-		if (player.getInventory().getItemInMainHand().getType() != plugin.getSettings().getClickItem() || !player.hasPermission("whatisthis.use")) { 
+		if (!player.hasPermission("whatisthis.use")) {
+			return;
+		}
+		if (player.getInventory().getItemInMainHand().getType() != plugin.getSettings().getClickItem()) { 
 			return;
 		}
 		plugin.getDisplayHandler().getVisualMethod(event.getClickedBlock(), player);

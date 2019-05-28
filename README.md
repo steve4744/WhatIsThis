@@ -46,4 +46,4 @@ WhatIsThis can be [downloaded from Spigot](https://www.spigotmc.org/resources/wh
     Copy to your server's 'plugins' folder
     Restart your server
 
-Updated 04 May 2019 by steve4744
+Updated 23 May 2019 by steve4744

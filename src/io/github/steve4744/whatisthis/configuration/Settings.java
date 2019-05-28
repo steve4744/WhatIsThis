@@ -41,8 +41,8 @@ public class Settings {
 	}
 
 	public Material getClickItem() {
-		Material clickItem = Material.getMaterial(plugin.getConfig().getString("use_right_click.item"));
-		return clickItem != null ? clickItem : Material.STICK;
+		Material clickItem = Material.getMaterial(plugin.getConfig().getString("use_right_click.item").toUpperCase());
+		return clickItem != null ? clickItem : Material.AIR;
 	}
 
 	public List<String> getLangs() {
