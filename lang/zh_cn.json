@@ -1084,7 +1084,7 @@
     "block.minecraft.polished_andesite_stairs": "\u78e8\u5236\u5b89\u5c71\u5ca9\u697c\u68af",
     "block.minecraft.polished_diorite": "\u78e8\u5236\u95ea\u957f\u5ca9",
     "block.minecraft.polished_diorite_slab": "\u78e8\u5236\u95ea\u957f\u5ca9\u53f0\u9636",
-    "block.minecraft.polished_diorite_stairs": "\u78e8\u5236\u95ea\u957f\u5ca9\u53f0\u9636",
+    "block.minecraft.polished_diorite_stairs": "\u78e8\u5236\u95ea\u957f\u5ca9\u697c\u68af",
     "block.minecraft.polished_granite": "\u78e8\u5236\u82b1\u5c97\u5ca9",
     "block.minecraft.polished_granite_slab": "\u78e8\u5236\u82b1\u5c97\u5ca9\u53f0\u9636",
     "block.minecraft.polished_granite_stairs": "\u78e8\u5236\u82b1\u5c97\u5ca9\u697c\u68af",
