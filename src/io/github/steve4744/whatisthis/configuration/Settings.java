@@ -67,6 +67,11 @@ public class Settings {
 		isClickEnabled = !isClickEnabled;
 	}
 
+	public void saveToggle() {
+		plugin.getConfig().set("use_right_click.enabled", isRightClickEnabled());
+		plugin.saveConfig();
+	}
+
 	public boolean isScoreboardEnabled() {
 		return plugin.getConfig().getBoolean("Display.scoreboard.enabled", true);
 	}

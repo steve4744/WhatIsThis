@@ -64,6 +64,7 @@ public class WhatIsThis extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
+		getSettings().saveToggle();
 		EnumLang.clean();
 		scoreboardManager = null;
 		displayHandler = null;
@@ -102,8 +103,7 @@ public class WhatIsThis extends JavaPlugin {
 	}
 
 	public void reloadPlugin() {
-		getConfig().set("use_right_click.enabled", getSettings().isRightClickEnabled());
-		saveConfig();
+		getSettings().saveToggle();
 		reloadConfig();
 	}
 
