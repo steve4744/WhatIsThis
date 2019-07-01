@@ -58,14 +58,16 @@ public class WhatIsThisCommand implements CommandExecutor {
 			return true;
 		}
 		if (args.length > 0) {
+			if (!player.hasPermission("whatisthis.admin")) {
+				player.sendMessage(ChatColor.GREEN + "[WhatIsThis] " + ChatColor.WHITE + "You do not have permission to run this command");
+				return true;
+			}
 			if (args[0].equalsIgnoreCase("reload")) {
-				if (!player.hasPermission("whatisthis.admin")) {
-					player.sendMessage(ChatColor.GREEN + "[WhatIsThis] " + ChatColor.WHITE + "You do not have permission to reload the plugin");
-					return true;
-				}
 				plugin.reloadConfig();
 				player.sendMessage(ChatColor.GREEN + "[WhatIsThis] " + ChatColor.WHITE + "Config reloaded");
 				return false;
+			} else if (args[0].equalsIgnoreCase("click")) {
+				plugin.getSettings().toggleRightClick();
 			}
 			player.sendMessage(infoMessage);
 			return true;

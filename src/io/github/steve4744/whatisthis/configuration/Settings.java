@@ -35,9 +35,11 @@ import io.github.steve4744.whatisthis.WhatIsThis;
 public class Settings {
 
 	private final WhatIsThis plugin;
+	private boolean isClickEnabled;
 
 	public Settings(WhatIsThis plugin) {
 		this.plugin = plugin;
+		this.isClickEnabled = plugin.getConfig().getBoolean("use_right_click.enabled", true);
 	}
 
 	public Material getClickItem() {
@@ -55,6 +57,14 @@ public class Settings {
 			langs.add(fallback);
 		}
 		return langs;
+	}
+
+	public boolean isRightClickEnabled() {
+		return isClickEnabled;
+	}
+
+	public void toggleRightClick() {
+		isClickEnabled = !isClickEnabled;
 	}
 
 	public boolean isScoreboardEnabled() {

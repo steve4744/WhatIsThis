@@ -95,10 +95,8 @@ public class WhatIsThis extends JavaPlugin {
 		this.getCommand("whatisthis").setExecutor(new WhatIsThisCommand(version, this));
 
 		settings = new Settings(this);
-		if (getConfig().getBoolean("use_right_click.enabled")) {
-			PluginManager pm = Bukkit.getPluginManager();
-			pm.registerEvents(new WhatIsThisListener(this), this);
-		}
+		PluginManager pm = Bukkit.getPluginManager();
+		pm.registerEvents(new WhatIsThisListener(this), this);
 		dataHandler = new DataHandler(this);
 		displayHandler = new DisplayHandler(this);
 	}
