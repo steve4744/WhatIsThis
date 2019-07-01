@@ -8,21 +8,26 @@ Inspired by Forge mods such as WAWLA (What Are We Looking At), WAILA (What Am I 
 
 You must have a clear view of the block being looked at when running the /wt command. The range is currently set to 10 blocks - I plan to make this configurable in a future release. Both options can be used underwater as well as on land.
 
-The ability to right-click with an item can be disabled in the config.yml if not required.
+The ability to right-click with an item can be disabled in the config.yml, or can be toggled on/off with the /wt toggleclick command.
 
 The item used to select the block is also configurable. The default item is a STICK. Any item can be used, although the plugin does not cancel any events that might be triggered by right-clicking with the item such as a "block place" event or opening a door or chest, so it doesn't interfere with the normal mechanics of the game.
 
 The name and number of items dropped reported by the plugin are those obtained from Block#getDrops(). Where the drops are variable (e.g. the number of SEEDS dropped by WHEAT) it returns either a range (e.g. 0 -> 3) or what could be dropped by breaking the block, not necessarily what you will get on breaking the block (e.g. number of MELON_SLICEs from a MELON).
 
+There is also the option to have the block information displayed on the ActionBar or BossBar. Using these methods, only the name of the block is displayed and not the dropped items.
+
+The ActionBar display is probably the most attractive and least intrusive of the display methods. The text colour can be set in the config.yml file. The ActionBar option is only available on Minecraft/Spigot 1.14+.
 
 ## Dependencies
 This plugin is only supported on Minecraft/Spigot 1.13 and 1.14.
+
 
 ## Commands & Permissions
 ```
 /wt - identifies the block being looked at
 /wt info - information about the plugin
 /wt reload - reload the config file (requires whatisthis.admin permission)
+/wt toggleclick - enable or disable right-click functionality (requires whatisthis.admin permission)
 ```
 ```
 whatisthis.use - default true
@@ -46,4 +51,4 @@ WhatIsThis can be [downloaded from Spigot](https://www.spigotmc.org/resources/wh
     Copy to your server's 'plugins' folder
     Restart your server
 
-Updated 23 May 2019 by steve4744
+Updated 01 July 2019 by steve4744

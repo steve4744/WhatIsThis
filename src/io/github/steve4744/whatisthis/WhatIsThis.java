@@ -95,7 +95,7 @@ public class WhatIsThis extends JavaPlugin {
 	}
 
 	private void setupPlugin() {
-		this.getCommand("whatisthis").setExecutor(new WhatIsThisCommand(version, this));
+		getCommand("whatisthis").setExecutor(new WhatIsThisCommand(version, this));
 		getCommand("whatisthis").setTabCompleter(new AutoTabCompleter());
 		settings = new Settings(this);
 		PluginManager pm = Bukkit.getPluginManager();
