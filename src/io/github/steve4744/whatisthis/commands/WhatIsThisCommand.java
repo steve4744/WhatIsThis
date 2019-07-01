@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
  */
-package io.github.steve4744.whatisthis;
+package io.github.steve4744.whatisthis.commands;
 
 import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
@@ -32,11 +32,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.util.BlockIterator;
 
+import io.github.steve4744.whatisthis.Utils;
+import io.github.steve4744.whatisthis.WhatIsThis;
+
 public class WhatIsThisCommand implements CommandExecutor {
 
 	private final String version;
 	private final WhatIsThis plugin;
-	
+
 	public WhatIsThisCommand(String version, WhatIsThis plugin) {
 		this.version = version;
 		this.plugin = plugin;
@@ -50,7 +53,6 @@ public class WhatIsThisCommand implements CommandExecutor {
 			sender.sendMessage(infoMessage);
 			return true;	
 		}
-
 		Player player = (Player) sender;
 
 		if (!player.hasPermission("whatisthis.use")) {
@@ -66,14 +68,13 @@ public class WhatIsThisCommand implements CommandExecutor {
 				plugin.reloadPlugin();
 				player.sendMessage(ChatColor.GREEN + "[WhatIsThis] " + ChatColor.WHITE + "Config reloaded");
 				return false;
-			} else if (args[0].equalsIgnoreCase("click")) {
+			} else if (args[0].equalsIgnoreCase("toggleclick")) {
 				plugin.getSettings().toggleRightClick();
 				return false;
 			}
 			player.sendMessage(infoMessage);
 			return true;
 		}
-
 		//get the block the player is looking at
 		BlockIterator iter = new BlockIterator(player, 10);
 		Block lastBlock = iter.next();
@@ -83,7 +84,6 @@ public class WhatIsThisCommand implements CommandExecutor {
 				continue;
 			break;
 		}
-
 		plugin.getDisplayHandler().getVisualMethod(lastBlock, player);
 		return false;
 	} 

@@ -29,6 +29,8 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import io.github.steve4744.whatisthis.commands.AutoTabCompleter;
+import io.github.steve4744.whatisthis.commands.WhatIsThisCommand;
 import io.github.steve4744.whatisthis.configuration.Settings;
 import io.github.steve4744.whatisthis.data.DataHandler;
 import io.github.steve4744.whatisthis.display.DisplayHandler;
@@ -94,7 +96,7 @@ public class WhatIsThis extends JavaPlugin {
 
 	private void setupPlugin() {
 		this.getCommand("whatisthis").setExecutor(new WhatIsThisCommand(version, this));
-
+		getCommand("whatisthis").setTabCompleter(new AutoTabCompleter());
 		settings = new Settings(this);
 		PluginManager pm = Bukkit.getPluginManager();
 		pm.registerEvents(new WhatIsThisListener(this), this);
