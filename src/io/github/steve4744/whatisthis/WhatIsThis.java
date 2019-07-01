@@ -101,6 +101,12 @@ public class WhatIsThis extends JavaPlugin {
 		displayHandler = new DisplayHandler(this);
 	}
 
+	public void reloadPlugin() {
+		getConfig().set("use_right_click.enabled", getSettings().isRightClickEnabled());
+		saveConfig();
+		reloadConfig();
+	}
+
 	public Settings getSettings() {
 		return settings;
 	}
