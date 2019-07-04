@@ -60,8 +60,8 @@ public class DataHandler {
 	 */
 	public String getDisplayName(Material target, Player player) {
 		String targetName = target.toString();
-		// wall_sign and coloured wall_banners are not currently in the Mojang language files
-		if (targetName.contains("WALL_BANNER") || targetName.contains("WALL_SIGN")) {
+		//coloured wall_banners are not currently in the Mojang language files
+		if (targetName.contains("WALL_BANNER")) {
 			targetName = targetName.replace("WALL_", "");
 		}
 		return translateItemName(targetName, player);

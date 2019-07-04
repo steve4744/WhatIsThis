@@ -47,35 +47,40 @@ public class WhatIsThisCommand implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
 		String infoMessage = ChatColor.GREEN + "[WhatIsThis] " + ChatColor.WHITE + "Version " + version + " : plugin by "+ ChatColor.AQUA + "steve4744";
-		if (!(sender instanceof Player)) {
-			sender.sendMessage(infoMessage);
-			return true;	
-		}
-		Player player = (Player) sender;
-
-		if (!player.hasPermission("whatisthis.use")) {
-			player.sendMessage(ChatColor.GREEN + "[WhatIsThis] " + ChatColor.WHITE + "You do not have permission to run this command");
+		
+		if (!sender.hasPermission("whatisthis.use")) {
+			sender.sendMessage(ChatColor.GREEN + "[WhatIsThis] " + ChatColor.WHITE + "You do not have permission to run this command");
 			return true;
 		}
 		if (args.length > 0) {
-			if (!player.hasPermission("whatisthis.admin")) {
-				player.sendMessage(ChatColor.GREEN + "[WhatIsThis] " + ChatColor.WHITE + "You do not have permission to run this command");
+			if (!sender.hasPermission("whatisthis.admin")) {
+				sender.sendMessage(ChatColor.GREEN + "[WhatIsThis] " + ChatColor.WHITE + "You do not have permission to run this command");
 				return true;
 			}
 			if (args[0].equalsIgnoreCase("reload")) {
 				plugin.reloadPlugin();
-				player.sendMessage(ChatColor.GREEN + "[WhatIsThis] " + ChatColor.WHITE + "Config reloaded");
+				sender.sendMessage(ChatColor.GREEN + "[WhatIsThis] " + ChatColor.WHITE + "Config reloaded");
 				return false;
 			} else if (args[0].equalsIgnoreCase("toggleclick")) {
+				String action = "OFF";
 				plugin.getSettings().toggleRightClick();
+				if (plugin.getSettings().isRightClickEnabled()) {
+					action = "ON";
+				}
+				sender.sendMessage(ChatColor.GREEN + "[WhatIsThis] " + ChatColor.WHITE + "Right-click toggled " + ChatColor.AQUA + action);
 				return false;
 			}
-			player.sendMessage(infoMessage);
+			sender.sendMessage(infoMessage);
 			return true;
 		}
+		if (!(sender instanceof Player)) {
+			sender.sendMessage(infoMessage);
+			return true;	
+		}
+
 		//get the block the player is looking at
+		Player player = (Player) sender;
 		BlockIterator iter = new BlockIterator(player, 10);
 		Block lastBlock = iter.next();
 		while (iter.hasNext()) {
