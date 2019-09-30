@@ -4,10 +4,13 @@ author: steve4744
 version: 2.5
 api-version: 1.13
 description: Displays the name of the block that you are looking at.
+softdepend: [Slimefun]
+
 commands:
   whatisthis:
     aliases: [wt, wit, whatisthat]
     description: WhatIsThis commands
+
 permissions:
   whatisthis.use:
     description: used to control who can use whatisthis and where.
