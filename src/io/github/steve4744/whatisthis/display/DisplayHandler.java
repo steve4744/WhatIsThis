@@ -38,18 +38,25 @@ public class DisplayHandler {
 	public DisplayHandler(WhatIsThis plugin) {
 		this.plugin = plugin;
 	}
-
+	
+	/**
+	 * This method handles the visual output of a given Block
+	 * based on the configured visual method.
+	 * 
+	 * @param block		The targeted Block
+	 * @param player	The Player to display the target to
+	 */
 	public void getVisualMethod(Block block, Player player) {
 		if (plugin.getSettings().isScoreboardEnabled()) {
 			plugin.getScoreboardManager().showTarget(player, block);
 		}
 		if (plugin.getSettings().isActionBarEnabled() && !Utils.isMC1_13()) {
-			String message = plugin.getDataHandler().getDisplayName(block.getType(), player);
+			String message = plugin.getDataHandler().getDisplayName(block, player);
 			ActionBar actionbar = new ActionBar(ChatColor.valueOf(plugin.getSettings().getActionBarColor()) + message);
 			actionbar.sendBar(player);
 		}
 		if (plugin.getSettings().isBossbarEnabled()) {
-			String message = plugin.getDataHandler().getDisplayName(block.getType(), player);
+			String message = plugin.getDataHandler().getDisplayName(block, player);
 			BossBarManager bm = new BossBarManager(plugin);
 			bm.setBar(player, message);
 		}
