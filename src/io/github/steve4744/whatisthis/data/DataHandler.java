@@ -64,12 +64,12 @@ public class DataHandler {
 	 */
 	public String getDisplayName(Block b, Player player) {
 		String targetName = b.getType().toString();
-		
+
 		//coloured wall_banners are not currently in the Mojang language files
 		if (targetName.contains("WALL_BANNER")) {
 			targetName = targetName.replace("WALL_", "");
 		}
-		
+
 		// Slimefun Support
 		if (slimefun) {
 			SlimefunItem item = BlockStorage.check(b.getLocation());
@@ -77,7 +77,7 @@ public class DataHandler {
 				return ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName());
 			}
 		}
-		
+
 		return translateItemName(targetName, player);
 	}
 
@@ -98,9 +98,16 @@ public class DataHandler {
 	 * @return names of all the items that the block is capable of dropping
 	 */
 	public Set<String> getItemDrops(Block block, Player player) {
-		Set<String> zeroDropItems = new HashSet<String>();
-
 		itemDrops.clear();
+
+		if (slimefun) {
+			SlimefunItem item = BlockStorage.check(block.getLocation());
+			if (item != null) {
+				itemDrops.put(ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName()), 1);
+				return getItemDropNames();
+			}
+		}
+		Set<String> zeroDropItems = new HashSet<String>();
 		Collection<ItemStack> coll = new ArrayList<ItemStack>();
 		coll = block.getDrops();
 
@@ -194,6 +201,9 @@ public class DataHandler {
 	 * @return localised item name
 	 */
 	private String translateItemName(String item, Player player) {
+		if (slimefun) {
+			return item;
+		}
 		String locale = Utils.getLocale(player);
 		String translated = null;
 
