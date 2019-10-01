@@ -42,14 +42,18 @@ import com.google.common.base.Enums;
 import io.github.steve4744.whatisthis.Utils;
 import io.github.steve4744.whatisthis.WhatIsThis;
 import io.github.steve4744.whatisthis.lang.EnumLang;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import me.mrCookieSlime.Slimefun.api.BlockStorage;
 
 public class DataHandler {
 
 	private WhatIsThis plugin;
-	private Map<String, Integer> itemDrops = new HashMap<String, Integer>();  // material -> amount
+	private boolean slimefun;
+	private Map<String, Integer> itemDrops = new HashMap<>();  // material -> amount
 
 	public DataHandler(WhatIsThis plugin) {
 		this.plugin = plugin;
+		this.slimefun = plugin.getServer().getPluginManager().isPluginEnabled("Slimefun");
 	}
 
 	/**
@@ -58,12 +62,22 @@ public class DataHandler {
 	 * @param player
 	 * @return localised material name
 	 */
-	public String getDisplayName(Material target, Player player) {
-		String targetName = target.toString();
+	public String getDisplayName(Block b, Player player) {
+		String targetName = b.getType().toString();
+		
 		//coloured wall_banners are not currently in the Mojang language files
 		if (targetName.contains("WALL_BANNER")) {
 			targetName = targetName.replace("WALL_", "");
 		}
+		
+		// Slimefun Support
+		if (slimefun) {
+			SlimefunItem item = BlockStorage.check(b.getLocation());
+			if (item != null) {
+				return ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName());
+			}
+		}
+		
 		return translateItemName(targetName, player);
 	}
 
