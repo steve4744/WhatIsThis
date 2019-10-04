@@ -108,7 +108,7 @@ public class WhatIsThis extends JavaPlugin {
 		refreshSettings();
 	}
 
-	public void refreshSettings() {
+	private void refreshSettings() {
 		this.settings = new Settings(this);
 	}
 
