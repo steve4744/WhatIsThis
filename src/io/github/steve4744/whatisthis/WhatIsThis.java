@@ -66,7 +66,6 @@ public class WhatIsThis extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
-		getSettings().saveToggle();
 		EnumLang.clean();
 		scoreboardManager = null;
 		displayHandler = null;
@@ -105,8 +104,12 @@ public class WhatIsThis extends JavaPlugin {
 	}
 
 	public void reloadPlugin() {
-		getSettings().saveToggle();
 		reloadConfig();
+		refreshSettings();
+	}
+
+	public void refreshSettings() {
+		this.settings = new Settings(this);
 	}
 
 	public Settings getSettings() {

@@ -28,6 +28,8 @@ import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.boss.BarColor;
+import org.bukkit.configuration.file.FileConfiguration;
+
 import com.google.common.base.Enums;
 
 import io.github.steve4744.whatisthis.WhatIsThis;
@@ -36,20 +38,22 @@ public class Settings {
 
 	private final WhatIsThis plugin;
 	private boolean isClickEnabled;
+	private FileConfiguration config;
 
 	public Settings(WhatIsThis plugin) {
 		this.plugin = plugin;
-		this.isClickEnabled = plugin.getConfig().getBoolean("use_right_click.enabled", true);
+		config = plugin.getConfig();
+		this.isClickEnabled = config.getBoolean("use_right_click.enabled", true);
 	}
 
 	public Material getClickItem() {
-		Material clickItem = Material.getMaterial(plugin.getConfig().getString("use_right_click.item").toUpperCase());
+		Material clickItem = Material.getMaterial(config.getString("use_right_click.item").toUpperCase());
 		return clickItem != null ? clickItem : Material.AIR;
 	}
 
 	public List<String> getLangs() {
 		String fallback = "en_us";
-		List<String> langs = plugin.getConfig().getStringList("LoadLanguage");
+		List<String> langs = config.getStringList("LoadLanguage");
 		if (langs.contains("all")) {
 			return langs;
 		}
@@ -65,27 +69,28 @@ public class Settings {
 
 	public void toggleRightClick() {
 		isClickEnabled = !isClickEnabled;
+		saveToggle();
 	}
 
-	public void saveToggle() {
-		plugin.getConfig().set("use_right_click.enabled", isRightClickEnabled());
+	private void saveToggle() {
+		config.set("use_right_click.enabled", isRightClickEnabled());
 		plugin.saveConfig();
 	}
 
 	public boolean isScoreboardEnabled() {
-		return plugin.getConfig().getBoolean("Display.scoreboard.enabled", true);
+		return config.getBoolean("Display.scoreboard.enabled", true);
 	}
 
 	public boolean isActionBarEnabled() {
-		return plugin.getConfig().getBoolean("Display.actionbar.enabled", true);
+		return config.getBoolean("Display.actionbar.enabled", true);
 	}
 
 	public boolean isBossbarEnabled() {
-		return plugin.getConfig().getBoolean("Display.bossbar.enabled", true);
+		return config.getBoolean("Display.bossbar.enabled", true);
 	}
 	
 	public String getActionBarColor() {
-		String colour = plugin.getConfig().getString("Display.actionbar.textcolor").toUpperCase();
+		String colour = config.getString("Display.actionbar.textcolor").toUpperCase();
 		if (colour == null || Enums.getIfPresent(ChatColor.class, colour).orNull() == null) {
 			colour = "WHITE";
 		}
@@ -93,7 +98,7 @@ public class Settings {
 	}
 
 	public String getBossBarColor() {
-		String colour = plugin.getConfig().getString("Display.bossbar.barcolor").toUpperCase();
+		String colour = config.getString("Display.bossbar.barcolor").toUpperCase();
 		if (colour == null || Enums.getIfPresent(BarColor.class, colour).orNull() == null) {
 			colour = "GREEN";
 		}
@@ -101,7 +106,7 @@ public class Settings {
 	}
 
 	public String getBossBarTextColor() {
-		String colour = plugin.getConfig().getString("Display.bossbar.textcolor").toUpperCase();
+		String colour = config.getString("Display.bossbar.textcolor").toUpperCase();
 		if (colour == null || Enums.getIfPresent(BarColor.class, colour).orNull() == null) {
 			colour = "WHITE";
 		}
