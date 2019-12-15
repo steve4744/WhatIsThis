@@ -120,7 +120,7 @@ public class DataHandler {
 			} else if (name.equalsIgnoreCase("CHORUS_PLANT")) {
 				zeroDropItems.add("CHORUS_FRUIT");
 
-			} else if (name.equalsIgnoreCase("GRASS") || name.equalsIgnoreCase("TALL_GRASS") || name.equalsIgnoreCase("FERN")) {
+			} else if (name.equalsIgnoreCase("GRASS") || name.equalsIgnoreCase("TALL_GRASS") || name.contains("FERN")) {
 				zeroDropItems.add("WHEAT_SEEDS");
 
 			} else if (name.equalsIgnoreCase("RED_MUSHROOM_BLOCK")) {

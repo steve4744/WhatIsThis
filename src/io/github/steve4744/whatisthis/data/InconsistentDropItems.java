@@ -31,6 +31,7 @@ public enum InconsistentDropItems {
 	GRASS,
 	TALL_GRASS,
 	FERN,
+	LARGE_FERN,
 	MELON_STEM,
 	ATTACHED_MELON_STEM,
 	PUMPKIN_STEM,
