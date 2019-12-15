@@ -109,7 +109,7 @@ public class DataHandler {
 		}
 		Set<String> zeroDropItems = new HashSet<String>();
 		Collection<ItemStack> coll = new ArrayList<ItemStack>();
-		coll = block.getDrops();
+		coll = block.getDrops(new ItemStack(Material.DIAMOND_PICKAXE));
 
 		if (coll.isEmpty() || dropsAreInconsistent(block)) {
 			String name = block.getType().toString();
@@ -129,10 +129,10 @@ public class DataHandler {
 			} else if (name.equalsIgnoreCase("BROWN_MUSHROOM_BLOCK")) {
 				zeroDropItems.add("BROWN_MUSHROOM");
 
-			} else if (name.equalsIgnoreCase("MELON_STEM")) {
+			} else if (name.contains("MELON_STEM")) {
 				zeroDropItems.add("MELON_SEEDS");
 
-			} else if (name.equalsIgnoreCase("PUMPKIN_STEM")) {
+			} else if (name.contains("PUMPKIN_STEM")) {
 				zeroDropItems.add("PUMPKIN_SEEDS");
 
 			} else if (name.equalsIgnoreCase("ACACIA_LEAVES")) {
@@ -299,6 +299,8 @@ public class DataHandler {
 		switch (block.getType().toString()) {
 		    case "MELON_STEM":
 		    case "PUMPKIN_STEM":
+		    case "ATTACHED_MELON_STEM":
+		    case "ATTACHED_PUMPKIN_STEM":
 		    	amount = 3;
 		    	break;
 			case "RED_MUSHROOM_BLOCK":
