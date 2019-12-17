@@ -62,20 +62,17 @@ public class DataHandler {
 	 * @param player
 	 * @return localised material name
 	 */
-	public String getDisplayName(Block b, Player player) {
-		String targetName = b.getType().toString();
+	public String getDisplayName(Block block, Player player) {
+		String targetName = block.getType().toString();
 
 		//coloured wall_banners are not currently in the Mojang language files
 		if (targetName.contains("WALL_BANNER")) {
 			targetName = targetName.replace("WALL_", "");
 		}
 
-		// Slimefun Support
-		if (slimefun) {
-			SlimefunItem item = BlockStorage.check(b.getLocation());
-			if (item != null) {
-				return ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName());
-			}
+		if (isSlimefunBlock(block)) {
+			SlimefunItem item = BlockStorage.check(block.getLocation());
+			return ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName());
 		}
 
 		return translateItemName(targetName, player);
@@ -100,13 +97,12 @@ public class DataHandler {
 	public Set<String> getItemDrops(Block block, Player player) {
 		itemDrops.clear();
 
-		if (slimefun) {
+		if (isSlimefunBlock(block)) {
 			SlimefunItem item = BlockStorage.check(block.getLocation());
-			if (item != null) {
-				itemDrops.put(ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName()), 1);
-				return getItemDropNames();
-			}
+			itemDrops.put(ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName()), 1);
+			return getItemDropNames();
 		}
+
 		Set<String> zeroDropItems = new HashSet<String>();
 		Collection<ItemStack> coll = new ArrayList<ItemStack>();
 		coll = block.getDrops(new ItemStack(Material.DIAMOND_PICKAXE));
@@ -201,9 +197,6 @@ public class DataHandler {
 	 * @return localised item name
 	 */
 	private String translateItemName(String item, Player player) {
-		if (slimefun) {
-			return item;
-		}
 		String locale = Utils.getLocale(player);
 		String translated = null;
 
@@ -267,8 +260,22 @@ public class DataHandler {
 		// Scoreboard max length is 40, so subtract length of result and separator
 		int maxlen = 40 - result.length() - separator.length();
 
-		String translated = translateItemName(item, player);
+		String translated = null;
+		if (!isSlimefunBlock(block)) {
+			translated = translateItemName(item, player);
+		} else {
+			SlimefunItem sfitem = BlockStorage.check(block.getLocation());
+			translated = ChatColor.stripColor(sfitem.getItem().getItemMeta().getDisplayName());
+		}
+
 		return result + translated.substring(0, Math.min(translated.length(), maxlen)) + separator;
+	}
+
+	private boolean isSlimefunBlock(Block block) {
+		if (!slimefun) {
+			return false;
+		}
+		return BlockStorage.check(block.getLocation()) != null;
 	}
 
 	/**
