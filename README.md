@@ -16,10 +16,10 @@ The name and number of items dropped reported by the plugin are those obtained f
 
 There is also the option to have the block information displayed on the ActionBar or BossBar. Using these methods, only the name of the block is displayed and not the dropped items.
 
-The ActionBar display is probably the most attractive and least intrusive of the display methods. The text colour can be set in the config.yml file. The ActionBar option is only available on Minecraft/Spigot 1.14+.
+The ActionBar display is probably the most attractive and least intrusive of the display methods. The text colour can be set in the config.yml file. The ActionBar option is available on Minecraft/Spigot 1.14 and 1.15.
 
 ## Dependencies
-This plugin is only supported on Minecraft/Spigot 1.13 and 1.14.
+This plugin is supported on Minecraft/Spigot 1.13, 1.14 and 1.15.
 
 
 ## Commands & Permissions
@@ -51,4 +51,4 @@ WhatIsThis can be [downloaded from Spigot](https://www.spigotmc.org/resources/wh
     Copy to your server's 'plugins' folder
     Restart your server
 
-Updated 01 July 2019 by steve4744
+Updated 17 December 2019 by steve4744
