@@ -33,11 +33,8 @@ import io.github.steve4744.whatisthis.commands.AutoTabCompleter;
 import io.github.steve4744.whatisthis.commands.WhatIsThisCommand;
 import io.github.steve4744.whatisthis.configuration.Settings;
 import io.github.steve4744.whatisthis.data.DataHandler;
-import io.github.steve4744.whatisthis.display.ActionBar;
 import io.github.steve4744.whatisthis.display.DisplayHandler;
 import io.github.steve4744.whatisthis.display.ScoreboardManager;
-import io.github.steve4744.whatisthis.display.nms.ActionBar_1_14;
-import io.github.steve4744.whatisthis.display.nms.ActionBar_1_15;
 import io.github.steve4744.whatisthis.lang.EnumLang;
 import io.github.steve4744.whatisthis.metrics.Metrics;
 
@@ -49,7 +46,6 @@ public class WhatIsThis extends JavaPlugin {
 	private DataHandler dataHandler;
 	private Settings settings;
 	private DisplayHandler displayHandler;
-	private ActionBar actionBar;
 
 	@Override
 	public void onEnable() {
@@ -74,7 +70,6 @@ public class WhatIsThis extends JavaPlugin {
 		scoreboardManager = null;
 		displayHandler = null;
 		dataHandler = null;
-		actionBar = null;
 		settings = null;
 		getLogger().info("WhatIsThis has been disabled");
 	}
@@ -106,21 +101,6 @@ public class WhatIsThis extends JavaPlugin {
 		pm.registerEvents(new WhatIsThisListener(this), this);
 		dataHandler = new DataHandler(this);
 		displayHandler = new DisplayHandler(this);
-		setupActionBar();
-	}
-
-	private void setupActionBar() {
-		String version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
-		switch (version) {
-		case "v1_14_R1":
-			actionBar = new ActionBar_1_14();
-			break;
-		case "v1_15_R1":
-			actionBar = new ActionBar_1_15();
-			break;
-		default:
-			getLogger().info("Bukkit version not recognised:" + version);
-		}
 	}
 
 	public void reloadPlugin() {
@@ -134,10 +114,6 @@ public class WhatIsThis extends JavaPlugin {
 
 	public Settings getSettings() {
 		return settings;
-	}
-
-	public ActionBar getActionBar() {
-		return actionBar;
 	}
 
 	private void checkForUpdate() {

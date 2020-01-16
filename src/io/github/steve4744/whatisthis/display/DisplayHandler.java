@@ -27,7 +27,6 @@ package io.github.steve4744.whatisthis.display;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
-import io.github.steve4744.whatisthis.Utils;
 import io.github.steve4744.whatisthis.WhatIsThis;
 
 public class DisplayHandler {
@@ -49,9 +48,10 @@ public class DisplayHandler {
 		if (plugin.getSettings().isScoreboardEnabled()) {
 			plugin.getScoreboardManager().showTarget(player, block);
 		}
-		if (plugin.getSettings().isActionBarEnabled() && !Utils.isMC1_13()) {
+		if (plugin.getSettings().isActionBarEnabled()) {
 			String message = plugin.getDataHandler().getDisplayName(block, player);
-			plugin.getActionBar().sendBar(player, message);
+			ActionBar actionBar = new ActionBar(message, plugin.getSettings().getActionBarColor());
+			actionBar.sendBar(player);
 		}
 		if (plugin.getSettings().isBossbarEnabled()) {
 			String message = plugin.getDataHandler().getDisplayName(block, player);
