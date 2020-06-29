@@ -24,6 +24,7 @@ SOFTWARE.
  */
 package io.github.steve4744.whatisthis.display;
 
+import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
@@ -50,7 +51,7 @@ public class DisplayHandler {
 		}
 		if (plugin.getSettings().isActionBarEnabled()) {
 			String message = plugin.getDataHandler().getDisplayName(block, player);
-			ActionBar actionBar = new ActionBar(message, plugin.getSettings().getActionBarColor());
+			ActionBar actionBar = new ActionBar(ChatColor.valueOf(plugin.getSettings().getActionBarColor()) + message);
 			actionBar.sendBar(player);
 		}
 		if (plugin.getSettings().isBossbarEnabled()) {
