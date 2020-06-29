@@ -60,7 +60,7 @@ public class WhatIsThis extends JavaPlugin {
 
 		// load language files
 		EnumLang.init();
-		new Metrics(this);
+		new Metrics(this, 4079);
 		checkForUpdate();
 	}
 
