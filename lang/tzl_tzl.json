@@ -757,13 +757,11 @@
     "item.minecraft.bucket": "\u00deauritorxheu",
     "item.minecraft.carrot": "Fisn\u00edc",
     "item.minecraft.charcoal": "Macascheu",
-    "item.minecraft.clay_ball": "Creta",
     "item.minecraft.clock": "Ur",
     "item.minecraft.coal": "Carbon",
     "item.minecraft.compass": "Comp\u00e1s",
     "item.minecraft.cooked_beef": "Entracuost",
     "item.minecraft.cookie": "Vaischla",
-    "item.minecraft.creeper_head": "Schl\u00fcteir s\u00e8 c\u00e4ps",
     "item.minecraft.cyan_dye": "Tint\u00fcra cian",
     "item.minecraft.dark_oak_boat": "C'hanart da cjar fusc",
     "item.minecraft.diamond": "Diamant",
@@ -943,6 +941,5 @@
     "item.minecraft.wooden_pickaxe": "Piart lignhol",
     "item.minecraft.wooden_shovel": "Espadeu lignhol",
     "item.minecraft.wooden_sword": "Esp\u00e4ts lignhol",
-    "item.minecraft.zombie_head": "Zomb\u00ec s\u00e8 c\u00e4ps",
 	"dummy": "dummy"
 }

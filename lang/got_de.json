@@ -3,7 +3,6 @@
     "block.minecraft.andesite_slab": "Andaiseiteiska spilda",
     "block.minecraft.andesite_stairs": "Andaiseiteiska usstaigos",
     "block.minecraft.bamboo": "Bambu",
-    "block.minecraft.banner": "Fana",
     "block.minecraft.banner.globe.black": "Swarta Krigglo",
     "block.minecraft.banner.globe.blue": "Blewa Krigglo",
     "block.minecraft.banner.globe.brown": "Bruna Krigglo",
@@ -16,7 +15,6 @@
     "block.minecraft.banner.globe.white": "Hweita Krigglo",
     "block.minecraft.banner.globe.yellow": "Gilwa Krigglo",
     "block.minecraft.barrel": "Barils",
-    "block.minecraft.bed": "Badi",
     "block.minecraft.bee_nest": "Biwasitls",
     "block.minecraft.bell": "Skilla",
     "block.minecraft.birch_door": "Bairkadaur",
@@ -122,7 +120,6 @@
     "item.minecraft.coal": "Hauri",
     "item.minecraft.cookie": "Koka",
     "item.minecraft.crossbow": "Krukabuga",
-    "item.minecraft.dragon_head": "Drakahaubi\u00fe",
     "item.minecraft.egg": "Addi",
     "item.minecraft.emerald": "Smaragdus",
     "item.minecraft.feather": "Fi\u00fera",
@@ -176,8 +173,8 @@
     "item.minecraft.trader_llama_spawn_egg": "Lewjins Lamos Addi Gaskaftais",
     "item.minecraft.wandering_trader_spawn_egg": "Farandins Lewjins Addi Gaskaftais",
     "item.minecraft.white_dye": "Faheins \u01f6eita",
+    "item.minecraft.wooden_axe": "Gul\u00feaqizi",
     "item.minecraft.wooden_sword": "Widuhairus",
     "item.minecraft.yellow_dye": "Faheins Gilwa",
-    "item.minecraft.zombie_head": "Nausahaubi\u00fe",
 	"dummy": "dummy"
 }
