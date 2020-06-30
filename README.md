@@ -1,8 +1,8 @@
 # WhatIsThis
 
-![alt text](https://www.spigotmc.org/attachments/2019-02-15_18-15-49-png.406089/ "WhatIsThis by steve4744")
+![alt text](https://www.spigotmc.org/attachments/2020-06-30_11-18-42-png.529683/ "WhatIsThis by steve4744")
 
-WhatIsThis is a lightweight utility plugin aimed at providing block information directly to the player without the need to open a UI. This can be helpful in Survival mode to know what a block is without having to break it first, or while looking at other people's builds in Creative mode.
+WhatIsThis is a lightweight utility plugin aimed at providing block information directly to the player without the need to open a UI. This can be helpful in Survival mode to know what a block is without having to break it first, while looking at other people's builds in Creative mode, or exploring the 1.16 nether update.
 
 Inspired by Forge mods such as WAWLA (What Are We Looking At), WAILA (What Am I Looking At) and HWYLA (Here's What You're Looking At), but without the distraction of the display on the screen constantly, and without utilising PlayerMoveEvent. Simply by right-clicking the block with a STICK (default) or running command /wt while looking at a block, the block type and the items it drops will be briefly displayed on the side of the screen.
 
@@ -19,7 +19,7 @@ There is also the option to have the block information displayed on the ActionBa
 The ActionBar display is probably the most attractive and least intrusive of the display methods. The text colour can be set in the config.yml file.
 
 ## Dependencies
-This plugin is supported on Minecraft/Spigot 1.13, 1.14 and 1.15.
+This plugin is supported on Minecraft/Spigot 1.13 through to 1.16+.
 
 
 ## Commands & Permissions
@@ -51,4 +51,7 @@ WhatIsThis can be [downloaded from Spigot](https://www.spigotmc.org/resources/wh
     Copy to your server's 'plugins' folder
     Restart your server
 
-Updated 17 January 2020 by steve4744
+
+![alt text](https://www.spigotmc.org/attachments/2019-02-15_18-15-49-png.406089/ "WhatIsThis by steve4744")
+
+Updated 30 June 2020 by steve4744
