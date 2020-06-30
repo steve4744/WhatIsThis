@@ -64,7 +64,6 @@ public class DataHandler {
 	 */
 	public String getDisplayName(Block block, Player player) {
 		String targetName = block.getType().toString();
-
 		//coloured wall_banners are not currently in the Mojang language files
 		if (targetName.contains("WALL_BANNER")) {
 			targetName = targetName.replace("WALL_", "");
@@ -152,6 +151,9 @@ public class DataHandler {
 				zeroDropItems.add("SPRUCE_SAPLING");
 
 			} else if (name.equalsIgnoreCase("CHORUS_FLOWER")) {
+				zeroDropItems.add(name);
+
+			} else if (name.contains("_VINES")) {
 				zeroDropItems.add(name);
 
 			// these below are 1.13.only
@@ -248,7 +250,11 @@ public class DataHandler {
 			if (block.getType().toString().contains("MUSHROOM_BLOCK")) {
 				separator = " # 0  ->";
 			}
+
+		} else if (item.contains("_VINES")) {
+			separator = " # 0  ->";
 		}
+
 		if (Utils.isMC1_13()) {
 			if (item.equalsIgnoreCase("NETHER_WART")) {
 				separator = " # 1  ->";
