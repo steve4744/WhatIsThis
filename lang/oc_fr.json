@@ -626,6 +626,9 @@
     "block.minecraft.black_stained_glass_pane": "Pan\u00e8l de Veire Negre",
     "block.minecraft.black_terracotta": "T\u00e8rra cu\u00e8ita negra",
     "block.minecraft.black_wool": "Lana Negra",
+    "block.minecraft.blackstone_slab": "Lausa en Gres",
+    "block.minecraft.blackstone_stairs": "Lausa en Gres",
+    "block.minecraft.blackstone_wall": "Lausa en Gres",
     "block.minecraft.blast_furnace": "Forn\u00e8u de fusion",
     "block.minecraft.blue_banner": "Bandi\u00e8ra Blava",
     "block.minecraft.blue_bed": "Li\u00e8ch Blau",
@@ -1197,6 +1200,7 @@
     "item.minecraft.gray_dye": "Tenchura Grisa",
     "item.minecraft.green_dye": "Tencha verda",
     "item.minecraft.gunpowder": "Polsa de Canon",
+    "item.minecraft.hoglin_spawn_egg": "U\u00f2u de Hoglin ",
     "item.minecraft.honey_bottle": "Botelha de M\u00e8l",
     "item.minecraft.honeycomb": "Bresca",
     "item.minecraft.hopper_minecart": "Vagonet amb un Embut",
@@ -1292,6 +1296,7 @@
     "item.minecraft.panda_spawn_egg": "U\u00f2u de Panda",
     "item.minecraft.paper": "Papi\u00e8r",
     "item.minecraft.piglin_banner_pattern": "Motiu de bandi\u00e8ra",
+    "item.minecraft.piglin_brute_spawn_egg": "U\u00f2u de Piglin",
     "item.minecraft.piglin_spawn_egg": "U\u00f2u de Piglin",
     "item.minecraft.pillager_spawn_egg": "U\u00f2u de Pilhard",
     "item.minecraft.pink_dye": "Tenchura R\u00f2sa",
@@ -1428,5 +1433,6 @@
     "item.minecraft.writable_book": "Libre e Pluma",
     "item.minecraft.written_book": "Libre Escrich",
     "item.minecraft.yellow_dye": "Tencha jauna",
+    "item.minecraft.zoglin_spawn_egg": "U\u00f2u de Hoglin ",
 	"dummy": "dummy"
 }
