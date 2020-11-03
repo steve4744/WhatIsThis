@@ -1,0 +1,125 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>io.github.steve4744</groupId>
+  <artifactId>WhatIsThis</artifactId>
+  <version>3.2</version>
+  <name>WhatIsThis</name>
+  <description>A Minecraft utility plugin which displays block information</description>
+  <packaging>jar</packaging>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+    <repositories>
+    <!-- Spigot API Repo -->
+    <repository>
+        <id>spigot-repo</id>
+        <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+    </repository>
+    <!-- bStats Repo -->
+    <repository>
+        <id>CodeMC</id>
+        <url>https://repo.codemc.org/repository/maven-public/</url>
+    </repository>
+    <!-- SlimeFun4 Repo -->
+    <repository>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
+  </repository>
+  </repositories>
+  <dependencies>
+    <!-- Spigot API -->
+    <dependency>
+        <groupId>org.spigotmc</groupId>
+        <artifactId>spigot-api</artifactId>
+        <version>1.16.4-R0.1-SNAPSHOT</version>
+        <scope>provided</scope>
+    </dependency>
+    <!-- bStats -->
+    <dependency>
+        <groupId>org.bstats</groupId>
+        <artifactId>bstats-bukkit</artifactId>
+        <version>1.7</version>
+        <scope>compile</scope>
+    </dependency>
+    <dependency>
+        <groupId>com.github.Slimefun</groupId>
+        <artifactId>Slimefun4</artifactId>
+        <version>RC-17</version>
+        <scope>provided</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <finalName>${project.artifactId}-${project.version}</finalName>
+	<defaultGoal>clean package</defaultGoal>
+
+    <sourceDirectory>src/main/java</sourceDirectory>
+
+    <resources>
+      <resource>
+          <targetPath>.</targetPath>
+          <filtering>true</filtering>
+          <directory>src/main/resources</directory>
+          <includes>
+              <include>plugin.yml</include>
+              <include>config.yml</include>
+              <include>lang/</include>
+          </includes>
+      </resource>
+    </resources>
+
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.7.0</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+      <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>3.3.0</version>
+          <configuration>
+              <descriptorRefs>
+                  <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+          </configuration>
+      </plugin>
+      <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-shade-plugin</artifactId>
+          <version>3.2.4</version>
+          <configuration>
+              <createDependencyReducedPom>false</createDependencyReducedPom>
+                <artifactSet>
+                </artifactSet>
+                <filters>
+                  <filter>
+                      <artifact>*:*</artifact>
+                      <excludes>
+                          <exclude>META-INF/</exclude>
+                      </excludes>
+                  </filter>
+                </filters>
+                <relocations>
+                    <relocation>
+                        <pattern>org.bstats</pattern>
+                        <shadedPattern>io.github.steve4744.whatisthis.bstats</shadedPattern>
+                    </relocation>
+                </relocations>
+            </configuration>
+            <executions>
+              <execution>
+                  <phase>package</phase>
+                  <goals>
+                      <goal>shade</goal>
+                  </goals>
+              </execution>
+            </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
