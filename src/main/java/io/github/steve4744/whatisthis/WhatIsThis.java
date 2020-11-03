@@ -24,6 +24,7 @@ SOFTWARE.
  */
 package io.github.steve4744.whatisthis;
 
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -36,7 +37,6 @@ import io.github.steve4744.whatisthis.data.DataHandler;
 import io.github.steve4744.whatisthis.display.DisplayHandler;
 import io.github.steve4744.whatisthis.display.ScoreboardManager;
 import io.github.steve4744.whatisthis.lang.EnumLang;
-import io.github.steve4744.whatisthis.metrics.Metrics;
 
 public class WhatIsThis extends JavaPlugin {
 
