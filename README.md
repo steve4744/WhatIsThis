@@ -1,6 +1,6 @@
 # WhatIsThis
 
-![alt text](https://www.spigotmc.org/attachments/2020-06-30_11-18-42-png.529683/ "WhatIsThis by steve4744")
+![alt text](https://user-images.githubusercontent.com/6975392/106388678-9858b180-63d7-11eb-9941-91aaa0ef6fc2.png "WhatIsThis by steve4744")
 
 WhatIsThis is a lightweight utility plugin aimed at providing block information directly to the player without the need to open a UI. This can be helpful in Survival mode to know what a block is without having to break it first, while looking at other people's builds in Creative mode, or exploring the 1.16 nether update.
 
