@@ -63,15 +63,14 @@ public class DataHandler {
 	 * @return localised material name
 	 */
 	public String getDisplayName(Block block, Player player) {
+		if (isSlimefunBlock(block)) {
+			SlimefunItem item = BlockStorage.check(block.getLocation());
+			return ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName());
+		}
 		String targetName = block.getType().toString();
 		//coloured wall_banners are not currently in the Mojang language files
 		if (targetName.contains("WALL_BANNER")) {
 			targetName = targetName.replace("WALL_", "");
-		}
-
-		if (isSlimefunBlock(block)) {
-			SlimefunItem item = BlockStorage.check(block.getLocation());
-			return ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName());
 		}
 
 		return translateItemName(targetName, player);
