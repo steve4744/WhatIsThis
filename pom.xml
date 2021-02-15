@@ -41,20 +41,20 @@
     <dependency>
         <groupId>org.spigotmc</groupId>
         <artifactId>spigot-api</artifactId>
-        <version>1.16.4-R0.1-SNAPSHOT</version>
+        <version>1.16.5-R0.1-SNAPSHOT</version>
         <scope>provided</scope>
     </dependency>
     <!-- bStats -->
     <dependency>
         <groupId>org.bstats</groupId>
         <artifactId>bstats-bukkit</artifactId>
-        <version>1.7</version>
+        <version>1.8</version>
         <scope>compile</scope>
     </dependency>
     <dependency>
         <groupId>com.github.Slimefun</groupId>
         <artifactId>Slimefun4</artifactId>
-        <version>RC-17</version>
+        <version>RC-20</version>
         <scope>provided</scope>
     </dependency>
   </dependencies>
