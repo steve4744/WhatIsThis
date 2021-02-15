@@ -922,7 +922,7 @@
     "block.minecraft.granite_wall": "Granittmur",
     "block.minecraft.grass": "Gras",
     "block.minecraft.grass_block": "Grasblokk",
-    "block.minecraft.grass_path": "Grasstig",
+    "block.minecraft.grass_path": "Grasr\u00e5s",
     "block.minecraft.gravel": "Grus",
     "block.minecraft.gray_banner": "Gr\u00e5 fane",
     "block.minecraft.gray_bed": "Gr\u00e5 seng",
@@ -1246,7 +1246,7 @@
     "block.minecraft.sandstone_slab": "Sandsteinhelle",
     "block.minecraft.sandstone_stairs": "Sandsteintrapp",
     "block.minecraft.sandstone_wall": "Sandsteinmur",
-    "block.minecraft.scaffolding": "Stillas",
+    "block.minecraft.scaffolding": "Stelling",
     "block.minecraft.sea_lantern": "Sj\u00f8lykt",
     "block.minecraft.sea_pickle": "Sj\u00f8agurk",
     "block.minecraft.seagrass": "Sj\u00f8gras",
@@ -1871,6 +1871,6 @@
     "item.minecraft.zombie_horse_spawn_egg": "Framkalleegg for hestedauding",
     "item.minecraft.zombie_spawn_egg": "Framkalleegg for dauding",
     "item.minecraft.zombie_villager_spawn_egg": "Framkalleegg for bygdedauding",
-    "item.minecraft.zombified_piglin_spawn_egg": "Framkalleegg for daudpiglin",
+    "item.minecraft.zombified_piglin_spawn_egg": "Framkalleegg for piglindauding",
 	"dummy": "dummy"
 }
