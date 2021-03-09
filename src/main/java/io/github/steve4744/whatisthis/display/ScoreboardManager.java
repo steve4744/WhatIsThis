@@ -70,7 +70,7 @@ public class ScoreboardManager {
 		Objective o = scoreboard.getObjective(DisplaySlot.SIDEBAR);
 		o.setDisplayName(ChatColor.GOLD.toString() + ChatColor.BOLD + dataHandler.getDisplayName(block, player));
 
-		for (String s : dataHandler.getItemDrops(block, player)) {
+		for (String s : dataHandler.getItemDrops(block)) {
 			o.getScore(dataHandler.getFormattedText(block, s, player)).setScore(dataHandler.getAmount(block, s));
 		}
 		player.setScoreboard(scoreboard);

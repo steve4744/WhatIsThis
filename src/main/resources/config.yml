@@ -36,3 +36,7 @@ Display:
     enabled: false
     textcolor: WHITE
     barcolor: GREEN
+  chat:
+    enabled: false
+    name_color: GREEN
+    drop_color: RED

@@ -92,7 +92,7 @@ public class DataHandler {
 	 * @param player
 	 * @return names of all the items that the block is capable of dropping
 	 */
-	public Set<String> getItemDrops(Block block, Player player) {
+	public Set<String> getItemDrops(Block block) {
 		itemDrops.clear();
 
 		if (isSlimefunBlock(block)) {

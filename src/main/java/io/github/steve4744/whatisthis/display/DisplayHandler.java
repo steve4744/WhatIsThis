@@ -59,5 +59,9 @@ public class DisplayHandler {
 			BossBarManager bm = new BossBarManager(plugin);
 			bm.setBar(player, message);
 		}
+		if (plugin.getSettings().isChatEnabled()) {
+			ChatManager cm = new ChatManager(plugin);
+			cm.showMessage(player, block);
+		}
 	}
 }

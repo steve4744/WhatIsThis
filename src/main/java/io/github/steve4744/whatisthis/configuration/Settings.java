@@ -88,7 +88,11 @@ public class Settings {
 	public boolean isBossbarEnabled() {
 		return config.getBoolean("Display.bossbar.enabled", true);
 	}
-	
+
+	public boolean isChatEnabled() {
+		return config.getBoolean("Display.chat.enabled", true);
+	}
+
 	public String getActionBarColor() {
 		String colour = config.getString("Display.actionbar.textcolor").toUpperCase();
 		if (colour == null || Enums.getIfPresent(ChatColor.class, colour).orNull() == null) {
@@ -99,18 +103,30 @@ public class Settings {
 
 	public String getBossBarColor() {
 		String colour = config.getString("Display.bossbar.barcolor").toUpperCase();
+		return validateBarColor(colour);
+	}
+
+	public String getBossBarTextColor() {
+		String colour = config.getString("Display.bossbar.textcolor").toUpperCase();
+		return validateChatColor(colour);
+	}
+
+	public String getChatColor(String element) {
+		String colour = element.equalsIgnoreCase("name") ? config.getString("Display.chat.name_color") : config.getString("Display.chat.drop_color");
+		return validateChatColor(colour.toUpperCase());
+	}
+
+	private String validateBarColor(String colour) {
 		if (colour == null || Enums.getIfPresent(BarColor.class, colour).orNull() == null) {
 			colour = "GREEN";
 		}
 		return colour;
 	}
 
-	public String getBossBarTextColor() {
-		String colour = config.getString("Display.bossbar.textcolor").toUpperCase();
-		if (colour == null || Enums.getIfPresent(BarColor.class, colour).orNull() == null) {
+	private String validateChatColor(String colour) {
+		if (colour == null || Enums.getIfPresent(ChatColor.class, colour).orNull() == null) {
 			colour = "WHITE";
 		}
 		return colour;
 	}
-
 }
