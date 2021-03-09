@@ -23,7 +23,7 @@ public class ChatManager {
 
 	public void showMessage(Player player, Block block) {
 		String name = dataHandler.getDisplayName(block, player);
-		player.sendMessage(formattedName(name) + ChatColor.DARK_GRAY + " [" + formattedDrops(block) + ChatColor.DARK_GRAY + "]");
+		player.sendMessage(formattedName(name) + formattedDrops(block));
 	}
 
 	private String formattedName(String name) {
@@ -31,14 +31,16 @@ public class ChatManager {
 	}
 
 	private String formattedDrops(Block block) {
+		if (!plugin.getSettings().showDropsInChat()) {
+			return "";
+		}
 		StringJoiner drops = new StringJoiner(", ");
-
 		for (String drop : dataHandler.getItemDrops(block)) {
 			int amount = dataHandler.getAmount(block, drop);
 			if (amount > 0) {
 				drops.add(WordUtils.capitalizeFully(drop, delim) + " x " + amount);
 			}
 		}
-		return ChatColor.valueOf(plugin.getSettings().getChatColor("drop")) + drops.toString();
+		return ChatColor.DARK_GRAY + " [" +ChatColor.valueOf(plugin.getSettings().getChatColor("drop")) + drops.toString() + ChatColor.DARK_GRAY + "]";
 	}
 }

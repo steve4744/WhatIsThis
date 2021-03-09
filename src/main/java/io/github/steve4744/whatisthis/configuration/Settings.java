@@ -93,6 +93,10 @@ public class Settings {
 		return config.getBoolean("Display.chat.enabled", true);
 	}
 
+	public boolean showDropsInChat() {
+		return config.getBoolean("Display.chat.show_drops", true);
+	}
+
 	public String getActionBarColor() {
 		String colour = config.getString("Display.actionbar.textcolor").toUpperCase();
 		if (colour == null || Enums.getIfPresent(ChatColor.class, colour).orNull() == null) {

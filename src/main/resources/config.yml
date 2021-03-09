@@ -40,3 +40,4 @@ Display:
     enabled: false
     name_color: GREEN
     drop_color: RED
+    show_drops: true

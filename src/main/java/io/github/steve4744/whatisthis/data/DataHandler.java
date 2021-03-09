@@ -89,7 +89,6 @@ public class DataHandler {
 	 * Blocks that can sometimes drop zero items, like LEAVES, are dealt with separately so that
 	 * the range of drops can be displayed.
 	 * @param block
-	 * @param player
 	 * @return names of all the items that the block is capable of dropping
 	 */
 	public Set<String> getItemDrops(Block block) {
