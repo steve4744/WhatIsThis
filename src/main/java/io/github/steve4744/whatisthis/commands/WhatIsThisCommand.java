@@ -47,36 +47,37 @@ public class WhatIsThisCommand implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		String infoMessage = ChatColor.GREEN + "[WhatIsThis] " + ChatColor.WHITE + "Version " + version + " : plugin by "+ ChatColor.AQUA + "steve4744";
+		String prefix = ChatColor.GREEN + "[WhatIsThis] " + ChatColor.WHITE;
+		String infoMessage = prefix + "Version " + version + " : plugin by "+ ChatColor.AQUA + "steve4744";
 		
 		if (!sender.hasPermission("whatisthis.use")) {
-			sender.sendMessage(ChatColor.GREEN + "[WhatIsThis] " + ChatColor.WHITE + "You do not have permission to run this command");
+			sender.sendMessage(prefix + "You do not have permission to run this command");
 			return true;
 		}
 		if (args.length > 0) {
 			if (!sender.hasPermission("whatisthis.admin")) {
-				sender.sendMessage(ChatColor.GREEN + "[WhatIsThis] " + ChatColor.WHITE + "You do not have permission to run this command");
-				return true;
+				sender.sendMessage(prefix + "You do not have permission to run this command");
+				return false;
 			}
 			if (args[0].equalsIgnoreCase("reload")) {
 				plugin.reloadPlugin();
-				sender.sendMessage(ChatColor.GREEN + "[WhatIsThis] " + ChatColor.WHITE + "Config reloaded");
-				return false;
+				sender.sendMessage(prefix + "Config reloaded");
+				return true;
 			} else if (args[0].equalsIgnoreCase("toggleclick")) {
 				String action = "OFF";
 				plugin.getSettings().toggleRightClick();
 				if (plugin.getSettings().isRightClickEnabled()) {
 					action = "ON";
 				}
-				sender.sendMessage(ChatColor.GREEN + "[WhatIsThis] " + ChatColor.WHITE + "Right-click toggled " + ChatColor.AQUA + action);
-				return false;
+				sender.sendMessage(prefix + "Right-click toggled " + ChatColor.AQUA + action);
+				return true;
 			}
 			sender.sendMessage(infoMessage);
 			return true;
 		}
 		if (!(sender instanceof Player)) {
 			sender.sendMessage(infoMessage);
-			return true;	
+			return false;
 		}
 
 		//get the block the player is looking at
@@ -90,7 +91,7 @@ public class WhatIsThisCommand implements CommandExecutor {
 			break;
 		}
 		plugin.getDisplayHandler().getVisualMethod(lastBlock, player);
-		return false;
+		return true;
 	} 
 
 }
