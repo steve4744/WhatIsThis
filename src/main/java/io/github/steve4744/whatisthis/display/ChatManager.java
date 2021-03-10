@@ -41,6 +41,6 @@ public class ChatManager {
 				drops.add(WordUtils.capitalizeFully(drop, delim) + " x " + amount);
 			}
 		}
-		return ChatColor.DARK_GRAY + " [" +ChatColor.valueOf(plugin.getSettings().getChatColor("drop")) + drops.toString() + ChatColor.DARK_GRAY + "]";
+		return ChatColor.DARK_GRAY + " [" + ChatColor.valueOf(plugin.getSettings().getChatColor("drop")) + drops.toString() + ChatColor.DARK_GRAY + "]";
 	}
 }

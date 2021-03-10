@@ -46,8 +46,9 @@ public class ScoreboardManager {
 	private WhatIsThis plugin;
 	private DataHandler dataHandler;
 	
-	private Map<String, Scoreboard> scoreboardMap = new HashMap<String, Scoreboard>();
-	private Map<String, BukkitTask> taskMap = new HashMap<String, BukkitTask>();
+	private Map<String, Scoreboard> scoreboardMap = new HashMap<>();
+	private Map<String, BukkitTask> taskMap = new HashMap<>();
+	private Map<String, Scoreboard> externalScoreboards = new HashMap<>();
 
 	public ScoreboardManager(WhatIsThis plugin) {
 		this.plugin = plugin;
@@ -57,6 +58,7 @@ public class ScoreboardManager {
 	public void showTarget(Player player, Block block) {
 		//kill any previous scheduled tasks
 		cancelTask(player.getName());
+		storeExternalScoreboard(player);
 
 		if (scoreboardMap.containsKey(player.getName())) {
 			scoreboard = scoreboardMap.get(player.getName());
@@ -79,6 +81,7 @@ public class ScoreboardManager {
 			@Override
 			public void run() {
 				resetScoreboard(player);
+				restoreExternalScoreboard(player);
 			}
 		}.runTaskLater(plugin, 60);
 		taskMap.put(player.getName(), task);
@@ -99,12 +102,33 @@ public class ScoreboardManager {
 	}
 
 	private void cancelTask(String playername) {
-		BukkitTask task = null;
 		if (taskMap.containsKey(playername)) {
-			task = taskMap.get(playername);
+			BukkitTask task = taskMap.get(playername);
 			task.cancel();
 			taskMap.remove(playername);
 		}
 	}
 
+	/**
+	 * Store 3rd party scoreboard if the scoreboard displayed is not of this plugin,
+	 * i.e. ignore if player is multi-clicking items.
+	 *
+	 * @param player
+	 */
+	private void storeExternalScoreboard(Player player) {
+		if (externalScoreboards.get(player.getName()) == null) {
+			externalScoreboards.put(player.getName(), player.getScoreboard());
+		}
+	}
+
+	/**
+	 * Restore player's 3rd party scoreboard, if previously saved.
+	 *
+	 * @param player
+	 */
+	private void restoreExternalScoreboard(Player player) {
+		if (externalScoreboards.get(player.getName()) != null) {
+			player.setScoreboard(externalScoreboards.remove(player.getName()));
+		}
+	}
 }
