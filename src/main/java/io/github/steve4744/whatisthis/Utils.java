@@ -26,7 +26,9 @@ package io.github.steve4744.whatisthis;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.util.BlockIterator;
 
 public class Utils {
 
@@ -46,4 +48,21 @@ public class Utils {
 		return Bukkit.getVersion().contains("1.13");
 	}
 
+	/**
+	 * Get the block the player is looking at.
+	 *
+	 * @param player
+	 * @return block targeted by player
+	 */
+	public static Block getTargetBlock(Player player) {
+		BlockIterator iter = new BlockIterator(player, 10);
+		Block lastBlock = iter.next();
+		while (iter.hasNext()) {
+			lastBlock = iter.next();
+			if (Utils.isAir(lastBlock.getType()) || Utils.isWater(lastBlock.getType()))
+				continue;
+			break;
+		}
+		return lastBlock;
+	}
 }

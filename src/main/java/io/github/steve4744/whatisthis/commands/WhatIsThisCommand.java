@@ -25,13 +25,10 @@ SOFTWARE.
 package io.github.steve4744.whatisthis.commands;
 
 import org.bukkit.ChatColor;
-import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.util.BlockIterator;
-
 import io.github.steve4744.whatisthis.Utils;
 import io.github.steve4744.whatisthis.WhatIsThis;
 
@@ -79,18 +76,8 @@ public class WhatIsThisCommand implements CommandExecutor {
 			sender.sendMessage(infoMessage);
 			return false;
 		}
-
-		//get the block the player is looking at
 		Player player = (Player) sender;
-		BlockIterator iter = new BlockIterator(player, 10);
-		Block lastBlock = iter.next();
-		while (iter.hasNext()) {
-			lastBlock = iter.next();
-			if (Utils.isAir(lastBlock.getType()) || Utils.isWater(lastBlock.getType()))
-				continue;
-			break;
-		}
-		plugin.getDisplayHandler().getVisualMethod(lastBlock, player);
+		plugin.getDisplayHandler().getVisualMethod(Utils.getTargetBlock(player), player);
 		return true;
 	} 
 
