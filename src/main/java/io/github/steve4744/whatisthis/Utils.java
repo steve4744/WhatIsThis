@@ -24,7 +24,6 @@ SOFTWARE.
  */
 package io.github.steve4744.whatisthis;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -42,10 +41,6 @@ public class Utils {
 
 	public static String getLocale(Player player) {
 		return player.getLocale();
-	}
-
-	public static boolean isMC1_13() {
-		return Bukkit.getVersion().contains("1.13");
 	}
 
 	/**

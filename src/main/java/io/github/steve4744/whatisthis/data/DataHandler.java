@@ -154,26 +154,12 @@ public class DataHandler {
 			} else if (name.contains("_VINES")) {
 				zeroDropItems.add(name);
 
-			// these below are 1.13.only
-			} else if (name.equalsIgnoreCase("COCOA")) {
-				zeroDropItems.add("COCOA_BEANS");
-
-			} else if (name.equalsIgnoreCase("NETHER_WART")) {
-				zeroDropItems.add(name);
-
-			} else if (name.equalsIgnoreCase("BEETROOTS")) {
-				zeroDropItems.add(name);
-				zeroDropItems.add("BEETROOT_SEEDS");
-
-			} else if (name.equalsIgnoreCase("WHEAT")) {
-				zeroDropItems.add(name);
-				zeroDropItems.add("WHEAT_SEEDS");
-
 			} else {
 				// items like GLASS drop nothing
 				zeroDropItems.add("");
 			}
-			if (name.contains("LEAVES") && !Utils.isMC1_13()) {
+
+			if (name.contains("LEAVES")) {
 				zeroDropItems.add("STICK");
 			}
 
@@ -253,14 +239,6 @@ public class DataHandler {
 			separator = " # 0  ->";
 		}
 
-		if (Utils.isMC1_13()) {
-			if (item.equalsIgnoreCase("NETHER_WART")) {
-				separator = " # 1  ->";
-			} else if (item.equalsIgnoreCase("WHEAT_SEEDS") || item.equalsIgnoreCase("BEETROOT_SEEDS")) {
-				separator = " # 0  ->";
-			}
-		}
-
 		// Scoreboard max length is 40, so subtract length of result and separator
 		int maxlen = 40 - result.length() - separator.length();
 
@@ -289,9 +267,6 @@ public class DataHandler {
 	 * @return boolean
 	 */
 	private boolean dropsAreInconsistent(Block block) {
-		if (Utils.isMC1_13()) {
-			return Enums.getIfPresent(InconsistentDropItems1_13.class, block.getType().toString()).orNull() != null;
-		}
 		return Enums.getIfPresent(InconsistentDropItems.class, block.getType().toString()).orNull() != null;
 	}
 
@@ -318,22 +293,6 @@ public class DataHandler {
 			case "BROWN_MUSHROOM_BLOCK":
 				amount = 2;
 				break;
-			// these below are 1.13 only
-			case "NETHER_WART":
-				amount = 4;
-				break;
-			case "COCOA":
-				amount = 3;
-				break;
-			case "WHEAT":
-			case "BEETROOTS":
-				if (name.contains("SEEDS")) {
-					amount = 3;
-				} else {
-					amount = 1;
-				}
-				break;
-
 			default: 
 				amount = 1;
 				if (name.equalsIgnoreCase("STICK")) {
