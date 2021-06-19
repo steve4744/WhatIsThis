@@ -46,6 +46,7 @@ public class WhatIsThis extends JavaPlugin {
 	private DataHandler dataHandler;
 	private Settings settings;
 	private DisplayHandler displayHandler;
+	private static final int BSTATS_PLUGIN_ID = 4079;
 
 	@Override
 	public void onEnable() {
@@ -60,7 +61,7 @@ public class WhatIsThis extends JavaPlugin {
 
 		// load language files
 		EnumLang.init();
-		new Metrics(this, 4079);
+		new Metrics(this, BSTATS_PLUGIN_ID);
 		checkForUpdate();
 	}
 
