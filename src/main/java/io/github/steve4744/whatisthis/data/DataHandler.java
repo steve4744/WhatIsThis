@@ -131,12 +131,18 @@ public class DataHandler {
 			} else if (name.equalsIgnoreCase("ACACIA_LEAVES")) {
 				zeroDropItems.add("ACACIA_SAPLING");
 
+			} else if (name.equalsIgnoreCase("AZALEA_LEAVES")) {
+				zeroDropItems.add("AZALEA");
+
 			} else if (name.equalsIgnoreCase("BIRCH_LEAVES")) {
 				zeroDropItems.add("BIRCH_SAPLING");
 
 			} else if (name.equalsIgnoreCase("DARK_OAK_LEAVES")) {
 				zeroDropItems.add("DARK_OAK_SAPLING");
 				zeroDropItems.add("APPLE");
+
+			} else if (name.equalsIgnoreCase("FLOWERING_AZALEA_LEAVES")) {
+				zeroDropItems.add("FLOWERING_AZALEA");
 
 			} else if (name.equalsIgnoreCase("JUNGLE_LEAVES")) {
 				zeroDropItems.add("JUNGLE_SAPLING");
@@ -222,7 +228,7 @@ public class DataHandler {
 		if (item.equalsIgnoreCase("CHORUS_FRUIT") || item.equalsIgnoreCase("STICK") || item.equalsIgnoreCase("MELON_SEEDS") || item.equalsIgnoreCase("PUMPKIN_SEEDS")) {
 			separator = " # 0  ->";
 
-		} else if (item.equalsIgnoreCase("APPLE") || item.contains("SAPLING")) {
+		} else if (item.equalsIgnoreCase("APPLE") || item.contains("SAPLING") || item.contains("AZALEA")) {
 			if (block.getType().toString().contains("LEAVES")) {
 				separator = " # 0  ->";
 			}
