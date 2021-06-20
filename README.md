@@ -2,7 +2,7 @@
 
 ![alt text](https://user-images.githubusercontent.com/6975392/106388678-9858b180-63d7-11eb-9941-91aaa0ef6fc2.png "WhatIsThis by steve4744")
 
-WhatIsThis is a lightweight utility plugin aimed at providing block information directly to the player without the need to open a UI. This can be helpful in Survival mode to know what a block is without having to break it first, while looking at other people's builds in Creative mode, or exploring the 1.16 nether update.
+WhatIsThis is a lightweight utility plugin aimed at providing block information directly to the player without the need to open a UI. This can be helpful in Survival mode to know what a block is without having to break it first, while looking at other people's builds in Creative mode, or exploring the latest nether update.
 
 Inspired by Forge mods such as WAWLA (What Are We Looking At), WAILA (What Am I Looking At) and HWYLA (Here's What You're Looking At), but without the distraction of the display on the screen constantly, and without utilising PlayerMoveEvent. Simply by right-clicking the block with a STICK (default) or running command `/wt` while looking at a block, the block type and the items it drops will be briefly displayed, either on the side of the screen, on the BossBar or ActionBar.
 
@@ -14,12 +14,18 @@ The item used to select the block is also configurable. The default item is a ST
 
 The name and number of items dropped reported by the plugin are those obtained from Block#getDrops(). Where the drops are variable (e.g. the number of SEEDS dropped by WHEAT) it returns either a range (e.g. 0 -> 3) or what could be dropped by breaking the block, not necessarily what you will get on breaking the block (e.g. number of MELON_SLICEs from a MELON).
 
-There is also the option to have the block information displayed on the ActionBar or BossBar. Using these methods, only the name of the block is displayed and not the dropped items.
+The block information can also be displayed on the ActionBar and/or BossBar. Using these methods, only the name of the block is displayed and not the dropped items.
+
+There is also the option to have the block information displayed in Chat.
 
 The ActionBar display is probably the most attractive and least intrusive of the display methods. The text colour can be set in the _config.yml_ file.
 
 ## Dependencies
-This plugin is supported on Minecraft/Spigot 1.13 through to 1.16+.
+This plugin is supported on servers running Minecraft/Spigot 1.16.5 - 1.17.
+
+Following Mojang's decision to require Java 16 for Minecraft 1.17, this plugin has also been updated to use Java 16. The latest version is therefore only supported on servers running on Java 16.
+
+This legacy version of the plugin, v3.4, is supported on Minecraft/Spigot 1.13.2 through to 1.16.5.
 
 
 ## Commands & Permissions
@@ -53,4 +59,4 @@ WhatIsThis can be [downloaded from Spigot](https://www.spigotmc.org/resources/wh
 
 
 
-Updated 15 February 2021 by steve4744
+Updated 21 June 2021 by steve4744
