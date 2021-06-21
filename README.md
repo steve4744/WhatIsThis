@@ -21,11 +21,11 @@ There is also the option to have the block information displayed in Chat.
 The ActionBar display is probably the most attractive and least intrusive of the display methods. The text colour can be set in the _config.yml_ file.
 
 ## Dependencies
-This plugin is supported on servers running Minecraft/Spigot 1.16.5 - 1.17.
+Following Mojang's decision to require Java 16 for Minecraft 1.17+, this plugin also now requires a minimum Java version of 16.
 
-Following Mojang's decision to require Java 16 for Minecraft 1.17, this plugin has also been updated to use Java 16. The latest version is therefore only supported on servers running on Java 16.
+From version 4.0 of this plugin, it requires servers to be running a minimum of Java 16 and Minecraft/Spigot 1.17+.
 
-This legacy version of the plugin, v3.4, is supported on Minecraft/Spigot 1.13.2 through to 1.16.5.
+The legacy version of the plugin, v3.4, is supported on Minecraft/Spigot 1.13.2 through to 1.16.5.
 
 
 ## Commands & Permissions
