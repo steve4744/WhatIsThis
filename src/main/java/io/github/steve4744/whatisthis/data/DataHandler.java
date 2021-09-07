@@ -287,24 +287,14 @@ public class DataHandler {
 		if (!dropsAreInconsistent(block)) {
 			return itemDrops.get(name) != null ? itemDrops.get(name) : 0;
 		}
-		int amount = 0;
-		switch (block.getType().toString()) {
-		    case "MELON_STEM":
-		    case "PUMPKIN_STEM":
-		    case "ATTACHED_MELON_STEM":
-		    case "ATTACHED_PUMPKIN_STEM":
-		    	amount = 3;
-		    	break;
-			case "RED_MUSHROOM_BLOCK":
-			case "BROWN_MUSHROOM_BLOCK":
-				amount = 2;
-				break;
-			default: 
-				amount = 1;
-				if (name.equalsIgnoreCase("STICK")) {
-					amount = 2;
-				}
-		}
+
+		int amount = switch (block.getType().toString()) {
+			case "MELON_STEM", "PUMPKIN_STEM", "ATTACHED_MELON_STEM", "ATTACHED_PUMPKIN_STEM" -> 3;
+			case "RED_MUSHROOM_BLOCK", "BROWN_MUSHROOM_BLOCK" -> 2;
+			default -> {
+				yield name.equalsIgnoreCase("STICK") ? 2 : 1;
+			}
+		};
 		return amount;
 	}
 
