@@ -14,11 +14,11 @@ The item used to select the block is also configurable. The default item is a ST
 
 The name and number of items dropped reported by the plugin are those obtained from Block#getDrops(). Where the drops are variable (e.g. the number of SEEDS dropped by WHEAT) it returns either a range (e.g. 0 -> 3) or what could be dropped by breaking the block, not necessarily what you will get on breaking the block (e.g. number of MELON_SLICEs from a MELON).
 
-The block information can also be displayed on the ActionBar and/or BossBar. Using these methods, only the name of the block is displayed and not the dropped items.
-
-There is also the option to have the block information displayed in Chat.
+The block information can also be displayed on the ActionBar, BossBar or in chat. Using the ActionBar or BossBar, only the name of the block is displayed and not the dropped items.
 
 The ActionBar display is probably the most attractive and least intrusive of the display methods. The text colour can be set in the _config.yml_ file.
+
+The plugin also supports [Slimefun4] (https://github.com/Slimefun/Slimefun4/ "Slimefun4") by TheBusyBiscuit.
 
 ## Dependencies
 Following Mojang's decision to require Java 16 for Minecraft 1.17+, this plugin also now requires a minimum Java version of 16.
@@ -59,4 +59,4 @@ WhatIsThis can be [downloaded from Spigot](https://www.spigotmc.org/resources/wh
 
 
 
-Updated 21 June 2021 by steve4744
+Updated 7th September 2021 by steve4744
