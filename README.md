@@ -18,7 +18,7 @@ The block information can also be displayed on the ActionBar, BossBar or in chat
 
 The ActionBar display is probably the most attractive and least intrusive of the display methods. The text colour can be set in the _config.yml_ file.
 
-The plugin also supports [Slimefun4] (https://github.com/Slimefun/Slimefun4/ "Slimefun4") by TheBusyBiscuit.
+The plugin also supports [Slimefun4](https://github.com/Slimefun/Slimefun4/ "Slimefun4") by TheBusyBiscuit.
 
 ## Dependencies
 Following Mojang's decision to require Java 16 for Minecraft 1.17+, this plugin also now requires a minimum Java version of 16.
