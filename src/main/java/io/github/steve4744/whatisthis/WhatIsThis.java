@@ -37,6 +37,7 @@ import io.github.steve4744.whatisthis.data.DataHandler;
 import io.github.steve4744.whatisthis.display.DisplayHandler;
 import io.github.steve4744.whatisthis.display.ScoreboardManager;
 import io.github.steve4744.whatisthis.lang.EnumLang;
+import io.github.steve4744.whatisthis.listeners.PlayerMoveListener;
 import io.github.steve4744.whatisthis.listeners.WhatIsThisListener;
 
 public class WhatIsThis extends JavaPlugin {
@@ -103,6 +104,9 @@ public class WhatIsThis extends JavaPlugin {
 		pm.registerEvents(new WhatIsThisListener(this), this);
 		dataHandler = new DataHandler(this);
 		displayHandler = new DisplayHandler(this);
+		if (getSettings().isAutoUpdateEnabled()) {
+			pm.registerEvents(new PlayerMoveListener(this), this);
+		}
 	}
 
 	public void reloadPlugin() {
