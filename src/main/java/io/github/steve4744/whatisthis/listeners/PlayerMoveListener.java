@@ -27,28 +27,25 @@ package io.github.steve4744.whatisthis.listeners;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.event.player.PlayerMoveEvent;
 
+import io.github.steve4744.whatisthis.Utils;
 import io.github.steve4744.whatisthis.WhatIsThis;
 
-public class WhatIsThisListener implements Listener {
+public class PlayerMoveListener implements Listener {
 
 	private final WhatIsThis plugin;
 
-	public WhatIsThisListener(WhatIsThis plugin) {
+	public PlayerMoveListener(WhatIsThis plugin) {
 		this.plugin = plugin;
 	}
 
 	@EventHandler
-	public void onQueryBlock(PlayerInteractEvent event) {
-		if (event.getAction() != Action.RIGHT_CLICK_BLOCK || event.getHand().equals(EquipmentSlot.OFF_HAND) || !plugin.getSettings().isRightClickEnabled()) {
+	public void onPlayerMove(PlayerMoveEvent event) {
+		if (!plugin.getSettings().isAutoUpdateEnabled()) {
 			return;
 		}
 		Player player = event.getPlayer();
-		if (player.hasPermission("whatisthis.use") && player.getInventory().getItemInMainHand().getType() == plugin.getSettings().getClickItem()) {
-			plugin.getDisplayHandler().getVisualMethod(event.getClickedBlock(), player);
-		}
+		plugin.getDisplayHandler().getVisualMethod(Utils.getTargetBlock(player), player);
 	}
 }
