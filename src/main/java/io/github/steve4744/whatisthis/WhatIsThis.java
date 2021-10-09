@@ -37,6 +37,7 @@ import io.github.steve4744.whatisthis.data.DataHandler;
 import io.github.steve4744.whatisthis.display.DisplayHandler;
 import io.github.steve4744.whatisthis.display.ScoreboardManager;
 import io.github.steve4744.whatisthis.lang.EnumLang;
+import io.github.steve4744.whatisthis.listeners.WhatIsThisListener;
 
 public class WhatIsThis extends JavaPlugin {
 

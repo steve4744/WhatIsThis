@@ -93,6 +93,10 @@ public class Settings {
 		return config.getBoolean("Display.chat.enabled", true);
 	}
 
+	public boolean isAutoUpdateEnabled() {
+		return config.getBoolean("Display.auto_update", false);
+	}
+
 	public boolean showDropsInChat() {
 		return config.getBoolean("Display.chat.show_drops", true);
 	}

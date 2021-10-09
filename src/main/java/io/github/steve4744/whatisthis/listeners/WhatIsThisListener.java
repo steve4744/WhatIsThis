@@ -22,14 +22,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
  */
-package io.github.steve4744.whatisthis;
+package io.github.steve4744.whatisthis.listeners;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.EquipmentSlot;
+
+import io.github.steve4744.whatisthis.Utils;
+import io.github.steve4744.whatisthis.WhatIsThis;
 
 public class WhatIsThisListener implements Listener {
 
@@ -48,5 +52,14 @@ public class WhatIsThisListener implements Listener {
 		if (player.hasPermission("whatisthis.use") && player.getInventory().getItemInMainHand().getType() == plugin.getSettings().getClickItem()) {
 			plugin.getDisplayHandler().getVisualMethod(event.getClickedBlock(), player);
 		}
+	}
+
+	@EventHandler
+	public void onPlayerMove(PlayerMoveEvent event) {
+		if (!plugin.getSettings().isAutoUpdateEnabled()) {
+			return;
+		}
+		Player player = event.getPlayer();
+		plugin.getDisplayHandler().getVisualMethod(Utils.getTargetBlock(player), player);
 	}
 }
