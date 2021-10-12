@@ -2,11 +2,17 @@
 
 ![alt text](https://user-images.githubusercontent.com/6975392/106388678-9858b180-63d7-11eb-9941-91aaa0ef6fc2.png "WhatIsThis by steve4744")
 
-WhatIsThis is a lightweight utility plugin aimed at providing block information directly to the player without the need to open a UI. This can be helpful in Survival mode to know what a block is without having to break it first, while looking at other people's builds in Creative mode, or exploring the latest nether update.
+WhatIsThis is a lightweight utility plugin aimed at providing block information directly to the player without the need to open a UI. This can be helpful in Survival mode to know what a block is without having to break it first, while looking at other people's builds in Creative mode, or when connected with an older client version to a server using Via* plugins.
 
-Inspired by Forge mods such as WAWLA (What Are We Looking At), WAILA (What Am I Looking At) and HWYLA (Here's What You're Looking At), but without the distraction of the display on the screen constantly, and without utilising PlayerMoveEvent. Simply by right-clicking the block with a STICK (default) or running command `/wt` while looking at a block, the block type and the items it drops will be briefly displayed, either on the side of the screen, on the BossBar or ActionBar.
+This plugin was inspired by Forge mods such as WAWLA (What Are We Looking At), WAILA (What Am I Looking At) and HWYLA (Here's What You're Looking At) which run client-side to constantly display the name of the block being looked at. This plugin runs server-side, and by simply right-clicking the block with a STICK (default, can be changed in config) or running command `/wt` while looking at a block, the block type and the items it drops will be briefly displayed, either on the side of the screen, on the BossBar, ActionBar or in chat.
 
-You must have a clear view of the block being looked at when running the `/wt` command. The range is currently set to 10 blocks - I plan to make this configurable in a future release. Both options can be used under water as well as on land.
+By enabling 'auto_display' in the config, the display will automatically update just by looking at a different block without the need for commands or clicking. As this runs server side, having 'auto-display' enabled may impact performance depending on the server hardware, software and the number of players online.
+
+If 'auto_display' is disabled when the server starts, the 'player move' listener is not registered. It is disabled by default.
+
+A list of blocks to ignore, for example, AIR, WATER, GRASS_BLOCK, can be specified in the config. These blocks will not display any information when targeted by the player.
+
+You must have a clear view of the block being looked at when running the `/wt` command. The range is currently set to 10 blocks. The plugin can be used under water as well as on land.
 
 The ability to right-click with an item can be disabled in the _config.yml_, or can be toggled on/off with the `/wt toggleclick` command.
 
@@ -59,4 +65,4 @@ WhatIsThis can be [downloaded from Spigot](https://www.spigotmc.org/resources/wh
 
 
 
-Updated 7th September 2021 by steve4744
+Updated 12th October 2021 by steve4744
