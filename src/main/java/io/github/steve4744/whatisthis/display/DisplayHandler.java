@@ -37,7 +37,7 @@ public class DisplayHandler {
 	public DisplayHandler(WhatIsThis plugin) {
 		this.plugin = plugin;
 	}
-	
+
 	/**
 	 * This method handles the visual output of a given Block
 	 * based on the configured visual method.
@@ -46,22 +46,25 @@ public class DisplayHandler {
 	 * @param player	The Player to display the target to
 	 */
 	public void getVisualMethod(Block block, Player player) {
+		String message = plugin.getDataHandler().getDisplayName(block, player);
+
 		if (plugin.getSettings().isScoreboardEnabled()) {
-			plugin.getScoreboardManager().showTarget(player, block);
+			plugin.getScoreboardManager().showTarget(player, message, block);
 		}
+
 		if (plugin.getSettings().isActionBarEnabled()) {
-			String message = plugin.getDataHandler().getDisplayName(block, player);
 			ActionBar actionBar = new ActionBar(ChatColor.valueOf(plugin.getSettings().getActionBarColor()) + message);
 			actionBar.sendBar(player);
 		}
+
 		if (plugin.getSettings().isBossbarEnabled()) {
-			String message = plugin.getDataHandler().getDisplayName(block, player);
 			BossBarManager bm = new BossBarManager(plugin);
 			bm.setBar(player, message);
 		}
+
 		if (plugin.getSettings().isChatEnabled()) {
 			ChatManager cm = new ChatManager(plugin);
-			cm.showMessage(player, block);
+			cm.showMessage(player, message, block);
 		}
 	}
 }

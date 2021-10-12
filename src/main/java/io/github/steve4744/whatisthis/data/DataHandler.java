@@ -63,6 +63,7 @@ public class DataHandler {
 	 * @return localised material name
 	 */
 	public String getDisplayName(Block block, Player player) {
+		//TODO check for transparent/ignored blocks
 		if (isSlimefunBlock(block)) {
 			SlimefunItem item = BlockStorage.check(block.getLocation());
 			return ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName());

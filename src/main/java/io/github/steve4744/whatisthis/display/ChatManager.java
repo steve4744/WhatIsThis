@@ -21,9 +21,8 @@ public class ChatManager {
 		this.dataHandler = plugin.getDataHandler();
 	}
 
-	public void showMessage(Player player, Block block) {
-		String name = dataHandler.getDisplayName(block, player);
-		player.sendMessage(formattedName(name) + formattedDrops(block));
+	public void showMessage(Player player, String message, Block block) {
+		player.sendMessage(formattedName(message) + formattedDrops(block));
 	}
 
 	private String formattedName(String name) {
