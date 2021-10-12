@@ -22,7 +22,9 @@ public class ChatManager {
 	}
 
 	public void showMessage(Player player, String message, Block block) {
-		player.sendMessage(formattedName(message) + formattedDrops(block));
+		if (!message.isEmpty()) {
+			player.sendMessage(formattedName(message) + formattedDrops(block));
+		}
 	}
 
 	private String formattedName(String name) {

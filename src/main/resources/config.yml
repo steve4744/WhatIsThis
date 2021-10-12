@@ -42,3 +42,7 @@ Display:
     name_color: GREEN
     drop_color: RED
     show_drops: true
+IgnoreBlocks:
+- AIR
+- CAVE_AIR
+- WATER

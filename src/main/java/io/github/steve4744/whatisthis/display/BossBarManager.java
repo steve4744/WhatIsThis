@@ -57,15 +57,22 @@ public class BossBarManager {
 
 	private void removePlayerFromBar(Player player) {
 		BossBar bar = barmap.get(player.getName());
-		bar.removePlayer(player);
-		barmap.remove(player.getName());
-		bar = null;
+		if (bar != null) {
+			bar.removePlayer(player);
+			barmap.remove(player.getName());
+			bar = null;
+		}
 	}
 
 	public void setBar(Player player, String message) {
 		//kill any previous scheduled tasks
 		cancelTask(player.getName());
 		
+		if (message.isEmpty()) {
+			removePlayerFromBar(player);
+			return;
+		}
+
 		if (!barmap.containsKey(player.getName())) {
 			createBar(player);
 		}

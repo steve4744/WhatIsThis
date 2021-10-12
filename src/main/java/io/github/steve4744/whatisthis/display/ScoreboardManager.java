@@ -69,6 +69,11 @@ public class ScoreboardManager {
 		//remove previous entry
 		resetScoreboard(player);
 
+		if (message.isEmpty()) {
+			restoreExternalScoreboard(player);
+			return;
+		}
+
 		Objective o = scoreboard.getObjective(DisplaySlot.SIDEBAR);
 		o.setDisplayName(ChatColor.GOLD.toString() + ChatColor.BOLD + message);
 

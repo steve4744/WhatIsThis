@@ -63,6 +63,10 @@ public class Settings {
 		return langs;
 	}
 
+	public List<String> getBlacklist() {
+		return config.getStringList("IgnoreBlocks");
+	}
+
 	public boolean isRightClickEnabled() {
 		return isClickEnabled;
 	}
