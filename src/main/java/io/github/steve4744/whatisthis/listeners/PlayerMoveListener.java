@@ -42,7 +42,7 @@ public class PlayerMoveListener implements Listener {
 
 	@EventHandler
 	public void onPlayerMove(PlayerMoveEvent event) {
-		if (!plugin.getSettings().isAutoUpdateEnabled()) {
+		if (!plugin.getSettings().isAutoDisplayEnabled()) {
 			return;
 		}
 		Player player = event.getPlayer();

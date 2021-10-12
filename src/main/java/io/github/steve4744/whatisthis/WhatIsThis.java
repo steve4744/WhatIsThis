@@ -104,7 +104,7 @@ public class WhatIsThis extends JavaPlugin {
 		pm.registerEvents(new WhatIsThisListener(this), this);
 		dataHandler = new DataHandler(this);
 		displayHandler = new DisplayHandler(this);
-		if (getSettings().isAutoUpdateEnabled()) {
+		if (getSettings().isAutoDisplayEnabled()) {
 			pm.registerEvents(new PlayerMoveListener(this), this);
 		}
 	}

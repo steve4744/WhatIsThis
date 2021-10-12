@@ -27,7 +27,7 @@ LoadLanguage:
 - all
 # Enable the preferred method(s) to display the block info
 Display:
-  auto_update: false
+  auto_display: false
   scoreboard:
     enabled: true
   actionbar:
