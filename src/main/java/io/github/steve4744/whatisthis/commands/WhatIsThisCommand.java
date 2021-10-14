@@ -29,8 +29,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import io.github.steve4744.whatisthis.Utils;
+
 import io.github.steve4744.whatisthis.WhatIsThis;
+import io.github.steve4744.whatisthis.utils.Utils;
 
 public class WhatIsThisCommand implements CommandExecutor {
 

@@ -29,8 +29,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
-import io.github.steve4744.whatisthis.Utils;
 import io.github.steve4744.whatisthis.WhatIsThis;
+import io.github.steve4744.whatisthis.utils.Utils;
 
 public class PlayerMoveListener implements Listener {
 

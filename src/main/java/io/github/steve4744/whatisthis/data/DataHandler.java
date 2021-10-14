@@ -39,9 +39,10 @@ import org.bukkit.inventory.ItemStack;
 
 import com.google.common.base.Enums;
 
-import io.github.steve4744.whatisthis.Utils;
 import io.github.steve4744.whatisthis.WhatIsThis;
 import io.github.steve4744.whatisthis.lang.EnumLang;
+import io.github.steve4744.whatisthis.utils.Utils;
+import io.github.steve4744.whatisthis.utils.UtilsKt;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 
@@ -50,10 +51,12 @@ public class DataHandler {
 	private WhatIsThis plugin;
 	private boolean slimefun;
 	private Map<String, Integer> itemDrops = new HashMap<>();  // material -> amount
+	private boolean nova;
 
 	public DataHandler(WhatIsThis plugin) {
 		this.plugin = plugin;
 		this.slimefun = plugin.getServer().getPluginManager().isPluginEnabled("Slimefun");
+		this.nova = plugin.getServer().getPluginManager().isPluginEnabled("Nova");
 	}
 
 	/**
@@ -70,6 +73,11 @@ public class DataHandler {
 			SlimefunItem item = BlockStorage.check(block.getLocation());
 			return ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName());
 		}
+		if (isNovaBlock(block)) {
+			return ChatColor.stripColor(UtilsKt.getBlockName(block.getLocation()));
+		}
+		
+		
 		String targetName = block.getType().toString();
 		//coloured wall_banners are not currently in the Mojang language files
 		if (targetName.contains("WALL_BANNER")) {
@@ -267,6 +275,13 @@ public class DataHandler {
 			return false;
 		}
 		return BlockStorage.check(block.getLocation()) != null;
+	}
+
+	private boolean isNovaBlock(Block block) {
+		if (!nova) {
+			return false;
+		}
+		return UtilsKt.check(block.getLocation());
 	}
 
 	/**

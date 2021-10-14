@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
  */
-package io.github.steve4744.whatisthis;
+package io.github.steve4744.whatisthis.utils;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
