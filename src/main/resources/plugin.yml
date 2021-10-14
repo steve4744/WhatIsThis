@@ -4,7 +4,7 @@ author: steve4744
 version: ${project.version}
 api-version: 1.17
 description: Displays the name of the block that you are looking at.
-softdepend: [Slimefun]
+softdepend: [Slimefun, Nova]
 
 commands:
   whatisthis:

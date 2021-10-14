@@ -49,9 +49,9 @@ import me.mrCookieSlime.Slimefun.api.BlockStorage;
 public class DataHandler {
 
 	private WhatIsThis plugin;
+	private boolean nova;
 	private boolean slimefun;
 	private Map<String, Integer> itemDrops = new HashMap<>();  // material -> amount
-	private boolean nova;
 
 	public DataHandler(WhatIsThis plugin) {
 		this.plugin = plugin;
@@ -76,8 +76,6 @@ public class DataHandler {
 		if (isNovaBlock(block)) {
 			return ChatColor.stripColor(UtilsKt.getBlockName(block.getLocation()));
 		}
-		
-		
 		String targetName = block.getType().toString();
 		//coloured wall_banners are not currently in the Mojang language files
 		if (targetName.contains("WALL_BANNER")) {
