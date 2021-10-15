@@ -108,6 +108,10 @@ public class DataHandler {
 			itemDrops.put(ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName()), 1);
 			return getItemDropNames();
 		}
+		if (isNovaBlock(block)) {
+			itemDrops.put(ChatColor.stripColor(UtilsKt.getBlockName(block.getLocation())), 1);
+			return getItemDropNames();
+		}
 
 		Set<String> zeroDropItems = new HashSet<String>();
 		Collection<ItemStack> coll = new ArrayList<ItemStack>();
@@ -258,11 +262,10 @@ public class DataHandler {
 		int maxlen = 40 - result.length() - separator.length();
 
 		String translated = null;
-		if (!isSlimefunBlock(block)) {
-			translated = translateItemName(item, player);
+		if (isSlimefunBlock(block) || isNovaBlock(block)) {
+			translated = item;
 		} else {
-			SlimefunItem sfitem = BlockStorage.check(block.getLocation());
-			translated = ChatColor.stripColor(sfitem.getItem().getItemMeta().getDisplayName());
+			translated = translateItemName(item, player);
 		}
 
 		return result + translated.substring(0, Math.min(translated.length(), maxlen)) + separator;
