@@ -2,13 +2,13 @@
 
 ![alt text](https://user-images.githubusercontent.com/6975392/106388678-9858b180-63d7-11eb-9941-91aaa0ef6fc2.png "WhatIsThis by steve4744")
 
-WhatIsThis is a lightweight utility plugin aimed at providing block information directly to the player without the need to open a UI. This can be helpful in Survival mode to know what a block is without having to break it first, while looking at other people's builds in Creative mode, or when connected with an older client version to a server using Via* plugins.
+WhatIsThis is a lightweight utility plugin aimed at providing block information directly to the player without the need to open a UI. This can be helpful in Survival mode to know what a block is without having to break it first, while looking at other people's builds in Creative mode, using custom block plugins like Slimefun4 and Nova, or when connected with an older client version to a server using Via* plugins.
 
 This plugin was inspired by Forge mods such as WAWLA (What Are We Looking At), WAILA (What Am I Looking At) and HWYLA (Here's What You're Looking At) which run client-side to constantly display the name of the block being looked at. This plugin runs server-side, and by simply right-clicking the block with a STICK (default, can be changed in config) or running command `/wt` while looking at a block, the block type and the items it drops will be briefly displayed, either on the side of the screen, on the BossBar, ActionBar or in chat.
 
 By enabling 'auto_display' in the config, the display will automatically update just by looking at a different block without the need for commands or clicking. As this runs server side, having 'auto-display' enabled may impact performance depending on the server hardware, software and the number of players online.
 
-If 'auto_display' is disabled when the server starts, the 'player move' listener is not registered. It is disabled by default.
+The 'auto_display' option is disabled by default, so when the server starts the 'player move' listener is not registered. To enable the 'auto-display' option the server will need to be restarted so that the listener is correctly registered.
 
 A list of blocks to ignore, for example, AIR, WATER, GRASS_BLOCK, can be specified in the config. These blocks will not display any information when targeted by the player.
 
@@ -24,7 +24,13 @@ The block information can also be displayed on the ActionBar, BossBar or in chat
 
 The ActionBar display is probably the most attractive and least intrusive of the display methods. The text colour can be set in the _config.yml_ file.
 
-The plugin also supports [Slimefun4](https://github.com/Slimefun/Slimefun4/ "Slimefun4") by TheBusyBiscuit.
+## Suppported Plugins
+
+The following plugins which provide a number of custom blocks are supported:
+
+[Slimefun4](https://github.com/Slimefun/Slimefun4/ "Slimefun4") by TheBusyBiscuit
+
+[Nova](https://github.com/xenondevs/Nova/ "Nova") by xenondevs
 
 ## Dependencies
 Following Mojang's decision to require Java 16 for Minecraft 1.17+, this plugin also now requires a minimum Java version of 16.
@@ -65,4 +71,4 @@ WhatIsThis can be [downloaded from Spigot](https://www.spigotmc.org/resources/wh
 
 
 
-Updated 12th October 2021 by steve4744
+Updated 15th October 2021 by steve4744
