@@ -42,9 +42,9 @@
     </repository>
     <!-- SlimeFun4 Repo -->
     <repository>
-    <id>jitpack.io</id>
-    <url>https://jitpack.io</url>
-  </repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
   </repositories>
   <dependencies>
     <!-- Spigot API -->
@@ -78,6 +78,12 @@
         <groupId>org.jetbrains.kotlin</groupId>
         <artifactId>kotlin-reflect</artifactId>
         <version>${kotlin.version}</version>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>com.github.xenondevs</groupId>
+        <artifactId>nova</artifactId>
+        <version>0.6.4</version>
         <scope>provided</scope>
     </dependency>
   </dependencies>
