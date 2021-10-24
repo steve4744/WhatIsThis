@@ -45,18 +45,21 @@ import io.github.steve4744.whatisthis.utils.Utils;
 import io.github.steve4744.whatisthis.utils.UtilsKt;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
+import dev.lone.itemsadder.api.CustomBlock;
 
 public class DataHandler {
 
 	private WhatIsThis plugin;
 	private boolean nova;
 	private boolean slimefun;
+	private boolean itemsadder;
 	private Map<String, Integer> itemDrops = new HashMap<>();  // material -> amount
 
 	public DataHandler(WhatIsThis plugin) {
 		this.plugin = plugin;
 		this.slimefun = plugin.getServer().getPluginManager().isPluginEnabled("Slimefun");
 		this.nova = plugin.getServer().getPluginManager().isPluginEnabled("Nova");
+		this.itemsadder = plugin.getServer().getPluginManager().isPluginEnabled("ItemsAdder");
 	}
 
 	/**
@@ -76,6 +79,10 @@ public class DataHandler {
 		if (isNovaBlock(block)) {
 			return ChatColor.stripColor(UtilsKt.getBlockName(block.getLocation()));
 		}
+		if (isItemsAdderBlock(block)) {
+			return ChatColor.stripColor(CustomBlock.byAlreadyPlaced(block).getDisplayName());
+		}
+
 		String targetName = block.getType().toString();
 		//coloured wall_banners are not currently in the Mojang language files
 		if (targetName.contains("WALL_BANNER")) {
@@ -283,6 +290,13 @@ public class DataHandler {
 			return false;
 		}
 		return UtilsKt.check(block.getLocation());
+	}
+
+	private boolean isItemsAdderBlock(Block block) {
+		if (!itemsadder) {
+			return false;
+		}
+		return CustomBlock.byAlreadyPlaced(block) != null;
 	}
 
 	/**
