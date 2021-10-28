@@ -47,24 +47,26 @@ public class DisplayHandler {
 	 */
 	public void getVisualMethod(Block block, Player player) {
 		String message = plugin.getDataHandler().getDisplayName(block, player);
+		String prefix = ChatColor.translateAlternateColorCodes('&',
+				plugin.getSettings().isCustomPrefixEnabled() ? plugin.getDataHandler().getCustomPrefix(block) : "");
 
 		if (plugin.getSettings().isScoreboardEnabled()) {
-			plugin.getScoreboardManager().showTarget(player, message, block);
+			plugin.getScoreboardManager().showTarget(player, message, prefix, block);
 		}
 
 		if (plugin.getSettings().isActionBarEnabled()) {
-			ActionBar actionBar = new ActionBar(ChatColor.valueOf(plugin.getSettings().getActionBarColor()) + message);
+			ActionBar actionBar = new ActionBar(prefix + ChatColor.valueOf(plugin.getSettings().getActionBarColor()) + message);
 			actionBar.sendBar(player);
 		}
 
 		if (plugin.getSettings().isBossbarEnabled()) {
 			BossBarManager bm = new BossBarManager(plugin);
-			bm.setBar(player, message);
+			bm.setBar(player, message, prefix);
 		}
 
 		if (plugin.getSettings().isChatEnabled()) {
 			ChatManager cm = new ChatManager(plugin);
-			cm.showMessage(player, message, block);
+			cm.showMessage(player, message, prefix, block);
 		}
 	}
 }

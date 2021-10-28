@@ -299,6 +299,22 @@ public class DataHandler {
 		return CustomBlock.byAlreadyPlaced(block) != null;
 	}
 
+	private String getCustomResourceName(Block block) {
+		if (isSlimefunBlock(block)) {
+			return "Slimefun";
+		} else if (isNovaBlock(block)) {
+			return "Nova";
+		} else if (isItemsAdderBlock(block)) {
+			return "ItemsAdder";
+		}
+		return "";
+	}
+
+	public String getCustomPrefix(Block block) {
+		String name = getCustomResourceName(block);
+		return !name.isEmpty() ? plugin.getSettings().getCustomPrefix().replace("{PREFIX}", name) : "";
+	}
+
 	/**
 	 * Returns whether or not this block drops a variable amount, including zero, of the item?
 	 * Include bugged items like chorus_flower which always drops itself, but getDrops() returns nothing.

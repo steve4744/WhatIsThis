@@ -55,7 +55,7 @@ public class ScoreboardManager {
 		this.dataHandler = plugin.getDataHandler();
 	}
 
-	public void showTarget(Player player, String message, Block block) {
+	public void showTarget(Player player, String message, String prefix, Block block) {
 		//kill any previous scheduled tasks
 		cancelTask(player.getName());
 		storeExternalScoreboard(player);
@@ -75,7 +75,7 @@ public class ScoreboardManager {
 		}
 
 		Objective o = scoreboard.getObjective(DisplaySlot.SIDEBAR);
-		o.setDisplayName(ChatColor.GOLD.toString() + ChatColor.BOLD + message);
+		o.setDisplayName(prefix + ChatColor.GOLD.toString() + ChatColor.BOLD + message);
 
 		for (String s : dataHandler.getItemDrops(block)) {
 			o.getScore(dataHandler.getFormattedText(block, s, player)).setScore(dataHandler.getAmount(block, s));

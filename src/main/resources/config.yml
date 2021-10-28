@@ -28,6 +28,9 @@ LoadLanguage:
 # Enable the preferred method(s) to display the block info
 Display:
   auto_display: false
+  prefix_custom_blocks:
+    enabled: true
+    prefix: '&7[&f{PREFIX}&7] '
   scoreboard:
     enabled: true
   actionbar:

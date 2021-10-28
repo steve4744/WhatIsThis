@@ -45,9 +45,9 @@ public class ChatManager {
 		this.dataHandler = plugin.getDataHandler();
 	}
 
-	public void showMessage(Player player, String message, Block block) {
+	public void showMessage(Player player, String message, String prefix, Block block) {
 		if (!message.isEmpty()) {
-			player.sendMessage(formattedName(message) + formattedDrops(block));
+			player.sendMessage(prefix + formattedName(message) + formattedDrops(block));
 		}
 	}
 

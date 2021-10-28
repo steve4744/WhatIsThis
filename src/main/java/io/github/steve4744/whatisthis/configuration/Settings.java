@@ -105,6 +105,10 @@ public class Settings {
 		return config.getBoolean("Display.chat.show_drops", true);
 	}
 
+	public boolean isCustomPrefixEnabled() {
+		return config.getBoolean("Display.prefix_custom_blocks.enabled");
+	}
+
 	public String getActionBarColor() {
 		String colour = config.getString("Display.actionbar.textcolor").toUpperCase();
 		if (colour == null || Enums.getIfPresent(ChatColor.class, colour).orNull() == null) {
@@ -126,6 +130,10 @@ public class Settings {
 	public String getChatColor(String element) {
 		String colour = element.equalsIgnoreCase("name") ? config.getString("Display.chat.name_color") : config.getString("Display.chat.drop_color");
 		return validateChatColor(colour.toUpperCase());
+	}
+
+	public String getCustomPrefix() {
+		return plugin.getConfig().getString("Display.prefix_custom_blocks.prefix", "");
 	}
 
 	private String validateBarColor(String colour) {
