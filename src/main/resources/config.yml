@@ -49,3 +49,5 @@ IgnoreBlocks:
 - AIR
 - CAVE_AIR
 - WATER
+- GRASS_BLOCK
+- NETHERRACK
