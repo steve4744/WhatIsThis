@@ -46,6 +46,8 @@ public class PlayerMoveListener implements Listener {
 			return;
 		}
 		Player player = event.getPlayer();
-		plugin.getDisplayHandler().getVisualMethod(Utils.getTargetBlock(player), player);
+		if (player.hasPermission("whatisthis.use")) {
+			plugin.getDisplayHandler().getVisualMethod(Utils.getTargetBlock(player), player);
+		}
 	}
 }
