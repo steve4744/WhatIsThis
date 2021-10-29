@@ -81,9 +81,9 @@
         <scope>provided</scope>
     </dependency>
     <dependency>
-        <groupId>com.github.xenondevs</groupId>
+        <groupId>com.github.steve4744</groupId>
         <artifactId>nova</artifactId>
-        <version>0.6.5</version>
+        <version>v0.6.5</version>
         <scope>provided</scope>
     </dependency>
     <dependency>
