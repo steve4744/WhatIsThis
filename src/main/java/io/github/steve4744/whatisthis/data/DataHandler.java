@@ -303,7 +303,7 @@ public class DataHandler {
 		return CustomBlock.byAlreadyPlaced(block) != null;
 	}
 
-	private String getCustomResourceName(Block block) {
+	public String getCustomResourceName(Block block) {
 		if (isSlimefunBlock(block)) {
 			return "Slimefun";
 		} else if (isNovaBlock(block)) {

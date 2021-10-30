@@ -76,6 +76,9 @@ public class WhatIsThisPlaceholders extends PlaceholderExpansion {
 
 		} else if (identifier.equals("blockname")) {
 			return plugin.getDataHandler().getDisplayName(Utils.getTargetBlock(player), player);
+
+		} else if (identifier.equals("resourcename")) {
+			return plugin.getDataHandler().getCustomResourceName(Utils.getTargetBlock(player));
 		}
 		return null;
 	}
