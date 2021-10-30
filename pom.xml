@@ -40,7 +40,12 @@
         <id>CodeMC</id>
         <url>https://repo.codemc.org/repository/maven-public/</url>
     </repository>
-    <!-- SlimeFun4 Repo -->
+    <!-- PlaceholderAPI Repo -->
+    <repository>
+        <id>placeholderapi-repo</id>
+        <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
+    </repository>
+    <!-- SlimeFun4 & Nova Repo -->
     <repository>
         <id>jitpack.io</id>
         <url>https://jitpack.io</url>
@@ -61,6 +66,13 @@
         <version>2.2.1</version>
         <scope>compile</scope>
     </dependency>
+    <!-- PlaceholderAPI -->
+    <dependency>
+        <groupId>me.clip</groupId>
+        <artifactId>placeholderapi</artifactId>
+        <version>2.10.10</version>
+        <scope>provided</scope>
+    </dependency>
     <!-- Slimefun -->
     <dependency>
         <groupId>com.github.Slimefun</groupId>
@@ -80,12 +92,14 @@
         <version>${kotlin.version}</version>
         <scope>provided</scope>
     </dependency>
+    <!-- Nova -->
     <dependency>
         <groupId>com.github.steve4744</groupId>
         <artifactId>nova</artifactId>
         <version>v0.6.5</version>
         <scope>provided</scope>
     </dependency>
+    <!-- ItemsAdder -->
     <dependency>
         <groupId>com.github.LoneDev6</groupId>
         <artifactId>api-itemsadder</artifactId>

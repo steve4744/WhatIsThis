@@ -25,6 +25,9 @@ text:
 # If you want to load all the languages, add "all" to the list:
 LoadLanguage:
 - all
+# Enable if you want to use the placeholders
+PlaceholderAPI:
+  enabled: false
 # Enable the preferred method(s) to display the block info
 Display:
   auto_display: false

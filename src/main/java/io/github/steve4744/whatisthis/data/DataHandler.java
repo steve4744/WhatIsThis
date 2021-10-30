@@ -119,6 +119,10 @@ public class DataHandler {
 			itemDrops.put(ChatColor.stripColor(UtilsKt.getBlockName(block.getLocation())), 1);
 			return getItemDropNames();
 		}
+		if (isItemsAdderBlock(block)) {
+			itemDrops.put(ChatColor.stripColor(CustomBlock.byAlreadyPlaced(block).getDisplayName()), 1);
+			return getItemDropNames();
+		}
 
 		Set<String> zeroDropItems = new HashSet<String>();
 		Collection<ItemStack> coll = new ArrayList<ItemStack>();
@@ -269,7 +273,7 @@ public class DataHandler {
 		int maxlen = 40 - result.length() - separator.length();
 
 		String translated = null;
-		if (isSlimefunBlock(block) || isNovaBlock(block)) {
+		if (isSlimefunBlock(block) || isNovaBlock(block) || isItemsAdderBlock(block)) {
 			translated = item;
 		} else {
 			translated = translateItemName(item, player);

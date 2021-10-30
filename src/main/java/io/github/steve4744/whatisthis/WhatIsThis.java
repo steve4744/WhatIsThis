@@ -26,6 +26,7 @@ package io.github.steve4744.whatisthis;
 
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -48,6 +49,7 @@ public class WhatIsThis extends JavaPlugin {
 	private DataHandler dataHandler;
 	private Settings settings;
 	private DisplayHandler displayHandler;
+	private boolean placeholderapi;
 	private static final int BSTATS_PLUGIN_ID = 4079;
 
 	@Override
@@ -107,6 +109,12 @@ public class WhatIsThis extends JavaPlugin {
 		if (getSettings().isAutoDisplayEnabled()) {
 			pm.registerEvents(new PlayerMoveListener(this), this);
 		}
+		Plugin PlaceholderAPI = pm.getPlugin("PlaceholderAPI");
+		if (PlaceholderAPI != null && PlaceholderAPI.isEnabled() && getConfig().getBoolean("PlaceholderAPI.enabled")) {
+			placeholderapi = true;
+			getLogger().info("Successfully linked with PlaceholderAPI, version " + PlaceholderAPI.getDescription().getVersion());
+			new WhatIsThisPlaceholders(this).register();
+		}
 	}
 
 	public void reloadPlugin() {
@@ -120,6 +128,10 @@ public class WhatIsThis extends JavaPlugin {
 
 	public Settings getSettings() {
 		return settings;
+	}
+
+	public boolean isPlaceholderAPI() {
+		return placeholderapi;
 	}
 
 	private void checkForUpdate() {
