@@ -1,11 +1,13 @@
-################################################
-# WhatIsThis configuration file                #
-#                                              #
-# Identify the block you are looking at by     #
-# command, or right-click with an item. Set    #
-# the item to AIR to click with empty hand.    #
-# Author: steve4744                            #
-################################################
+#################################################
+# WhatIsThis configuration file                 #
+#                                               #
+# Identify blocks simply by looking at them,    #
+# by command or by right-clicking with an item. #
+# Set the item to AIR to click with empty hand. #
+# Setting "auto_display: true" will display     #
+# block info without a command or clicking.     #
+# Author: steve4744                             #
+#################################################
 # Check for new version
 check_for_update: true
 # Allow right-click with item
