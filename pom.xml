@@ -45,7 +45,7 @@
         <id>placeholderapi-repo</id>
         <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
     </repository>
-    <!-- SlimeFun4 & Nova Repo -->
+    <!-- SlimeFun4, Nova & Oraxen Repo -->
     <repository>
         <id>jitpack.io</id>
         <url>https://jitpack.io</url>
@@ -106,6 +106,7 @@
         <version>2.4.8</version>
         <scope>provided</scope>
     </dependency>
+    <!-- Oraxen -->
   </dependencies>
   <build>
     <finalName>${project.artifactId}-${project.version}</finalName>

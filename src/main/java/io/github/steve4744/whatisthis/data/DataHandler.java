@@ -36,11 +36,11 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-
 import com.google.common.base.Enums;
 
 import io.github.steve4744.whatisthis.WhatIsThis;
 import io.github.steve4744.whatisthis.lang.EnumLang;
+import io.github.steve4744.whatisthis.utils.Oraxen;
 import io.github.steve4744.whatisthis.utils.Utils;
 import io.github.steve4744.whatisthis.utils.UtilsKt;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
@@ -53,6 +53,7 @@ public class DataHandler {
 	private boolean nova;
 	private boolean slimefun;
 	private boolean itemsadder;
+	private boolean oraxen;
 	private Map<String, Integer> itemDrops = new HashMap<>();  // material -> amount
 
 	public DataHandler(WhatIsThis plugin) {
@@ -60,6 +61,7 @@ public class DataHandler {
 		this.slimefun = plugin.getServer().getPluginManager().isPluginEnabled("Slimefun");
 		this.nova = plugin.getServer().getPluginManager().isPluginEnabled("Nova");
 		this.itemsadder = plugin.getServer().getPluginManager().isPluginEnabled("ItemsAdder");
+		this.oraxen = plugin.getServer().getPluginManager().isPluginEnabled("Oraxen");
 	}
 
 	/**
@@ -81,6 +83,9 @@ public class DataHandler {
 		}
 		if (isItemsAdderBlock(block)) {
 			return ChatColor.stripColor(CustomBlock.byAlreadyPlaced(block).getDisplayName());
+		}
+		if (isOraxenBlock(block)) {
+			return ChatColor.stripColor(Oraxen.getOraxenDisplayName(block));
 		}
 
 		String targetName = block.getType().toString();
@@ -121,6 +126,10 @@ public class DataHandler {
 		}
 		if (isItemsAdderBlock(block)) {
 			itemDrops.put(ChatColor.stripColor(CustomBlock.byAlreadyPlaced(block).getDisplayName()), 1);
+			return getItemDropNames();
+		}
+		if (isOraxenBlock(block)) {
+			itemDrops.put(ChatColor.stripColor(Oraxen.getOraxenDisplayName(block)), 1);
 			return getItemDropNames();
 		}
 
@@ -273,7 +282,7 @@ public class DataHandler {
 		int maxlen = 40 - result.length() - separator.length();
 
 		String translated = null;
-		if (isSlimefunBlock(block) || isNovaBlock(block) || isItemsAdderBlock(block)) {
+		if (isSlimefunBlock(block) || isNovaBlock(block) || isItemsAdderBlock(block) || isOraxenBlock(block)) {
 			translated = item;
 		} else {
 			translated = translateItemName(item, player);
@@ -303,6 +312,13 @@ public class DataHandler {
 		return CustomBlock.byAlreadyPlaced(block) != null;
 	}
 
+	private boolean isOraxenBlock(Block block) {
+		if (!oraxen) {
+			return false;
+		}
+		return Oraxen.isOraxen(block);
+	}
+
 	public String getCustomResourceName(Block block) {
 		if (isSlimefunBlock(block)) {
 			return "Slimefun";
@@ -310,6 +326,8 @@ public class DataHandler {
 			return "Nova";
 		} else if (isItemsAdderBlock(block)) {
 			return "ItemsAdder";
+		} else if (isOraxenBlock(block)) {
+			return "Oraxen";
 		}
 		return "";
 	}
