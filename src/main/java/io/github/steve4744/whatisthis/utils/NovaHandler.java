@@ -30,7 +30,7 @@ import org.bukkit.Location;
 import xyz.xenondevs.nova.tileentity.TileEntity;
 import xyz.xenondevs.nova.tileentity.TileEntityManager;
 
-public class UtilsKt {
+public class NovaHandler {
 
 	private static TileEntityManager manager = TileEntityManager.INSTANCE;
 

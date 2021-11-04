@@ -40,9 +40,9 @@ import com.google.common.base.Enums;
 
 import io.github.steve4744.whatisthis.WhatIsThis;
 import io.github.steve4744.whatisthis.lang.EnumLang;
-import io.github.steve4744.whatisthis.utils.Oraxen;
+import io.github.steve4744.whatisthis.utils.OraxenHandler;
 import io.github.steve4744.whatisthis.utils.Utils;
-import io.github.steve4744.whatisthis.utils.UtilsKt;
+import io.github.steve4744.whatisthis.utils.NovaHandler;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import dev.lone.itemsadder.api.CustomBlock;
@@ -79,13 +79,13 @@ public class DataHandler {
 			return ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName());
 		}
 		if (isNovaBlock(block)) {
-			return ChatColor.stripColor(UtilsKt.getBlockName(block.getLocation()));
+			return ChatColor.stripColor(NovaHandler.getBlockName(block.getLocation()));
 		}
 		if (isItemsAdderBlock(block)) {
 			return ChatColor.stripColor(CustomBlock.byAlreadyPlaced(block).getDisplayName());
 		}
 		if (isOraxenBlock(block)) {
-			return ChatColor.stripColor(Oraxen.getOraxenDisplayName(block));
+			return ChatColor.stripColor(OraxenHandler.getOraxenDisplayName(block));
 		}
 
 		String targetName = block.getType().toString();
@@ -121,7 +121,7 @@ public class DataHandler {
 			return getItemDropNames();
 		}
 		if (isNovaBlock(block)) {
-			itemDrops.put(ChatColor.stripColor(UtilsKt.getBlockName(block.getLocation())), 1);
+			itemDrops.put(ChatColor.stripColor(NovaHandler.getBlockName(block.getLocation())), 1);
 			return getItemDropNames();
 		}
 		if (isItemsAdderBlock(block)) {
@@ -129,7 +129,7 @@ public class DataHandler {
 			return getItemDropNames();
 		}
 		if (isOraxenBlock(block)) {
-			itemDrops.put(ChatColor.stripColor(Oraxen.getOraxenDisplayName(block)), 1);
+			itemDrops.put(ChatColor.stripColor(OraxenHandler.getOraxenDisplayName(block)), 1);
 			return getItemDropNames();
 		}
 
@@ -302,7 +302,7 @@ public class DataHandler {
 		if (!nova) {
 			return false;
 		}
-		return UtilsKt.check(block.getLocation());
+		return NovaHandler.check(block.getLocation());
 	}
 
 	private boolean isItemsAdderBlock(Block block) {
@@ -316,7 +316,7 @@ public class DataHandler {
 		if (!oraxen) {
 			return false;
 		}
-		return Oraxen.isOraxen(block);
+		return OraxenHandler.isOraxen(block);
 	}
 
 	public String getCustomResourceName(Block block) {
