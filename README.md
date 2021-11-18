@@ -34,6 +34,8 @@ The following plugins which provide a number of custom blocks are supported:
 
 [ItemsAdder](https://www.spigotmc.org/resources/%E2%9C%85must-have%E2%9C%85-itemsadder%E2%9C%A8custom-items-huds-guis-mobs-3dmodels-emojis-blocks-wings-hats-liquids.73355/ "ItemsAdder") by LoneDev
 
+[Oraxen](https://github.com/oraxen/oraxen/ "Oraxen") by Th0rgal
+
 ## Dependencies
 Following Mojang's decision to require Java 16 for Minecraft 1.17+, this plugin also now requires a minimum Java version of 16.
 
@@ -81,4 +83,4 @@ WhatIsThis can be [downloaded from Spigot](https://www.spigotmc.org/resources/wh
 
 
 
-Updated 31st October 2021 by steve4744
+Updated 18th November 2021 by steve4744
