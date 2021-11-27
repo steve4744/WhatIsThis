@@ -29,7 +29,7 @@ The following plugins which provide a number of custom blocks are supported:
 
 Version 3.4 of WhatIsThis (available on Spigot) should be used with Slimefun4 versions up to RC-26.
 
-Version 3.4.1 of WhatIsThis (see GitHub releases) should be used with Slimefun4 versions starting from RC-27.
+Version 3.4.1 of WhatIsThis ([download here](https://github.com/steve4744/WhatIsThis/releases/download/v3.4.1/WhatIsThis-3.4.1.jar "v3.4.1")) should be used with Slimefun4 versions starting from RC-27.
 
 
 ## Commands & Permissions
@@ -63,4 +63,4 @@ WhatIsThis can be [downloaded from Spigot](https://www.spigotmc.org/resources/wh
 
 
 
-Updated 15 February 2021 by steve4744
+Updated 27 November 2021 by steve4744
