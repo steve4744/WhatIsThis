@@ -19,7 +19,17 @@ There is also the option to have the block information displayed on the ActionBa
 The ActionBar display is probably the most attractive and least intrusive of the display methods. The text colour can be set in the _config.yml_ file.
 
 ## Dependencies
-This plugin is supported on Minecraft/Spigot 1.13 through to 1.16+.
+This plugin is supported on Minecraft/Spigot 1.13 through to 1.16.5.
+
+## Suppported Plugins
+
+The following plugins which provide a number of custom blocks are supported:
+
+[Slimefun4](https://github.com/Slimefun/Slimefun4/ "Slimefun4") by TheBusyBiscuit
+
+Version 3.4 of WhatIsThis (available on Spigot) should be used with Slimefun4 versions up to RC-26.
+
+Version 3.4.1 of WhatIsThis (see GitHub releases) should be used with Slimefun4 versions starting from RC-27.
 
 
 ## Commands & Permissions
