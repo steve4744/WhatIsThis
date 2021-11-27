@@ -42,7 +42,7 @@ import com.google.common.base.Enums;
 import io.github.steve4744.whatisthis.Utils;
 import io.github.steve4744.whatisthis.WhatIsThis;
 import io.github.steve4744.whatisthis.lang.EnumLang;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 
 public class DataHandler {
