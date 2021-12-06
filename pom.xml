@@ -110,7 +110,7 @@
     <dependency>
         <groupId>com.github.steve4744</groupId>
         <artifactId>oraxen</artifactId>
-        <version>1.118.01</version>
+        <version>1.119.0</version>
         <scope>provided</scope>
     </dependency>
   </dependencies>
