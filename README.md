@@ -39,10 +39,11 @@ The following plugins which provide a number of custom blocks are supported:
 ## Dependencies
 Following Mojang's decision to require Java 16 for Minecraft 1.17+, this plugin also now requires a minimum Java version of 16.
 
-From version 4.0 of this plugin, it requires servers to be running a minimum of Java 16 and Minecraft/Spigot 1.17+.
+From version 4.0 of this plugin, it requires servers to be running a minimum of Java 16 and Minecraft/Spigot 1.17 or 1.18.
 
 The legacy version of the plugin, v3.4, is supported on Minecraft/Spigot 1.13.2 through to 1.16.5.
 
+PlaceholderAPI is required to use this plugin's placeholders.
 
 ## Commands & Permissions
 ```
@@ -83,4 +84,4 @@ WhatIsThis can be [downloaded from Spigot](https://www.spigotmc.org/resources/wh
 
 
 
-Updated 18th November 2021 by steve4744
+Updated 12th December 2021 by steve4744
