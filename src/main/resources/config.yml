@@ -1,22 +1,35 @@
-#################################################
-# WhatIsThis configuration file                 #
-#                                               #
-# Identify blocks simply by looking at them,    #
-# by command or by right-clicking with an item. #
-# Set the item to AIR to click with empty hand. #
-# Setting "auto_display: true" will display     #
-# block info without a command or clicking.     #
-# Author: steve4744                             #
-#################################################
-# Check for new version
+################################################################ #
+#                  WhatIsThis configuration file                  #
+#                                                                 #
+# Identify blocks by looking at them, using a command or by       #
+# right-clicking with an item.                                    #
+#                                                                 #
+# Setting "auto_display: true" will display the block information #
+# simply by targeting the block.                                  #
+#                                                                 #
+# The block information will be displayed in the client language  #
+# provided the corresponding language file has been loaded by     #
+# the plugin.                                                     #
+#                                                                 #
+# Common blocks can be skipped by adding their names to the       #
+# "IgnoreBlocks" list.                                            #
+#                                                                 #
+# Author: steve4744                                               #
+################################################################ #
+
+# Check for new version on SpigotMC.
 check_for_update: true
-# Allow right-click with item
+
+# Allow right-click with item. Set the item to AIR to use empty hand.
 use_right_click:
   enabled: true
   item: STICK
-# Translatable text
+
+# Translatable text - change the word "Drops" into your desired language.
+# This only applies to the 'scoreboard' and 'chat' display methods.
 text:
   drops: Drops
+
 # To enable the loading of specific languages only, add them to a list as follows:
 #LoadLanguage: [en_us, es_es, cy_gb]
 # Or
@@ -27,12 +40,16 @@ text:
 # If you want to load all the languages, add "all" to the list:
 LoadLanguage:
 - all
-# Enable if you want to use the placeholders
+
+# Enable if you want to use the placeholders.
 PlaceholderAPI:
   enabled: false
-# Enable the preferred method(s) to display the block info
+
+# Choose the method(s) to display the block info by enabling the preferred option(s).
 Display:
+  # Set to true to display the block info simply by targeting the block.
   auto_display: false
+  # If true the custom block name will be prefixed by the name of the plugin providing the custom block.
   prefix_custom_blocks:
     enabled: true
     prefix: '&7[&f{PREFIX}&7] '
@@ -50,6 +67,8 @@ Display:
     name_color: GREEN
     drop_color: RED
     show_drops: true
+
+# List of common blocks that will be ignored by the plugin.
 IgnoreBlocks:
 - AIR
 - CAVE_AIR

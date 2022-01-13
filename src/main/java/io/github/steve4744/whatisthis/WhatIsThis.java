@@ -63,7 +63,6 @@ public class WhatIsThis extends JavaPlugin {
 		version = this.getDescription().getVersion();
 		setupPlugin();
 
-		// load language files
 		EnumLang.init();
 		new Metrics(this, BSTATS_PLUGIN_ID);
 		checkForUpdate();
@@ -146,7 +145,7 @@ public class WhatIsThis extends JavaPlugin {
 					getLogger().info("Error attempting to check for new version. Please report it here: https://www.spigotmc.org/threads/whatisthis.360832/");
 				} else {
 					if (!version.equals(latestVersion)) {
-						getLogger().info("New version " + latestVersion + " available on Spigot: https://www.spigotmc.org/resources/whatisthis.65050//");
+						getLogger().info("Latest version " + latestVersion + " available on Spigot: https://www.spigotmc.org/resources/whatisthis.65050//");
 					}
 				}
 			}
