@@ -24,23 +24,21 @@ SOFTWARE.
  */
 package io.github.steve4744.whatisthis.utils;
 
-import org.apache.commons.lang.WordUtils;
 import org.bukkit.Location;
-
-import xyz.xenondevs.nova.tileentity.TileEntity;
-import xyz.xenondevs.nova.tileentity.TileEntityManager;
+import xyz.xenondevs.nova.api.Nova;
+import xyz.xenondevs.nova.api.tileentity.TileEntity;
+import xyz.xenondevs.nova.api.tileentity.TileEntityManager;
 
 public class NovaHandler {
 
-	private static TileEntityManager manager = TileEntityManager.INSTANCE;
+	private static TileEntityManager manager = Nova.getNova().getTileEntityManager();
 
-	public static boolean check(Location loc) {
-		return manager.getTileEntityAt(loc, false) != null ? true : false;
+	public static boolean isNova(Location loc) {
+		return manager.getTileEntityAt(loc) != null;
 	}
 
-	public static String getBlockName(Location loc) {
-		final char[] delim = {' ', '_'};
-		TileEntity tileEntity = manager.getTileEntityAt(loc, false);
-		return WordUtils.capitalizeFully(tileEntity.getMaterial().getTypeName(), delim);
+	public static String getBlockName(Location loc, String locale) {
+		TileEntity tileEntity = manager.getTileEntityAt(loc);
+		return tileEntity.getMaterial().getLocalizedName(locale);
 	}
 }

@@ -66,6 +66,7 @@ public class DataHandler {
 
 	/**
 	 * Get the localised material name. Cater for vanilla issues with WALL_ items.
+	 *
 	 * @param target material name
 	 * @param player
 	 * @return localised material name
@@ -79,7 +80,7 @@ public class DataHandler {
 			return ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName());
 		}
 		if (isNovaBlock(block)) {
-			return ChatColor.stripColor(NovaHandler.getBlockName(block.getLocation()));
+			return ChatColor.stripColor(NovaHandler.getBlockName(block.getLocation(), Utils.getLocale(player)));
 		}
 		if (isItemsAdderBlock(block)) {
 			return ChatColor.stripColor(CustomBlock.byAlreadyPlaced(block).getDisplayName());
@@ -99,6 +100,7 @@ public class DataHandler {
 
 	/**
 	 * Get the text to display the 'Drops'. Can be translated to suit server language.
+	 *
 	 * @return text for 'Drops'
 	 */
 	private String getText() {
@@ -109,10 +111,12 @@ public class DataHandler {
 	 * Get the names of the items that can be dropped by the block.
 	 * Blocks that can sometimes drop zero items, like LEAVES, are dealt with separately so that
 	 * the range of drops can be displayed.
+	 *
 	 * @param block
+	 * @param player
 	 * @return names of all the items that the block is capable of dropping
 	 */
-	public Set<String> getItemDrops(Block block) {
+	public Set<String> getItemDrops(Block block, Player player) {
 		itemDrops.clear();
 
 		if (isSlimefunBlock(block)) {
@@ -121,7 +125,7 @@ public class DataHandler {
 			return getItemDropNames();
 		}
 		if (isNovaBlock(block)) {
-			itemDrops.put(ChatColor.stripColor(NovaHandler.getBlockName(block.getLocation())), 1);
+			itemDrops.put(ChatColor.stripColor(NovaHandler.getBlockName(block.getLocation(), Utils.getLocale(player))), 1);
 			return getItemDropNames();
 		}
 		if (isItemsAdderBlock(block)) {
@@ -217,6 +221,7 @@ public class DataHandler {
 
 	/**
 	 * Translate the material to its localised name. If not present revert to "en_us".
+	 *
 	 * @param item
 	 * @param player
 	 * @return localised item name
@@ -245,6 +250,7 @@ public class DataHandler {
 	 * Format the text for showing the items that the block can drop. 
 	 * Translate this into the appropriate language.
 	 * Truncate if > 40 chars for scoreboard.
+	 *
 	 * @param block
 	 * @param item
 	 * @param player
@@ -302,7 +308,7 @@ public class DataHandler {
 		if (!nova) {
 			return false;
 		}
-		return NovaHandler.check(block.getLocation());
+		return NovaHandler.isNova(block.getLocation());
 	}
 
 	private boolean isItemsAdderBlock(Block block) {
@@ -340,6 +346,7 @@ public class DataHandler {
 	/**
 	 * Returns whether or not this block drops a variable amount, including zero, of the item?
 	 * Include bugged items like chorus_flower which always drops itself, but getDrops() returns nothing.
+	 *
 	 * @param block
 	 * @return boolean
 	 */
@@ -350,6 +357,7 @@ public class DataHandler {
 	/**
 	 * Get the amount of the item that can be dropped. If the item can sometimes drop zero items,
 	 * then get the maximum number for that item.
+	 *
 	 * @param block
 	 * @param name
 	 * @return amount

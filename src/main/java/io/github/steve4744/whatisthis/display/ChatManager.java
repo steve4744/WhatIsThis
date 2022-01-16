@@ -47,7 +47,7 @@ public class ChatManager {
 
 	public void showMessage(Player player, String message, String prefix, Block block) {
 		if (!message.isEmpty()) {
-			player.sendMessage(prefix + formattedName(message) + formattedDrops(block));
+			player.sendMessage(prefix + formattedName(message) + formattedDrops(block, player));
 		}
 	}
 
@@ -55,12 +55,12 @@ public class ChatManager {
 		return ChatColor.valueOf(plugin.getSettings().getChatColor("name")) + WordUtils.capitalizeFully(name, delim);
 	}
 
-	private String formattedDrops(Block block) {
+	private String formattedDrops(Block block, Player player) {
 		if (!plugin.getSettings().showDropsInChat()) {
 			return "";
 		}
 		StringJoiner drops = new StringJoiner(", ");
-		for (String drop : dataHandler.getItemDrops(block)) {
+		for (String drop : dataHandler.getItemDrops(block, player)) {
 			int amount = dataHandler.getAmount(block, drop);
 			if (amount > 0) {
 				drops.add(WordUtils.capitalizeFully(drop, delim) + " x " + amount);

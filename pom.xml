@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.steve4744</groupId>
   <artifactId>WhatIsThis</artifactId>
-  <version>4.6-SNAPSHOT</version>
+  <version>4.6-Nova</version>
   <name>WhatIsThis</name>
   <description>A Minecraft utility plugin which displays block information</description>
   <packaging>jar</packaging>
@@ -45,7 +45,13 @@
         <id>placeholderapi-repo</id>
         <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
     </repository>
-    <!-- SlimeFun4, Nova & Oraxen Repo -->
+    <!-- Nova-API Repo -->
+    <repository>
+        <id>xenondevs-releases</id>
+        <name>xenondevs</name>
+        <url>https://repo.xenondevs.xyz/releases</url>
+    </repository>
+    <!-- SlimeFun4 & Oraxen Repo -->
     <repository>
         <id>jitpack.io</id>
         <url>https://jitpack.io</url>
@@ -94,9 +100,9 @@
     </dependency>
     <!-- Nova -->
     <dependency>
-        <groupId>com.github.steve4744</groupId>
-        <artifactId>nova</artifactId>
-        <version>v0.6.7</version>
+        <groupId>xyz.xenondevs.nova</groupId>
+        <artifactId>Nova-API</artifactId>
+        <version>0.8</version>
         <scope>provided</scope>
     </dependency>
     <!-- ItemsAdder -->
