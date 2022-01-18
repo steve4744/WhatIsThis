@@ -4,13 +4,13 @@
 
 WhatIsThis is a lightweight utility plugin aimed at providing block information directly to the player without the need to open a UI. This can be helpful in Survival mode to know what a block is without having to break it first, while looking at other people's builds in Creative mode, using custom block plugins like Slimefun4 and Nova, or when connected with an older client version to a server using Via* plugins.
 
-This plugin was inspired by Forge mods such as WAWLA (What Are We Looking At), WAILA (What Am I Looking At) and HWYLA (Here's What You're Looking At) which run client-side to constantly display the name of the block being looked at. This plugin runs server-side, and by simply right-clicking the block with a STICK (default, can be changed in config) or running command `/wt` while looking at a block, the block type and the items it drops will be briefly displayed, either on the side of the screen, on the BossBar, ActionBar or in chat.
+This plugin was inspired by Forge mods such as WAILA (What Am I Looking At) and HWYLA (Here's What You're Looking At) which run client-side to constantly display the name of the block being looked at. This plugin runs server-side, and by simply right-clicking the block with a STICK (default, can be changed in config) or running command `/wt` while looking at a block, the block type and the items it drops will be briefly displayed, either on the side of the screen, on the BossBar, ActionBar or in chat.
 
 By enabling 'auto_display' in the config, the display will automatically update just by looking at a different block without the need for commands or clicking. As this runs server side, having 'auto-display' enabled may impact performance depending on the server hardware, software and the number of players online.
 
 The 'auto_display' option is disabled by default, so when the server starts the 'player move' listener is not registered. To enable the 'auto-display' option the server will need to be restarted so that the listener is correctly registered.
 
-A list of blocks to ignore, for example, AIR, WATER, GRASS_BLOCK, can be specified in the config. These blocks will not display any information when targeted by the player.
+A list of blocks to ignore, for example, AIR, WATER, GRASS_BLOCK, NETHERRACK, can be specified in the config. These blocks will not display any information when targeted by the player.
 
 You must have a clear view of the block being looked at when running the `/wt` command. The range is currently set to 10 blocks. The plugin can be used under water as well as on land.
 
@@ -37,9 +37,9 @@ The following plugins which provide a number of custom blocks are supported:
 [Oraxen](https://github.com/oraxen/oraxen/ "Oraxen") by Th0rgal
 
 ## Dependencies
-Following Mojang's decision to require Java 16 for Minecraft 1.17+, this plugin also now requires a minimum Java version of 16.
+From version 4.6, this plugin requires Java 17 and Minecraft/Spigot 1.17.1 or 1.18.1.
 
-From version 4.0 of this plugin, it requires servers to be running a minimum of Java 16 and Minecraft/Spigot 1.17 or 1.18.
+Version 4.5 is supported for servers running a minimum of Java 16 and Minecraft/Spigot 1.17.1.
 
 The legacy version of the plugin, v3.4, is supported on Minecraft/Spigot 1.13.2 through to 1.16.5.
 
@@ -58,7 +58,7 @@ whatisthis.admin - default op
 ```
 
 ## Multi Language Support
-All Minecraft languages are supported. The player's own language (which is set locally in the Minecraft launcher) is used to display the name of the block and the items it drops when broken. The text for the word "Drops" can be changed from English by manually changing the text in the _config.yml_.
+All Minecraft languages are supported. The player's own language (which is set locally in the Minecraft launcher) is used to display the name of the block and the items it drops when broken. Translation of custom block names is done by the plugin providing the custom blocks - currently this is only supported by Nova.
 
 If there is no local language file, then it will revert to "en_us" and display the English equivalent.
 
@@ -84,4 +84,4 @@ WhatIsThis can be [downloaded from Spigot](https://www.spigotmc.org/resources/wh
 
 
 
-Updated 12th December 2021 by steve4744
+Updated 18th January 2022 by steve4744
