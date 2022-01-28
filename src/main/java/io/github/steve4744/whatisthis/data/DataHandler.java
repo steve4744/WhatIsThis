@@ -44,8 +44,8 @@ import io.github.steve4744.whatisthis.utils.OraxenHandler;
 import io.github.steve4744.whatisthis.utils.SlimefunHandler;
 import io.github.steve4744.whatisthis.utils.Utils;
 import io.github.steve4744.whatisthis.utils.CraftoryHandler;
+import io.github.steve4744.whatisthis.utils.ItemsAdderHandler;
 import io.github.steve4744.whatisthis.utils.NovaHandler;
-import dev.lone.itemsadder.api.CustomBlock;
 
 public class DataHandler {
 
@@ -84,7 +84,7 @@ public class DataHandler {
 			return ChatColor.stripColor(NovaHandler.getBlockName(block.getLocation(), Utils.getLocale(player)));
 		}
 		if (isItemsAdderBlock(block)) {
-			return ChatColor.stripColor(CustomBlock.byAlreadyPlaced(block).getDisplayName());
+			return ChatColor.stripColor(ItemsAdderHandler.getItemsAdderDisplayName(block));
 		}
 		if (isOraxenBlock(block)) {
 			return ChatColor.stripColor(OraxenHandler.getOraxenDisplayName(block));
@@ -132,7 +132,7 @@ public class DataHandler {
 			return getItemDropNames();
 		}
 		if (isItemsAdderBlock(block)) {
-			itemDrops.put(ChatColor.stripColor(CustomBlock.byAlreadyPlaced(block).getDisplayName()), 1);
+			itemDrops.put(ChatColor.stripColor(ItemsAdderHandler.getItemsAdderDisplayName(block)), 1);
 			return getItemDropNames();
 		}
 		if (isOraxenBlock(block)) {
@@ -322,7 +322,7 @@ public class DataHandler {
 		if (!itemsadder) {
 			return false;
 		}
-		return CustomBlock.byAlreadyPlaced(block) != null;
+		return ItemsAdderHandler.isItemsAdder(block);
 	}
 
 	private boolean isOraxenBlock(Block block) {
