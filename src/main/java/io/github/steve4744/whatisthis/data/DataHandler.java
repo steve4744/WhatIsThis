@@ -41,11 +41,10 @@ import com.google.common.base.Enums;
 import io.github.steve4744.whatisthis.WhatIsThis;
 import io.github.steve4744.whatisthis.lang.EnumLang;
 import io.github.steve4744.whatisthis.utils.OraxenHandler;
+import io.github.steve4744.whatisthis.utils.SlimefunHandler;
 import io.github.steve4744.whatisthis.utils.Utils;
 import io.github.steve4744.whatisthis.utils.CraftoryHandler;
 import io.github.steve4744.whatisthis.utils.NovaHandler;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import dev.lone.itemsadder.api.CustomBlock;
 
 public class DataHandler {
@@ -79,8 +78,7 @@ public class DataHandler {
 			return "";
 		}
 		if (isSlimefunBlock(block)) {
-			SlimefunItem item = BlockStorage.check(block.getLocation());
-			return ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName());
+			return ChatColor.stripColor(SlimefunHandler.getSlimefunDisplayName(block));
 		}
 		if (isNovaBlock(block)) {
 			return ChatColor.stripColor(NovaHandler.getBlockName(block.getLocation(), Utils.getLocale(player)));
@@ -126,8 +124,7 @@ public class DataHandler {
 		itemDrops.clear();
 
 		if (isSlimefunBlock(block)) {
-			SlimefunItem item = BlockStorage.check(block.getLocation());
-			itemDrops.put(ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName()), 1);
+			itemDrops.put(ChatColor.stripColor(SlimefunHandler.getSlimefunDisplayName(block)), 1);
 			return getItemDropNames();
 		}
 		if (isNovaBlock(block)) {
@@ -311,7 +308,7 @@ public class DataHandler {
 		if (!slimefun) {
 			return false;
 		}
-		return BlockStorage.check(block.getLocation()) != null;
+		return SlimefunHandler.isSlimefun(block.getLocation());
 	}
 
 	private boolean isNovaBlock(Block block) {
