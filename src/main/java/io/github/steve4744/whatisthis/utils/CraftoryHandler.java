@@ -39,7 +39,7 @@ public class CraftoryHandler {
 		return manager.isCustomBlock(loc);
 	}
 
-	public static String getCraftoryDisplayName(Block block) {
+	public static String getDisplayName(Block block) {
 		return Utilities.getTranslation(manager.getCustomBlockName(block.getLocation()));
 	}
 }

@@ -36,7 +36,7 @@ public class SlimefunHandler {
 		return BlockStorage.check(loc) != null;
 	}
 
-	public static String getSlimefunDisplayName(Block block) {
+	public static String getDisplayName(Block block) {
 		SlimefunItem item = BlockStorage.check(block.getLocation());
 		return item.getItem().getItemMeta().getDisplayName();
 	}

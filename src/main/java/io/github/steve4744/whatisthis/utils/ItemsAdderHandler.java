@@ -34,7 +34,7 @@ public class ItemsAdderHandler {
 		return CustomBlock.byAlreadyPlaced(block) != null;
 	}
 
-	public static String getItemsAdderDisplayName(Block block) {
+	public static String getDisplayName(Block block) {
 		return CustomBlock.byAlreadyPlaced(block).getDisplayName();
 	}
 }

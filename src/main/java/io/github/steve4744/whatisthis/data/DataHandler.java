@@ -78,19 +78,19 @@ public class DataHandler {
 			return "";
 		}
 		if (isSlimefunBlock(block)) {
-			return ChatColor.stripColor(SlimefunHandler.getSlimefunDisplayName(block));
+			return ChatColor.stripColor(SlimefunHandler.getDisplayName(block));
 		}
 		if (isNovaBlock(block)) {
-			return ChatColor.stripColor(NovaHandler.getBlockName(block.getLocation(), Utils.getLocale(player)));
+			return ChatColor.stripColor(NovaHandler.getDisplayName(block.getLocation(), Utils.getLocale(player)));
 		}
 		if (isItemsAdderBlock(block)) {
-			return ChatColor.stripColor(ItemsAdderHandler.getItemsAdderDisplayName(block));
+			return ChatColor.stripColor(ItemsAdderHandler.getDisplayName(block));
 		}
 		if (isOraxenBlock(block)) {
-			return ChatColor.stripColor(OraxenHandler.getOraxenDisplayName(block));
+			return ChatColor.stripColor(OraxenHandler.getDisplayName(block));
 		}
 		if (isCraftoryBlock(block)) {
-			return ChatColor.stripColor(CraftoryHandler.getCraftoryDisplayName(block));
+			return ChatColor.stripColor(CraftoryHandler.getDisplayName(block));
 		}
 
 		String targetName = block.getType().toString();
@@ -124,23 +124,23 @@ public class DataHandler {
 		itemDrops.clear();
 
 		if (isSlimefunBlock(block)) {
-			itemDrops.put(ChatColor.stripColor(SlimefunHandler.getSlimefunDisplayName(block)), 1);
+			itemDrops.put(ChatColor.stripColor(SlimefunHandler.getDisplayName(block)), 1);
 			return getItemDropNames();
 		}
 		if (isNovaBlock(block)) {
-			itemDrops.put(ChatColor.stripColor(NovaHandler.getBlockName(block.getLocation(), Utils.getLocale(player))), 1);
+			itemDrops.put(ChatColor.stripColor(NovaHandler.getDisplayName(block.getLocation(), Utils.getLocale(player))), 1);
 			return getItemDropNames();
 		}
 		if (isItemsAdderBlock(block)) {
-			itemDrops.put(ChatColor.stripColor(ItemsAdderHandler.getItemsAdderDisplayName(block)), 1);
+			itemDrops.put(ChatColor.stripColor(ItemsAdderHandler.getDisplayName(block)), 1);
 			return getItemDropNames();
 		}
 		if (isOraxenBlock(block)) {
-			itemDrops.put(ChatColor.stripColor(OraxenHandler.getOraxenDisplayName(block)), 1);
+			itemDrops.put(ChatColor.stripColor(OraxenHandler.getDisplayName(block)), 1);
 			return getItemDropNames();
 		}
 		if (isCraftoryBlock(block)) {
-			itemDrops.put(ChatColor.stripColor(CraftoryHandler.getCraftoryDisplayName(block)), 1);
+			itemDrops.put(ChatColor.stripColor(CraftoryHandler.getDisplayName(block)), 1);
 			return getItemDropNames();
 		}
 

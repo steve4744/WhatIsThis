@@ -66,7 +66,7 @@ public class OraxenHandler {
 	}
 
 	@SuppressWarnings("deprecation")
-	public static String getOraxenDisplayName(Block block) {
+	public static String getDisplayName(Block block) {
 		if (block.getBlockData() instanceof NoteBlock) {
 			final NoteBlock noteBlock = (NoteBlock) block.getBlockData();
 			final NoteBlockMechanic mech = NoteBlockMechanicFactory.getBlockMechanic((int) (noteBlock

@@ -37,7 +37,7 @@ public class NovaHandler {
 		return manager.getTileEntityAt(loc) != null;
 	}
 
-	public static String getBlockName(Location loc, String locale) {
+	public static String getDisplayName(Location loc, String locale) {
 		TileEntity tileEntity = manager.getTileEntityAt(loc);
 		return tileEntity.getMaterial().getLocalizedName(locale);
 	}
