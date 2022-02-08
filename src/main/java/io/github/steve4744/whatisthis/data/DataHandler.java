@@ -264,7 +264,7 @@ public class DataHandler {
 	 * @return translated string
 	 */
 	public String getFormattedText(Block block, String item, Player player) {
-		String separator = "  x";
+		boolean hasZeroRange = false;
 		String result = getText() + " : " + ChatColor.RED;
 		if (item.isEmpty()) {
 			return result;
@@ -272,36 +272,36 @@ public class DataHandler {
 
 		//define range of zero drop items
 		if (item.equalsIgnoreCase("CHORUS_FRUIT") || item.equalsIgnoreCase("STICK") || item.equalsIgnoreCase("MELON_SEEDS") || item.equalsIgnoreCase("PUMPKIN_SEEDS")) {
-			separator = " # 0  ->";
+			hasZeroRange = true;
 
 		} else if (item.equalsIgnoreCase("APPLE") || item.contains("SAPLING") || item.contains("AZALEA")) {
 			if (block.getType().toString().contains("LEAVES")) {
-				separator = " # 0  ->";
+				hasZeroRange = true;
 			}
 
 		} else if (item.equalsIgnoreCase("WHEAT_SEEDS") && block.getType() != Material.WHEAT) {
-			separator = " # 0  ->";
+			hasZeroRange = true;
 
 		} else if (item.equalsIgnoreCase("RED_MUSHROOM") || item.equalsIgnoreCase("BROWN_MUSHROOM")) {
 			if (block.getType().toString().contains("MUSHROOM_BLOCK")) {
-				separator = " # 0  ->";
+				hasZeroRange = true;
 			}
 
 		} else if (item.contains("_VINES")) {
-			separator = " # 0  ->";
+			hasZeroRange = true;
 		}
+
+		String separator = hasZeroRange ? " # 0  ->" : "  x";
 
 		// Scoreboard max length is 40, so subtract length of result and separator
 		int maxlen = 40 - result.length() - separator.length();
-
-		String translated = null;
-		if (isSlimefunBlock(block) || isNovaBlock(block) || isItemsAdderBlock(block) || isOraxenBlock(block) || isCraftoryBlock(block)) {
-			translated = item;
-		} else {
-			translated = translateItemName(item, player);
-		}
+		String translated = isCustomBlock(block) ? item : translateItemName(item, player);
 
 		return result + translated.substring(0, Math.min(translated.length(), maxlen)) + separator;
+	}
+
+	private boolean isCustomBlock(Block block) {
+		return isSlimefunBlock(block) || isNovaBlock(block) || isItemsAdderBlock(block) || isOraxenBlock(block) || isCraftoryBlock(block);
 	}
 
 	private boolean isSlimefunBlock(Block block) {
