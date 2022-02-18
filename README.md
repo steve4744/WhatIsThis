@@ -36,8 +36,10 @@ The following plugins which provide a number of custom blocks are supported:
 
 [Oraxen](https://github.com/oraxen/oraxen/ "Oraxen") by Th0rgal
 
+[Craftory Tech](https://www.spigotmc.org/resources/craftory-tech.81151/ "Craftory Tech") by CraftoryStudios
+
 ## Dependencies
-From version 4.6, this plugin requires Java 17 and Minecraft/Spigot 1.17.1 or 1.18.1.
+The latest version of this plugin requires Java 17 and Minecraft/Spigot 1.17.1 or 1.18.1.
 
 Version 4.5 is supported for servers running a minimum of Java 16 and Minecraft/Spigot 1.17.1.
 
@@ -84,4 +86,4 @@ WhatIsThis can be [downloaded from Spigot](https://www.spigotmc.org/resources/wh
 
 
 
-Updated 18th January 2022 by steve4744
+Updated 18th February 2022 by steve4744
