@@ -46,8 +46,9 @@ PlaceholderAPI:
   enabled: false
 
 # Choose the method(s) to display the block info by enabling the preferred option(s).
+# For available text/chat colors see https://hub.spigotmc.org/javadocs/spigot/org/bukkit/ChatColor.html
 Display:
-  # Set to true to display the block info simply by targeting the block.
+  # If true the block details will be displayed simply by targeting the block.
   auto_display: false
   # If true the custom block name will be prefixed by the name of the plugin providing the custom block.
   prefix_custom_blocks:
@@ -56,11 +57,12 @@ Display:
   scoreboard:
     enabled: true
   actionbar:
-    enabled: false
-    textcolor: WHITE
+    enabled: true
+    textcolor: GREEN
   bossbar: 
     enabled: false
     textcolor: WHITE
+    # For available bar colors see https://hub.spigotmc.org/javadocs/spigot/org/bukkit/boss/BarColor.html
     barcolor: GREEN
   chat:
     enabled: false
