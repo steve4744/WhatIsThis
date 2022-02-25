@@ -8,7 +8,7 @@ env:
 
 on:
   push:
-    branches: [ 4.8SNAPSHOT ]
+    branches: [ 4.8-SNAPSHOT ]
 #  pull_request:
 #   branches: [ master ]
 
