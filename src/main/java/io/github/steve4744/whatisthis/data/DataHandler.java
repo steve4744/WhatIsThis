@@ -80,6 +80,7 @@ public class DataHandler {
 		if (isSlimefunBlock(block)) {
 			return ChatColor.stripColor(SlimefunHandler.getDisplayName(block));
 		}
+
 		if (isNovaBlock(block)) {
 			return ChatColor.stripColor(NovaHandler.getDisplayName(block.getLocation(), Utils.getLocale(player)));
 		}
@@ -305,49 +306,44 @@ public class DataHandler {
 	}
 
 	private boolean isSlimefunBlock(Block block) {
-		if (!slimefun) {
-			return false;
-		}
-		return SlimefunHandler.isSlimefun(block.getLocation());
+		return slimefun ? SlimefunHandler.isSlimefun(block.getLocation()) : false;
 	}
 
 	private boolean isNovaBlock(Block block) {
-		if (!nova) {
-			return false;
-		}
-		return NovaHandler.isNova(block.getLocation());
+		return nova ? NovaHandler.isNova(block.getLocation()) : false;
 	}
 
 	private boolean isItemsAdderBlock(Block block) {
-		if (!itemsadder) {
-			return false;
-		}
-		return ItemsAdderHandler.isItemsAdder(block);
+		return itemsadder ? ItemsAdderHandler.isItemsAdder(block) : false;
 	}
 
 	private boolean isOraxenBlock(Block block) {
-		if (!oraxen) {
-			return false;
-		}
-		return OraxenHandler.isOraxen(block);
+		return oraxen ? OraxenHandler.isOraxen(block) : false;
 	}
 
 	private boolean isCraftoryBlock(Block block) {
-		if (!craftory) {
-			return false;
-		}
-		return CraftoryHandler.isCraftory(block.getLocation());
+		return craftory ? CraftoryHandler.isCraftory(block.getLocation()) : false;
 	}
 
+	/**
+	 * Get the name of the plugin providing the custom block.
+	 *
+	 * @param block
+	 * @return
+	 */
 	public String getCustomResourceName(Block block) {
 		if (isSlimefunBlock(block)) {
 			return "Slimefun";
+
 		} else if (isNovaBlock(block)) {
 			return "Nova";
+
 		} else if (isItemsAdderBlock(block)) {
 			return "ItemsAdder";
+
 		} else if (isOraxenBlock(block)) {
 			return "Oraxen";
+
 		} else if (isCraftoryBlock(block)) {
 			return "Craftory";
 		}
