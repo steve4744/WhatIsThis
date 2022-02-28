@@ -85,16 +85,32 @@ public class Settings {
 		return config.getBoolean("Display.scoreboard.enabled", true);
 	}
 
+	public boolean isScoreboardOnSneak() {
+		return config.getBoolean("Display.scoreboard.on_sneak");
+	}
+
 	public boolean isActionBarEnabled() {
 		return config.getBoolean("Display.actionbar.enabled", true);
+	}
+
+	public boolean isActionBarOnSneak() {
+		return config.getBoolean("Display.actionbar.on_sneak");
 	}
 
 	public boolean isBossbarEnabled() {
 		return config.getBoolean("Display.bossbar.enabled", true);
 	}
 
+	public boolean isBossBarOnSneak() {
+		return config.getBoolean("Display.bossbar.on_sneak");
+	}
+
 	public boolean isChatEnabled() {
 		return config.getBoolean("Display.chat.enabled", true);
+	}
+
+	public boolean isChatOnSneak() {
+		return config.getBoolean("Display.chat.on_sneak");
 	}
 
 	public boolean isAutoDisplayEnabled() {

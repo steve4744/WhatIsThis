@@ -51,22 +51,30 @@ public class DisplayHandler {
 				plugin.getSettings().isCustomPrefixEnabled() ? plugin.getDataHandler().getCustomPrefix(block) : "");
 
 		if (plugin.getSettings().isScoreboardEnabled()) {
-			plugin.getScoreboardManager().showTarget(player, message, prefix, block);
+			if (!plugin.getSettings().isScoreboardOnSneak() || (plugin.getSettings().isScoreboardOnSneak() && player.isSneaking())) {
+				plugin.getScoreboardManager().showTarget(player, message, prefix, block);
+			}
 		}
 
 		if (plugin.getSettings().isActionBarEnabled()) {
-			ActionBar actionBar = new ActionBar(prefix + ChatColor.valueOf(plugin.getSettings().getActionBarColor()) + message);
-			actionBar.sendBar(player);
+			if (!plugin.getSettings().isActionBarOnSneak() || (plugin.getSettings().isActionBarOnSneak() && player.isSneaking())) {
+				ActionBar actionBar = new ActionBar(prefix + ChatColor.valueOf(plugin.getSettings().getActionBarColor()) + message);
+				actionBar.sendBar(player);
+			}
 		}
 
 		if (plugin.getSettings().isBossbarEnabled()) {
-			BossBarManager bm = new BossBarManager(plugin);
-			bm.setBar(player, message, prefix);
+			if (!plugin.getSettings().isBossBarOnSneak() || (plugin.getSettings().isBossBarOnSneak() && player.isSneaking())) {
+				BossBarManager bm = new BossBarManager(plugin);
+				bm.setBar(player, message, prefix);
+			}
 		}
 
 		if (plugin.getSettings().isChatEnabled()) {
-			ChatManager cm = new ChatManager(plugin);
-			cm.showMessage(player, message, prefix, block);
+			if (!plugin.getSettings().isChatOnSneak() || (plugin.getSettings().isChatOnSneak() && player.isSneaking())) {
+				ChatManager cm = new ChatManager(plugin);
+				cm.showMessage(player, message, prefix, block);
+			}
 		}
 	}
 }

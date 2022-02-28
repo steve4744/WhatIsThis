@@ -80,7 +80,6 @@ public class DataHandler {
 		if (isSlimefunBlock(block)) {
 			return ChatColor.stripColor(SlimefunHandler.getDisplayName(block));
 		}
-
 		if (isNovaBlock(block)) {
 			return ChatColor.stripColor(NovaHandler.getDisplayName(block.getLocation(), Utils.getLocale(player)));
 		}
