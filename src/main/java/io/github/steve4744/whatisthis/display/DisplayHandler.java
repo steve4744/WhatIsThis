@@ -1,7 +1,7 @@
 /*
  * MIT License
 
-Copyright (c) 2019 steve4744
+Copyright (c) 2022 steve4744
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -39,11 +39,11 @@ public class DisplayHandler {
 	}
 
 	/**
-	 * This method handles the visual output of a given Block
-	 * based on the configured visual method.
-	 * 
-	 * @param block		The targeted Block
-	 * @param player	The Player to display the target to
+	 * This method handles the visual output of a given Block based on
+	 * the configured visual method(s).
+	 *
+	 * @param block		The targeted block
+	 * @param player	The player to display the target to
 	 */
 	public void getVisualMethod(Block block, Player player) {
 		String message = plugin.getDataHandler().getDisplayName(block, player);

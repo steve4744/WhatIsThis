@@ -1,7 +1,7 @@
 /*
  * MIT License
 
-Copyright (c) 2019 steve4744
+Copyright (c) 2022 steve4744
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -24,6 +24,7 @@ SOFTWARE.
  */
 package io.github.steve4744.whatisthis.display;
 
+import java.util.Map;
 import java.util.StringJoiner;
 
 import org.apache.commons.lang.WordUtils;
@@ -33,6 +34,7 @@ import org.bukkit.entity.Player;
 
 import io.github.steve4744.whatisthis.WhatIsThis;
 import io.github.steve4744.whatisthis.data.DataHandler;
+import io.github.steve4744.whatisthis.data.ItemDropRanges;
 
 public class ChatManager {
 
@@ -59,13 +61,25 @@ public class ChatManager {
 		if (!plugin.getSettings().showDropsInChat()) {
 			return "";
 		}
+
 		StringJoiner drops = new StringJoiner(", ");
 		for (String drop : dataHandler.getItemDrops(block, player)) {
-			int amount = dataHandler.getAmount(block, drop);
-			if (amount > 0) {
-				drops.add(WordUtils.capitalizeFully(drop, delim) + " x " + amount);
+			String translated = dataHandler.isCustomBlock(block) ? drop : dataHandler.translateItemName(drop, player);
+			if (!dataHandler.hasDropRange(block)) {
+				int amount = dataHandler.getFixedAmount(drop);
+				if (amount > 0) {
+					drops.add(getFinalisedString(translated) + " x " + amount);
+				}
+			} else {
+				Map<String, String> itemDrops = ItemDropRanges.valueOf(block.getType().toString()).getMap();
+				drops.add(getFinalisedString(translated) + " " + itemDrops.get(drop));
 			}
 		}
-		return ChatColor.DARK_GRAY + " [" + ChatColor.valueOf(plugin.getSettings().getChatColor("drop")) + drops.toString() + ChatColor.DARK_GRAY + "]";
+		return ChatColor.DARK_GRAY + " [" + ChatColor.valueOf(plugin.getSettings().getChatColor("drop")) +
+						drops.toString() + ChatColor.DARK_GRAY + "]";
+	}
+
+	private String getFinalisedString(String drop) {
+		return WordUtils.capitalizeFully(drop, delim);
 	}
 }

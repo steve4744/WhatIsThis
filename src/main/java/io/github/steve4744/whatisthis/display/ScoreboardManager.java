@@ -1,7 +1,7 @@
 /*
  * MIT License
 
-Copyright (c) 2019 steve4744
+Copyright (c) 2022 steve4744
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -40,6 +40,7 @@ import org.bukkit.scoreboard.Scoreboard;
 
 import io.github.steve4744.whatisthis.WhatIsThis;
 import io.github.steve4744.whatisthis.data.DataHandler;
+import io.github.steve4744.whatisthis.data.ItemDropRanges;
 
 public class ScoreboardManager {
 	private Scoreboard scoreboard;
@@ -78,7 +79,7 @@ public class ScoreboardManager {
 		o.setDisplayName(prefix + ChatColor.GOLD.toString() + ChatColor.BOLD + message);
 
 		for (String s : dataHandler.getItemDrops(block, player)) {
-			o.getScore(dataHandler.getFormattedText(block, s, player)).setScore(dataHandler.getAmount(block, s));
+			o.getScore(getFormattedText(block, s, player)).setScore(getMaxDrops(block, s));
 		}
 		player.setScoreboard(scoreboard);
 
@@ -135,5 +136,56 @@ public class ScoreboardManager {
 		if (externalScoreboards.get(player.getName()) != null) {
 			player.setScoreboard(externalScoreboards.remove(player.getName()));
 		}
+	}
+
+	/**
+	 * Format the text for showing the items that the block can drop.
+	 * Translate this into the appropriate language.
+	 * Truncate if > 40 chars for scoreboard.
+	 *
+	 * @param block
+	 * @param item
+	 * @param player
+	 * @return translated string
+	 */
+	private String getFormattedText(Block block, String item, Player player) {
+		String result = getText() + " : " + ChatColor.RED;
+		if (item.isEmpty()) {
+			return result;
+		}
+
+		String range = getRange(block, item);
+		String separator = range != null ? " " + range.substring(0, range.length() -2) : "  x";
+
+		// Scoreboard max length is 40, so subtract length of result and separator
+		int maxlen = 40 - result.length() - separator.length();
+		String translated = dataHandler.isCustomBlock(block) ? item : dataHandler.translateItemName(item, player);
+
+		return result + translated.substring(0, Math.min(translated.length(), maxlen)) + separator;
+	}
+
+	private String getRange(Block block, String item) {
+		if (!dataHandler.hasDropRange(block)) {
+			return null;
+		}
+		Map<String, String> itemDrops = ItemDropRanges.valueOf(block.getType().toString()).getMap();
+		return itemDrops.get(item);
+	}
+
+	private int getMaxDrops(Block block, String item) {
+		if (!dataHandler.hasDropRange(block)) {
+			return dataHandler.getFixedAmount(item);
+		}
+		String range = getRange(block, item);
+		return Integer.valueOf(range.substring(range.length() -1));
+	}
+
+	/**
+	 * Get the text to display the 'Drops'. Can be translated to suit server language.
+	 *
+	 * @return text for 'Drops'
+	 */
+	private String getText() {
+		return plugin.getConfig().getString("text.drops", "Drops");
 	}
 }

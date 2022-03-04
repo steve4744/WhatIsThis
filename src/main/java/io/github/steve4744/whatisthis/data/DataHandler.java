@@ -1,7 +1,7 @@
 /*
  * MIT License
 
-Copyright (c) 2019 steve4744
+Copyright (c) 2022 steve4744
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -103,15 +103,6 @@ public class DataHandler {
 	}
 
 	/**
-	 * Get the text to display the 'Drops'. Can be translated to suit server language.
-	 *
-	 * @return text for 'Drops'
-	 */
-	private String getText() {
-		return plugin.getConfig().getString("text.drops", "Drops");
-	}
-
-	/**
 	 * Get the names of the items that can be dropped by the block.
 	 * Blocks that can sometimes drop zero items, like LEAVES, are dealt with separately so that
 	 * the range of drops can be displayed.
@@ -145,74 +136,17 @@ public class DataHandler {
 		}
 
 		Set<String> zeroDropItems = new HashSet<String>();
+
+		if (hasDropRange(block)) {
+			Map<String, String> itemDrops = ItemDropRanges.valueOf(block.getType().toString()).getMap();
+			zeroDropItems.addAll(itemDrops.keySet());
+			return zeroDropItems;
+		}
+
 		Collection<ItemStack> coll = new ArrayList<ItemStack>();
-		coll = block.getDrops(new ItemStack(Material.DIAMOND_PICKAXE));
-
-		if (coll.isEmpty() || dropsAreInconsistent(block)) {
-			String name = block.getType().toString();
-
-			if (name.equalsIgnoreCase("DEAD_BUSH")) {
-				zeroDropItems.add("STICK");
-
-			} else if (name.equalsIgnoreCase("CHORUS_PLANT")) {
-				zeroDropItems.add("CHORUS_FRUIT");
-
-			} else if (name.equalsIgnoreCase("GRASS") || name.equalsIgnoreCase("TALL_GRASS") || name.contains("FERN")) {
-				zeroDropItems.add("WHEAT_SEEDS");
-
-			} else if (name.equalsIgnoreCase("RED_MUSHROOM_BLOCK")) {
-				zeroDropItems.add("RED_MUSHROOM");
-
-			} else if (name.equalsIgnoreCase("BROWN_MUSHROOM_BLOCK")) {
-				zeroDropItems.add("BROWN_MUSHROOM");
-
-			} else if (name.contains("MELON_STEM")) {
-				zeroDropItems.add("MELON_SEEDS");
-
-			} else if (name.contains("PUMPKIN_STEM")) {
-				zeroDropItems.add("PUMPKIN_SEEDS");
-
-			} else if (name.equalsIgnoreCase("ACACIA_LEAVES")) {
-				zeroDropItems.add("ACACIA_SAPLING");
-
-			} else if (name.equalsIgnoreCase("AZALEA_LEAVES")) {
-				zeroDropItems.add("AZALEA");
-
-			} else if (name.equalsIgnoreCase("BIRCH_LEAVES")) {
-				zeroDropItems.add("BIRCH_SAPLING");
-
-			} else if (name.equalsIgnoreCase("DARK_OAK_LEAVES")) {
-				zeroDropItems.add("DARK_OAK_SAPLING");
-				zeroDropItems.add("APPLE");
-
-			} else if (name.equalsIgnoreCase("FLOWERING_AZALEA_LEAVES")) {
-				zeroDropItems.add("FLOWERING_AZALEA");
-
-			} else if (name.equalsIgnoreCase("JUNGLE_LEAVES")) {
-				zeroDropItems.add("JUNGLE_SAPLING");
-
-			} else if (name.equalsIgnoreCase("OAK_LEAVES")) {
-				zeroDropItems.add("OAK_SAPLING");
-				zeroDropItems.add("APPLE");
-
-			} else if (name.equalsIgnoreCase("SPRUCE_LEAVES")) {
-				zeroDropItems.add("SPRUCE_SAPLING");
-
-			} else if (name.equalsIgnoreCase("CHORUS_FLOWER")) {
-				zeroDropItems.add(name);
-
-			} else if (name.contains("_VINES")) {
-				zeroDropItems.add(name);
-
-			} else {
-				// items like GLASS drop nothing
-				zeroDropItems.add("");
-			}
-
-			if (name.contains("LEAVES")) {
-				zeroDropItems.add("STICK");
-			}
-
+		coll = block.getDrops(new ItemStack(getPreferredTool(block)), player);
+		if (coll.isEmpty()) {
+			zeroDropItems.add("");
 			return zeroDropItems;
 		}
 
@@ -233,7 +167,7 @@ public class DataHandler {
 	 * @param player
 	 * @return localised item name
 	 */
-	private String translateItemName(String item, Player player) {
+	public String translateItemName(String item, Player player) {
 		String locale = Utils.getLocale(player);
 		String translated = null;
 
@@ -253,54 +187,7 @@ public class DataHandler {
 		return translated == null ? "not found" : translated;
 	}
 
-	/**
-	 * Format the text for showing the items that the block can drop. 
-	 * Translate this into the appropriate language.
-	 * Truncate if > 40 chars for scoreboard.
-	 *
-	 * @param block
-	 * @param item
-	 * @param player
-	 * @return translated string
-	 */
-	public String getFormattedText(Block block, String item, Player player) {
-		boolean hasZeroRange = false;
-		String result = getText() + " : " + ChatColor.RED;
-		if (item.isEmpty()) {
-			return result;
-		}
-
-		//define range of zero drop items
-		if (item.equalsIgnoreCase("CHORUS_FRUIT") || item.equalsIgnoreCase("STICK") || item.equalsIgnoreCase("MELON_SEEDS") || item.equalsIgnoreCase("PUMPKIN_SEEDS")) {
-			hasZeroRange = true;
-
-		} else if (item.equalsIgnoreCase("APPLE") || item.contains("SAPLING") || item.contains("AZALEA")) {
-			if (block.getType().toString().contains("LEAVES")) {
-				hasZeroRange = true;
-			}
-
-		} else if (item.equalsIgnoreCase("WHEAT_SEEDS") && block.getType() != Material.WHEAT) {
-			hasZeroRange = true;
-
-		} else if (item.equalsIgnoreCase("RED_MUSHROOM") || item.equalsIgnoreCase("BROWN_MUSHROOM")) {
-			if (block.getType().toString().contains("MUSHROOM_BLOCK")) {
-				hasZeroRange = true;
-			}
-
-		} else if (item.contains("_VINES")) {
-			hasZeroRange = true;
-		}
-
-		String separator = hasZeroRange ? " # 0  ->" : "  x";
-
-		// Scoreboard max length is 40, so subtract length of result and separator
-		int maxlen = 40 - result.length() - separator.length();
-		String translated = isCustomBlock(block) ? item : translateItemName(item, player);
-
-		return result + translated.substring(0, Math.min(translated.length(), maxlen)) + separator;
-	}
-
-	private boolean isCustomBlock(Block block) {
+	public boolean isCustomBlock(Block block) {
 		return isSlimefunBlock(block) || isNovaBlock(block) || isItemsAdderBlock(block) || isOraxenBlock(block) || isCraftoryBlock(block);
 	}
 
@@ -328,7 +215,7 @@ public class DataHandler {
 	 * Get the name of the plugin providing the custom block.
 	 *
 	 * @param block
-	 * @return
+	 * @return the name of the custom resource
 	 */
 	public String getCustomResourceName(Block block) {
 		if (isSlimefunBlock(block)) {
@@ -349,46 +236,43 @@ public class DataHandler {
 		return "";
 	}
 
+	/**
+	 * Get the prefix to prepend to the custom block name.
+	 *
+	 * @param block
+	 * @return prefix
+	 */
 	public String getCustomPrefix(Block block) {
 		String name = getCustomResourceName(block);
 		return !name.isEmpty() ? plugin.getSettings().getCustomPrefix().replace("{PREFIX}", name) : "";
 	}
 
 	/**
-	 * Returns whether or not this block drops a variable amount, including zero, of the item?
-	 * Include bugged items like chorus_flower which always drops itself, but getDrops() returns nothing.
+	 * Returns whether or not this block drops a variable amount of an item.
 	 *
 	 * @param block
 	 * @return boolean
 	 */
-	private boolean dropsAreInconsistent(Block block) {
-		return Enums.getIfPresent(InconsistentDropItems.class, block.getType().toString()).orNull() != null;
+	public boolean hasDropRange(Block block) {
+		return Enums.getIfPresent(ItemDropRanges.class, block.getType().toString()).orNull() != null;
 	}
 
 	/**
-	 * Get the amount of the item that can be dropped. If the item can sometimes drop zero items,
-	 * then get the maximum number for that item.
+	 * Get the amount of the item that can be dropped or zero.
 	 *
 	 * @param block
 	 * @param name
 	 * @return amount
 	 */
-	public int getAmount(Block block, String name) {
-		if (!dropsAreInconsistent(block)) {
-			return itemDrops.get(name) != null ? itemDrops.get(name) : 0;
-		}
-
-		int amount = switch (block.getType().toString()) {
-			case "MELON_STEM", "PUMPKIN_STEM", "ATTACHED_MELON_STEM", "ATTACHED_PUMPKIN_STEM" -> 3;
-			case "RED_MUSHROOM_BLOCK", "BROWN_MUSHROOM_BLOCK" -> 2;
-			default -> {
-				yield name.equalsIgnoreCase("STICK") ? 2 : 1;
-			}
-		};
-		return amount;
+	public int getFixedAmount(String name) {
+		return itemDrops.get(name) != null ? itemDrops.get(name) : 0;
 	}
 
 	private Set<String> getItemDropNames() {
 		return itemDrops.keySet();
+	}
+
+	private Material getPreferredTool(Block block) {
+		return block.getType().toString().contains("SNOW") ? Material.DIAMOND_SHOVEL : Material.DIAMOND_PICKAXE;
 	}
 }
