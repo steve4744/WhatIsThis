@@ -77,6 +77,7 @@ public enum EnumLang {
 	FRA_DE("fra_de", new HashMap<String, String>()),
 	FR_CA("fr_ca", new HashMap<String, String>()),
 	FR_FR("fr_fr", new HashMap<String, String>()),
+	FUR_IT("fur_it", new HashMap<String, String>()),
 	FY_NL("fy_nl", new HashMap<String, String>()),
 	GA_IE("ga_ie", new HashMap<String, String>()),
 	GD_GB("gd_gb", new HashMap<String, String>()),
