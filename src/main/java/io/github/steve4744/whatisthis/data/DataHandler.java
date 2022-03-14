@@ -74,7 +74,7 @@ public class DataHandler {
 	 * @return localised material name
 	 */
 	public String getDisplayName(Block block, Player player) {
-		if (plugin.getSettings().getBlacklist().contains(block.getType().toString())) {
+		if (isBlacklisted(block)) {
 			return "";
 		}
 		if (isSlimefunBlock(block)) {
@@ -274,5 +274,9 @@ public class DataHandler {
 
 	private Material getPreferredTool(Block block) {
 		return block.getType().toString().contains("SNOW") ? Material.DIAMOND_SHOVEL : Material.DIAMOND_PICKAXE;
+	}
+
+	public boolean isBlacklisted(Block block) {
+		return plugin.getSettings().getBlacklist().contains(block.getType().toString());
 	}
 }

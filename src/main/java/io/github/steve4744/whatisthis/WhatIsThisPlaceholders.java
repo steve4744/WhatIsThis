@@ -25,6 +25,7 @@ SOFTWARE.
 package io.github.steve4744.whatisthis;
 
 import org.bukkit.OfflinePlayer;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 import io.github.steve4744.whatisthis.utils.Utils;
@@ -79,6 +80,23 @@ public class WhatIsThisPlaceholders extends PlaceholderExpansion {
 
 		} else if (identifier.equals("resourcename")) {
 			return plugin.getDataHandler().getCustomResourceName(Utils.getTargetBlock(player));
+
+		} else if (identifier.equals("location")) {
+			Block block = Utils.getTargetBlock(player);
+			return plugin.getDataHandler().isBlacklisted(block) ? "" : Utils.getLocationString(block);
+
+		} else if (identifier.equals("locationX")) {
+			Block block = Utils.getTargetBlock(player);
+			return plugin.getDataHandler().isBlacklisted(block) ? "" : String.valueOf(block.getLocation().getBlockX());
+
+		} else if (identifier.equals("locationY")) {
+			Block block = Utils.getTargetBlock(player);
+			return plugin.getDataHandler().isBlacklisted(block) ? "" : String.valueOf(block.getLocation().getBlockY());
+
+		} else if (identifier.equals("locationZ")) {
+			Block block = Utils.getTargetBlock(player);
+			return plugin.getDataHandler().isBlacklisted(block) ? "" : String.valueOf(block.getLocation().getBlockZ());
+
 		}
 		return null;
 	}

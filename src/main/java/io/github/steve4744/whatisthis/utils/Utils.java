@@ -1,7 +1,7 @@
 /*
  * MIT License
 
-Copyright (c) 2019 steve4744
+Copyright (c) 2022 steve4744
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -59,5 +59,15 @@ public class Utils {
 			break;
 		}
 		return lastBlock;
+	}
+
+	/**
+	 * Get a string representation of the location of the targeted block.
+	 *
+	 * @param block
+	 * @return
+	 */
+	public static String getLocationString(Block block) {
+		return "XYZ: " + block.getX() + " / " + block.getY() + " / " + block.getZ();
 	}
 }
