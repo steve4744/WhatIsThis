@@ -39,7 +39,7 @@ The following plugins which provide a number of custom blocks are supported:
 [Craftory Tech](https://www.spigotmc.org/resources/craftory-tech.81151/ "Craftory Tech") by CraftoryStudios
 
 ## Dependencies
-The latest version of this plugin requires Java 17 and Minecraft/Spigot 1.17.1 or 1.18.1.
+The latest version of this plugin requires Java 17 and Minecraft/Spigot 1.17.1 - 1.18.2.
 
 Version 4.5 is supported for servers running a minimum of Java 16 and Minecraft/Spigot 1.17.1.
 
@@ -72,6 +72,10 @@ Support for placeholders can be enabled in the config.
 ```
 %whatisthis_blockname% - name of the block
 %whatisthis_resourcename% - name of the providing resource
+%whatisthis_location% - location of block
+%whatisthis_locationX% - X coordinate of block
+%whatisthis_locationY% - Y coordinate of block
+%whatisthis_locationZ% - Z coordinate of block
 %whatisthis_version% - version of the plugin
 ```
     
@@ -86,4 +90,4 @@ WhatIsThis can be [downloaded from Spigot](https://www.spigotmc.org/resources/wh
 
 
 
-Updated 18th February 2022 by steve4744
+Updated 22nd April 2022 by steve4744
