@@ -185,6 +185,7 @@ public enum EnumLang {
      * Initialise this class, load all the languages to the corresponding HashMap.
      */
     public static void init() {
+    	final String PREFIX = "[WhatIsThis] ";
         for (EnumLang enumLang : EnumLang.values()) {
 
             if (!WhatIsThis.getPlugin().getSettings().getLangs().contains("all") && !WhatIsThis.getPlugin().getSettings().getLangs().contains(enumLang.getLocale())) {
@@ -192,9 +193,9 @@ public enum EnumLang {
             }
             try {
                 readFile(enumLang, new BufferedReader(new InputStreamReader(EnumLang.class.getResourceAsStream("/lang/" + enumLang.locale + ".json"), Charset.forName("UTF-8"))));
-                Bukkit.getLogger().info(enumLang.getLocale() + " has been loaded.");
+                Bukkit.getLogger().info(PREFIX + enumLang.getLocale() + " has been loaded.");
             } catch (Exception e) {
-            	Bukkit.getLogger().info("Fail to load language file " + enumLang.getLocale());
+            	Bukkit.getLogger().info(PREFIX + "Fail to load language file " + enumLang.getLocale());
                 e.printStackTrace();
             }
         }
@@ -206,11 +207,11 @@ public enum EnumLang {
         for (File file : Objects.requireNonNull(customizedLangDir.listFiles((dir, name) -> name.toLowerCase().endsWith(".json")))) {
             EnumLang enumLang = get(file.getName()); // Returns EN_US when language not found.
             if (enumLang.getLocale().equals(EN_US.locale) && !file.getName().contains(EN_US.locale)) {
-                Bukkit.getLogger().info("Failed to load customized language file " + file.getName()); // Language not present
+                Bukkit.getLogger().info(PREFIX + "Failed to load customized language file " + file.getName()); // Language not present
             } else {
                 try (FileInputStream fs = new FileInputStream(file)) {
                     readFile(enumLang, new BufferedReader(new InputStreamReader(fs, Charset.forName("UTF-8"))));
-                    Bukkit.getLogger().info("Failed to load customized language file " + file.getName()); // Error loading language files
+                    Bukkit.getLogger().info(PREFIX + "Failed to load customized language file " + file.getName()); // Error loading language files
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
