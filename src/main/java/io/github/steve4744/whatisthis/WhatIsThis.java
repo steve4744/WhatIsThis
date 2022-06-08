@@ -34,6 +34,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import io.github.steve4744.whatisthis.commands.AutoTabCompleter;
 import io.github.steve4744.whatisthis.commands.WhatIsThisCommand;
 import io.github.steve4744.whatisthis.configuration.Settings;
+import io.github.steve4744.whatisthis.data.CustomData;
 import io.github.steve4744.whatisthis.data.DataHandler;
 import io.github.steve4744.whatisthis.display.DisplayHandler;
 import io.github.steve4744.whatisthis.display.ScoreboardManager;
@@ -49,6 +50,7 @@ public class WhatIsThis extends JavaPlugin {
 	private DataHandler dataHandler;
 	private Settings settings;
 	private DisplayHandler displayHandler;
+	private CustomData customData;
 	private boolean placeholderapi;
 	private static final int BSTATS_PLUGIN_ID = 4079;
 
@@ -97,12 +99,17 @@ public class WhatIsThis extends JavaPlugin {
 		return displayHandler;
 	}
 
+	public CustomData getCustomData() {
+		return customData;
+	}
+
 	private void setupPlugin() {
 		getCommand("whatisthis").setExecutor(new WhatIsThisCommand(version, this));
 		getCommand("whatisthis").setTabCompleter(new AutoTabCompleter());
 		settings = new Settings(this);
 		PluginManager pm = Bukkit.getPluginManager();
 		pm.registerEvents(new WhatIsThisListener(this), this);
+		customData = new CustomData(this);
 		dataHandler = new DataHandler(this);
 		displayHandler = new DisplayHandler(this);
 		if (getSettings().isAutoDisplayEnabled()) {
@@ -119,10 +126,15 @@ public class WhatIsThis extends JavaPlugin {
 	public void reloadPlugin() {
 		reloadConfig();
 		refreshSettings();
+		reloadCustomData();
 	}
 
 	private void refreshSettings() {
 		this.settings = new Settings(this);
+	}
+
+	private void reloadCustomData() {
+		customData = new CustomData(this);
 	}
 
 	public Settings getSettings() {

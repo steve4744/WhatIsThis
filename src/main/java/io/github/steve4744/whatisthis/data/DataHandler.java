@@ -77,29 +77,35 @@ public class DataHandler {
 		if (isBlacklisted(block)) {
 			return "";
 		}
+		String targetName = null;
 		if (isSlimefunBlock(block)) {
-			return ChatColor.stripColor(SlimefunHandler.getDisplayName(block));
-		}
-		if (isNovaBlock(block)) {
-			return ChatColor.stripColor(NovaHandler.getDisplayName(block.getLocation(), Utils.getLocale(player)));
-		}
-		if (isItemsAdderBlock(block)) {
-			return ChatColor.stripColor(ItemsAdderHandler.getDisplayName(block));
-		}
-		if (isOraxenBlock(block)) {
-			return ChatColor.stripColor(OraxenHandler.getDisplayName(block));
-		}
-		if (isCraftoryBlock(block)) {
-			return ChatColor.stripColor(CraftoryHandler.getDisplayName(block));
+			targetName = ChatColor.stripColor(SlimefunHandler.getDisplayName(block));
+
+		} else if (isNovaBlock(block)) {
+			targetName = ChatColor.stripColor(NovaHandler.getDisplayName(block.getLocation(), Utils.getLocale(player)));
+
+		} else if (isItemsAdderBlock(block)) {
+			targetName = ChatColor.stripColor(ItemsAdderHandler.getDisplayName(block));
+
+		} else if (isOraxenBlock(block)) {
+			targetName = ChatColor.stripColor(OraxenHandler.getDisplayName(block));
+
+		} else if (isCraftoryBlock(block)) {
+			targetName =  ChatColor.stripColor(CraftoryHandler.getDisplayName(block));
+
+		} else {
+			targetName = block.getType().toString();
+			//coloured wall_banners are not currently in the Mojang language files
+			if (targetName.contains("WALL_BANNER")) {
+				targetName = targetName.replace("WALL_", "");
+			}
 		}
 
-		String targetName = block.getType().toString();
-		//coloured wall_banners are not currently in the Mojang language files
-		if (targetName.contains("WALL_BANNER")) {
-			targetName = targetName.replace("WALL_", "");
-		}
+		String translatedName = isCustomBlock(block) ? targetName : translateItemName(targetName, player);
+		String prefix = getCustomResourceName(block) != "" ? getCustomResourceName(block).toLowerCase() + "_" : "minecraft_";
 
-		return translateItemName(targetName, player);
+		return plugin.getCustomData().hasCustomName(prefix + translatedName) ?
+				plugin.getCustomData().getCustomName(prefix + translatedName) : translatedName;
 	}
 
 	/**
