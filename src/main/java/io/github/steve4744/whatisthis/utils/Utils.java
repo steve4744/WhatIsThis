@@ -24,6 +24,9 @@ SOFTWARE.
  */
 package io.github.steve4744.whatisthis.utils;
 
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -69,5 +72,23 @@ public class Utils {
 	 */
 	public static String getLocationString(Block block) {
 		return "XYZ: " + block.getX() + " / " + block.getY() + " / " + block.getZ();
+	}
+
+	/**
+	 * Convert the text to title case replacing underscores with spaces.
+	 *
+	 * @param text
+	 * @return name in title case
+	 */
+	public static String capitalizeFully(String text) {
+		String delim = "\\s|_";
+
+		return Stream.of(text.split(delim))
+				.map(Utils::capitalize)
+				.collect(Collectors.joining(" "));
+	}
+
+	private static String capitalize(String word) {
+		return word.equals("") ? word : word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
 	}
 }

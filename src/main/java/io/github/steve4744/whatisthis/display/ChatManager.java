@@ -27,7 +27,6 @@ package io.github.steve4744.whatisthis.display;
 import java.util.Map;
 import java.util.StringJoiner;
 
-import org.apache.commons.lang.WordUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -35,12 +34,12 @@ import org.bukkit.entity.Player;
 import io.github.steve4744.whatisthis.WhatIsThis;
 import io.github.steve4744.whatisthis.data.DataHandler;
 import io.github.steve4744.whatisthis.data.ItemDropRanges;
+import io.github.steve4744.whatisthis.utils.Utils;
 
 public class ChatManager {
 
 	private final WhatIsThis plugin;
 	private DataHandler dataHandler;
-	private final char[] delim = {' ', '_'};
 
 	public ChatManager(WhatIsThis plugin) {
 		this.plugin = plugin;
@@ -54,7 +53,7 @@ public class ChatManager {
 	}
 
 	private String formattedName(String name) {
-		return ChatColor.valueOf(plugin.getSettings().getChatColor("name")) + WordUtils.capitalizeFully(name, delim);
+		return ChatColor.valueOf(plugin.getSettings().getChatColor("name")) + Utils.capitalizeFully(name);
 	}
 
 	private String formattedDrops(Block block, Player player) {
@@ -80,6 +79,6 @@ public class ChatManager {
 	}
 
 	private String getFinalisedString(String drop) {
-		return WordUtils.capitalizeFully(drop, delim);
+		return Utils.capitalizeFully(drop);
 	}
 }
