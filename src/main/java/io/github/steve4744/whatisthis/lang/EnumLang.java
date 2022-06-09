@@ -152,7 +152,9 @@ public enum EnumLang {
 	YO_NG("yo_ng", new HashMap<String, String>()),
 	ZH_CN("zh_cn", new HashMap<String, String>()),
 	ZH_HK("zh_hk", new HashMap<String, String>()),
-	ZH_TW("zh_tw", new HashMap<String, String>());
+	ZH_TW("zh_tw", new HashMap<String, String>()),
+	ZLM_ARAB("zlm_arab", new HashMap<String, String>());
+
 
     private static final Map<String, EnumLang> lookup = new HashMap<>();
 
