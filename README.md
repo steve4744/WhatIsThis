@@ -39,7 +39,7 @@ The following plugins which provide a number of custom blocks are supported:
 [Craftory Tech](https://www.spigotmc.org/resources/craftory-tech.81151/ "Craftory Tech") by CraftoryStudios
 
 ## Dependencies
-The latest version of this plugin requires Java 17 and Minecraft/Spigot 1.17.1 - 1.18.2.
+The latest version of this plugin requires Java 17 and Minecraft/Spigot 1.17.1 - 1.19.
 
 Version 4.5 is supported for servers running a minimum of Java 16 and Minecraft/Spigot 1.17.1.
 
@@ -90,4 +90,4 @@ WhatIsThis can be [downloaded from Spigot](https://www.spigotmc.org/resources/wh
 
 
 
-Updated 22nd April 2022 by steve4744
+Updated 14th June 2022 by steve4744
