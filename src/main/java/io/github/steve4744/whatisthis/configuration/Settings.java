@@ -125,6 +125,10 @@ public class Settings {
 		return config.getBoolean("Display.prefix_custom_blocks.enabled");
 	}
 
+	public boolean isCustomDataEnabled() {
+		return config.getBoolean("CustomData.enabled");
+	}
+
 	public String getActionBarColor() {
 		String colour = config.getString("Display.actionbar.textcolor").toUpperCase();
 		if (colour == null || Enums.getIfPresent(ChatColor.class, colour).orNull() == null) {

@@ -102,10 +102,14 @@ public class DataHandler {
 		}
 
 		String translatedName = isCustomBlock(block) ? targetName : translateItemName(targetName, player);
-		String prefix = getCustomResourceName(block) != "" ? getCustomResourceName(block).toLowerCase() + "_" : "minecraft_";
 
-		return plugin.getCustomData().hasCustomName(prefix + translatedName) ?
-				plugin.getCustomData().getCustomName(prefix + translatedName) : translatedName;
+		if (plugin.getSettings().isCustomDataEnabled()) {
+			String prefix = getCustomResourceName(block) != "" ? getCustomResourceName(block).toLowerCase() + "_" : "minecraft_";
+			return plugin.getCustomData().hasCustomName(prefix + translatedName) ?
+					plugin.getCustomData().getCustomName(prefix + translatedName) : translatedName;
+		}
+
+		return translatedName;
 	}
 
 	/**

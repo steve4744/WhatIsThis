@@ -110,7 +110,9 @@ public class WhatIsThis extends JavaPlugin {
 		PluginManager pm = Bukkit.getPluginManager();
 		pm.registerEvents(new WhatIsThisListener(this), this);
 
-		customData = new CustomData(this);
+		if (getSettings().isCustomDataEnabled()) {
+			customData = new CustomData(this);
+		}
 		dataHandler = new DataHandler(this);
 		displayHandler = new DisplayHandler(this);
 
@@ -129,7 +131,9 @@ public class WhatIsThis extends JavaPlugin {
 	public void reloadPlugin() {
 		reloadConfig();
 		refreshSettings();
-		reloadCustomData();
+		if (getSettings().isCustomDataEnabled()) {
+			reloadCustomData();
+		}
 	}
 
 	private void refreshSettings() {

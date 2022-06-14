@@ -41,8 +41,12 @@ text:
 LoadLanguage:
 - all
 
-# Enable if you want to use the placeholders.
+# Enable only if you want to use the placeholders.
 PlaceholderAPI:
+  enabled: false
+
+# Enable only if you want to use the custom.yml file.
+CustomData:
   enabled: false
 
 # Choose the method(s) to display the block info by enabling the preferred option(s).
