@@ -109,12 +109,15 @@ public class WhatIsThis extends JavaPlugin {
 		settings = new Settings(this);
 		PluginManager pm = Bukkit.getPluginManager();
 		pm.registerEvents(new WhatIsThisListener(this), this);
+
 		customData = new CustomData(this);
 		dataHandler = new DataHandler(this);
 		displayHandler = new DisplayHandler(this);
+
 		if (getSettings().isAutoDisplayEnabled()) {
 			pm.registerEvents(new PlayerMoveListener(this), this);
 		}
+
 		Plugin PlaceholderAPI = pm.getPlugin("PlaceholderAPI");
 		if (PlaceholderAPI != null && PlaceholderAPI.isEnabled() && getConfig().getBoolean("PlaceholderAPI.enabled")) {
 			placeholderapi = true;

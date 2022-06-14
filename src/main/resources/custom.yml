@@ -1,0 +1,24 @@
+################################################################ #
+#                  WhatIsThis custom data file                    #
+#                                                                 #
+# This file can be used to override the display name of a block.  #
+#                                                                 #
+# Simply replace the display name returned by minecraft or by a   #
+# custom block plugin with the display name you require.          #
+#                                                                 #
+# Format each line as:                                            #
+# <space><space>resource_DisplayName: New Display Name            #
+#                                                                 #
+# For example:                                                    #
+#                                                                 #
+# To override the vanilla display name "Crafting Table":          #
+#  minecraft_Crafting Table: Work Bench                           #
+#                                                                 #
+# To override Slimefun's display name "Ancient Altar":            #
+#  slimefun_Ancient Altar: Very Old Altar                         #
+#                                                                 #
+################################################################ #
+
+#custom:
+#  minecraft_Crafting Table: Work Bench
+#  slimefun_Ancient Altar: Very Old Altar
