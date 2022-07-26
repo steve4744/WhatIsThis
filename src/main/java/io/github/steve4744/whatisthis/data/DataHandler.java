@@ -286,7 +286,13 @@ public class DataHandler {
 		return block.getType().toString().contains("SNOW") ? Material.DIAMOND_SHOVEL : Material.DIAMOND_PICKAXE;
 	}
 
+	/**
+	 * Return true if the block is blacklisted or if block returned by getTargetBlock is null.
+	 *
+	 * @param block
+	 * @return
+	 */
 	public boolean isBlacklisted(Block block) {
-		return plugin.getSettings().getBlacklist().contains(block.getType().toString());
+		return block == null || plugin.getSettings().getBlacklist().contains(block.getType().toString());
 	}
 }

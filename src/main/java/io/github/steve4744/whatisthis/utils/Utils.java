@@ -24,19 +24,15 @@ SOFTWARE.
  */
 package io.github.steve4744.whatisthis.utils;
 
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.bukkit.util.BlockIterator;
 
 public class Utils {
-
-	public static boolean isAir(Material material) {
-		return material == Material.AIR || material == Material.CAVE_AIR || material == Material.VOID_AIR;
-	}
 
 	public static boolean isWater(Material material) {
 		return material == Material.WATER;
@@ -47,21 +43,21 @@ public class Utils {
 	}
 
 	/**
-	 * Get the block the player is looking at.
+	 * Get the block the player is looking at. The BlockIterator method can sometimes
+	 * return an exception, so just ignore it.
 	 *
 	 * @param player
 	 * @return block targeted by player
 	 */
 	public static Block getTargetBlock(Player player) {
-		BlockIterator iter = new BlockIterator(player, 10);
-		Block lastBlock = iter.next();
-		while (iter.hasNext()) {
-			lastBlock = iter.next();
-			if (Utils.isAir(lastBlock.getType()) || Utils.isWater(lastBlock.getType()))
-				continue;
-			break;
+		Set<Material> transparent = Set.of(Material.AIR, Material.CAVE_AIR, Material.VOID_AIR, Material.WATER);
+		try {
+			Block lastBlock = player.getTargetBlock(transparent, 10);
+			return lastBlock;
+
+		} catch(IllegalStateException ex) {
 		}
-		return lastBlock;
+		return null;
 	}
 
 	/**
