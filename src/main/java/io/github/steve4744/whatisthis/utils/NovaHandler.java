@@ -34,11 +34,11 @@ public class NovaHandler {
 	private static TileEntityManager manager = Nova.getNova().getTileEntityManager();
 
 	public static boolean isNova(Location loc) {
-		return manager.getTileEntityAt(loc) != null;
+		return manager.getTileEntity(loc) != null;
 	}
 
 	public static String getDisplayName(Location loc, String locale) {
-		TileEntity tileEntity = manager.getTileEntityAt(loc);
+		TileEntity tileEntity = manager.getTileEntity(loc);
 		return tileEntity.getMaterial().getLocalizedName(locale);
 	}
 }
