@@ -26,7 +26,6 @@ package io.github.steve4744.whatisthis.utils;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.data.MultipleFacing;
 import org.bukkit.block.data.type.NoteBlock;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
@@ -53,9 +52,7 @@ public class OraxenHandler {
                     + (noteBlock.isPowered() ? 400 : 0) - 26) != null;
 
 		} else if (block.getType() == Material.MUSHROOM_STEM) {
-			final MultipleFacing blockFacing = (MultipleFacing) block.getBlockData();
-
-			return BlockMechanicFactory.getBlockMechanic(BlockMechanic.getCode(blockFacing)) != null;
+			return BlockMechanicFactory.getBlockMechanic(block) != null;
 
 		} else if (block.getType() == Material.BARRIER) {
 			final PersistentDataContainer customBlockData = new CustomBlockData(block, OraxenPlugin.get());
@@ -76,10 +73,8 @@ public class OraxenHandler {
 			return mech != null ? mech.getItemID() : "";
 
 		} else if (block.getType() == Material.MUSHROOM_STEM) {
-			final MultipleFacing blockFacing = (MultipleFacing) block.getBlockData();
+			final BlockMechanic mech = BlockMechanicFactory.getBlockMechanic(block);
 
-			final BlockMechanic mech = BlockMechanicFactory.getBlockMechanic(BlockMechanic.getCode(blockFacing));
-			
 			return mech != null ? mech.getItemID() : "";
 
 		} else if (block.getType() == Material.BARRIER) {
