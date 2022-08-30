@@ -49,7 +49,7 @@
     <dependency>
         <groupId>org.spigotmc</groupId>
         <artifactId>spigot-api</artifactId>
-        <version>1.19-R0.1-SNAPSHOT</version>
+        <version>1.19.2-R0.1-SNAPSHOT</version>
         <scope>provided</scope>
     </dependency>
     <!-- bStats -->
@@ -63,7 +63,7 @@
     <dependency>
         <groupId>me.clip</groupId>
         <artifactId>placeholderapi</artifactId>
-        <version>2.11.1</version>
+        <version>2.11.2</version>
         <scope>provided</scope>
     </dependency>
     <!-- Slimefun -->
@@ -89,21 +89,21 @@
     <dependency>
         <groupId>xyz.xenondevs.nova</groupId>
         <artifactId>Nova-API</artifactId>
-        <version>0.9-SNAPSHOT</version>
+        <version>0.10-SNAPSHOT</version>
         <scope>provided</scope>
     </dependency>
     <!-- ItemsAdder -->
     <dependency>
         <groupId>com.github.LoneDev6</groupId>
         <artifactId>api-itemsadder</artifactId>
-        <version>3.1.6</version>
+        <version>3.2.3c</version>
         <scope>provided</scope>
     </dependency>
     <!-- Oraxen -->
     <dependency>
         <groupId>com.github.steve4744</groupId>
         <artifactId>oraxen</artifactId>
-        <version>1.133.0</version>
+        <version>1.140.0</version>
         <scope>provided</scope>
     </dependency>
   </dependencies>
