@@ -27,7 +27,6 @@ package io.github.steve4744.whatisthis.display;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-
 import io.github.steve4744.whatisthis.WhatIsThis;
 
 public class DisplayHandler {
@@ -42,13 +41,13 @@ public class DisplayHandler {
 	 * This method handles the visual output of a given Block based on
 	 * the configured visual method(s).
 	 *
-	 * @param block		The targeted block
+	 * @param result	The targeted block or entity @notnull
 	 * @param player	The player to display the target to
 	 */
-	public void getVisualMethod(Block block, Player player) {
-		String message = plugin.getDataHandler().getDisplayName(block, player);
-		String prefix = ChatColor.translateAlternateColorCodes('&',
-				plugin.getSettings().isCustomPrefixEnabled() ? plugin.getDataHandler().getCustomPrefix(block) : "");
+	public void getVisualMethod(String prefix, String message, Player player, Block block) {
+		if (message.isEmpty()) {
+			return;
+		}
 
 		if (plugin.getSettings().isScoreboardEnabled()) {
 			if (!plugin.getSettings().isScoreboardOnSneak() || (plugin.getSettings().isScoreboardOnSneak() && player.isSneaking())) {

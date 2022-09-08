@@ -25,6 +25,7 @@ SOFTWARE.
 package io.github.steve4744.whatisthis.data;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -34,7 +35,20 @@ import java.util.Set;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Axolotl;
+import org.bukkit.entity.Boat;
+import org.bukkit.entity.Cat;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Fox;
+import org.bukkit.entity.Frog;
+import org.bukkit.entity.Horse;
+import org.bukkit.entity.Llama;
+import org.bukkit.entity.MushroomCow;
+import org.bukkit.entity.Parrot;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Rabbit;
+import org.bukkit.entity.TropicalFish;
+import org.bukkit.entity.Villager;
 import org.bukkit.inventory.ItemStack;
 import com.google.common.base.Enums;
 
@@ -110,6 +124,39 @@ public class DataHandler {
 		}
 
 		return translatedName;
+	}
+
+	public String getEntityDisplayName(Entity entity, Player player) {
+		if (isBlacklistedEntity(entity)) {
+			return "";
+		}
+		String targetName = translateEntityName(entity.getType().toString(), player);
+
+		if (isItemsAdderEntity(entity)) {
+			targetName = ChatColor.stripColor(ItemsAdderHandler.getEntityDisplayName(entity));
+		}
+
+		if (isHybridEntity(entity.getType().toString())) {
+			return getVariant(entity) + " " + targetName;
+		}
+		return targetName;
+	}
+
+	public void processBlock(Block block, Player player) {
+		String prefix = ChatColor.translateAlternateColorCodes('&',
+				plugin.getSettings().isCustomPrefixEnabled() ? getCustomPrefix(block, null) : "");
+
+		plugin.getDisplayHandler().getVisualMethod(prefix, getDisplayName(block, player), player, block);
+	}
+
+	public void processEntity(Entity entity, Player player) {
+		if (entity.getType().toString().equalsIgnoreCase("dropped_item")) {
+			return;
+		}
+		String prefix = ChatColor.translateAlternateColorCodes('&',
+				plugin.getSettings().isCustomPrefixEnabled() ? getCustomPrefix(null, entity) : "");
+
+		plugin.getDisplayHandler().getVisualMethod(prefix, getEntityDisplayName(entity, player), player, null);
 	}
 
 	/**
@@ -194,7 +241,21 @@ public class DataHandler {
 			translated = EnumLang.get("en_us").getMap().get("block.minecraft." + item.toLowerCase());
 		}
 
-		return translated == null ? "not found" : translated;
+		return translated == null ? "block not found:" + item : translated;
+	}
+
+	private String translateEntityName(String name, Player player) {
+		String locale = Utils.getLocale(player);
+		String translated = null;
+
+		if (EnumLang.get(locale).getMap().containsKey("entity.minecraft." + name.toLowerCase())) {
+			translated = EnumLang.get(locale).getMap().get("entity.minecraft." + name.toLowerCase());
+
+		} else if (EnumLang.get("en_us").getMap().containsKey("entity.minecraft." + name.toLowerCase())) {
+			translated = EnumLang.get("en_us").getMap().get("entity.minecraft." + name.toLowerCase());
+		}
+
+		return translated == null ? "entity not found:" + name : translated;
 	}
 
 	public boolean isCustomBlock(Block block) {
@@ -211,6 +272,10 @@ public class DataHandler {
 
 	private boolean isItemsAdderBlock(Block block) {
 		return itemsadder ? ItemsAdderHandler.isItemsAdder(block) : false;
+	}
+
+	private boolean isItemsAdderEntity(Entity entity) {
+		return itemsadder ? ItemsAdderHandler.isItemsAdderEntity(entity) : false;
 	}
 
 	private boolean isOraxenBlock(Block block) {
@@ -246,14 +311,18 @@ public class DataHandler {
 		return "";
 	}
 
+	public String getCustomResourceName(Entity entity) {
+		return isItemsAdderEntity(entity) ? "ItemsAdder" : "";
+	}
+
 	/**
 	 * Get the prefix to prepend to the custom block name.
 	 *
 	 * @param block
 	 * @return prefix
 	 */
-	public String getCustomPrefix(Block block) {
-		String name = getCustomResourceName(block);
+	public String getCustomPrefix(Block block, Entity entity) {
+		String name = block != null ? getCustomResourceName(block) : getCustomResourceName(entity);
 		return !name.isEmpty() ? plugin.getSettings().getCustomPrefix().replace("{PREFIX}", name) : "";
 	}
 
@@ -294,5 +363,73 @@ public class DataHandler {
 	 */
 	public boolean isBlacklisted(Block block) {
 		return block == null || plugin.getSettings().getBlacklist().contains(block.getType().toString());
+	}
+
+	public boolean isBlacklistedEntity(Entity entity) {
+		return entity == null || plugin.getSettings().getBlacklist().contains(entity.getType().toString());
+	}
+
+	private String getVariant(Entity entity) {
+		String type = switch (entity.getType().toString().toUpperCase()) {
+		case "AXOLOTL" -> {
+			yield ((Axolotl)entity).getVariant().toString();
+		}
+		case "BOAT" -> {
+			yield ((Boat)entity).getBoatType().toString();
+		}
+		case "CAT" -> {
+			yield ((Cat)entity).getCatType().toString();
+		}
+		case "FOX" -> {
+			yield ((Fox)entity).getFoxType().toString();
+		}
+		case "FROG" -> {
+			yield ((Frog)entity).getVariant().toString();
+		}
+		case "HORSE" -> {
+			String colour = ((Horse)entity).getColor().toString();
+			String style = ((Horse)entity).getStyle().toString();
+			if (style.equalsIgnoreCase("none")) {
+				style = "";
+			}
+			yield colour + " " + style;
+		}
+		case "LLAMA" -> {
+			yield ((Llama)entity).getColor().toString();
+		}
+		case "MUSHROOMCOW" -> {
+			yield ((MushroomCow)entity).getVariant().toString();
+		}
+		case "PARROT" -> {
+			yield ((Parrot)entity).getVariant().toString();
+		}
+		case "RABBIT" -> {
+			yield ((Rabbit)entity).getRabbitType().toString();
+		}
+		case "TROPICALFISH" -> {
+			String pattern = ((TropicalFish)entity).getPattern().toString();
+			String colour = ((TropicalFish)entity).getPatternColor().toString();
+			if (pattern.equalsIgnoreCase("none")) {
+				pattern = "";
+			}
+			yield colour + " " + pattern;
+		}
+		case "VILLAGER" -> {
+			String profession = ((Villager)entity).getProfession().toString();
+			String vtype = ((Villager)entity).getVillagerType().toString();
+			if (profession.equalsIgnoreCase("none")) {
+				profession = "";
+			}
+			yield vtype + " " + profession;
+		}
+		default -> {
+			yield entity.getType().toString();
+		}
+		};
+		return Utils.capitalizeFully(type);
+	}
+
+	private boolean isHybridEntity(String name) {
+		return Arrays.stream(EntityTypes.values()).anyMatch((t) -> t.name().equalsIgnoreCase(name));
 	}
 }

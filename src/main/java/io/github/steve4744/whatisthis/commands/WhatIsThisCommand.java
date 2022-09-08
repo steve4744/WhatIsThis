@@ -1,7 +1,7 @@
 /*
  * MIT License
 
-Copyright (c) 2019 steve4744
+Copyright (c) 2022 steve4744
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -29,6 +29,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.util.RayTraceResult;
 
 import io.github.steve4744.whatisthis.WhatIsThis;
 import io.github.steve4744.whatisthis.utils.Utils;
@@ -78,7 +79,15 @@ public class WhatIsThisCommand implements CommandExecutor {
 			return false;
 		}
 		Player player = (Player) sender;
-		plugin.getDisplayHandler().getVisualMethod(Utils.getTargetBlock(player), player);
+		RayTraceResult result = Utils.getRayTraceResult(player);
+		if (result == null) {
+			return true;
+		}
+		if (result.getHitBlock() != null) {
+			plugin.getDataHandler().processBlock(result.getHitBlock(), player);
+		} else if (result.getHitEntity() != null) {
+			plugin.getDataHandler().processEntity(result.getHitEntity(), player);
+		}
 		return true;
 	} 
 

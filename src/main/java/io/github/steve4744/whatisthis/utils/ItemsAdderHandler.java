@@ -25,8 +25,10 @@ SOFTWARE.
 package io.github.steve4744.whatisthis.utils;
 
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
 
 import dev.lone.itemsadder.api.CustomBlock;
+import dev.lone.itemsadder.api.CustomEntity;
 
 public class ItemsAdderHandler {
 
@@ -36,5 +38,13 @@ public class ItemsAdderHandler {
 
 	public static String getDisplayName(Block block) {
 		return CustomBlock.byAlreadyPlaced(block).getDisplayName();
+	}
+
+	public static boolean isItemsAdderEntity(Entity entity) {
+		return CustomEntity.isCustomEntity(entity);
+	}
+
+	public static String getEntityDisplayName(Entity entity) {
+		return CustomEntity.byAlreadySpawned(entity).getNamespace();
 	}
 }

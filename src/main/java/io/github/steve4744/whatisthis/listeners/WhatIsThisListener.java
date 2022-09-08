@@ -24,10 +24,13 @@ SOFTWARE.
  */
 package io.github.steve4744.whatisthis.listeners;
 
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.player.PlayerInteractAtEntityEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 
@@ -48,7 +51,31 @@ public class WhatIsThisListener implements Listener {
 		}
 		Player player = event.getPlayer();
 		if (player.hasPermission("whatisthis.use") && player.getInventory().getItemInMainHand().getType() == plugin.getSettings().getClickItem()) {
-			plugin.getDisplayHandler().getVisualMethod(event.getClickedBlock(), player);
+			plugin.getDataHandler().processBlock(event.getClickedBlock(), player);
+		}
+	}
+
+	@EventHandler
+	public void onQueryEntity(PlayerInteractEntityEvent event) {
+		plugin.getLogger().info("debug 1");
+		if (event.getHand().equals(EquipmentSlot.OFF_HAND) || !plugin.getSettings().isRightClickEnabled()) {
+			return;
+		}
+		Player player = event.getPlayer();
+		if (player.hasPermission("whatisthis.use") && player.getInventory().getItemInMainHand().getType() == plugin.getSettings().getClickItem()) {
+			plugin.getDataHandler().processEntity(event.getRightClicked(), player);
+		}
+	}
+
+	@EventHandler
+	public void onQueryAtEntity(PlayerInteractAtEntityEvent event) {
+		if (event.getHand().equals(EquipmentSlot.OFF_HAND) || !plugin.getSettings().isRightClickEnabled() || !(event.getRightClicked() instanceof ArmorStand)) {
+			return;
+		}
+		plugin.getLogger().info("debug 2");
+		Player player = event.getPlayer();
+		if (player.hasPermission("whatisthis.use") && player.getInventory().getItemInMainHand().getType() == plugin.getSettings().getClickItem()) {
+			plugin.getDataHandler().processEntity(event.getRightClicked(), player);
 		}
 	}
 }

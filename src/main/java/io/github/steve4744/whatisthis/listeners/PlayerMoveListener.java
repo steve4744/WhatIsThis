@@ -28,6 +28,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.util.RayTraceResult;
 
 import io.github.steve4744.whatisthis.WhatIsThis;
 import io.github.steve4744.whatisthis.utils.Utils;
@@ -46,8 +47,18 @@ public class PlayerMoveListener implements Listener {
 			return;
 		}
 		Player player = event.getPlayer();
-		if (player.hasPermission("whatisthis.use")) {
-			plugin.getDisplayHandler().getVisualMethod(Utils.getTargetBlock(player), player);
+		if (!player.hasPermission("whatisthis.use")) {
+			return;
+		}
+		RayTraceResult result = Utils.getRayTraceResult(player);
+		if (result == null) {
+			return;
+		}
+
+		if (result.getHitBlock() != null) {
+			plugin.getDataHandler().processBlock(result.getHitBlock(), player);
+		} else if (result.getHitEntity() != null) {
+			plugin.getDataHandler().processEntity(result.getHitEntity(), player);
 		}
 	}
 }

@@ -78,8 +78,12 @@ public class ScoreboardManager {
 		Objective o = scoreboard.getObjective(DisplaySlot.SIDEBAR);
 		o.setDisplayName(prefix + ChatColor.GOLD.toString() + ChatColor.BOLD + message);
 
-		for (String s : dataHandler.getItemDrops(block, player)) {
-			o.getScore(getFormattedText(block, s, player)).setScore(getMaxDrops(block, s));
+		if (block != null) {
+			for (String s : dataHandler.getItemDrops(block, player)) {
+				o.getScore(getFormattedText(block, s, player)).setScore(getMaxDrops(block, s));
+			}
+		} else {
+			o.getScore(getText() + " : Not Supported").setScore(0);
 		}
 		player.setScoreboard(scoreboard);
 

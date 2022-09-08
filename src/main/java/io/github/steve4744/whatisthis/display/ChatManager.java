@@ -57,7 +57,7 @@ public class ChatManager {
 	}
 
 	private String formattedDrops(Block block, Player player) {
-		if (!plugin.getSettings().showDropsInChat()) {
+		if (!plugin.getSettings().showDropsInChat() || block == null) {
 			return "";
 		}
 

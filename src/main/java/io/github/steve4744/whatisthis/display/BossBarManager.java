@@ -78,6 +78,7 @@ public class BossBarManager {
 		}
 		String colour = plugin.getSettings().getBossBarTextColor();
 		barmap.get(player.getName()).setTitle(prefix + ChatColor.valueOf(colour) + message);
+
 		
 		BukkitTask task = new BukkitRunnable() {
 			@Override public void run() {
