@@ -35,6 +35,7 @@ import java.util.Set;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.Skull;
 import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Boat;
 import org.bukkit.entity.Cat;
@@ -108,6 +109,13 @@ public class DataHandler {
 			targetName =  ChatColor.stripColor(CraftoryHandler.getDisplayName(block));
 
 		} else {
+			if (block.getType() == Material.PLAYER_HEAD || block.getType() == Material.PLAYER_WALL_HEAD) {
+				Skull skull = (Skull) block.getState();
+				if (skull.getOwningPlayer() != null) {
+					String name = skull.getOwningPlayer().getName();
+					return name != null ? name + "'s Head" : "";
+				}
+			}
 			targetName = block.getType().toString();
 			//coloured wall_banners are not currently in the Mojang language files
 			if (targetName.contains("WALL_BANNER")) {
