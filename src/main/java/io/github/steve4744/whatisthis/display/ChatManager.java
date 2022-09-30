@@ -64,7 +64,7 @@ public class ChatManager {
 		StringJoiner drops = new StringJoiner(", ");
 		for (String drop : dataHandler.getItemDrops(block, player)) {
 			String translated = dataHandler.isCustomBlock(block) ? drop : dataHandler.translateItemName(drop, player);
-			if (!dataHandler.hasDropRange(block)) {
+			if (dataHandler.isCustomBlock(block) || !dataHandler.hasDropRange(block)) {
 				int amount = dataHandler.getFixedAmount(drop);
 				if (amount > 0) {
 					drops.add(getFinalisedString(translated) + " x " + amount);

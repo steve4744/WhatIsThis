@@ -169,7 +169,7 @@ public class ScoreboardManager {
 	}
 
 	private String getRange(Block block, String item) {
-		if (!dataHandler.hasDropRange(block)) {
+		if (dataHandler.isCustomBlock(block) || !dataHandler.hasDropRange(block)) {
 			return null;
 		}
 		Map<String, String> itemDrops = ItemDropRanges.valueOf(block.getType().toString()).getMap();
@@ -177,7 +177,7 @@ public class ScoreboardManager {
 	}
 
 	private int getMaxDrops(Block block, String item) {
-		if (!dataHandler.hasDropRange(block)) {
+		if (dataHandler.isCustomBlock(block) || !dataHandler.hasDropRange(block)) {
 			return dataHandler.getFixedAmount(item);
 		}
 		String range = getRange(block, item);

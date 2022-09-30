@@ -356,7 +356,7 @@ public class DataHandler {
 	}
 
 	/**
-	 * Return true if the block is blacklisted or if block returned by getTargetBlock is null.
+	 * Return true if the block is blacklisted or if the block is null.
 	 *
 	 * @param block
 	 * @return
@@ -365,8 +365,14 @@ public class DataHandler {
 		return block == null || plugin.getSettings().getBlacklist().contains(block.getType().toString());
 	}
 
+	/**
+	 * Return true if the entity is blacklisted or if the entity is null.
+	 *
+	 * @param entity
+	 * @return
+	 */
 	public boolean isBlacklistedEntity(Entity entity) {
-		return entity == null || plugin.getSettings().getBlacklist().contains(entity.getType().toString());
+		return entity == null || plugin.getSettings().getEntityBlacklist().contains(entity.getType().toString());
 	}
 
 	private String getVariant(Entity entity) {

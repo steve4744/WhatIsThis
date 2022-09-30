@@ -24,7 +24,6 @@ SOFTWARE.
  */
 package io.github.steve4744.whatisthis.display;
 
-import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import io.github.steve4744.whatisthis.WhatIsThis;
@@ -57,7 +56,7 @@ public class DisplayHandler {
 
 		if (plugin.getSettings().isActionBarEnabled()) {
 			if (!plugin.getSettings().isActionBarOnSneak() || (plugin.getSettings().isActionBarOnSneak() && player.isSneaking())) {
-				ActionBar actionBar = new ActionBar(prefix + ChatColor.valueOf(plugin.getSettings().getActionBarColor()) + message);
+				ActionBar actionBar = new ActionBar((prefix + plugin.getSettings().getActionBarColor() + message));
 				actionBar.sendBar(player);
 			}
 		}

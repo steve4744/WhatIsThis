@@ -35,7 +35,7 @@
     <!-- Nova-API Repo -->
     <repository>
         <id>xenondevs-releases</id>
-        <name>xenondevs</name>
+        <name>xenondevs repository</name>
         <url>https://repo.xenondevs.xyz/releases</url>
     </repository>
     <!-- SlimeFun4 & Oraxen Repo -->
@@ -88,8 +88,8 @@
     <!-- Nova -->
     <dependency>
         <groupId>xyz.xenondevs.nova</groupId>
-        <artifactId>Nova-API</artifactId>
-        <version>0.10-SNAPSHOT</version>
+        <artifactId>nova-api</artifactId>
+        <version>0.11.1</version>
         <scope>provided</scope>
     </dependency>
     <!-- ItemsAdder -->

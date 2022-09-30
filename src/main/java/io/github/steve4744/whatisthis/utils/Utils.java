@@ -25,6 +25,8 @@ SOFTWARE.
 package io.github.steve4744.whatisthis.utils;
 
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -34,7 +36,11 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.util.RayTraceResult;
 
+import net.md_5.bungee.api.ChatColor;
+
 public class Utils {
+
+	private final static Pattern HEXCOLOUR = Pattern.compile("<#([A-Fa-f0-9]){6}>");
 
 	public static boolean isWater(Material material) {
 		return material == Material.WATER;
@@ -98,5 +104,17 @@ public class Utils {
 
 	private static String capitalize(String word) {
 		return word.equals("") ? word : word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
+	}
+
+	public static String translateColourCodes(String message) {
+		Matcher matcher = HEXCOLOUR.matcher(message);
+		while (matcher.find()) {
+			StringBuilder sb = new StringBuilder();
+			final ChatColor hexColour = ChatColor.of(matcher.group().substring(1, matcher.group().length() - 1));
+			sb.append(message.substring(0, matcher.start())).append(hexColour).append(message.substring(matcher.end()));
+			message = sb.toString();
+			matcher = HEXCOLOUR.matcher(message);
+		}
+		return ChatColor.translateAlternateColorCodes('&', message);
 	}
 }

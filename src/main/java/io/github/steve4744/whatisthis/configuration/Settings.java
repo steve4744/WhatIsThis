@@ -33,6 +33,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import com.google.common.base.Enums;
 
 import io.github.steve4744.whatisthis.WhatIsThis;
+import io.github.steve4744.whatisthis.utils.Utils;
 
 public class Settings {
 
@@ -65,6 +66,10 @@ public class Settings {
 
 	public List<String> getBlacklist() {
 		return config.getStringList("IgnoreBlocks");
+	}
+
+	public List<String> getEntityBlacklist() {
+		return config.getStringList("IgnoreEntities");
 	}
 
 	public boolean isRightClickEnabled() {
@@ -130,11 +135,11 @@ public class Settings {
 	}
 
 	public String getActionBarColor() {
-		String colour = config.getString("Display.actionbar.textcolor").toUpperCase();
-		if (colour == null || Enums.getIfPresent(ChatColor.class, colour).orNull() == null) {
-			colour = "WHITE";
+		String colour = config.getString("Display.actionbar.textcolor", "WHITE").toUpperCase();
+		if (Enums.getIfPresent(ChatColor.class, colour).orNull() != null) {
+			return ChatColor.valueOf(colour).toString();
 		}
-		return colour;
+		return Utils.translateColourCodes(colour);
 	}
 
 	public String getBossBarColor() {

@@ -87,3 +87,9 @@ IgnoreBlocks:
 - WATER
 - GRASS_BLOCK
 - NETHERRACK
+# List of common entities that will be ignored by the plugin.
+IgnoreEntities:
+- COW
+- PIG
+- SHEEP
+- SKELETON
