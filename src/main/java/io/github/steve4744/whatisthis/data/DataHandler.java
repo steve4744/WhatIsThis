@@ -130,6 +130,10 @@ public class DataHandler {
 		if (isBlacklistedEntity(entity)) {
 			return "";
 		}
+		if (entity instanceof Player) {
+			Player targetPlayer = (Player) entity;
+			return targetPlayer.getName();
+		}
 		String targetName = translateEntityName(entity.getType().toString(), player);
 
 		if (isItemsAdderEntity(entity)) {
