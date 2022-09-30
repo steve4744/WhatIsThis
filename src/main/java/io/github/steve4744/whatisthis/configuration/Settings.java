@@ -39,12 +39,14 @@ public class Settings {
 
 	private final WhatIsThis plugin;
 	private boolean isClickEnabled;
+	private String actionBarColour;
 	private FileConfiguration config;
 
 	public Settings(WhatIsThis plugin) {
 		this.plugin = plugin;
 		config = plugin.getConfig();
 		this.isClickEnabled = config.getBoolean("use_right_click.enabled", true);
+		this.actionBarColour = loadActionBarColour();
 	}
 
 	public Material getClickItem() {
@@ -134,12 +136,16 @@ public class Settings {
 		return config.getBoolean("CustomData.enabled");
 	}
 
-	public String getActionBarColor() {
+	private String loadActionBarColour() {
 		String colour = config.getString("Display.actionbar.textcolor", "WHITE").toUpperCase();
 		if (Enums.getIfPresent(ChatColor.class, colour).orNull() != null) {
 			return ChatColor.valueOf(colour).toString();
 		}
 		return Utils.translateColourCodes(colour);
+	}
+
+	public String getActionBarColour() {
+		return actionBarColour;
 	}
 
 	public String getBossBarColor() {

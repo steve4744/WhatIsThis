@@ -56,7 +56,7 @@ public class DisplayHandler {
 
 		if (plugin.getSettings().isActionBarEnabled()) {
 			if (!plugin.getSettings().isActionBarOnSneak() || (plugin.getSettings().isActionBarOnSneak() && player.isSneaking())) {
-				ActionBar actionBar = new ActionBar((prefix + plugin.getSettings().getActionBarColor() + message));
+				ActionBar actionBar = new ActionBar((prefix + plugin.getSettings().getActionBarColour() + message));
 				actionBar.sendBar(player);
 			}
 		}
