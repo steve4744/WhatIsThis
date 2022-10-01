@@ -155,9 +155,7 @@ public class DataHandler {
 	}
 
 	public void processBlock(Block block, Player player) {
-		String prefix = ChatColor.translateAlternateColorCodes('&',
-				plugin.getSettings().isCustomPrefixEnabled() ? getCustomPrefix(block, null) : "");
-
+		String prefix = plugin.getSettings().isCustomPrefixEnabled() ? getCustomPrefix(block, null) : "";
 		plugin.getDisplayHandler().getVisualMethod(prefix, getDisplayName(block, player), player, block);
 	}
 
@@ -165,9 +163,7 @@ public class DataHandler {
 		if (entity.getType().toString().equalsIgnoreCase("dropped_item")) {
 			return;
 		}
-		String prefix = ChatColor.translateAlternateColorCodes('&',
-				plugin.getSettings().isCustomPrefixEnabled() ? getCustomPrefix(null, entity) : "");
-
+		String prefix = plugin.getSettings().isCustomPrefixEnabled() ? getCustomPrefix(null, entity) : "";
 		plugin.getDisplayHandler().getVisualMethod(prefix, getEntityDisplayName(entity, player), player, null);
 	}
 

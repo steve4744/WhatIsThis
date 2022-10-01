@@ -40,6 +40,7 @@ public class Settings {
 	private final WhatIsThis plugin;
 	private boolean isClickEnabled;
 	private String actionBarColour;
+	private String customPrefix;
 	private FileConfiguration config;
 
 	public Settings(WhatIsThis plugin) {
@@ -47,6 +48,7 @@ public class Settings {
 		config = plugin.getConfig();
 		this.isClickEnabled = config.getBoolean("use_right_click.enabled", true);
 		this.actionBarColour = loadActionBarColour();
+		this.customPrefix = loadCustomPrefix();
 	}
 
 	public Material getClickItem() {
@@ -163,8 +165,12 @@ public class Settings {
 		return validateChatColor(colour.toUpperCase());
 	}
 
+	private String loadCustomPrefix() {
+		return Utils.translateColourCodes(plugin.getConfig().getString("Display.prefix_custom_blocks.prefix", ""));
+	}
+
 	public String getCustomPrefix() {
-		return plugin.getConfig().getString("Display.prefix_custom_blocks.prefix", "");
+		return customPrefix;
 	}
 
 	private String validateBarColor(String colour) {
