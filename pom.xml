@@ -43,6 +43,7 @@
         <id>jitpack.io</id>
         <url>https://jitpack.io</url>
     </repository>
+    <!-- MythicMobs Repo -->
     <repository>
         <id>nexus</id>
         <name>Lumine Releases</name>
@@ -112,6 +113,7 @@
         <version>1.140.0</version>
         <scope>provided</scope>
     </dependency>
+    <!-- MythicMobs -->
     <dependency>
         <groupId>io.lumine</groupId>
         <artifactId>Mythic-Dist</artifactId>

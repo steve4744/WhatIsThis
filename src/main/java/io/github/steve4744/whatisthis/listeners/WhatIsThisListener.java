@@ -57,7 +57,6 @@ public class WhatIsThisListener implements Listener {
 
 	@EventHandler
 	public void onQueryEntity(PlayerInteractEntityEvent event) {
-		plugin.getLogger().info("debug 1");
 		if (event.getHand().equals(EquipmentSlot.OFF_HAND) || !plugin.getSettings().isRightClickEnabled()) {
 			return;
 		}
@@ -72,7 +71,6 @@ public class WhatIsThisListener implements Listener {
 		if (event.getHand().equals(EquipmentSlot.OFF_HAND) || !plugin.getSettings().isRightClickEnabled() || !(event.getRightClicked() instanceof ArmorStand)) {
 			return;
 		}
-		plugin.getLogger().info("debug 2");
 		Player player = event.getPlayer();
 		if (player.hasPermission("whatisthis.use") && player.getInventory().getItemInMainHand().getType() == plugin.getSettings().getClickItem()) {
 			plugin.getDataHandler().processEntity(event.getRightClicked(), player);
