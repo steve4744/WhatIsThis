@@ -60,6 +60,7 @@ import io.github.steve4744.whatisthis.utils.SlimefunHandler;
 import io.github.steve4744.whatisthis.utils.Utils;
 import io.github.steve4744.whatisthis.utils.CraftoryHandler;
 import io.github.steve4744.whatisthis.utils.ItemsAdderHandler;
+import io.github.steve4744.whatisthis.utils.MythicMobsHandler;
 import io.github.steve4744.whatisthis.utils.NovaHandler;
 
 public class DataHandler {
@@ -70,6 +71,7 @@ public class DataHandler {
 	private boolean itemsadder;
 	private boolean oraxen;
 	private boolean craftory;
+	private boolean mythicmobs;
 	private Map<String, Integer> itemDrops = new HashMap<>();  // material -> amount
 
 	public DataHandler(WhatIsThis plugin) {
@@ -79,6 +81,7 @@ public class DataHandler {
 		this.itemsadder = plugin.getServer().getPluginManager().isPluginEnabled("ItemsAdder");
 		this.oraxen = plugin.getServer().getPluginManager().isPluginEnabled("Oraxen");
 		this.craftory = plugin.getServer().getPluginManager().isPluginEnabled("Craftory");
+		this.mythicmobs = plugin.getServer().getPluginManager().isPluginEnabled("MythicMobs");
 	}
 
 	/**
@@ -146,6 +149,9 @@ public class DataHandler {
 
 		if (isItemsAdderEntity(entity)) {
 			targetName = ChatColor.stripColor(ItemsAdderHandler.getEntityDisplayName(entity));
+
+		} else if (isMythicMobsEntity(entity)) {
+			targetName =  ChatColor.stripColor(MythicMobsHandler.getEntityDisplayName(entity));
 		}
 
 		if (isHybridEntity(entity.getType().toString())) {
@@ -294,6 +300,10 @@ public class DataHandler {
 		return craftory ? CraftoryHandler.isCraftory(block.getLocation()) : false;
 	}
 
+	private boolean isMythicMobsEntity(Entity entity) {
+		return mythicmobs ? MythicMobsHandler.isMythicMobs(entity) : false;
+	}
+
 	/**
 	 * Get the name of the plugin providing the custom block.
 	 *
@@ -320,7 +330,12 @@ public class DataHandler {
 	}
 
 	public String getCustomResourceName(Entity entity) {
-		return isItemsAdderEntity(entity) ? "ItemsAdder" : "";
+		if (isItemsAdderEntity(entity)) {
+			return "ItemsAdder";
+		} else if (isMythicMobsEntity(entity)) {
+			return "MythicMobs";
+		}
+		return "";
 	}
 
 	/**

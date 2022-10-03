@@ -24,21 +24,21 @@ SOFTWARE.
  */
 package io.github.steve4744.whatisthis.utils;
 
-import org.bukkit.Location;
-import xyz.xenondevs.nova.api.Nova;
-import xyz.xenondevs.nova.api.tileentity.TileEntity;
-import xyz.xenondevs.nova.api.tileentity.TileEntityManager;
+import org.bukkit.entity.Entity;
+import io.lumine.mythic.bukkit.BukkitAPIHelper;
+import io.lumine.mythic.bukkit.MythicBukkit;
+import io.lumine.mythic.core.mobs.ActiveMob;
 
-public class NovaHandler {
+public class MythicMobsHandler {
 
-	private static TileEntityManager manager = Nova.getNova().getTileEntityManager();
+	private static BukkitAPIHelper api = MythicBukkit.inst().getAPIHelper();
 
-	public static boolean isNova(Location loc) {
-		return manager.getTileEntity(loc) != null;
+	public static boolean isMythicMobs(Entity entity) {
+		return api.isMythicMob(entity);
 	}
 
-	public static String getDisplayName(Location loc, String locale) {
-		TileEntity tileEntity = manager.getTileEntity(loc);
-		return tileEntity.getMaterial().getLocalizedName(locale);
+	public static String getEntityDisplayName(Entity entity) {
+		ActiveMob activeMob = api.getMythicMobInstance(entity);
+		return activeMob != null ? activeMob.getDisplayName() : "";
 	}
 }
