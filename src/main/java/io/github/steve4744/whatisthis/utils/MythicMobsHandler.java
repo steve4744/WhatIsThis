@@ -41,4 +41,19 @@ public class MythicMobsHandler {
 		ActiveMob activeMob = api.getMythicMobInstance(entity);
 		return activeMob != null ? activeMob.getDisplayName() : "";
 	}
+
+	public static double getEntityHealth(Entity entity) {
+		ActiveMob activeMob = api.getMythicMobInstance(entity);
+		return activeMob.getEntity().getHealth();
+	}
+
+	public static double getEntityMaxHealth(Entity entity) {
+		ActiveMob activeMob = api.getMythicMobInstance(entity);
+		return activeMob.getEntity().getMaxHealth();
+	}
+
+	public static double getEntityHealthNormalised(Entity entity) {
+		ActiveMob activeMob = api.getMythicMobInstance(entity);
+		return activeMob.getEntity().getHealth() / activeMob.getEntity().getMaxHealth();
+	}
 }

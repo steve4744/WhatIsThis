@@ -64,7 +64,7 @@ public class BossBarManager {
 		}
 	}
 
-	public void setBar(Player player, String message, String prefix) {
+	public void setBar(Player player, String message, String prefix, double progress) {
 		//kill any previous scheduled tasks
 		cancelTask(player.getName());
 		
@@ -78,6 +78,7 @@ public class BossBarManager {
 		}
 		String colour = plugin.getSettings().getBossBarTextColor();
 		barmap.get(player.getName()).setTitle(prefix + ChatColor.valueOf(colour) + message);
+		barmap.get(player.getName()).setProgress(progress);
 
 		
 		BukkitTask task = new BukkitRunnable() {

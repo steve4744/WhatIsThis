@@ -34,15 +34,18 @@ import java.util.Set;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
 import org.bukkit.block.Skull;
 import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Boat;
 import org.bukkit.entity.Cat;
+import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Fox;
 import org.bukkit.entity.Frog;
 import org.bukkit.entity.Horse;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Llama;
 import org.bukkit.entity.MushroomCow;
 import org.bukkit.entity.Parrot;
@@ -72,6 +75,7 @@ public class DataHandler {
 	private boolean oraxen;
 	private boolean craftory;
 	private boolean mythicmobs;
+	private static final double DEFAULT_HEALTH = 1.0;
 	private Map<String, Integer> itemDrops = new HashMap<>();  // material -> amount
 
 	public DataHandler(WhatIsThis plugin) {
@@ -137,7 +141,7 @@ public class DataHandler {
 		return translatedName;
 	}
 
-	public String getEntityDisplayName(Entity entity, Player player) {
+	private String getEntityDisplayName(Entity entity, Player player) {
 		if (isBlacklistedEntity(entity)) {
 			return "";
 		}
@@ -160,9 +164,22 @@ public class DataHandler {
 		return targetName;
 	}
 
+	private double getEntityHealthNormalised(Entity entity) {
+		if (!(entity instanceof Damageable) || isBlacklistedEntity(entity)) {
+			return DEFAULT_HEALTH;
+		}
+		if (isMythicMobsEntity(entity)) {
+			return MythicMobsHandler.getEntityHealthNormalised(entity);
+		}
+		LivingEntity le = (LivingEntity) entity;
+		double maxhealth = le.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+
+		return ((Damageable) entity).getHealth() / maxhealth;
+	}
+
 	public void processBlock(Block block, Player player) {
 		String prefix = plugin.getSettings().isCustomPrefixEnabled() ? getCustomPrefix(block, null) : "";
-		plugin.getDisplayHandler().getVisualMethod(prefix, getDisplayName(block, player), player, block);
+		plugin.getDisplayHandler().getVisualMethod(prefix, getDisplayName(block, player), player, block, DEFAULT_HEALTH);
 	}
 
 	public void processEntity(Entity entity, Player player) {
@@ -170,7 +187,7 @@ public class DataHandler {
 			return;
 		}
 		String prefix = plugin.getSettings().isCustomPrefixEnabled() ? getCustomPrefix(null, entity) : "";
-		plugin.getDisplayHandler().getVisualMethod(prefix, getEntityDisplayName(entity, player), player, null);
+		plugin.getDisplayHandler().getVisualMethod(prefix, getEntityDisplayName(entity, player), player, null, getEntityHealthNormalised(entity));
 	}
 
 	/**

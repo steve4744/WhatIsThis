@@ -43,7 +43,7 @@ public class DisplayHandler {
 	 * @param result	The targeted block or entity @notnull
 	 * @param player	The player to display the target to
 	 */
-	public void getVisualMethod(String prefix, String message, Player player, Block block) {
+	public void getVisualMethod(String prefix, String message, Player player, Block block, double health) {
 		if (message.isEmpty()) {
 			return;
 		}
@@ -56,7 +56,7 @@ public class DisplayHandler {
 
 		if (plugin.getSettings().isActionBarEnabled()) {
 			if (!plugin.getSettings().isActionBarOnSneak() || (plugin.getSettings().isActionBarOnSneak() && player.isSneaking())) {
-				ActionBar actionBar = new ActionBar((prefix + plugin.getSettings().getActionBarColour() + message));
+				ActionBar actionBar = new ActionBar(prefix + plugin.getSettings().getActionBarColour() + message);
 				actionBar.sendBar(player);
 			}
 		}
@@ -64,7 +64,7 @@ public class DisplayHandler {
 		if (plugin.getSettings().isBossbarEnabled()) {
 			if (!plugin.getSettings().isBossBarOnSneak() || (plugin.getSettings().isBossBarOnSneak() && player.isSneaking())) {
 				BossBarManager bm = new BossBarManager(plugin);
-				bm.setBar(player, message, prefix);
+				bm.setBar(player, message, prefix, health);
 			}
 		}
 
