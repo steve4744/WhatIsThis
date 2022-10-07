@@ -80,7 +80,8 @@
         <version>RC-32</version>
         <scope>provided</scope>
     </dependency>
-	<dependency>
+    <!-- Craftory -->
+    <dependency>
         <groupId>com.github.steve4744</groupId>
         <artifactId>craftory-tech</artifactId>
         <version>v0.8.3</version>
@@ -103,7 +104,7 @@
     <dependency>
         <groupId>com.github.LoneDev6</groupId>
         <artifactId>api-itemsadder</artifactId>
-        <version>3.2.3c</version>
+        <version>3.2.3-r8</version>
         <scope>provided</scope>
     </dependency>
     <!-- Oraxen -->
