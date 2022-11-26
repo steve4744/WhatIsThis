@@ -54,6 +54,8 @@ import org.bukkit.entity.Rabbit;
 import org.bukkit.entity.TropicalFish;
 import org.bukkit.entity.Villager;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.PluginManager;
+
 import com.google.common.base.Enums;
 
 import io.github.steve4744.whatisthis.WhatIsThis;
@@ -75,17 +77,26 @@ public class DataHandler {
 	private boolean oraxen;
 	private boolean craftory;
 	private boolean mythicmobs;
+
 	private static final double DEFAULT_HEALTH = 1.0;
+	private static final String SLIMEFUN = "Slimefun";
+	private static final String NOVA = "Nova";
+	private static final String ITEMSADDER = "ItemsAdder";
+	private static final String ORAXEN = "Oraxen";
+	private static final String CRAFTORY = "Craftory";
+	private static final String MYTHICMOBS = "MythicMobs";
+
 	private Map<String, Integer> itemDrops = new HashMap<>();  // material -> amount
 
 	public DataHandler(WhatIsThis plugin) {
 		this.plugin = plugin;
-		this.slimefun = plugin.getServer().getPluginManager().isPluginEnabled("Slimefun");
-		this.nova = plugin.getServer().getPluginManager().isPluginEnabled("Nova");
-		this.itemsadder = plugin.getServer().getPluginManager().isPluginEnabled("ItemsAdder");
-		this.oraxen = plugin.getServer().getPluginManager().isPluginEnabled("Oraxen");
-		this.craftory = plugin.getServer().getPluginManager().isPluginEnabled("Craftory");
-		this.mythicmobs = plugin.getServer().getPluginManager().isPluginEnabled("MythicMobs");
+		PluginManager pm = plugin.getServer().getPluginManager();
+		this.slimefun = pm.isPluginEnabled(SLIMEFUN);
+		this.nova = pm.isPluginEnabled(NOVA);
+		this.itemsadder = pm.isPluginEnabled(ITEMSADDER);
+		this.oraxen = pm.isPluginEnabled(ORAXEN);
+		this.craftory = pm.isPluginEnabled(CRAFTORY);
+		this.mythicmobs = pm.isPluginEnabled(MYTHICMOBS);
 	}
 
 	/**
@@ -101,19 +112,19 @@ public class DataHandler {
 		}
 		String targetName = null;
 		if (isSlimefunBlock(block)) {
-			targetName = ChatColor.stripColor(SlimefunHandler.getDisplayName(block));
+			targetName = includePlugin(SLIMEFUN) ? ChatColor.stripColor(SlimefunHandler.getDisplayName(block)) : "";
 
 		} else if (isNovaBlock(block)) {
-			targetName = ChatColor.stripColor(NovaHandler.getDisplayName(block.getLocation(), Utils.getLocale(player)));
+			targetName = includePlugin(NOVA) ? ChatColor.stripColor(NovaHandler.getDisplayName(block.getLocation(), Utils.getLocale(player))) : "";
 
 		} else if (isItemsAdderBlock(block)) {
-			targetName = ChatColor.stripColor(ItemsAdderHandler.getDisplayName(block));
+			targetName = includePlugin(ITEMSADDER) ? ChatColor.stripColor(ItemsAdderHandler.getDisplayName(block)) : "";
 
 		} else if (isOraxenBlock(block)) {
-			targetName = ChatColor.stripColor(OraxenHandler.getDisplayName(block));
+			targetName = includePlugin(ORAXEN) ? ChatColor.stripColor(OraxenHandler.getDisplayName(block)) : "";
 
 		} else if (isCraftoryBlock(block)) {
-			targetName =  ChatColor.stripColor(CraftoryHandler.getDisplayName(block));
+			targetName = includePlugin(CRAFTORY) ? ChatColor.stripColor(CraftoryHandler.getDisplayName(block)) : "";
 
 		} else {
 			if (block.getType() == Material.PLAYER_HEAD || block.getType() == Material.PLAYER_WALL_HEAD) {
@@ -152,10 +163,10 @@ public class DataHandler {
 		String targetName = translateEntityName(entity.getType().toString(), player);
 
 		if (isItemsAdderEntity(entity)) {
-			targetName = ChatColor.stripColor(ItemsAdderHandler.getEntityDisplayName(entity));
+			targetName = includePlugin(ITEMSADDER) ? ChatColor.stripColor(ItemsAdderHandler.getEntityDisplayName(entity)) : "";
 
 		} else if (isMythicMobsEntity(entity)) {
-			targetName =  ChatColor.stripColor(MythicMobsHandler.getEntityDisplayName(entity));
+			targetName =  includePlugin(MYTHICMOBS) ? ChatColor.stripColor(MythicMobsHandler.getEntityDisplayName(entity)) : "";
 		}
 
 		if (isHybridEntity(entity.getType().toString())) {
@@ -329,28 +340,28 @@ public class DataHandler {
 	 */
 	public String getCustomResourceName(Block block) {
 		if (isSlimefunBlock(block)) {
-			return "Slimefun";
+			return SLIMEFUN;
 
 		} else if (isNovaBlock(block)) {
-			return "Nova";
+			return NOVA;
 
 		} else if (isItemsAdderBlock(block)) {
-			return "ItemsAdder";
+			return ITEMSADDER;
 
 		} else if (isOraxenBlock(block)) {
-			return "Oraxen";
+			return ORAXEN;
 
 		} else if (isCraftoryBlock(block)) {
-			return "Craftory";
+			return CRAFTORY;
 		}
 		return "";
 	}
 
 	public String getCustomResourceName(Entity entity) {
 		if (isItemsAdderEntity(entity)) {
-			return "ItemsAdder";
+			return ITEMSADDER;
 		} else if (isMythicMobsEntity(entity)) {
-			return "MythicMobs";
+			return MYTHICMOBS;
 		}
 		return "";
 	}
@@ -415,6 +426,22 @@ public class DataHandler {
 		return entity == null || plugin.getSettings().getEntityBlacklist().contains(entity.getType().toString());
 	}
 
+	/**
+	 * Return true if the plugin's blocks and/or entities are to be included.
+	 *
+	 * @param string plugin name
+	 * @ return
+	 */
+	private boolean includePlugin(String pluginName) {
+		return !plugin.getConfig().getStringList("IgnorePlugins").contains(pluginName);
+	}
+
+	/**
+	 * Return the variant name or type of entity.
+	 *
+	 * @param entity
+	 * @return string variant name
+	 */
 	private String getVariant(Entity entity) {
 		String type = switch (entity.getType().toString().toUpperCase()) {
 		case "AXOLOTL" -> {

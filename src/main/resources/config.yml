@@ -80,6 +80,12 @@ Display:
     drop_color: RED
     show_drops: true
 
+# If you have custom block or entity plugins installed that you want this plugin to ignore,
+# for example Nova now has its own version of WAILA, set the plugin name here.
+#IgnorePlugins:
+#-Nova
+IgnorePlugins: []
+
 # List of common blocks that will be ignored by the plugin.
 IgnoreBlocks:
 - AIR
