@@ -189,11 +189,17 @@ public class DataHandler {
 	}
 
 	public void processBlock(Block block, Player player) {
+		if (plugin.getConfig().getStringList("BlacklistedWorlds").contains(player.getWorld().getName())) {
+			return;
+		}
 		String prefix = plugin.getSettings().isCustomPrefixEnabled() ? getCustomPrefix(block, null) : "";
 		plugin.getDisplayHandler().getVisualMethod(prefix, getDisplayName(block, player), player, block, DEFAULT_HEALTH);
 	}
 
 	public void processEntity(Entity entity, Player player) {
+		if (plugin.getConfig().getStringList("BlacklistedWorlds").contains(player.getWorld().getName())) {
+			return;
+		}
 		if (entity.getType().toString().equalsIgnoreCase("dropped_item")) {
 			return;
 		}

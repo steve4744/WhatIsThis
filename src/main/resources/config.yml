@@ -80,6 +80,11 @@ Display:
     drop_color: RED
     show_drops: true
 
+# List of worlds where the plugin should be disabled.
+#BlacklistedWorlds:
+#- world
+BlacklistedWorlds: []
+
 # If you have custom block or entity plugins installed that you want this plugin to ignore,
 # for example Nova now has its own version of WAILA, set the plugin name here.
 #IgnorePlugins:
@@ -93,6 +98,7 @@ IgnoreBlocks:
 - WATER
 - GRASS_BLOCK
 - NETHERRACK
+
 # List of common entities that will be ignored by the plugin.
 IgnoreEntities:
 - COW
