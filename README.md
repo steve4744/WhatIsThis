@@ -4,6 +4,8 @@
 
 WhatIsThis is a lightweight utility plugin aimed at providing block information directly to the player without the need to open a UI. This can be helpful in Survival mode to know what a block is without having to break it first, while looking at other people's builds in Creative mode, using custom block plugins like Slimefun4 and Nova, or when connected with an older client version to a server using Via* plugins.
 
+Starting with version 5.0, the plugin will also identify entities in the same way as blocks.
+
 This plugin was inspired by Forge mods such as WAILA (What Am I Looking At) and HWYLA (Here's What You're Looking At) which run client-side to constantly display the name of the block being looked at. This plugin runs server-side, and will display the block information either on the ActionBar, the side of the screen (scoreboard), on the BossBar, or in chat. The information is displayed either automatically by looking at a block, or by right-clicking the block with a STICK (default, can be changed in config) or running command `/wt` while looking at a block. The items dropped by the block are also displayed in the scoreboard and chat display options.
 
 By enabling 'auto_display' in the config, the display will automatically update just by looking at a different block without the need for commands or clicking. As this runs server side, having 'auto-display' enabled may impact performance depending on the server hardware, software and the number of players online.
@@ -22,6 +24,7 @@ The name and number of items dropped reported by the plugin are those obtained f
 
 The text and BossBar colours can be set in the _config.yml_ file.
 
+
 ## Suppported Plugins
 
 The following plugins which provide a number of custom blocks are supported:
@@ -36,6 +39,8 @@ The following plugins which provide a number of custom blocks are supported:
 
 [Craftory Tech](https://www.spigotmc.org/resources/craftory-tech.81151/ "Craftory Tech") by CraftoryStudios
 
+[MythicMobs](https://www.spigotmc.org/resources/mythicmobs-free-version.5702/ "MythicMobs") by Xikage
+
 ## Dependencies
 The latest version of this plugin requires Java 17 and Minecraft/Spigot 1.17.1 - 1.19.2.<br>
 The minimum requirement for Oraxen is version 1.140.0.<br>
@@ -49,7 +54,7 @@ PlaceholderAPI is required to use this plugin's placeholders.
 
 ## Commands & Permissions
 ```
-/wt - identifies the block being looked at
+/wt - identifies the block or entity being looked at
 /wt info - information about the plugin
 /wt reload - reload the config file (requires whatisthis.admin permission)
 /wt toggleclick - enable or disable right-click functionality (requires whatisthis.admin permission)
@@ -90,4 +95,4 @@ WhatIsThis can be [downloaded from Spigot](https://www.spigotmc.org/resources/wh
 
 
 
-Updated 31st August 2022 by steve4744
+Updated 1st December 2022 by steve4744

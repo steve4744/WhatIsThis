@@ -89,6 +89,6 @@ public class WhatIsThisCommand implements CommandExecutor {
 			plugin.getDataHandler().processEntity(result.getHitEntity(), player);
 		}
 		return true;
-	} 
+	}
 
 }
