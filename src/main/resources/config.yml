@@ -4,15 +4,17 @@
 # Identify blocks by looking at them, using a command or by       #
 # right-clicking with an item.                                    #
 #                                                                 #
-# Setting "auto_display: true" will display the block information #
-# simply by targeting the block.                                  #
+# Setting "auto_display: true" will display the block/entity      #
+# information simply by targeting the block.                      #
 #                                                                 #
-# The block information will be displayed in the client language  #
-# provided the corresponding language file has been loaded by     #
-# the plugin.                                                     #
+# The block/entity information will be displayed in the client    #
+# language provided the corresponding language file has been      #
+# loaded by the plugin.                                           #
 #                                                                 #
 # Common blocks can be skipped by adding their names to the       #
 # "IgnoreBlocks" list.                                            #
+# Common entities can be skipped by adding their names to the     #
+# "IgnoreEntities" list.                                          #
 #                                                                 #
 # Author: steve4744                                               #
 ################################################################ #
@@ -103,5 +105,4 @@ IgnoreBlocks:
 IgnoreEntities:
 - COW
 - PIG
-- SHEEP
-- SKELETON
+- CHICKEN
