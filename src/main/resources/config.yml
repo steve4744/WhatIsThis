@@ -54,7 +54,10 @@ CustomData:
 # Choose the method(s) to display the block info by enabling the preferred option(s).
 # If the method is enabled and 'on_sneak' is also true, the block info is only displayed if
 # the player is 'sneaking' (holding down the Shift key).
-# For available text/chat colors see https://hub.spigotmc.org/javadocs/spigot/org/bukkit/ChatColor.html
+# The prefix and actionbar text can be coloured using any of the following formats:
+#    textcolor: yellow
+#    textcolor: '&b&l'
+#    textcolor: <#ff00ff>
 Display:
   # If true the block details will be displayed simply by targeting the block.
   auto_display: false
@@ -73,14 +76,15 @@ Display:
     enabled: false
     on_sneak: false
     textcolor: WHITE
-    # For available bar colors see https://hub.spigotmc.org/javadocs/spigot/org/bukkit/boss/BarColor.html
     barcolor: GREEN
+    # For available bar colors see https://hub.spigotmc.org/javadocs/spigot/org/bukkit/boss/BarColor.html
   chat:
     enabled: false
     on_sneak: false
     name_color: GREEN
     drop_color: RED
     show_drops: true
+    # For available chat colors see https://hub.spigotmc.org/javadocs/spigot/org/bukkit/ChatColor.html
 
 # List of worlds where the plugin should be disabled.
 #BlacklistedWorlds:
