@@ -35,7 +35,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TAG_NAME: ${{ env.VERSION  }}.${{ github.run_number }}
       run: |
-        gh release create v${{ env.TAG_NAME }} -t WhatIsThis-${{ env.TAG_NAME }} --target ${{ env.version }}
+        gh release create v${{ env.TAG_NAME }} -t WhatIsThis-${{ env.TAG_NAME }} --target ${{ env.VERSION }}
 
     - name: Upload Release Asset
       id: upload-release-asset
