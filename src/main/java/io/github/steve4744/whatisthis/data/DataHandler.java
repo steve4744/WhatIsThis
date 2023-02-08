@@ -1,7 +1,7 @@
 /*
  * MIT License
 
-Copyright (c) 2022 steve4744
+Copyright (c) 2023 steve4744
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -224,7 +224,7 @@ public class DataHandler {
 			return getItemDropNames();
 		}
 		if (isNovaBlock(block)) {
-			itemDrops.put(ChatColor.stripColor(NovaHandler.getDisplayName(block.getLocation(), Utils.getLocale(player))), 1);
+			itemDrops.putAll(NovaHandler.getNovaItemDrops(block.getLocation(), Utils.getLocale(player)));
 			return getItemDropNames();
 		}
 		if (isItemsAdderBlock(block)) {
@@ -273,7 +273,17 @@ public class DataHandler {
 	 * @return localised item name
 	 */
 	public String translateItemName(String item, Player player) {
-		String locale = Utils.getLocale(player);
+		return translateItemName(item, Utils.getLocale(player));
+	}
+
+	/**
+	 * Translate the material to its localised name. If not present revert to "en_us".
+	 *
+	 * @param item
+	 * @param locale
+	 * @return localised item name
+	 */
+	public String translateItemName(String item, String locale) {
 		String translated = null;
 
 		if (EnumLang.get(locale).getMap().containsKey("item.minecraft." + item.toLowerCase())) {
