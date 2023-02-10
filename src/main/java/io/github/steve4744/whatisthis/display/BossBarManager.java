@@ -1,7 +1,7 @@
 /*
  * MIT License
 
-Copyright (c) 2019 steve4744
+Copyright (c) 2023 steve4744
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -85,7 +85,7 @@ public class BossBarManager {
 			@Override public void run() {
 				removePlayerFromBar(player);
 			}
-		}.runTaskLater(plugin, 60);
+		}.runTaskLater(plugin, plugin.getSettings().getBossBarTimeout());
 		taskmap.put(player.getName(), task);
 	}
 

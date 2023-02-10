@@ -1,7 +1,7 @@
 /*
  * MIT License
 
-Copyright (c) 2019 steve4744
+Copyright (c) 2023 steve4744
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -158,6 +158,14 @@ public class Settings {
 	public String getBossBarTextColor() {
 		String colour = config.getString("Display.bossbar.textcolor").toUpperCase();
 		return validateChatColor(colour);
+	}
+
+	public int getBossBarTimeout() {
+		return config.getInt("Display.bossbar.timeout", 60);
+	}
+
+	public int getScoreboardTimeout() {
+		return config.getInt("Display.scoreboard.timeout", 60);
 	}
 
 	public String getChatColor(String element) {

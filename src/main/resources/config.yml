@@ -68,6 +68,8 @@ Display:
   scoreboard:
     enabled: true
     on_sneak: false
+    # Maximum number of ticks that scoreboard remains visible (default 60 = 3 seconds)
+    timeout: 60
   actionbar:
     enabled: true
     on_sneak: false
@@ -76,8 +78,10 @@ Display:
     enabled: false
     on_sneak: false
     textcolor: WHITE
-    barcolor: GREEN
     # For available bar colors see https://hub.spigotmc.org/javadocs/spigot/org/bukkit/boss/BarColor.html
+    barcolor: GREEN
+    # Maximum number of ticks that bossbar remains visible (default 60 = 3 seconds)
+    timeout: 60
   chat:
     enabled: false
     on_sneak: false
