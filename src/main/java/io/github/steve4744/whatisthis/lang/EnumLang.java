@@ -128,6 +128,7 @@ public enum EnumLang {
 	RO_RO("ro_ro", new HashMap<String, String>()),
 	RPR("rpr", new HashMap<String, String>()),
 	RU_RU("ru_ru", new HashMap<String, String>()),
+	RY_UA("ry_ua", new HashMap<String, String>()),
 	SE_NO("se_no", new HashMap<String, String>()),
 	SK_SK("sk_sk", new HashMap<String, String>()),
 	SL_SI("sl_si", new HashMap<String, String>()),
