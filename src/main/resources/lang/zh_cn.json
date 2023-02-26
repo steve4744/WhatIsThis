@@ -1830,7 +1830,7 @@
     "item.minecraft.debug_stick": "\u8c03\u8bd5\u68d2",
     "item.minecraft.debug_stick.empty": "%s\u4e0d\u5177\u5907\u5c5e\u6027",
     "item.minecraft.debug_stick.select": "\u5df2\u9009\u62e9\u201c%s\u201d\uff08%s\uff09",
-    "item.minecraft.debug_stick.update": "\u5c06\"%s\"\u8bbe\u4e3a%s",
+    "item.minecraft.debug_stick.update": "\u201c%s\u201d\u8bbe\u4e3a%s",
     "item.minecraft.diamond": "\u94bb\u77f3",
     "item.minecraft.diamond_axe": "\u94bb\u77f3\u65a7",
     "item.minecraft.diamond_boots": "\u94bb\u77f3\u9774\u5b50",
