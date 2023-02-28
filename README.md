@@ -12,9 +12,9 @@ By enabling 'auto_display' in the config, the display will automatically update 
 
 The 'auto_display' option is disabled by default, so when the server starts the 'player move' listener is not registered. To enable the 'auto-display' option the server will need to be restarted so that the listener is correctly registered.
 
-A list of blocks to ignore, for example, AIR, WATER, GRASS_BLOCK, NETHERRACK, can be specified in the config. These blocks will not display any information when targeted by the player.
+A list of blocks and entities to ignore, for example, AIR, WATER, GRASS_BLOCK, NETHERRACK, can be specified in the config. These blocks and entities will not display any information when targeted by the player.
 
-You must have a clear view of the block being looked at when running the `/wt` command. The range is currently set to 10 blocks. The plugin can be used under water as well as on land.
+You must have a clear view of the block or entity being looked at when running the `/wt` command. The range is currently set to 10 blocks. The plugin can be used under water as well as on land.
 
 The ability to right-click with an item can be disabled in the _config.yml_, or can be toggled on/off with the `/wt toggleclick` command.
 
@@ -42,7 +42,7 @@ The following plugins which provide a number of custom blocks are supported:
 [MythicMobs](https://www.spigotmc.org/resources/mythicmobs-free-version.5702/ "MythicMobs") by Xikage
 
 ## Dependencies
-The latest version of this plugin requires Java 17 and Minecraft/Spigot 1.17.1 - 1.19.2.<br>
+The latest version of this plugin requires Java 17 and Minecraft/Spigot 1.17.1 - 1.19.3.<br>
 The minimum requirement for Oraxen is version 1.140.0.<br>
 The minimum requirement for Nova is version 0.10.
 
@@ -95,4 +95,4 @@ WhatIsThis can be [downloaded from Spigot](https://www.spigotmc.org/resources/wh
 
 
 
-Updated 1st December 2022 by steve4744
+Updated 1st March 2023 by steve4744
