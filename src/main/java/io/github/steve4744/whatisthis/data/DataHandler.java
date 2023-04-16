@@ -189,7 +189,10 @@ public class DataHandler {
 	}
 
 	public void processBlock(Block block, Player player) {
-		if (plugin.getConfig().getStringList("BlacklistedWorlds").contains(player.getWorld().getName())) {
+		if (plugin.getSettings().isIgnoreAllBlocks()) {
+			return;
+		}
+		if (plugin.getSettings().getBlacklist().contains(player.getWorld().getName())) {
 			return;
 		}
 		String prefix = plugin.getSettings().isCustomPrefixEnabled() ? getCustomPrefix(block, null) : "";
@@ -197,6 +200,9 @@ public class DataHandler {
 	}
 
 	public void processEntity(Entity entity, Player player) {
+		if (plugin.getSettings().isIgnoreAllEntities()) {
+			return;
+		}
 		if (plugin.getConfig().getStringList("BlacklistedWorlds").contains(player.getWorld().getName())) {
 			return;
 		}

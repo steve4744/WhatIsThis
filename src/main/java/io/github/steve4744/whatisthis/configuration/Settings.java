@@ -76,6 +76,14 @@ public class Settings {
 		return config.getStringList("IgnoreEntities");
 	}
 
+	public boolean isIgnoreAllBlocks() {
+		return getBlacklist().stream().anyMatch("all"::equalsIgnoreCase);
+	}
+
+	public boolean isIgnoreAllEntities() {
+		return getEntityBlacklist().stream().anyMatch("all"::equalsIgnoreCase);
+	}
+
 	public boolean isRightClickEnabled() {
 		return isClickEnabled;
 	}
