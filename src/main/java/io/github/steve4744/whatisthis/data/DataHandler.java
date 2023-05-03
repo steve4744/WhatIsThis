@@ -32,6 +32,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -470,6 +471,10 @@ public class DataHandler {
 			yield ((Axolotl)entity).getVariant().toString();
 		}
 		case "BOAT" -> {
+			String version = Bukkit.getBukkitVersion();
+			if (version.contains("1.17") || version.contains("1.18")) {
+				yield ((Boat)entity).getWoodType().toString();
+			}
 			yield ((Boat)entity).getBoatType().toString();
 		}
 		case "CAT" -> {
