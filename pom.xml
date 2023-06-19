@@ -4,7 +4,7 @@
   <artifactId>WhatIsThis</artifactId>
   <version>5.2-SNAPSHOT</version>
   <name>WhatIsThis</name>
-  <description>A Minecraft utility plugin which displays block information</description>
+  <description>A Minecraft utility plugin which displays block and entity information</description>
   <packaging>jar</packaging>
 
   <properties>
@@ -56,7 +56,7 @@
     <dependency>
         <groupId>org.spigotmc</groupId>
         <artifactId>spigot-api</artifactId>
-        <version>1.19.4-R0.1-SNAPSHOT</version>
+        <version>1.20.1-R0.1-SNAPSHOT</version>
         <scope>provided</scope>
     </dependency>
     <!-- bStats -->
@@ -97,21 +97,21 @@
     <dependency>
         <groupId>xyz.xenondevs.nova</groupId>
         <artifactId>nova-api</artifactId>
-        <version>0.12.16</version>
+        <version>0.13.5</version>
         <scope>provided</scope>
     </dependency>
     <!-- ItemsAdder -->
     <dependency>
         <groupId>com.github.LoneDev6</groupId>
         <artifactId>api-itemsadder</artifactId>
-        <version>3.2.5</version>
+        <version>3.4.1e</version>
         <scope>provided</scope>
     </dependency>
     <!-- Oraxen -->
     <dependency>
         <groupId>com.github.oraxen</groupId>
         <artifactId>oraxen</artifactId>
-        <version>1.153.1</version>
+        <version>1.157.0</version>
         <scope>provided</scope>
         <exclusions>
           <exclusion>
