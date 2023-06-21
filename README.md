@@ -42,7 +42,7 @@ The following plugins which provide a number of custom blocks are supported:
 [MythicMobs](https://www.spigotmc.org/resources/mythicmobs-free-version.5702/ "MythicMobs") by Xikage
 
 ## Dependencies
-The latest version of this plugin requires Java 17 and Minecraft/Spigot 1.17.1 - 1.19.3.<br>
+The latest version of this plugin requires Java 17 and Minecraft/Spigot 1.17.1 - 1.20.1.<br>
 The minimum requirement for Oraxen is version 1.140.0.<br>
 The minimum requirement for Nova is version 0.10.
 
@@ -95,4 +95,4 @@ WhatIsThis can be [downloaded from Spigot](https://www.spigotmc.org/resources/wh
 
 
 
-Updated 1st March 2023 by steve4744
+Updated 21st June 2023 by steve4744
