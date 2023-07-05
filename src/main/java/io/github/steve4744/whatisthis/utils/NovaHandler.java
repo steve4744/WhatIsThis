@@ -26,18 +26,19 @@ package io.github.steve4744.whatisthis.utils;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import org.bukkit.Location;
 import io.github.steve4744.whatisthis.WhatIsThis;
 import xyz.xenondevs.nova.api.Nova;
-import xyz.xenondevs.nova.api.material.NovaMaterial;
-import xyz.xenondevs.nova.api.material.NovaMaterialRegistry;
+import xyz.xenondevs.nova.api.block.NovaBlock;
+import xyz.xenondevs.nova.api.block.NovaBlockRegistry;
 import xyz.xenondevs.nova.api.tileentity.TileEntity;
 import xyz.xenondevs.nova.api.tileentity.TileEntityManager;
 
 public class NovaHandler {
 
 	private static TileEntityManager manager = Nova.getNova().getTileEntityManager();
-	private static NovaMaterialRegistry materialRegistry = Nova.getNova().getMaterialRegistry();
+	private static NovaBlockRegistry blockRegistry = Nova.getNova().getBlockRegistry();
 
 	public static boolean isNova(Location loc) {
 		return manager.getTileEntity(loc) != null;
@@ -45,16 +46,25 @@ public class NovaHandler {
 
 	public static String getDisplayName(Location loc, String locale) {
 		TileEntity tileEntity = manager.getTileEntity(loc);
-		return tileEntity.getMaterial().getLocalizedName(locale);
+		return tileEntity.getBlock().getLocalizedName(locale);
 	}
 
+	/**
+	 * Get the localised name of the Nova block and any other items that it might drop.
+	 * This assumes a Nova block always drops itself.
+	 *
+	 * @param loc
+	 * @param locale
+	 * @return dropped items
+	 */
 	public static Map<String, Integer> getNovaItemDrops(Location loc, String locale) {
 		Map<String, Integer> drops = new HashMap<>();
 		TileEntity tileEntity = manager.getTileEntity(loc);
-		tileEntity.getDrops(true).forEach(i -> {
-			NovaMaterial material = materialRegistry.getOrNull(i);
-			String name = material != null ?
-					material.getLocalizedName(locale) :
+		drops.put(tileEntity.getBlock().getLocalizedName(locale), 1);
+		tileEntity.getDrops(false).forEach(i -> {
+			NovaBlock block = blockRegistry.getOrNull(i.getType().toString().toLowerCase());
+			String name = block != null ?
+					block.getLocalizedName(locale) :
 					WhatIsThis.getPlugin().getDataHandler().translateItemName(i.getType().toString(), locale);
 			drops.put(name, i.getAmount());
 		});
