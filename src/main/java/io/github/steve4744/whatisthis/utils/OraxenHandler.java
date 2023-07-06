@@ -1,7 +1,7 @@
 /*
  * MIT License
 
-Copyright (c) 2021 steve4744
+Copyright (c) 2023 steve4744
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -70,12 +70,12 @@ public class OraxenHandler {
 					.getInstrument().getType()) * 25 + (int) noteBlock.getNote().getId()
 					+ (noteBlock.isPowered() ? 400 : 0) - 26);
 
-			return mech != null ? mech.getItemID() : "";
+			return mech != null ? Utils.capitalizeFully(mech.getItemID()) : "";
 
 		} else if (block.getType() == Material.MUSHROOM_STEM) {
 			final BlockMechanic mech = BlockMechanicFactory.getBlockMechanic(block);
 
-			return mech != null ? mech.getItemID() : "";
+			return mech != null ? Utils.capitalizeFully(mech.getItemID()) : "";
 
 		} else if (block.getType() == Material.BARRIER) {
 			final PersistentDataContainer customBlockData = new CustomBlockData(block, OraxenPlugin.get());
@@ -83,7 +83,7 @@ public class OraxenHandler {
 			final String mechanicID = customBlockData.get(FURNITURE_KEY, PersistentDataType.STRING);
 			final FurnitureMechanic mech = (FurnitureMechanic) FurnitureFactory.getInstance().getMechanic(mechanicID);
 
-			return mech != null ? mech.getItemID() : "";
+			return mech != null ? Utils.capitalizeFully(mech.getItemID()) : "";
 		}
 
 		return "";
