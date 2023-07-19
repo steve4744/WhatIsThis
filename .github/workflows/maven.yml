@@ -4,11 +4,11 @@
 name: Java CI with Maven
 
 env:
-  VERSION: 5.3-SNAPSHOT
+  VERSION: 5.4-SNAPSHOT
 
 on:
   push:
-    branches: [ 5.3-SNAPSHOT ]
+    branches: [ 5.4-SNAPSHOT ]
 #  pull_request:
 #   branches: [ master ]
 
@@ -46,12 +46,12 @@ jobs:
       run: |
         gh release upload v${{ env.TAG_NAME }} "target/${{ env.ASSET_NAME }}#${{ env.ASSET_NAME }}"
 
-    - name: Upload to Artifactory
-      id: upload-to-artifactory
-      uses: advancedcsg-open/action-jfrog-cli@master
-      with:
-        url: 'https://steve4744.jfrog.io/artifactory/'
-        credentials type: 'username'
-        user: ${{ secrets.RT_USER }}
-        password: ${{ secrets.RT_PASSWORD }}
-        args: u "target/WhatIsThis-${{ env.VERSION }}.jar" "steve4744-repo/io.github.steve4744/WhatIsThis/${{ env.VERSION }}/"
+        #    - name: Upload to Artifactory
+        #      id: upload-to-artifactory
+        #      uses: advancedcsg-open/action-jfrog-cli@master
+        #      with:
+        #        url: 'https://steve4744.jfrog.io/artifactory/'
+        #        credentials type: 'username'
+        #        user: ${{ secrets.RT_USER }}
+        #        password: ${{ secrets.RT_PASSWORD }}
+        #        args: u "target/WhatIsThis-${{ env.VERSION }}.jar" "steve4744-repo/io.github.steve4744/WhatIsThis/${{ env.VERSION }}/"
