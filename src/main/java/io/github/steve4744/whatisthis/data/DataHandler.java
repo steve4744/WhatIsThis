@@ -161,19 +161,20 @@ public class DataHandler {
 			Player targetPlayer = (Player) entity;
 			return targetPlayer.getName();
 		}
-		String targetName = translateEntityName(entity.getType().toString(), player);
+		String vanillaName = translateEntityName(entity.getType().toString(), player);
 
+		String targetName = null;
 		if (isItemsAdderEntity(entity)) {
 			targetName = includePlugin(ITEMSADDER) ? ChatColor.stripColor(ItemsAdderHandler.getEntityDisplayName(entity)) : "";
 
 		} else if (isMythicMobsEntity(entity)) {
-			targetName =  includePlugin(MYTHICMOBS) ? ChatColor.stripColor(MythicMobsHandler.getEntityDisplayName(entity)) : "";
+			targetName = includePlugin(MYTHICMOBS) ? ChatColor.stripColor(MythicMobsHandler.getEntityDisplayName(entity)) : "";
+
+		} else if (isHybridEntity(entity.getType().toString())) {
+			targetName = getVariant(entity) + " " + vanillaName;
 		}
 
-		if (isHybridEntity(entity.getType().toString())) {
-			return getVariant(entity) + " " + targetName;
-		}
-		return targetName;
+		return targetName != null ? targetName : vanillaName;
 	}
 
 	private double getEntityHealthNormalised(Entity entity) {
