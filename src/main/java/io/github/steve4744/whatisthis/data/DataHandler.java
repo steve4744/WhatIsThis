@@ -202,7 +202,7 @@ public class DataHandler {
 		if (plugin.getSettings().isIgnoreAllBlocks()) {
 			return;
 		}
-		if (plugin.getSettings().getBlacklist().contains(player.getWorld().getName())) {
+		if (plugin.getConfig().getStringList("BlacklistedWorlds").contains(player.getWorld().getName())) {
 			return;
 		}
 		String prefix = plugin.getSettings().isCustomPrefixEnabled() ? getCustomPrefix(block, null) : "";
