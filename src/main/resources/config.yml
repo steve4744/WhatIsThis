@@ -51,6 +51,10 @@ PlaceholderAPI:
 CustomData:
   enabled: false
 
+# Enable only if you want to display the content of an item frame
+ItemFrame:
+  display_content: false
+
 # Choose the method(s) to display the block info by enabling the preferred option(s).
 # If the method is enabled and 'on_sneak' is also true, the block info is only displayed if
 # the player is 'sneaking' (holding down the Shift key).

@@ -146,6 +146,10 @@ public class Settings {
 		return config.getBoolean("CustomData.enabled");
 	}
 
+	public boolean isItemFrameContentEnabled() {
+		return config.getBoolean("ItemFrame.display_content");
+	}
+
 	private String loadActionBarColour() {
 		String colour = config.getString("Display.actionbar.textcolor", "WHITE").toUpperCase();
 		if (Enums.getIfPresent(ChatColor.class, colour).orNull() != null) {

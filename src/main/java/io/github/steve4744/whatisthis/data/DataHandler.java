@@ -43,9 +43,11 @@ import org.bukkit.entity.Boat;
 import org.bukkit.entity.Cat;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fox;
 import org.bukkit.entity.Frog;
 import org.bukkit.entity.Horse;
+import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Llama;
 import org.bukkit.entity.MushroomCow;
@@ -172,6 +174,12 @@ public class DataHandler {
 
 		} else if (isHybridEntity(entity.getType().toString())) {
 			targetName = getVariant(entity) + " " + vanillaName;
+
+		} else if (entity.getType() == EntityType.ITEM_FRAME || entity.getType() == EntityType.GLOW_ITEM_FRAME) {
+			final ItemFrame iframe = (ItemFrame) entity;
+			if (plugin.getSettings().isItemFrameContentEnabled() && iframe.getItem().getType() != Material.AIR) {
+				targetName = translateItemName(iframe.getItem().getType().toString(), player);
+			}
 		}
 
 		return targetName != null ? targetName : vanillaName;
