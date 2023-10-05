@@ -1,7 +1,7 @@
 /*
  * MIT License
 
-Copyright (c) 2019 steve4744
+Copyright (c) 2023 steve4744
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -72,6 +72,9 @@ public class WhatIsThisPlaceholders extends PlaceholderExpansion {
 		}
 
 		Player player = (Player) p;
+		if (plugin.getConfig().getStringList("BlacklistedWorlds").contains(player.getWorld().getName())) {
+			return "";
+		}
 		if (identifier.equals("version")) {
 			return String.valueOf(plugin.getDescription().getVersion());
 
