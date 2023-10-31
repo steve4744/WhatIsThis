@@ -86,6 +86,8 @@ Display:
     barcolor: GREEN
     # Maximum number of ticks that bossbar remains visible (default 60 = 3 seconds)
     timeout: 60
+    # Style refers to the number of segments the bar is divided into. Valid options are 1, 6, 10, 12 and 20.
+    style: 1
   chat:
     enabled: false
     on_sneak: false

@@ -28,6 +28,7 @@ import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import com.google.common.base.Enums;
@@ -176,6 +177,11 @@ public class Settings {
 		return config.getInt("Display.bossbar.timeout", 60);
 	}
 
+	public String getBossBarStyle() {
+		int segments = config.getInt("Display.bossbar.style", 1);
+		return validateBarStyle(segments);
+	}
+
 	public int getScoreboardTimeout() {
 		return config.getInt("Display.scoreboard.timeout", 60);
 	}
@@ -205,5 +211,13 @@ public class Settings {
 			colour = "WHITE";
 		}
 		return colour;
+	}
+
+	private String validateBarStyle(int segments) {
+		String style = "SEGMENTED_" + segments;
+		if (segments == 1 || Enums.getIfPresent(BarStyle.class, style).orNull() == null) {
+			style = "SOLID";
+		}
+		return style;
 	}
 }

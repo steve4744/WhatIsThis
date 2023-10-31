@@ -50,7 +50,8 @@ public class BossBarManager {
 
 	private void createBar(Player player) {
 		String colour = plugin.getSettings().getBossBarColor();
-		BossBar bar = Bukkit.createBossBar(null, BarColor.valueOf(colour), BarStyle.SOLID);
+		String style = plugin.getSettings().getBossBarStyle();
+		BossBar bar = Bukkit.createBossBar(null, BarColor.valueOf(colour), BarStyle.valueOf(style));
 		bar.addPlayer(player);
 		barmap.put(player.getName(), bar);
 	}
