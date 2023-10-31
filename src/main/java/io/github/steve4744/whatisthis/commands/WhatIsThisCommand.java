@@ -1,7 +1,7 @@
 /*
  * MIT License
 
-Copyright (c) 2022 steve4744
+Copyright (c) 2023 steve4744
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -48,7 +48,7 @@ public class WhatIsThisCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		String prefix = ChatColor.GREEN + "[WhatIsThis] " + ChatColor.WHITE;
 		String infoMessage = prefix + "Version " + version + " : plugin by "+ ChatColor.AQUA + "steve4744";
-		
+
 		if (!sender.hasPermission("whatisthis.use")) {
 			sender.sendMessage(prefix + "You do not have permission to run this command");
 			return true;
@@ -78,16 +78,19 @@ public class WhatIsThisCommand implements CommandExecutor {
 			sender.sendMessage(infoMessage);
 			return false;
 		}
+
 		Player player = (Player) sender;
 		RayTraceResult result = Utils.getRayTraceResult(player);
 		if (result == null) {
 			return true;
 		}
-		if (result.getHitBlock() != null) {
+
+		if (Utils.isBlock(result)) {
 			plugin.getDataHandler().processBlock(result.getHitBlock(), player);
-		} else if (result.getHitEntity() != null) {
+		} else if (Utils.isEntity(result)) {
 			plugin.getDataHandler().processEntity(result.getHitEntity(), player);
 		}
+
 		return true;
 	}
 

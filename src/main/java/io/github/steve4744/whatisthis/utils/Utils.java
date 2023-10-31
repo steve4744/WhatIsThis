@@ -1,7 +1,7 @@
 /*
  * MIT License
 
-Copyright (c) 2022 steve4744
+Copyright (c) 2023 steve4744
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -76,6 +76,14 @@ public class Utils {
 				false,
 				1.0,
 				entity -> !entity.getUniqueId().equals(player.getUniqueId()));
+	}
+
+	public static boolean isBlock(RayTraceResult result) {
+		return result != null && result.getHitBlock() != null;
+	}
+
+	public static boolean isEntity(RayTraceResult result) {
+		return result != null && result.getHitEntity() != null;
 	}
 
 	/**

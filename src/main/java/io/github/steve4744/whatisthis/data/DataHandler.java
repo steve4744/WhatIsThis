@@ -155,7 +155,7 @@ public class DataHandler {
 		return translatedName;
 	}
 
-	private String getEntityDisplayName(Entity entity, Player player) {
+	public String getEntityDisplayName(Entity entity, Player player) {
 		if (isBlacklistedEntity(entity)) {
 			return "";
 		}

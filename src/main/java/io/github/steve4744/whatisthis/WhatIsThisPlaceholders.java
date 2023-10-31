@@ -27,6 +27,7 @@ package io.github.steve4744.whatisthis;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.util.RayTraceResult;
 
 import io.github.steve4744.whatisthis.utils.Utils;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
@@ -80,6 +81,10 @@ public class WhatIsThisPlaceholders extends PlaceholderExpansion {
 
 		} else if (identifier.equals("blockname")) {
 			return plugin.getDataHandler().getDisplayName(Utils.getTargetBlock(player), player);
+
+		} else if (identifier.equals("entityname")) {
+			RayTraceResult result = Utils.getRayTraceResult(player);
+			return Utils.isEntity(result) ? plugin.getDataHandler().getEntityDisplayName(result.getHitEntity(), player) : "";
 
 		} else if (identifier.equals("resourcename")) {
 			return plugin.getDataHandler().getCustomResourceName(Utils.getTargetBlock(player));
