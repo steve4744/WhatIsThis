@@ -1,7 +1,7 @@
 /*
  * MIT License
 
-Copyright (c) 2022 steve4744
+Copyright (c) 2023 steve4744
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -43,7 +43,7 @@ public class ItemsAdderHandler {
 	}
 
 	public static boolean isItemsAdderEntity(Entity entity) {
-		return CustomEntity.isCustomEntity(entity);
+		return isApiEnabled() ? CustomEntity.isCustomEntity(entity) : false;
 	}
 
 	public static String getEntityDisplayName(Entity entity) {
@@ -56,5 +56,19 @@ public class ItemsAdderHandler {
 			return customFurn.getDisplayName();
 		}
 		return CustomEntity.byAlreadySpawned(entity).getNamespace();
+	}
+
+	/*
+	 * ItemsAdder only loads the Entity API if its enabled in the config.
+	 *
+	 * @return is entity API available
+	 */
+	private static boolean isApiEnabled() {
+		try {
+			Class.forName("dev.lone.itemsadder.api.CustomEntity");
+		} catch (ClassNotFoundException e) {
+			return false;
+		}
+		return true;
 	}
 }
