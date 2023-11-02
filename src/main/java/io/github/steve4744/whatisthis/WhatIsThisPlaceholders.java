@@ -89,22 +89,44 @@ public class WhatIsThisPlaceholders extends PlaceholderExpansion {
 		} else if (identifier.equals("resourcename")) {
 			return plugin.getDataHandler().getCustomResourceName(Utils.getTargetBlock(player));
 
-		} else if (identifier.equals("location")) {
-			Block block = Utils.getTargetBlock(player);
-			return plugin.getDataHandler().isBlacklisted(block) ? "" : Utils.getLocationString(block);
+		} else if (identifier.startsWith("location")) {
+			RayTraceResult result = Utils.getRayTraceResult(player);
+			if (Utils.isBlock(result)) {
+				Block block = result.getHitBlock();
+				if (plugin.getDataHandler().isBlacklisted(block)) {
+					return "";
+				}
+				if (identifier.endsWith("n")) {
+					return Utils.getLocationString(block);
 
-		} else if (identifier.equals("locationX")) {
-			Block block = Utils.getTargetBlock(player);
-			return plugin.getDataHandler().isBlacklisted(block) ? "" : String.valueOf(block.getLocation().getBlockX());
+				} else if (identifier.endsWith("X")) {
+					return String.valueOf(block.getLocation().getBlockX());
 
-		} else if (identifier.equals("locationY")) {
-			Block block = Utils.getTargetBlock(player);
-			return plugin.getDataHandler().isBlacklisted(block) ? "" : String.valueOf(block.getLocation().getBlockY());
+				} else if (identifier.endsWith("Y")) {
+					return String.valueOf(block.getLocation().getBlockY());
 
-		} else if (identifier.equals("locationZ")) {
-			Block block = Utils.getTargetBlock(player);
-			return plugin.getDataHandler().isBlacklisted(block) ? "" : String.valueOf(block.getLocation().getBlockZ());
+				} else if (identifier.endsWith("Z")) {
+					return String.valueOf(block.getLocation().getBlockZ());
+				}
 
+			} else if (Utils.isEntity(result)) {
+				if (plugin.getDataHandler().isBlacklistedEntity(result.getHitEntity())) {
+					return "";
+				}
+				if (identifier.endsWith("n")) {
+					return Utils.getLocationString(result.getHitEntity());
+
+				} else if (identifier.endsWith("X")) {
+					return String.valueOf(result.getHitEntity().getLocation().getBlockX());
+
+				} else if (identifier.endsWith("Y")) {
+					return String.valueOf(result.getHitEntity().getLocation().getBlockY());
+
+				} else if (identifier.endsWith("Z")) {
+					return String.valueOf(result.getHitEntity().getLocation().getBlockZ());
+				}
+			}
+			return "";
 		}
 		return null;
 	}

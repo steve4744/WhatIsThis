@@ -1,7 +1,7 @@
 /*
  * MIT License
 
-Copyright (c) 2022 steve4744
+Copyright (c) 2023 steve4744
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -51,13 +51,10 @@ public class PlayerMoveListener implements Listener {
 			return;
 		}
 		RayTraceResult result = Utils.getRayTraceResult(player);
-		if (result == null) {
-			return;
-		}
 
-		if (result.getHitBlock() != null) {
+		if (Utils.isBlock(result)) {
 			plugin.getDataHandler().processBlock(result.getHitBlock(), player);
-		} else if (result.getHitEntity() != null) {
+		} else if (Utils.isEntity(result)) {
 			plugin.getDataHandler().processEntity(result.getHitEntity(), player);
 		}
 	}

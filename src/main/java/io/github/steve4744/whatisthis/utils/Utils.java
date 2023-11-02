@@ -33,6 +33,7 @@ import java.util.stream.Stream;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.RayTraceResult;
 
@@ -94,6 +95,10 @@ public class Utils {
 	 */
 	public static String getLocationString(Block block) {
 		return "XYZ: " + block.getX() + " / " + block.getY() + " / " + block.getZ();
+	}
+
+	public static String getLocationString(Entity entity) {
+		return "XYZ: " + entity.getLocation().getBlockX() + " / " + entity.getLocation().getBlockY() + " / " + entity.getLocation().getBlockZ();
 	}
 
 	/**

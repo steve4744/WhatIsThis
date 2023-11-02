@@ -81,9 +81,6 @@ public class WhatIsThisCommand implements CommandExecutor {
 
 		Player player = (Player) sender;
 		RayTraceResult result = Utils.getRayTraceResult(player);
-		if (result == null) {
-			return true;
-		}
 
 		if (Utils.isBlock(result)) {
 			plugin.getDataHandler().processBlock(result.getHitBlock(), player);
