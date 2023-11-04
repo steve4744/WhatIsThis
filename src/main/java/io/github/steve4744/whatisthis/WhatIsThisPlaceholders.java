@@ -87,7 +87,13 @@ public class WhatIsThisPlaceholders extends PlaceholderExpansion {
 			return Utils.isEntity(result) ? plugin.getDataHandler().getEntityDisplayName(result.getHitEntity(), player) : "";
 
 		} else if (identifier.equals("resourcename")) {
-			return plugin.getDataHandler().getCustomResourceName(Utils.getTargetBlock(player));
+			RayTraceResult result = Utils.getRayTraceResult(player);
+			if (Utils.isBlock(result)) {
+				return plugin.getDataHandler().getCustomResourceName(Utils.getTargetBlock(player));
+
+			} else if (Utils.isEntity(result)) {
+				return plugin.getDataHandler().getCustomResourceName(result.getHitEntity());
+			}
 
 		} else if (identifier.startsWith("location")) {
 			RayTraceResult result = Utils.getRayTraceResult(player);
