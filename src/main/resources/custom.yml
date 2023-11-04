@@ -1,10 +1,11 @@
 ################################################################ #
 #                  WhatIsThis custom data file                    #
 #                                                                 #
-# This file can be used to override the display name of a block.  #
+# This file can be used to override the display name of a block   #
+# or entity.                                                      #
 #                                                                 #
-# Simply replace the display name returned by minecraft or by a   #
-# custom block plugin with the display name you require.          #
+# Simply replace the display name returned by Minecraft or by a   #
+# custom plugin with the display name you require.                #
 #                                                                 #
 # Format each line as:                                            #
 # <space><space>resource_DisplayName: New Display Name            #
@@ -22,3 +23,4 @@
 #custom:
 #  minecraft_Crafting Table: Work Bench
 #  slimefun_Ancient Altar: Very Old Altar
+#  mythicmobs_Skeleton King: Barbossa

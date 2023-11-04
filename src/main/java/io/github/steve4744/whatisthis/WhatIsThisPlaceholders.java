@@ -94,6 +94,7 @@ public class WhatIsThisPlaceholders extends PlaceholderExpansion {
 			} else if (Utils.isEntity(result)) {
 				return plugin.getDataHandler().getCustomResourceName(result.getHitEntity());
 			}
+			return "";
 
 		} else if (identifier.startsWith("location")) {
 			RayTraceResult result = Utils.getRayTraceResult(player);

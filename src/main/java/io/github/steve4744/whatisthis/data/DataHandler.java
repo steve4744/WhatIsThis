@@ -148,10 +148,10 @@ public class DataHandler {
 
 		if (plugin.getSettings().isCustomDataEnabled()) {
 			String prefix = getCustomResourceName(block) != "" ? getCustomResourceName(block).toLowerCase() + "_" : "minecraft_";
-			return plugin.getCustomData().hasCustomName(prefix + translatedName) ?
-					plugin.getCustomData().getCustomName(prefix + translatedName) : translatedName;
+			if (plugin.getCustomData().hasCustomName(prefix + translatedName)) {
+				return plugin.getCustomData().getCustomName(prefix + translatedName);
+			}
 		}
-
 		return translatedName;
 	}
 
@@ -182,7 +182,15 @@ public class DataHandler {
 			}
 		}
 
-		return targetName != null ? targetName : vanillaName;
+		targetName = targetName != null ? targetName : vanillaName;
+
+		if (plugin.getSettings().isCustomDataEnabled()) {
+			String prefix = getCustomResourceName(entity) != "" ? getCustomResourceName(entity).toLowerCase() + "_" : "minecraft_";
+			if (plugin.getCustomData().hasCustomName(prefix + targetName)) {
+				return plugin.getCustomData().getCustomName(prefix + targetName);
+			}
+		}
+		return targetName;
 	}
 
 	private double getEntityHealthNormalised(Entity entity) {
