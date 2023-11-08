@@ -428,14 +428,16 @@ public class DataHandler {
 	}
 
 	/**
-	 * Get the prefix to prepend to the custom block name.
+	 * Get the prefix to prepend to the custom block or entity name.
+	 * Vanilla blocks and entities have no prefix.
 	 *
-	 * @param block
+	 * @param block, entity
 	 * @return prefix
 	 */
-	public String getCustomPrefix(Block block, Entity entity) {
+	private String getCustomPrefix(Block block, Entity entity) {
 		String name = block != null ? getCustomResourceName(block) : getCustomResourceName(entity);
-		return !name.isEmpty() ? plugin.getSettings().getCustomPrefix().replace("{PREFIX}", name) : "";
+
+		return name.isEmpty() ? name : plugin.getSettings().getCustomPrefix(name).replace("{PREFIX}", name);
 	}
 
 	/**

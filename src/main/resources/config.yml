@@ -1,11 +1,11 @@
 ################################################################ #
 #                  WhatIsThis configuration file                  #
 #                                                                 #
-# Identify blocks by looking at them, using a command or by       #
-# right-clicking with an item.                                    #
+# Identify blocks and entities by looking at them, using a        #
+# command or by right-clicking with an item.                      #
 #                                                                 #
-# Setting "auto_display: true" will display the block/entity      #
-# information simply by targeting the block.                      #
+# Setting "auto_display: true" will display the information       #
+# simply by targeting the block or entity.                        #
 #                                                                 #
 # The block/entity information will be displayed in the client    #
 # language provided the corresponding language file has been      #
@@ -55,17 +55,23 @@ CustomData:
 ItemFrame:
   display_content: false
 
-# Choose the method(s) to display the block info by enabling the preferred option(s).
-# If the method is enabled and 'on_sneak' is also true, the block info is only displayed if
+# Choose the method(s) to display the block/entity info by enabling the preferred option(s).
+# If the method is enabled and 'on_sneak' is also true, the info is only displayed if
 # the player is 'sneaking' (holding down the Shift key).
 # The prefix and actionbar text can be coloured using any of the following formats:
 #    textcolor: yellow
 #    textcolor: '&b&l'
 #    textcolor: <#ff00ff>
 Display:
-  # If true the block details will be displayed simply by targeting the block.
+  # If auto_display is true the name will be displayed simply by looking at the block or entity.
   auto_display: false
-  # If true the custom block name will be prefixed by the name of the plugin providing the custom block.
+  # If enabled is true the custom block name will be prefixed by the name of the plugin providing the custom block.
+  # Each plugin can have a different coloured prefix by specifying a prefix separately as in the examples below.
+  #prefix_custom_blocks:
+  #  enabled: true
+  #  prefix: '&7[&f{PREFIX}&7] '
+  #  Slimefun: '&7[<#ff00ff>{PREFIX}&7] '
+  #  MythicMobs: '&7[&bMM&7] '
   prefix_custom_blocks:
     enabled: true
     prefix: '&7[&f{PREFIX}&7] '

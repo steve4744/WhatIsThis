@@ -199,7 +199,14 @@ public class Settings {
 		return Utils.translateColourCodes(plugin.getConfig().getString("Display.prefix_custom_blocks.prefix", ""));
 	}
 
-	public String getCustomPrefix() {
+	public String getCustomPrefix(String name) {
+		if (name.isEmpty()) {
+			return customPrefix;
+		}
+		String path = "Display.prefix_custom_blocks." + name;
+		if (config.isSet(path)) {
+			return Utils.translateColourCodes(config.getString(path));
+		}
 		return customPrefix;
 	}
 
