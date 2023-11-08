@@ -24,13 +24,15 @@ SOFTWARE.
  */
 package io.github.steve4744.whatisthis.configuration;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.configuration.file.FileConfiguration;
-
 import com.google.common.base.Enums;
 
 import io.github.steve4744.whatisthis.WhatIsThis;
@@ -43,6 +45,7 @@ public class Settings {
 	private String actionBarColour;
 	private String customPrefix;
 	private FileConfiguration config;
+	private Map<String, List<String>> customBlacklist = new HashMap<>();
 
 	public Settings(WhatIsThis plugin) {
 		this.plugin = plugin;
@@ -50,6 +53,7 @@ public class Settings {
 		this.isClickEnabled = config.getBoolean("use_right_click.enabled", true);
 		this.actionBarColour = loadActionBarColour();
 		this.customPrefix = loadCustomPrefix();
+		loadCustomBlacklist();
 	}
 
 	public Material getClickItem() {
@@ -219,5 +223,18 @@ public class Settings {
 			style = "SOLID";
 		}
 		return style;
+	}
+
+	private void loadCustomBlacklist() {
+		if (!config.isConfigurationSection("Ignore")) {
+			return;
+		}
+		for (String cname : config.getConfigurationSection("Ignore").getKeys(false)) {
+			customBlacklist.put(cname, config.getStringList("Ignore." + cname));
+		}
+	}
+
+	public List<String> getCustomBlacklist(String customName) {
+		return customBlacklist.get(customName) != null ? customBlacklist.get(customName) : List.of();
 	}
 }

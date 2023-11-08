@@ -113,21 +113,36 @@ public class DataHandler {
 		if (isBlacklisted(block)) {
 			return "";
 		}
-		String targetName = null;
-		if (isSlimefunBlock(block)) {
-			targetName = includePlugin(SLIMEFUN) ? ChatColor.stripColor(SlimefunHandler.getDisplayName(block)) : "";
+		String targetName = "";
+		if (isSlimefunBlock(block) && includePlugin(SLIMEFUN)) {
+			targetName = ChatColor.stripColor(SlimefunHandler.getDisplayName(block));
+			if (plugin.getSettings().getCustomBlacklist(SLIMEFUN).contains(targetName)) {
+				return "";
+			}
 
-		} else if (isNovaBlock(block)) {
-			targetName = includePlugin(NOVA) ? ChatColor.stripColor(NovaHandler.getDisplayName(block.getLocation(), Utils.getLocale(player))) : "";
+		} else if (isNovaBlock(block) && includePlugin(NOVA)) {
+			targetName = ChatColor.stripColor(NovaHandler.getDisplayName(block.getLocation(), Utils.getLocale(player)));
+			if (plugin.getSettings().getCustomBlacklist(NOVA).contains(targetName)) {
+				return "";
+			}
 
-		} else if (isItemsAdderBlock(block)) {
-			targetName = includePlugin(ITEMSADDER) ? ChatColor.stripColor(ItemsAdderHandler.getDisplayName(block)) : "";
+		} else if (isItemsAdderBlock(block) && includePlugin(ITEMSADDER)) {
+			targetName = ChatColor.stripColor(ItemsAdderHandler.getDisplayName(block));
+			if (plugin.getSettings().getCustomBlacklist(ITEMSADDER).contains(targetName)) {
+				return "";
+			}
 
-		} else if (isOraxenBlock(block)) {
-			targetName = includePlugin(ORAXEN) ? ChatColor.stripColor(OraxenHandler.getDisplayName(block)) : "";
+		} else if (isOraxenBlock(block) && includePlugin(ORAXEN)) {
+			targetName = ChatColor.stripColor(OraxenHandler.getDisplayName(block));
+			if (plugin.getSettings().getCustomBlacklist(ORAXEN).contains(targetName)) {
+				return "";
+			}
 
-		} else if (isCraftoryBlock(block)) {
-			targetName = includePlugin(CRAFTORY) ? ChatColor.stripColor(CraftoryHandler.getDisplayName(block)) : "";
+		} else if (isCraftoryBlock(block) && includePlugin(CRAFTORY)) {
+			targetName = ChatColor.stripColor(CraftoryHandler.getDisplayName(block));
+			if (plugin.getSettings().getCustomBlacklist(CRAFTORY).contains(targetName)) {
+				return "";
+			}
 
 		} else {
 			if (block.getType() == Material.PLAYER_HEAD || block.getType() == Material.PLAYER_WALL_HEAD) {
@@ -165,12 +180,18 @@ public class DataHandler {
 		}
 		String vanillaName = translateEntityName(entity.getType().toString(), player);
 
-		String targetName = null;
-		if (isItemsAdderEntity(entity)) {
-			targetName = includePlugin(ITEMSADDER) ? ChatColor.stripColor(ItemsAdderHandler.getEntityDisplayName(entity)) : "";
+		String targetName = "";
+		if (isItemsAdderEntity(entity) && includePlugin(ITEMSADDER)) {
+			targetName = ChatColor.stripColor(ItemsAdderHandler.getEntityDisplayName(entity));
+			if (plugin.getSettings().getCustomBlacklist(ITEMSADDER).contains(targetName)) {
+				return "";
+			}
 
-		} else if (isMythicMobsEntity(entity)) {
-			targetName = includePlugin(MYTHICMOBS) ? ChatColor.stripColor(MythicMobsHandler.getEntityDisplayName(entity)) : "";
+		} else if (isMythicMobsEntity(entity) && includePlugin(MYTHICMOBS)) {
+			targetName = ChatColor.stripColor(MythicMobsHandler.getEntityDisplayName(entity));
+			if (plugin.getSettings().getCustomBlacklist(MYTHICMOBS).contains(targetName)) {
+				return "";
+			}
 
 		} else if (isHybridEntity(entity.getType().toString())) {
 			targetName = getVariant(entity) + " " + vanillaName;
@@ -182,7 +203,7 @@ public class DataHandler {
 			}
 		}
 
-		targetName = targetName != null ? targetName : vanillaName;
+		targetName = (targetName == null || targetName.isEmpty()) ? vanillaName : targetName;
 
 		if (plugin.getSettings().isCustomDataEnabled()) {
 			String prefix = getCustomResourceName(entity) != "" ? getCustomResourceName(entity).toLowerCase() + "_" : "minecraft_";
