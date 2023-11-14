@@ -37,7 +37,14 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.Skull;
+import org.bukkit.block.data.Ageable;
+import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.Hatchable;
+import org.bukkit.block.data.Levelled;
+import org.bukkit.block.data.type.Beehive;
+import org.bukkit.block.data.type.Sapling;
 import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Boat;
 import org.bukkit.entity.Cat;
@@ -61,6 +68,7 @@ import org.bukkit.plugin.PluginManager;
 
 import com.google.common.base.Enums;
 
+import dev.lone.itemsadder.api.CustomCrop;
 import io.github.steve4744.whatisthis.WhatIsThis;
 import io.github.steve4744.whatisthis.lang.EnumLang;
 import io.github.steve4744.whatisthis.utils.OraxenHandler;
@@ -105,7 +113,7 @@ public class DataHandler {
 	/**
 	 * Get the localised material name. Cater for vanilla issues with WALL_ items.
 	 *
-	 * @param target material name
+	 * @param block the block being targeted
 	 * @param player
 	 * @return localised material name
 	 */
@@ -235,7 +243,7 @@ public class DataHandler {
 			return;
 		}
 		String prefix = plugin.getSettings().isCustomPrefixEnabled() ? getCustomPrefix(block, null) : "";
-		plugin.getDisplayHandler().getVisualMethod(prefix, getDisplayName(block, player), player, block, DEFAULT_HEALTH);
+		plugin.getDisplayHandler().getVisualMethod(prefix, getDisplayName(block, player), player, block, getAge(block));
 	}
 
 	public void processEntity(Entity entity, Player player) {
@@ -571,5 +579,84 @@ public class DataHandler {
 
 	private boolean isHybridEntity(String name) {
 		return Arrays.stream(EntityTypes.values()).anyMatch((t) -> t.name().equalsIgnoreCase(name));
+	}
+
+	/**
+	 * Get the age of crops or any other progress information related to other blocks.
+	 *
+	 * @param block
+	 * @return
+	 */
+	private double getAge(Block block) {
+		return hasAging(block) ? getProgress(block) : DEFAULT_HEALTH;
+	}
+
+	/**
+	 * Get if the block has growth stages or has any other progress information.
+	 *
+	 * @param block
+	 * @return
+	 */
+	public boolean hasAging(Block block) {
+		BlockData bdata = block.getBlockData();
+		return bdata instanceof Ageable || bdata instanceof Levelled || bdata instanceof Hatchable
+				|| bdata instanceof Beehive || bdata instanceof Sapling;
+	}
+
+	/**
+	 * Get the growth stage of the crop as a percentage of the maximum age.
+	 *
+	 * @param block
+	 * @return int percentage growth progress
+	 */
+	private int getProgress(Block block) {
+		if (isItemsAdderBlock(block) && includePlugin(ITEMSADDER)) {
+			CustomCrop customCrop = CustomCrop.byAlreadyPlaced(block);
+			if (customCrop != null) {
+				 return customCrop.getAge() * 100 / customCrop.getMaxAge();
+			}
+		}
+
+		int progress = 0;
+		BlockData bdata = block.getBlockData();
+		if (bdata instanceof Ageable) {
+			Ageable age = (Ageable) bdata;
+			progress = age.getAge() * 100 / age.getMaximumAge();
+			if (progress == 0 && isFullyGrown(block)) {
+				progress = 100;
+			}
+
+		} else if (bdata instanceof Levelled) {
+			Levelled levelled = (Levelled) bdata;
+			progress = levelled.getLevel() * 100 / levelled.getMaximumLevel();
+
+		} else if (bdata instanceof Hatchable) {
+			Hatchable hatchable = (Hatchable) bdata;
+			progress = hatchable.getHatch() * 100 / hatchable.getMaximumHatch();
+
+		} else if (bdata instanceof Beehive) {
+			Beehive beehive = (Beehive) bdata;
+			progress = beehive.getHoneyLevel() * 100 / beehive.getMaximumHoneyLevel();
+
+		} else if (bdata instanceof Sapling) {
+			Sapling sapling = (Sapling) bdata;
+			progress = sapling.getStage() * 100 / sapling.getMaximumStage();
+		}
+
+		return progress;
+	}
+
+	/**
+	 * If CACTUS and SUGAR_CANE are at least 3 blocks tall then assume fully grown.
+	 *
+	 * @param block
+	 * @return
+	 */
+	private boolean isFullyGrown(Block block) {
+		Material material = block.getType();
+		if (material != Material.CACTUS && material != Material.SUGAR_CANE) {
+			return false;
+		}
+		return material == block.getRelative(BlockFace.DOWN).getType() && material == block.getRelative(BlockFace.DOWN, 2).getType();
 	}
 }

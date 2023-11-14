@@ -155,6 +155,10 @@ public class Settings {
 		return config.getBoolean("ItemFrame.display_content");
 	}
 
+	public boolean isDisplayGrowth() {
+		return config.getBoolean("Crops.display_growth");
+	}
+
 	private String loadActionBarColour() {
 		String colour = config.getString("Display.actionbar.textcolor", "WHITE").toUpperCase();
 		if (Enums.getIfPresent(ChatColor.class, colour).orNull() != null) {

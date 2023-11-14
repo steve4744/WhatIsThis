@@ -37,15 +37,22 @@ public class DisplayHandler {
 	}
 
 	/**
-	 * This method handles the visual output of a given Block based on
+	 * This method handles the visual output of a given block or entity based on
 	 * the configured visual method(s).
 	 *
-	 * @param result	The targeted block or entity @notnull
-	 * @param player	The player to display the target to
+	 * @param prefix  name of plugin providing custom block or entity
+	 * @param message name of block or entity
+	 * @param player  player to display the information to
+	 * @param block   targeted block, null for entities
+	 * @param health  health status of entity, used to display progress in boss bar
 	 */
 	public void getVisualMethod(String prefix, String message, Player player, Block block, double health) {
 		if (message.isEmpty()) {
 			return;
+		}
+
+		if (block != null && plugin.getSettings().isDisplayGrowth() && plugin.getDataHandler().hasAging(block)) {
+			message = message + " : " + (int)health + "%";
 		}
 
 		if (plugin.getSettings().isScoreboardEnabled()) {
@@ -64,6 +71,9 @@ public class DisplayHandler {
 		if (plugin.getSettings().isBossbarEnabled()) {
 			if (!plugin.getSettings().isBossBarOnSneak() || (plugin.getSettings().isBossBarOnSneak() && player.isSneaking())) {
 				BossBarManager bm = new BossBarManager(plugin);
+				if (block != null) {
+					health = health / 100;
+				}
 				bm.setBar(player, message, prefix, health);
 			}
 		}
