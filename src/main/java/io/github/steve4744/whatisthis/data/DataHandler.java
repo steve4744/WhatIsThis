@@ -201,6 +201,12 @@ public class DataHandler {
 				return "";
 			}
 
+		} else if (isOraxenEntity(entity) && includePlugin(ORAXEN)) {
+			targetName = ChatColor.stripColor(OraxenHandler.getEntityDisplayName(entity));
+			if (plugin.getSettings().getCustomBlacklist(ORAXEN).contains(targetName)) {
+				return "";
+			}
+
 		} else if (isHybridEntity(entity.getType().toString())) {
 			targetName = getVariant(entity) + " " + vanillaName;
 
@@ -393,6 +399,10 @@ public class DataHandler {
 		return oraxen ? OraxenHandler.isOraxen(block) : false;
 	}
 
+	private boolean isOraxenEntity(Entity entity) {
+		return oraxen ? OraxenHandler.isOraxen(entity) : false;
+	}
+
 	private boolean isCraftoryBlock(Block block) {
 		return craftory ? CraftoryHandler.isCraftory(block.getLocation()) : false;
 	}
@@ -431,6 +441,8 @@ public class DataHandler {
 			return ITEMSADDER;
 		} else if (isMythicMobsEntity(entity)) {
 			return MYTHICMOBS;
+		} else if (isOraxenEntity(entity)) {
+			return ORAXEN;
 		}
 		return "";
 	}

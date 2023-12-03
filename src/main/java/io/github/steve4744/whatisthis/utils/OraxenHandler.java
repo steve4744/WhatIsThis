@@ -24,69 +24,43 @@ SOFTWARE.
  */
 package io.github.steve4744.whatisthis.utils;
 
-import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.data.type.NoteBlock;
-import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.entity.Entity;
 
-import io.th0rgal.oraxen.OraxenPlugin;
-import io.th0rgal.oraxen.mechanics.provided.gameplay.block.BlockMechanic;
-import io.th0rgal.oraxen.mechanics.provided.gameplay.block.BlockMechanicFactory;
-import io.th0rgal.oraxen.mechanics.provided.gameplay.furniture.FurnitureFactory;
-import io.th0rgal.oraxen.mechanics.provided.gameplay.furniture.FurnitureMechanic;
-import io.th0rgal.oraxen.mechanics.provided.gameplay.noteblock.NoteBlockMechanic;
-import io.th0rgal.oraxen.mechanics.provided.gameplay.noteblock.NoteBlockMechanicFactory;
-import io.th0rgal.oraxen.shaded.customblockdata.CustomBlockData;
-import static io.th0rgal.oraxen.mechanics.provided.gameplay.furniture.FurnitureMechanic.FURNITURE_KEY;
+import io.th0rgal.oraxen.api.OraxenBlocks;
+import io.th0rgal.oraxen.api.OraxenFurniture;
 
 public class OraxenHandler {
 
-	@SuppressWarnings("deprecation")
 	public static boolean isOraxen(Block block) {
-		if (block.getBlockData() instanceof NoteBlock) {
-			final NoteBlock noteBlock = (NoteBlock) block.getBlockData();
-
-			return NoteBlockMechanicFactory.getBlockMechanic((int) (noteBlock
-                    .getInstrument().getType()) * 25 + (int) noteBlock.getNote().getId()
-                    + (noteBlock.isPowered() ? 400 : 0) - 26) != null;
-
-		} else if (block.getType() == Material.MUSHROOM_STEM) {
-			return BlockMechanicFactory.getBlockMechanic(block) != null;
-
-		} else if (block.getType() == Material.BARRIER) {
-			final PersistentDataContainer customBlockData = new CustomBlockData(block, OraxenPlugin.get());
-            return customBlockData.has(FURNITURE_KEY, PersistentDataType.STRING);
-		}
-
-		return false;
+		return OraxenBlocks.isOraxenBlock(block) || OraxenFurniture.isFurniture(block);
 	}
 
-	@SuppressWarnings("deprecation")
+	public static boolean isOraxen(Entity entity) {
+		return OraxenFurniture.isFurniture(entity);
+	}
+
 	public static String getDisplayName(Block block) {
-		if (block.getBlockData() instanceof NoteBlock) {
-			final NoteBlock noteBlock = (NoteBlock) block.getBlockData();
-			final NoteBlockMechanic mech = NoteBlockMechanicFactory.getBlockMechanic((int) (noteBlock
-					.getInstrument().getType()) * 25 + (int) noteBlock.getNote().getId()
-					+ (noteBlock.isPowered() ? 400 : 0) - 26);
+		if (OraxenBlocks.isOraxenNoteBlock(block)) {
+			return Utils.capitalizeFully(OraxenBlocks.getNoteBlockMechanic(block).getItemID());
 
-			return mech != null ? Utils.capitalizeFully(mech.getItemID()) : "";
+		} else if (OraxenBlocks.isOraxenStringBlock(block)) {
+			return Utils.capitalizeFully(OraxenBlocks.getStringMechanic(block).getItemID());
 
-		} else if (block.getType() == Material.MUSHROOM_STEM) {
-			final BlockMechanic mech = BlockMechanicFactory.getBlockMechanic(block);
+		} else if (OraxenBlocks.isOraxenBlock(block)) {
+			return Utils.capitalizeFully(OraxenBlocks.getBlockMechanic(block).getItemID());
 
-			return mech != null ? Utils.capitalizeFully(mech.getItemID()) : "";
-
-		} else if (block.getType() == Material.BARRIER) {
-			final PersistentDataContainer customBlockData = new CustomBlockData(block, OraxenPlugin.get());
-
-			final String mechanicID = customBlockData.get(FURNITURE_KEY, PersistentDataType.STRING);
-			final FurnitureMechanic mech = (FurnitureMechanic) FurnitureFactory.getInstance().getMechanic(mechanicID);
-
-			return mech != null ? Utils.capitalizeFully(mech.getItemID()) : "";
+		} else if (OraxenFurniture.isFurniture(block)) {
+			return Utils.capitalizeFully(OraxenFurniture.getFurnitureMechanic(block).getItemID());
 		}
 
 		return "";
 	}
 
+	public static String getEntityDisplayName(Entity entity) {
+		if (isOraxen(entity)) {
+			return Utils.capitalizeFully(OraxenFurniture.getFurnitureMechanic(entity).getItemID());
+		}
+		return "";
+	}
 }
