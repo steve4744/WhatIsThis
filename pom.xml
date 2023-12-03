@@ -38,7 +38,7 @@
         <name>xenondevs repository</name>
         <url>https://repo.xenondevs.xyz/releases</url>
     </repository>
-    <!-- SlimeFun4 & Oraxen Repo -->
+    <!-- SlimeFun4, ItemsAdder & Craftory Repo -->
     <repository>
         <id>jitpack.io</id>
         <url>https://jitpack.io</url>
@@ -49,6 +49,12 @@
         <name>Lumine Releases</name>
         <url>https://mvn.lumine.io/repository/maven-public/</url>
     </repository>
+    <!-- Oraxen Repo -->
+    <repository>
+        <id>oraxen-releases</id>
+        <name>Oraxen Repository</name>
+        <url>https://repo.oraxen.com/#/releases</url>
+    </repository>
   </repositories>
 
   <dependencies>
@@ -56,7 +62,7 @@
     <dependency>
         <groupId>org.spigotmc</groupId>
         <artifactId>spigot-api</artifactId>
-        <version>1.20.1-R0.1-SNAPSHOT</version>
+        <version>1.20.2-R0.1-SNAPSHOT</version>
         <scope>provided</scope>
     </dependency>
     <!-- bStats -->
@@ -70,14 +76,14 @@
     <dependency>
         <groupId>me.clip</groupId>
         <artifactId>placeholderapi</artifactId>
-        <version>2.11.3</version>
+        <version>2.11.5</version>
         <scope>provided</scope>
     </dependency>
     <!-- Slimefun -->
     <dependency>
         <groupId>com.github.Slimefun</groupId>
         <artifactId>Slimefun4</artifactId>
-        <version>RC-34</version>
+        <version>RC-35</version>
         <scope>provided</scope>
     </dependency>
     <!-- Craftory -->
@@ -97,21 +103,21 @@
     <dependency>
         <groupId>xyz.xenondevs.nova</groupId>
         <artifactId>nova-api</artifactId>
-        <version>0.14.2</version>
+        <version>0.14.10</version>
         <scope>provided</scope>
     </dependency>
     <!-- ItemsAdder -->
     <dependency>
         <groupId>com.github.LoneDev6</groupId>
         <artifactId>api-itemsadder</artifactId>
-        <version>3.4.1e</version>
+        <version>3.6.2-beta-r3-b</version>
         <scope>provided</scope>
     </dependency>
     <!-- Oraxen -->
     <dependency>
-        <groupId>com.github.oraxen</groupId>
+        <groupId>io.th0rgal</groupId>
         <artifactId>oraxen</artifactId>
-        <version>1.157.4</version>
+        <version>1.164.0</version>
         <scope>provided</scope>
         <exclusions>
           <exclusion>
@@ -124,7 +130,7 @@
     <dependency>
         <groupId>io.lumine</groupId>
         <artifactId>Mythic-Dist</artifactId>
-        <version>5.3.3</version>
+        <version>5.5.0</version>
         <scope>provided</scope>
     </dependency>
   </dependencies>
