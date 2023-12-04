@@ -2,11 +2,11 @@
 
 ![alt text](https://user-images.githubusercontent.com/6975392/106388678-9858b180-63d7-11eb-9941-91aaa0ef6fc2.png "WhatIsThis by steve4744")
 
-WhatIsThis is a lightweight utility plugin aimed at providing block information directly to the player without the need to open a UI. This can be helpful in Survival mode to know what a block is without having to break it first, while looking at other people's builds in Creative mode, using custom block plugins like Slimefun4 and Nova, or when connected with an older client version to a server using Via* plugins.
+WhatIsThis is a lightweight utility plugin aimed at providing block information directly to the player without the need to open a UI. This can be helpful in Survival mode to know what a block is without having to break it first, while looking at other people's builds in Creative mode, using custom block plugins like Slimefun4 and Nova, or when connected with an older client version to a server using Via* plugins. Following the Archaeology Update in Minecraft 1.20. it can also be useful to easily and quickly identify  _Suspicious Sand_  and  _Suspicious Gravel_  blocks.
 
 Starting with version 5.0, the plugin will also identify entities in the same way as blocks.
 
-This plugin was inspired by Forge mods such as WAILA (What Am I Looking At) and HWYLA (Here's What You're Looking At) which run client-side to constantly display the name of the block being looked at. This plugin runs server-side, and will display the block information either on the ActionBar, the side of the screen (scoreboard), on the BossBar, or in chat. The information is displayed either automatically by looking at a block, or by right-clicking the block with a STICK (default, can be changed in config) or running command `/wt` while looking at a block. The items dropped by the block are also displayed in the scoreboard and chat display options.
+This plugin was inspired by Forge mods such as WAILA (What Am I Looking At) and HWYLA (Here's What You're Looking At) which run client-side to constantly display the name of the block being looked at. This plugin runs server-side, and will display the block and entity information either on the ActionBar, the side of the screen (scoreboard), on the BossBar, or in chat. The information is displayed either automatically by looking at a block, or by right-clicking the block with a STICK (default, can be changed in config) or running command `/wt` while looking at a block. The items dropped by the block are also displayed in the scoreboard and chat display options.
 
 By enabling 'auto_display' in the config, the display will automatically update just by looking at a different block without the need for commands or clicking. As this runs server side, having 'auto-display' enabled may impact performance depending on the server hardware, software and the number of players online.
 
@@ -42,9 +42,15 @@ The following plugins which provide a number of custom blocks are supported:
 [MythicMobs](https://www.spigotmc.org/resources/mythicmobs-free-version.5702/ "MythicMobs") by Xikage
 
 ## Dependencies
-The latest release of this plugin requires Java 17 and Minecraft/Spigot 1.17.1 - 1.20.1.<br>
-The latest release supports Oraxen 1.157.4.<br>
-The latest release supports Nova 0.14.2.
+The latest release of this plugin requires Java 17 and Minecraft/Spigot 1.17.1 - 1.20.2 and supports
+
+```
+Oraxen 1.164.0
+Nova 0.14.10
+MythicMobs 5.5.0
+Slimefun RC-35
+ItemsAdder - 3.6.2
+```
 
 Version 4.5 is supported for servers running a minimum of Java 16 and Minecraft/Spigot 1.17.1.
 
@@ -74,14 +80,16 @@ As the Scoreboard has a limit of 40 characters, item names which are too long wi
 
 ## Placeholders
 Support for placeholders can be enabled in the config.
+
 ```
-%whatisthis_blockname% - name of the block
+%whatisthis_blockname%    - name of the targeted block
+%whatisthis_entityname%   - name of the targeted entity
 %whatisthis_resourcename% - name of the providing resource
-%whatisthis_location% - location of block
-%whatisthis_locationX% - X coordinate of block
-%whatisthis_locationY% - Y coordinate of block
-%whatisthis_locationZ% - Z coordinate of block
-%whatisthis_version% - version of the plugin
+%whatisthis_location%     - location of the block or entity
+%whatisthis_locationX%    - X coordinate of the block or entity
+%whatisthis_locationY%    - Y coordinate of the block or entity
+%whatisthis_locationZ%    - Z coordinate of the block or entity
+%whatisthis_version%      - version of the plugin
 ```
     
 ## Download
@@ -95,4 +103,4 @@ WhatIsThis can be [downloaded from Spigot](https://www.spigotmc.org/resources/wh
 
 
 
-Updated 7th July 2023 by steve4744
+Updated 4th December 2023 by steve4744
