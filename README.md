@@ -27,36 +27,30 @@ The text and BossBar colours can be set in the _config.yml_ file.
 
 ## Suppported Plugins
 
-The following plugins which provide a number of custom blocks are supported:
+The following plugins which provide a number of custom blocks and entities are supported:
 
-[Slimefun4](https://github.com/Slimefun/Slimefun4/ "Slimefun4") by TheBusyBiscuit
+[Slimefun4 - RC-35](https://github.com/Slimefun/Slimefun4/ "Slimefun4") by TheBusyBiscuit
 
-[Nova](https://github.com/xenondevs/Nova/ "Nova") by xenondevs
+[Nova - 0.14.10](https://github.com/xenondevs/Nova/ "Nova") by xenondevs
 
-[ItemsAdder](https://www.spigotmc.org/resources/%E2%9C%85must-have%E2%9C%85-itemsadder%E2%9C%A8custom-items-huds-guis-mobs-3dmodels-emojis-blocks-wings-hats-liquids.73355/ "ItemsAdder") by LoneDev
+[ItemsAdder - 3.6.2](https://www.spigotmc.org/resources/%E2%9C%85must-have%E2%9C%85-itemsadder%E2%9C%A8custom-items-huds-guis-mobs-3dmodels-emojis-blocks-wings-hats-liquids.73355/ "ItemsAdder") by LoneDev
 
-[Oraxen](https://github.com/oraxen/oraxen/ "Oraxen") by Th0rgal
+[Oraxen - 1.164.0](https://github.com/oraxen/oraxen/ "Oraxen") by Th0rgal
 
-[Craftory Tech](https://www.spigotmc.org/resources/craftory-tech.81151/ "Craftory Tech") by CraftoryStudios
+[Craftory Tech - 0.8.3](https://www.spigotmc.org/resources/craftory-tech.81151/ "Craftory Tech") by CraftoryStudios
 
-[MythicMobs](https://www.spigotmc.org/resources/mythicmobs-free-version.5702/ "MythicMobs") by Xikage
+[MythicMobs - 5.5.0](https://www.spigotmc.org/resources/mythicmobs-free-version.5702/ "MythicMobs") by Xikage
 
-## Dependencies
-The latest release of this plugin requires Java 17 and Minecraft/Spigot 1.17.1 - 1.20.2 and supports
+PlaceholderAPI is optional and is only required to use this plugin's placeholders.
 
-```
-Oraxen 1.164.0
-Nova 0.14.10
-MythicMobs 5.5.0
-Slimefun RC-35
-ItemsAdder - 3.6.2
-```
+
+## Support for older versions
+The latest release of this plugin requires Java 17 and Minecraft/Spigot 1.17.1 - 1.20.3
 
 Version 4.5 is supported for servers running a minimum of Java 16 and Minecraft/Spigot 1.17.1.
 
-The legacy version of the plugin, v3.4, is supported on Minecraft/Spigot 1.13.2 through to 1.16.5.
+Version 3.4 (legacy version) is available for Minecraft/Spigot 1.13.2 through to 1.16.5 but is no longer supported.
 
-PlaceholderAPI is required to use this plugin's placeholders.
 
 ## Commands & Permissions
 ```
@@ -103,4 +97,4 @@ WhatIsThis can be [downloaded from Spigot](https://www.spigotmc.org/resources/wh
 
 
 
-Updated 4th December 2023 by steve4744
+Updated 5th December 2023 by steve4744
