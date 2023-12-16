@@ -53,7 +53,7 @@
     <repository>
         <id>oraxen-releases</id>
         <name>Oraxen Repository</name>
-        <url>https://repo.oraxen.com/#/releases</url>
+        <url>https://repo.oraxen.com/releases</url>
     </repository>
   </repositories>
 
@@ -115,7 +115,7 @@
     </dependency>
     <!-- Oraxen -->
     <dependency>
-        <groupId>io.th0rgal</groupId>
+        <groupId>com.github.steve4744</groupId>
         <artifactId>oraxen</artifactId>
         <version>1.164.0</version>
         <scope>provided</scope>
