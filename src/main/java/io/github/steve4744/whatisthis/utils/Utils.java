@@ -70,12 +70,12 @@ public class Utils {
 	}
 
 	public static RayTraceResult getRayTraceResult(Player player) {
-		return player.getWorld().rayTrace(player.getEyeLocation().add(player.getLocation().getDirection()),
+		return player.getWorld().rayTrace(player.getEyeLocation(),
 				player.getEyeLocation().getDirection(),
 				10.0,
 				FluidCollisionMode.NEVER,
 				false,
-				1.0,
+				0.1,
 				entity -> !entity.getUniqueId().equals(player.getUniqueId()));
 	}
 
