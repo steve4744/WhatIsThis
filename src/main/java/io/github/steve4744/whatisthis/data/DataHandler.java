@@ -213,7 +213,11 @@ public class DataHandler {
 		} else if (entity.getType() == EntityType.ITEM_FRAME || entity.getType() == EntityType.GLOW_ITEM_FRAME) {
 			final ItemFrame iframe = (ItemFrame) entity;
 			if (plugin.getSettings().isItemFrameContentEnabled() && iframe.getItem().getType() != Material.AIR) {
-				targetName = translateItemName(iframe.getItem().getType().toString(), player);
+				if (iframe.getItem().getItemMeta() != null && iframe.getItem().getItemMeta().hasDisplayName()) {
+					targetName = iframe.getItem().getItemMeta().getDisplayName();
+				} else {
+					targetName = translateItemName(iframe.getItem().getType().toString(), player);
+				}
 			}
 		}
 
