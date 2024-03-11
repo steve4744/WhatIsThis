@@ -45,6 +45,7 @@ import org.bukkit.block.data.Hatchable;
 import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.type.Beehive;
 import org.bukkit.block.data.type.Sapling;
+import org.bukkit.block.data.type.TurtleEgg;
 import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Boat;
 import org.bukkit.entity.Cat;
@@ -90,6 +91,7 @@ public class DataHandler {
 	private boolean mythicmobs;
 
 	private static final double DEFAULT_HEALTH = 1.0;
+	private static final double DEFAULT_AGE = 100.0;
 	private static final String SLIMEFUN = "Slimefun";
 	private static final String NOVA = "Nova";
 	private static final String ITEMSADDER = "ItemsAdder";
@@ -604,7 +606,7 @@ public class DataHandler {
 	 * @return
 	 */
 	private double getAge(Block block) {
-		return hasAging(block) ? getProgress(block) : DEFAULT_HEALTH;
+		return hasAging(block) ? getProgress(block) : DEFAULT_AGE;
 	}
 
 	/**
@@ -615,6 +617,10 @@ public class DataHandler {
 	 */
 	public boolean hasAging(Block block) {
 		BlockData bdata = block.getBlockData();
+		if (!Bukkit.getBukkitVersion().contains("1.20")) {
+			return bdata instanceof Ageable || bdata instanceof Levelled || bdata instanceof TurtleEgg
+					|| bdata instanceof Beehive || bdata instanceof Sapling;
+		}
 		return bdata instanceof Ageable || bdata instanceof Levelled || bdata instanceof Hatchable
 				|| bdata instanceof Beehive || bdata instanceof Sapling;
 	}
@@ -646,10 +652,6 @@ public class DataHandler {
 			Levelled levelled = (Levelled) bdata;
 			progress = levelled.getLevel() * 100 / levelled.getMaximumLevel();
 
-		} else if (bdata instanceof Hatchable) {
-			Hatchable hatchable = (Hatchable) bdata;
-			progress = hatchable.getHatch() * 100 / hatchable.getMaximumHatch();
-
 		} else if (bdata instanceof Beehive) {
 			Beehive beehive = (Beehive) bdata;
 			progress = beehive.getHoneyLevel() * 100 / beehive.getMaximumHoneyLevel();
@@ -657,6 +659,15 @@ public class DataHandler {
 		} else if (bdata instanceof Sapling) {
 			Sapling sapling = (Sapling) bdata;
 			progress = sapling.getStage() * 100 / sapling.getMaximumStage();
+
+		} else if (Bukkit.getVersion().contains("1.20")) {
+			if (bdata instanceof Hatchable) {
+				Hatchable hatchable = (Hatchable) bdata;
+				progress = hatchable.getHatch() * 100 / hatchable.getMaximumHatch();
+			}
+		} else if (bdata instanceof TurtleEgg) {
+				TurtleEgg turtleEgg = (TurtleEgg) bdata;
+				progress = turtleEgg.getHatch() * 100 / turtleEgg.getMaximumHatch();
 		}
 
 		return progress;
