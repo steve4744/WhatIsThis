@@ -59,6 +59,10 @@ ItemFrame:
 Crops:
   display_growth: false
 
+# Enable only if you want to display the facing direction and open state of trapdoors.
+Trapdoor:
+  display_state: false
+
 # Choose the method(s) to display the block/entity info by enabling the preferred option(s).
 # If the method is enabled and 'on_sneak' is also true, the info is only displayed if
 # the player is 'sneaking' (holding down the Shift key).

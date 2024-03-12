@@ -1,7 +1,7 @@
 /*
  * MIT License
 
-Copyright (c) 2023 steve4744
+Copyright (c) 2024 steve4744
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -35,14 +35,17 @@ import java.util.Set;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Skull;
 import org.bukkit.block.data.Ageable;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.Directional;
 import org.bukkit.block.data.Hatchable;
 import org.bukkit.block.data.Levelled;
+import org.bukkit.block.data.Openable;
 import org.bukkit.block.data.type.Beehive;
 import org.bukkit.block.data.type.Sapling;
 import org.bukkit.block.data.type.TurtleEgg;
@@ -162,6 +165,7 @@ public class DataHandler {
 					return name != null ? name + "'s Head" : "";
 				}
 			}
+
 			targetName = block.getType().toString();
 			//coloured wall_banners are not currently in the Mojang language files
 			if (targetName.contains("WALL_BANNER")) {
@@ -170,6 +174,14 @@ public class DataHandler {
 		}
 
 		String translatedName = isCustomBlock(block) ? targetName : translateItemName(targetName, player);
+
+		if (isTrapdoor(block) && plugin.getSettings().isDisplayTrapdoorState()) {
+			Directional directional = (Directional) block.getBlockData();
+			String facing = Utils.capitalizeFully(directional.getFacing().toString());
+			Openable openable = (Openable) block.getBlockData();
+			String state = openable.isOpen() ? "Open" : "Closed";
+			return translatedName + " [" + state + ", " + facing + "]";
+		}
 
 		if (plugin.getSettings().isCustomDataEnabled()) {
 			String prefix = getCustomResourceName(block) != "" ? getCustomResourceName(block).toLowerCase() + "_" : "minecraft_";
@@ -685,5 +697,9 @@ public class DataHandler {
 			return false;
 		}
 		return material == block.getRelative(BlockFace.DOWN).getType() && material == block.getRelative(BlockFace.DOWN, 2).getType();
+	}
+
+	private boolean isTrapdoor(Block block) {
+		return Tag.TRAPDOORS.isTagged(block.getType());
 	}
 }

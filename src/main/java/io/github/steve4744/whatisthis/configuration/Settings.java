@@ -1,7 +1,7 @@
 /*
  * MIT License
 
-Copyright (c) 2023 steve4744
+Copyright (c) 2024 steve4744
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -157,6 +157,10 @@ public class Settings {
 
 	public boolean isDisplayGrowth() {
 		return config.getBoolean("Crops.display_growth");
+	}
+
+	public boolean isDisplayTrapdoorState() {
+		return config.getBoolean("Trapdoor.display_state");
 	}
 
 	private String loadActionBarColour() {
