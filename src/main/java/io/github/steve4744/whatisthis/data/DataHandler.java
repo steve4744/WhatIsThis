@@ -32,7 +32,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Tag;
@@ -48,7 +47,6 @@ import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.Openable;
 import org.bukkit.block.data.type.Beehive;
 import org.bukkit.block.data.type.Sapling;
-import org.bukkit.block.data.type.TurtleEgg;
 import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Boat;
 import org.bukkit.entity.Cat;
@@ -549,10 +547,6 @@ public class DataHandler {
 			yield ((Axolotl)entity).getVariant().toString();
 		}
 		case "BOAT" -> {
-			String version = Bukkit.getBukkitVersion();
-			if (version.contains("1.17") || version.contains("1.18")) {
-				yield ((Boat)entity).getWoodType().toString();
-			}
 			yield ((Boat)entity).getBoatType().toString();
 		}
 		case "CAT" -> {
@@ -629,10 +623,6 @@ public class DataHandler {
 	 */
 	public boolean hasAging(Block block) {
 		BlockData bdata = block.getBlockData();
-		if (!Bukkit.getBukkitVersion().contains("1.20")) {
-			return bdata instanceof Ageable || bdata instanceof Levelled || bdata instanceof TurtleEgg
-					|| bdata instanceof Beehive || bdata instanceof Sapling;
-		}
 		return bdata instanceof Ageable || bdata instanceof Levelled || bdata instanceof Hatchable
 				|| bdata instanceof Beehive || bdata instanceof Sapling;
 	}
@@ -672,14 +662,9 @@ public class DataHandler {
 			Sapling sapling = (Sapling) bdata;
 			progress = sapling.getStage() * 100 / sapling.getMaximumStage();
 
-		} else if (Bukkit.getVersion().contains("1.20")) {
-			if (bdata instanceof Hatchable) {
+		} else if (bdata instanceof Hatchable) {
 				Hatchable hatchable = (Hatchable) bdata;
 				progress = hatchable.getHatch() * 100 / hatchable.getMaximumHatch();
-			}
-		} else if (bdata instanceof TurtleEgg) {
-				TurtleEgg turtleEgg = (TurtleEgg) bdata;
-				progress = turtleEgg.getHatch() * 100 / turtleEgg.getMaximumHatch();
 		}
 
 		return progress;
