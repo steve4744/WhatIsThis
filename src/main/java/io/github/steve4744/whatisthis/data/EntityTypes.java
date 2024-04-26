@@ -13,6 +13,7 @@ public enum EntityTypes {
 	RABBIT,
 	TROPICALFISH,
 	VILLAGER,
-	WITHER;
+	WITHER,
+	WOLF;
 
 }

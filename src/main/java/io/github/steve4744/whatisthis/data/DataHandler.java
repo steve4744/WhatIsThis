@@ -65,6 +65,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Rabbit;
 import org.bukkit.entity.TropicalFish;
 import org.bukkit.entity.Villager;
+import org.bukkit.entity.Wolf;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 
@@ -593,6 +594,9 @@ public class DataHandler {
 				profession = "";
 			}
 			yield vtype + " " + profession;
+		}
+		case "WOLF" -> {
+			yield ((Wolf)entity).getVariant().getKey().getKey();
 		}
 		default -> {
 			yield entity.getType().toString();
