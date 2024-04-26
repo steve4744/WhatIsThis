@@ -8,10 +8,10 @@ import net.md_5.bungee.api.chat.TextComponent;
 
 public class ActionBar {
 
-	private BaseComponent[] bc;
+	private BaseComponent bc;
 
 	public ActionBar(String message) {
-		bc = TextComponent.fromLegacyText(message);
+		bc = TextComponent.fromLegacy(message);
 	}
 
 	public void sendBar(Player player) {
