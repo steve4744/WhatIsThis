@@ -34,6 +34,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
+import org.bukkit.scoreboard.Criteria;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
@@ -99,7 +100,7 @@ public class ScoreboardManager {
 
 	private Scoreboard buildScoreboard() {
 		scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
-		Objective o = scoreboard.registerNewObjective("WhatIsThis", "showblock", "WhatIsThis");
+		Objective o = scoreboard.registerNewObjective("WhatIsThis", Criteria.DUMMY, "WhatIsThis");
 		o.setDisplaySlot(DisplaySlot.SIDEBAR);
 		return scoreboard;
 	}
