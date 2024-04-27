@@ -153,6 +153,7 @@ public enum EnumLang {
 	VAL_ES("val_es", new HashMap<String, String>()),
 	VEC_IT("vec_it", new HashMap<String, String>()),
 	VI_VN("vi_vn", new HashMap<String, String>()),
+	VP_VL("vp_vl", new HashMap<String, String>()),
 	YI_DE("yi_de", new HashMap<String, String>()),
 	YO_NG("yo_ng", new HashMap<String, String>()),
 	ZH_CN("zh_cn", new HashMap<String, String>()),
