@@ -1,7 +1,7 @@
 /*
  * MIT License
 
-Copyright (c) 2019 steve4744
+Copyright (c) 2024 steve4744
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -27,15 +27,14 @@ package io.github.steve4744.whatisthis;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.URL;
-
+import java.net.URI;
 import org.bukkit.Bukkit;
 
 public class VersionChecker {
 	
 	public static String getVersion() {
 		try {
-			HttpURLConnection con = (HttpURLConnection) new URL("https://api.spigotmc.org/legacy/update.php?resource=65050").openConnection();
+			HttpURLConnection con = (HttpURLConnection) new URI("https://api.spigotmc.org/legacy/update.php?resource=65050").toURL().openConnection();
 			con.setDoOutput(true);
 			con.setRequestMethod("GET");
 			String version = new BufferedReader(new InputStreamReader(con.getInputStream())).readLine();
