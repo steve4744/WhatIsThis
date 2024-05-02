@@ -77,7 +77,6 @@ import io.github.steve4744.whatisthis.lang.EnumLang;
 import io.github.steve4744.whatisthis.utils.OraxenHandler;
 import io.github.steve4744.whatisthis.utils.SlimefunHandler;
 import io.github.steve4744.whatisthis.utils.Utils;
-import io.github.steve4744.whatisthis.utils.CraftoryHandler;
 import io.github.steve4744.whatisthis.utils.ItemsAdderHandler;
 import io.github.steve4744.whatisthis.utils.MythicMobsHandler;
 import io.github.steve4744.whatisthis.utils.NovaHandler;
@@ -89,7 +88,6 @@ public class DataHandler {
 	private boolean slimefun;
 	private boolean itemsadder;
 	private boolean oraxen;
-	private boolean craftory;
 	private boolean mythicmobs;
 
 	private static final double DEFAULT_HEALTH = 1.0;
@@ -98,7 +96,6 @@ public class DataHandler {
 	private static final String NOVA = "Nova";
 	private static final String ITEMSADDER = "ItemsAdder";
 	private static final String ORAXEN = "Oraxen";
-	private static final String CRAFTORY = "Craftory";
 	private static final String MYTHICMOBS = "MythicMobs";
 
 	private Map<String, Integer> itemDrops = new HashMap<>();  // material -> amount
@@ -110,7 +107,6 @@ public class DataHandler {
 		this.nova = pm.isPluginEnabled(NOVA);
 		this.itemsadder = pm.isPluginEnabled(ITEMSADDER);
 		this.oraxen = pm.isPluginEnabled(ORAXEN);
-		this.craftory = pm.isPluginEnabled(CRAFTORY);
 		this.mythicmobs = pm.isPluginEnabled(MYTHICMOBS);
 	}
 
@@ -147,12 +143,6 @@ public class DataHandler {
 		} else if (isOraxenBlock(block) && includePlugin(ORAXEN)) {
 			targetName = ChatColor.stripColor(OraxenHandler.getDisplayName(block));
 			if (plugin.getSettings().getCustomBlacklist(ORAXEN).contains(targetName)) {
-				return "";
-			}
-
-		} else if (isCraftoryBlock(block) && includePlugin(CRAFTORY)) {
-			targetName = ChatColor.stripColor(CraftoryHandler.getDisplayName(block));
-			if (plugin.getSettings().getCustomBlacklist(CRAFTORY).contains(targetName)) {
 				return "";
 			}
 
@@ -311,10 +301,6 @@ public class DataHandler {
 			itemDrops.put(ChatColor.stripColor(OraxenHandler.getDisplayName(block)), 1);
 			return getItemDropNames();
 		}
-		if (isCraftoryBlock(block)) {
-			itemDrops.put(ChatColor.stripColor(CraftoryHandler.getDisplayName(block)), 1);
-			return getItemDropNames();
-		}
 
 		Set<String> zeroDropItems = new HashSet<String>();
 
@@ -393,7 +379,7 @@ public class DataHandler {
 	}
 
 	public boolean isCustomBlock(Block block) {
-		return isSlimefunBlock(block) || isNovaBlock(block) || isItemsAdderBlock(block) || isOraxenBlock(block) || isCraftoryBlock(block);
+		return isSlimefunBlock(block) || isNovaBlock(block) || isItemsAdderBlock(block) || isOraxenBlock(block);
 	}
 
 	private boolean isSlimefunBlock(Block block) {
@@ -420,10 +406,6 @@ public class DataHandler {
 		return oraxen ? OraxenHandler.isOraxen(entity) : false;
 	}
 
-	private boolean isCraftoryBlock(Block block) {
-		return craftory ? CraftoryHandler.isCraftory(block.getLocation()) : false;
-	}
-
 	private boolean isMythicMobsEntity(Entity entity) {
 		return mythicmobs ? MythicMobsHandler.isMythicMobs(entity) : false;
 	}
@@ -446,9 +428,6 @@ public class DataHandler {
 
 		} else if (isOraxenBlock(block)) {
 			return ORAXEN;
-
-		} else if (isCraftoryBlock(block)) {
-			return CRAFTORY;
 		}
 		return "";
 	}

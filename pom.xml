@@ -38,7 +38,7 @@
         <name>xenondevs repository</name>
         <url>https://repo.xenondevs.xyz/releases</url>
     </repository>
-    <!-- SlimeFun4, ItemsAdder & Craftory Repo -->
+    <!-- SlimeFun4 & ItemsAdder Repo -->
     <repository>
         <id>jitpack.io</id>
         <url>https://jitpack.io</url>
@@ -85,19 +85,6 @@
         <artifactId>Slimefun4</artifactId>
         <version>RC-35</version>
         <scope>provided</scope>
-    </dependency>
-    <!-- Craftory -->
-    <dependency>
-        <groupId>com.github.steve4744</groupId>
-        <artifactId>craftory-tech</artifactId>
-        <version>v0.8.3</version>
-        <scope>provided</scope>
-        <exclusions>
-          <exclusion>
-              <groupId>com.github.oraxen</groupId>
-              <artifactId>Oraxen</artifactId>
-          </exclusion>
-        </exclusions>
     </dependency>
     <!-- Nova -->
     <dependency>
