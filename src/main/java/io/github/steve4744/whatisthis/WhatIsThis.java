@@ -29,8 +29,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
-
 import io.github.steve4744.whatisthis.commands.AutoTabCompleter;
 import io.github.steve4744.whatisthis.commands.WhatIsThisCommand;
 import io.github.steve4744.whatisthis.configuration.Settings;
@@ -52,6 +50,7 @@ public class WhatIsThis extends JavaPlugin {
 	private DisplayHandler displayHandler;
 	private CustomData customData;
 	private boolean placeholderapi;
+	private static final int SPIGOT_ID = 65050;
 	private static final int BSTATS_PLUGIN_ID = 4079;
 
 	@Override
@@ -156,19 +155,16 @@ public class WhatIsThis extends JavaPlugin {
 		if (!getConfig().getBoolean("check_for_update", true)) {
 			return;
 		}
-		new BukkitRunnable() {
-			@Override
-			public void run() {
-				String latestVersion = VersionChecker.getVersion();
-				if (latestVersion == "error") {
-					getLogger().info("Error attempting to check for new version. Please report it here: https://www.spigotmc.org/threads/whatisthis.360832/");
-				} else {
-					if (!version.equals(latestVersion)) {
-						getLogger().info("Latest version " + latestVersion + " available on Spigot: https://www.spigotmc.org/resources/whatisthis.65050//");
-					}
-				}
+
+		new VersionChecker(this, SPIGOT_ID).getVersion(latestVersion -> {
+			if (version.equals(latestVersion)) {
+				getLogger().info("You are running the most recent version");
+			} else if (Character.isDigit(latestVersion.charAt(0))) {
+				getLogger().info("Current version: " + version);
+				getLogger().info("New version: " + latestVersion);
+				getLogger().info("New version available from Spigot: https://www.spigotmc.org/resources/WhatIsThis." + SPIGOT_ID + "/");
 			}
-		}.runTaskLaterAsynchronously(this, 40L);
+		});
 	}
 
 }

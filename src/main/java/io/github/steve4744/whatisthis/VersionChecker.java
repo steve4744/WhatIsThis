@@ -24,28 +24,36 @@ SOFTWARE.
  */
 package io.github.steve4744.whatisthis;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Scanner;
+import java.util.function.Consumer;
+
 import org.bukkit.Bukkit;
 
 public class VersionChecker {
+
+	private WhatIsThis plugin;
+	private final int resourceId;
+
+	public VersionChecker(WhatIsThis plugin, int resourceId) {
+		this.plugin = plugin;
+		this.resourceId = resourceId;
+	}
 	
-	public static String getVersion() {
-		try {
-			HttpURLConnection con = (HttpURLConnection) new URI("https://api.spigotmc.org/legacy/update.php?resource=65050").toURL().openConnection();
-			con.setDoOutput(true);
-			con.setRequestMethod("GET");
-			String version = new BufferedReader(new InputStreamReader(con.getInputStream())).readLine();
-			con.disconnect();
-			if (version.length() <= 7) {
-				return version;
+	public void getVersion(final Consumer<String> consumer) {
+		Bukkit.getScheduler().runTaskLaterAsynchronously(this.plugin, () -> {
+			try (InputStream is = new URI("https://api.spigotmc.org/legacy/update.php?resource=" + this.resourceId + "/~").toURL().openStream();
+					Scanner scann = new Scanner(is)) {
+				if (scann.hasNext()) {
+					consumer.accept(scann.next());
+				}
+			} catch (IOException | URISyntaxException e) {
+				plugin.getLogger().info("Unable to check for update: " + e.getMessage());
 			}
-		} catch (Exception ex) {
-			Bukkit.getLogger().info("[WhatIsThis] Failed to check for an update on Spigot.");
-		}
-		return "error";
+		}, 40L);
 	}
 
 }
