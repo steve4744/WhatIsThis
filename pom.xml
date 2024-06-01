@@ -69,35 +69,35 @@
     <dependency>
         <groupId>org.bstats</groupId>
         <artifactId>bstats-bukkit</artifactId>
-        <version>3.0.0</version>
+        <version>3.0.2</version>
         <scope>compile</scope>
     </dependency>
     <!-- PlaceholderAPI -->
     <dependency>
         <groupId>me.clip</groupId>
         <artifactId>placeholderapi</artifactId>
-        <version>2.11.5</version>
+        <version>2.11.6</version>
         <scope>provided</scope>
     </dependency>
     <!-- Slimefun -->
     <dependency>
         <groupId>com.github.Slimefun</groupId>
         <artifactId>Slimefun4</artifactId>
-        <version>RC-35</version>
+        <version>RC-37</version>
         <scope>provided</scope>
     </dependency>
     <!-- Nova -->
     <dependency>
         <groupId>xyz.xenondevs.nova</groupId>
         <artifactId>nova-api</artifactId>
-        <version>0.14.10</version>
+        <version>0.16</version>
         <scope>provided</scope>
     </dependency>
     <!-- ItemsAdder -->
     <dependency>
         <groupId>com.github.LoneDev6</groupId>
         <artifactId>api-itemsadder</artifactId>
-        <version>3.6.2-beta-r3-b</version>
+        <version>3.6.3-beta-14</version>
         <scope>provided</scope>
     </dependency>
     <!-- Oraxen -->
@@ -117,7 +117,7 @@
     <dependency>
         <groupId>io.lumine</groupId>
         <artifactId>Mythic-Dist</artifactId>
-        <version>5.5.0</version>
+        <version>5.6.2</version>
         <scope>provided</scope>
     </dependency>
   </dependencies>
