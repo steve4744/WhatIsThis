@@ -29,23 +29,23 @@ The text and BossBar colours can be set in the _config.yml_ file.
 
 The following plugins which provide a number of custom blocks and entities are supported:
 
-[Slimefun4 - RC-35](https://github.com/Slimefun/Slimefun4/ "Slimefun4") by TheBusyBiscuit
+[Slimefun4 - RC-37](https://github.com/Slimefun/Slimefun4/ "Slimefun4") by TheBusyBiscuit
 
-[Nova - 0.14.10](https://github.com/xenondevs/Nova/ "Nova") by xenondevs
+[Nova - 0.16](https://github.com/xenondevs/Nova/ "Nova") by xenondevs
 
-[ItemsAdder - 3.6.2](https://www.spigotmc.org/resources/%E2%9C%85must-have%E2%9C%85-itemsadder%E2%9C%A8custom-items-huds-guis-mobs-3dmodels-emojis-blocks-wings-hats-liquids.73355/ "ItemsAdder") by LoneDev
+[ItemsAdder - 3.6.3](https://www.spigotmc.org/resources/%E2%9C%85must-have%E2%9C%85-itemsadder%E2%9C%A8custom-items-huds-guis-mobs-3dmodels-emojis-blocks-wings-hats-liquids.73355/ "ItemsAdder") by LoneDev
 
 [Oraxen - 1.164.0](https://github.com/oraxen/oraxen/ "Oraxen") by Th0rgal
 
-[Craftory Tech - 0.8.3](https://www.spigotmc.org/resources/craftory-tech.81151/ "Craftory Tech") by CraftoryStudios
-
-[MythicMobs - 5.5.0](https://www.spigotmc.org/resources/mythicmobs-free-version.5702/ "MythicMobs") by Xikage
+[MythicMobs - 5.6.2](https://www.spigotmc.org/resources/mythicmobs-free-version.5702/ "MythicMobs") by Xikage
 
 PlaceholderAPI is optional and is only required to use this plugin's placeholders.
 
 
 ## Support for older versions
-The latest release of this plugin requires Java 17 and Minecraft/Spigot 1.17.1 - 1.20.4
+The latest release of this plugin requires Java 21 and Minecraft/Spigot 1.20.6.
+
+Version 5.5 requires Java 17 and is supported for servers running Minecraft/Spigot 1.17.1 - 1.20.4.
 
 Version 4.5 is supported for servers running a minimum of Java 16 and Minecraft/Spigot 1.17.1.
 
@@ -97,4 +97,4 @@ WhatIsThis can be [downloaded from Spigot](https://www.spigotmc.org/resources/wh
 
 
 
-Updated 12th March 2024 by steve4744
+Updated 1st June 2024 by steve4744
