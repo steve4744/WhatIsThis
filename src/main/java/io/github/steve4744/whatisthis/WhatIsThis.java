@@ -161,8 +161,8 @@ public class WhatIsThis extends JavaPlugin {
 				getLogger().info("You are running the most recent version");
 			} else if (Character.isDigit(latestVersion.charAt(0))) {
 				getLogger().info("Current version: " + version);
-				getLogger().info("New version: " + latestVersion);
-				getLogger().info("New version available from Spigot: https://www.spigotmc.org/resources/WhatIsThis." + SPIGOT_ID + "/");
+				getLogger().info("Latest release: " + latestVersion);
+				getLogger().info("Latest release available from Spigot: https://www.spigotmc.org/resources/WhatIsThis." + SPIGOT_ID + "/");
 			}
 		});
 	}

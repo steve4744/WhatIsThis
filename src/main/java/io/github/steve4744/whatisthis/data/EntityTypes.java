@@ -9,6 +9,7 @@ public enum EntityTypes {
 	HORSE,
 	LLAMA,
 	MUSHROOMCOW,
+	PAINTING,
 	PARROT,
 	RABBIT,
 	TROPICALFISH,

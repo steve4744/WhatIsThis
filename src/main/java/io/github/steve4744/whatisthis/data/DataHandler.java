@@ -60,6 +60,7 @@ import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Llama;
 import org.bukkit.entity.MushroomCow;
+import org.bukkit.entity.Painting;
 import org.bukkit.entity.Parrot;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Rabbit;
@@ -551,6 +552,9 @@ public class DataHandler {
 		}
 		case "MUSHROOMCOW" -> {
 			yield ((MushroomCow)entity).getVariant().toString();
+		}
+		case "PAINTING" -> {
+			yield ((Painting)entity).getArt().toString();
 		}
 		case "PARROT" -> {
 			yield ((Parrot)entity).getVariant().toString();

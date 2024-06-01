@@ -42,7 +42,7 @@ public class VersionChecker {
 		this.plugin = plugin;
 		this.resourceId = resourceId;
 	}
-	
+
 	public void getVersion(final Consumer<String> consumer) {
 		Bukkit.getScheduler().runTaskLaterAsynchronously(this.plugin, () -> {
 			try (InputStream is = new URI("https://api.spigotmc.org/legacy/update.php?resource=" + this.resourceId + "/~").toURL().openStream();
@@ -55,5 +55,4 @@ public class VersionChecker {
 			}
 		}, 40L);
 	}
-
 }
