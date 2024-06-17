@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.steve4744</groupId>
   <artifactId>WhatIsThis</artifactId>
-  <version>5.6</version>
+  <version>5.7-SNAPSHOT</version>
   <name>WhatIsThis</name>
   <description>A Minecraft utility plugin which displays block and entity information</description>
   <packaging>jar</packaging>
