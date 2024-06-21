@@ -50,6 +50,7 @@ import org.bukkit.block.data.type.Sapling;
 import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Boat;
 import org.bukkit.entity.Cat;
+import org.bukkit.entity.ChestBoat;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -533,6 +534,9 @@ public class DataHandler {
 		case "CAT" -> {
 			yield ((Cat)entity).getCatType().toString();
 		}
+		case "CHEST_BOAT" -> {
+			yield ((ChestBoat)entity).getBoatType().toString();
+		}
 		case "FOX" -> {
 			yield ((Fox)entity).getFoxType().toString();
 		}
@@ -550,7 +554,7 @@ public class DataHandler {
 		case "LLAMA" -> {
 			yield ((Llama)entity).getColor().toString();
 		}
-		case "MUSHROOMCOW" -> {
+		case "MOOSHROOM" -> {
 			yield ((MushroomCow)entity).getVariant().toString();
 		}
 		case "PAINTING" -> {
@@ -562,7 +566,7 @@ public class DataHandler {
 		case "RABBIT" -> {
 			yield ((Rabbit)entity).getRabbitType().toString();
 		}
-		case "TROPICALFISH" -> {
+		case "TROPICAL_FISH" -> {
 			String pattern = ((TropicalFish)entity).getPattern().toString();
 			String colour = ((TropicalFish)entity).getPatternColor().toString();
 			if (pattern.equalsIgnoreCase("none")) {
