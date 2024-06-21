@@ -46,7 +46,7 @@ public class NovaHandler {
 
 	public static String getDisplayName(Location loc, String locale) {
 		TileEntity tileEntity = manager.getTileEntity(loc);
-		return tileEntity.getBlock().getLocalizedName(locale);
+		return tileEntity.getBlock().getPlaintextName(locale);
 	}
 
 	/**
@@ -60,11 +60,11 @@ public class NovaHandler {
 	public static Map<String, Integer> getNovaItemDrops(Location loc, String locale) {
 		Map<String, Integer> drops = new HashMap<>();
 		TileEntity tileEntity = manager.getTileEntity(loc);
-		drops.put(tileEntity.getBlock().getLocalizedName(locale), 1);
+		drops.put(tileEntity.getBlock().getPlaintextName(locale), 1);
 		tileEntity.getDrops(false).forEach(i -> {
 			NovaBlock block = blockRegistry.getOrNull(i.getType().toString().toLowerCase());
 			String name = block != null ?
-					block.getLocalizedName(locale) :
+					block.getPlaintextName(locale) :
 					WhatIsThis.getPlugin().getDataHandler().translateItemName(i.getType().toString(), locale);
 			drops.put(name, i.getAmount());
 		});
