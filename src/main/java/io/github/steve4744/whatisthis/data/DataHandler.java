@@ -31,7 +31,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Tag;
@@ -46,6 +45,7 @@ import org.bukkit.block.data.Hatchable;
 import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.Openable;
 import org.bukkit.block.data.type.Beehive;
+import org.bukkit.block.data.type.ChiseledBookshelf;
 import org.bukkit.block.data.type.Sapling;
 import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Boat;
@@ -218,11 +218,13 @@ public class DataHandler {
 		} else if (entity.getType() == EntityType.ITEM_FRAME || entity.getType() == EntityType.GLOW_ITEM_FRAME) {
 			final ItemFrame iframe = (ItemFrame) entity;
 			if (plugin.getSettings().isItemFrameContentEnabled() && iframe.getItem().getType() != Material.AIR) {
-				if (iframe.getItem().getItemMeta() != null && iframe.getItem().getItemMeta().hasDisplayName()) {
+				targetName = getItemFrameContent(iframe, player);
+
+				/*if (iframe.getItem().getItemMeta() != null && iframe.getItem().getItemMeta().hasDisplayName()) {
 					targetName = iframe.getItem().getItemMeta().getDisplayName();
 				} else {
 					targetName = translateItemName(iframe.getItem().getType().toString(), player);
-				}
+				}*/
 			}
 		}
 
@@ -615,7 +617,7 @@ public class DataHandler {
 	public boolean hasAging(Block block) {
 		BlockData bdata = block.getBlockData();
 		return bdata instanceof Ageable || bdata instanceof Levelled || bdata instanceof Hatchable
-				|| bdata instanceof Beehive || bdata instanceof Sapling;
+				|| bdata instanceof Beehive || bdata instanceof Sapling || bdata instanceof ChiseledBookshelf;
 	}
 
 	/**
@@ -656,6 +658,10 @@ public class DataHandler {
 		} else if (bdata instanceof Hatchable) {
 				Hatchable hatchable = (Hatchable) bdata;
 				progress = hatchable.getHatch() * 100 / hatchable.getMaximumHatch();
+
+		} else if (bdata instanceof ChiseledBookshelf) {
+			ChiseledBookshelf bookshelf = (ChiseledBookshelf) bdata;
+			progress = bookshelf.getOccupiedSlots().size() * 100 / bookshelf.getMaximumOccupiedSlots();
 		}
 
 		return progress;
@@ -677,5 +683,23 @@ public class DataHandler {
 
 	private boolean isTrapdoor(Block block) {
 		return Tag.TRAPDOORS.isTagged(block.getType());
+	}
+
+	private String getItemFrameContent(ItemFrame iframe, Player player) {
+		// deal with custom items
+		if (iframe.getItem().getItemMeta() != null && iframe.getItem().getItemMeta().hasDisplayName()) {
+			return iframe.getItem().getItemMeta().getDisplayName();
+		}
+
+		Material content = iframe.getItem().getType();
+
+		// check for music disc names
+		if (content.toString().startsWith("MUSIC_DISC")) {
+			String track = Utils.capitalizeFully(content.toString().substring(11));
+			return translateItemName(content.toString(), player) + " : " + track;
+		}
+		//TODO check for armour trim
+
+		return translateItemName(content.toString(), player);
 	}
 }
