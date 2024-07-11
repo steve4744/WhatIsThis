@@ -69,8 +69,9 @@ import org.bukkit.entity.TropicalFish;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.Wolf;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.MusicInstrumentMeta;
+import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.plugin.PluginManager;
-
 import com.google.common.base.Enums;
 
 import dev.lone.itemsadder.api.CustomCrop;
@@ -219,12 +220,6 @@ public class DataHandler {
 			final ItemFrame iframe = (ItemFrame) entity;
 			if (plugin.getSettings().isItemFrameContentEnabled() && iframe.getItem().getType() != Material.AIR) {
 				targetName = getItemFrameContent(iframe, player);
-
-				/*if (iframe.getItem().getItemMeta() != null && iframe.getItem().getItemMeta().hasDisplayName()) {
-					targetName = iframe.getItem().getItemMeta().getDisplayName();
-				} else {
-					targetName = translateItemName(iframe.getItem().getType().toString(), player);
-				}*/
 			}
 		}
 
@@ -685,21 +680,46 @@ public class DataHandler {
 		return Tag.TRAPDOORS.isTagged(block.getType());
 	}
 
+	/**
+	 * Gets the name of the item in the item frame. If the item has a custom name return the name without
+	 * attempting to translate. Where an item has a generic name with several variants, translate the generic name
+	 * and append the variant name.
+	 * Even though armour trim patterns are materials in their own right, e.g. Material.BOLT_ARMOR_TRIM_SMITHING_TEMPLATE,
+	 * and have entries in the lang files, their translations are generic.
+	 *
+	 * @param ItemFrame
+	 * @param player
+	 * @return String name of item
+	 */
 	private String getItemFrameContent(ItemFrame iframe, Player player) {
-		// deal with custom items
 		if (iframe.getItem().getItemMeta() != null && iframe.getItem().getItemMeta().hasDisplayName()) {
 			return iframe.getItem().getItemMeta().getDisplayName();
 		}
 
 		Material content = iframe.getItem().getType();
+		String itemName = content.toString();
 
-		// check for music disc names
-		if (content.toString().startsWith("MUSIC_DISC")) {
-			String track = Utils.capitalizeFully(content.toString().substring(11));
-			return translateItemName(content.toString(), player) + " : " + track;
+		if (itemName.startsWith("MUSIC_DISC")) {
+			return translateItemName(itemName, player) + " : " + Utils.capitalizeFully(itemName.substring(11));
 		}
-		//TODO check for armour trim
 
-		return translateItemName(content.toString(), player);
+		if (Tag.ITEMS_TRIM_TEMPLATES.isTagged(content)) {
+			String delim = "_SMITHING";
+			return translateItemName(itemName, player) + " : " + Utils.capitalizeFully(itemName.substring(0, itemName.indexOf(delim)));
+		}
+
+		if (content == Material.POTION || content == Material.LINGERING_POTION || content == Material.SPLASH_POTION) {
+			final PotionMeta meta = (PotionMeta) iframe.getItem().getItemMeta();
+			return translateItemName(itemName, player) + " : " + Utils.capitalizeFully(meta.getBasePotionType().toString());
+		}
+
+		if (content == Material.GOAT_HORN) {
+			MusicInstrumentMeta meta = (MusicInstrumentMeta) iframe.getItem().getItemMeta();
+			String horn = meta.getInstrument().getKey().getKey();
+			String delim = "_goat";
+			return translateItemName(itemName, player) + " : " + Utils.capitalizeFully(horn.substring(0, horn.indexOf(delim)));
+		}
+
+		return translateItemName(itemName, player);
 	}
 }
