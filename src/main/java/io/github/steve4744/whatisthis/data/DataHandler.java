@@ -529,7 +529,7 @@ public class DataHandler {
 			yield ((Boat)entity).getBoatType().toString();
 		}
 		case "CAT" -> {
-			yield ((Cat)entity).getCatType().toString();
+			yield ((Cat)entity).getCatType().getKey().getKey();
 		}
 		case "CHEST_BOAT" -> {
 			yield ((ChestBoat)entity).getBoatType().toString();
@@ -538,7 +538,7 @@ public class DataHandler {
 			yield ((Fox)entity).getFoxType().toString();
 		}
 		case "FROG" -> {
-			yield ((Frog)entity).getVariant().toString();
+			yield ((Frog)entity).getVariant().getKey().getKey();
 		}
 		case "HORSE" -> {
 			String colour = ((Horse)entity).getColor().toString();
@@ -572,8 +572,8 @@ public class DataHandler {
 			yield colour + " " + pattern;
 		}
 		case "VILLAGER" -> {
-			String profession = ((Villager)entity).getProfession().toString();
-			String vtype = ((Villager)entity).getVillagerType().toString();
+			String profession = ((Villager)entity).getProfession().getKey().getKey();
+			String vtype = ((Villager)entity).getVillagerType().getKey().getKey();
 			if (profession.equalsIgnoreCase("none")) {
 				profession = "";
 			}
