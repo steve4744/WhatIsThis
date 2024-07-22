@@ -201,7 +201,8 @@ public class DataHandler {
 			Player targetPlayer = (Player) entity;
 			return targetPlayer.getName();
 		}
-		String vanillaName = translateEntityName(entity.getType().toString(), player);
+
+		String vanillaName = translateEntityName(entity.getType().getKey().getKey(), player);
 
 		String targetName = "";
 		if (isItemsAdderEntity(entity) && includePlugin(ITEMSADDER)) {
