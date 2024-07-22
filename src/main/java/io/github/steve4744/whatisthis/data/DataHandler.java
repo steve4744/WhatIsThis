@@ -52,6 +52,7 @@ import org.bukkit.block.data.type.TurtleEgg;
 import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Boat;
 import org.bukkit.entity.Cat;
+import org.bukkit.entity.ComplexEntityPart;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -253,7 +254,11 @@ public class DataHandler {
 		if (isMythicMobsEntity(entity)) {
 			return MythicMobsHandler.getEntityHealthNormalised(entity);
 		}
+		if (entity instanceof ComplexEntityPart) {
+			entity = ((ComplexEntityPart) entity).getParent();
+		}
 		LivingEntity le = (LivingEntity) entity;
+
 		double maxhealth = le.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
 
 		return ((Damageable) entity).getHealth() / maxhealth;
