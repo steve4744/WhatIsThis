@@ -33,6 +33,7 @@ public enum ItemDropRanges {
 	AZALEA_LEAVES(Map.of("Azalea", "0 -> 1", "Stick", "0 -> 2")),
 	BIRCH_LEAVES(Map.of("Birch_Sapling", "0 -> 1", "Stick", "0 -> 2")),
 	BROWN_MUSHROOM_BLOCK(Map.of("Brown_Mushroom", "0 -> 2")),
+	CHISELED_BOOKSHELF(Map.of("Book", "0 -> 6")),
 	CHORUS_PLANT(Map.of("Chorus_Fruit", "0 -> 1")),
 	COPPER_ORE(Map.of("Raw_copper", "2 -> 5")),
 	DARK_OAK_LEAVES(Map.of("Dark_Oak_Sapling", "0 -> 1", "Apple", "0 -> 1", "Stick", "0 -> 2")),

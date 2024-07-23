@@ -31,7 +31,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Tag;
@@ -46,10 +45,12 @@ import org.bukkit.block.data.Hatchable;
 import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.Openable;
 import org.bukkit.block.data.type.Beehive;
+import org.bukkit.block.data.type.ChiseledBookshelf;
 import org.bukkit.block.data.type.Sapling;
 import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Boat;
 import org.bukkit.entity.Cat;
+import org.bukkit.entity.ChestBoat;
 import org.bukkit.entity.ComplexEntityPart;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
@@ -69,8 +70,9 @@ import org.bukkit.entity.TropicalFish;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.Wolf;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.MusicInstrumentMeta;
+import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.plugin.PluginManager;
-
 import com.google.common.base.Enums;
 
 import dev.lone.itemsadder.api.CustomCrop;
@@ -218,11 +220,7 @@ public class DataHandler {
 		} else if (entity.getType() == EntityType.ITEM_FRAME || entity.getType() == EntityType.GLOW_ITEM_FRAME) {
 			final ItemFrame iframe = (ItemFrame) entity;
 			if (plugin.getSettings().isItemFrameContentEnabled() && iframe.getItem().getType() != Material.AIR) {
-				if (iframe.getItem().getItemMeta() != null && iframe.getItem().getItemMeta().hasDisplayName()) {
-					targetName = iframe.getItem().getItemMeta().getDisplayName();
-				} else {
-					targetName = translateItemName(iframe.getItem().getType().toString(), player);
-				}
+				targetName = getItemFrameContent(iframe, player);
 			}
 		}
 
@@ -247,8 +245,8 @@ public class DataHandler {
 		if (entity instanceof ComplexEntityPart) {
 			entity = ((ComplexEntityPart) entity).getParent();
 		}
-
 		LivingEntity le = (LivingEntity) entity;
+
 		double maxhealth = le.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
 
 		return ((Damageable) entity).getHealth() / maxhealth;
@@ -536,13 +534,16 @@ public class DataHandler {
 			yield ((Boat)entity).getBoatType().toString();
 		}
 		case "CAT" -> {
-			yield ((Cat)entity).getCatType().toString();
+			yield ((Cat)entity).getCatType().getKey().getKey();
+		}
+		case "CHEST_BOAT" -> {
+			yield ((ChestBoat)entity).getBoatType().toString();
 		}
 		case "FOX" -> {
 			yield ((Fox)entity).getFoxType().toString();
 		}
 		case "FROG" -> {
-			yield ((Frog)entity).getVariant().toString();
+			yield ((Frog)entity).getVariant().getKey().getKey();
 		}
 		case "HORSE" -> {
 			String colour = ((Horse)entity).getColor().toString();
@@ -555,7 +556,7 @@ public class DataHandler {
 		case "LLAMA" -> {
 			yield ((Llama)entity).getColor().toString();
 		}
-		case "MUSHROOMCOW" -> {
+		case "MOOSHROOM" -> {
 			yield ((MushroomCow)entity).getVariant().toString();
 		}
 		case "PAINTING" -> {
@@ -567,7 +568,7 @@ public class DataHandler {
 		case "RABBIT" -> {
 			yield ((Rabbit)entity).getRabbitType().toString();
 		}
-		case "TROPICALFISH" -> {
+		case "TROPICAL_FISH" -> {
 			String pattern = ((TropicalFish)entity).getPattern().toString();
 			String colour = ((TropicalFish)entity).getPatternColor().toString();
 			if (pattern.equalsIgnoreCase("none")) {
@@ -576,8 +577,8 @@ public class DataHandler {
 			yield colour + " " + pattern;
 		}
 		case "VILLAGER" -> {
-			String profession = ((Villager)entity).getProfession().toString();
-			String vtype = ((Villager)entity).getVillagerType().toString();
+			String profession = ((Villager)entity).getProfession().getKey().getKey();
+			String vtype = ((Villager)entity).getVillagerType().getKey().getKey();
 			if (profession.equalsIgnoreCase("none")) {
 				profession = "";
 			}
@@ -616,7 +617,7 @@ public class DataHandler {
 	public boolean hasAging(Block block) {
 		BlockData bdata = block.getBlockData();
 		return bdata instanceof Ageable || bdata instanceof Levelled || bdata instanceof Hatchable
-				|| bdata instanceof Beehive || bdata instanceof Sapling;
+				|| bdata instanceof Beehive || bdata instanceof Sapling || bdata instanceof ChiseledBookshelf;
 	}
 
 	/**
@@ -657,6 +658,10 @@ public class DataHandler {
 		} else if (bdata instanceof Hatchable) {
 				Hatchable hatchable = (Hatchable) bdata;
 				progress = hatchable.getHatch() * 100 / hatchable.getMaximumHatch();
+
+		} else if (bdata instanceof ChiseledBookshelf) {
+			ChiseledBookshelf bookshelf = (ChiseledBookshelf) bdata;
+			progress = bookshelf.getOccupiedSlots().size() * 100 / bookshelf.getMaximumOccupiedSlots();
 		}
 
 		return progress;
@@ -678,5 +683,48 @@ public class DataHandler {
 
 	private boolean isTrapdoor(Block block) {
 		return Tag.TRAPDOORS.isTagged(block.getType());
+	}
+
+	/**
+	 * Gets the name of the item in the item frame. If the item has a custom name return the name without
+	 * attempting to translate. Where an item has a generic name with several variants, translate the generic name
+	 * and append the variant name.
+	 * Even though armour trim patterns are materials in their own right, e.g. Material.BOLT_ARMOR_TRIM_SMITHING_TEMPLATE,
+	 * and have entries in the lang files, their translations are generic.
+	 *
+	 * @param ItemFrame
+	 * @param player
+	 * @return String name of item
+	 */
+	private String getItemFrameContent(ItemFrame iframe, Player player) {
+		if (iframe.getItem().getItemMeta() != null && iframe.getItem().getItemMeta().hasDisplayName()) {
+			return iframe.getItem().getItemMeta().getDisplayName();
+		}
+
+		Material content = iframe.getItem().getType();
+		String itemName = content.toString();
+
+		if (itemName.startsWith("MUSIC_DISC")) {
+			return translateItemName(itemName, player) + " : " + Utils.capitalizeFully(itemName.substring(11));
+		}
+
+		if (Tag.ITEMS_TRIM_TEMPLATES.isTagged(content)) {
+			String delim = "_SMITHING";
+			return translateItemName(itemName, player) + " : " + Utils.capitalizeFully(itemName.substring(0, itemName.indexOf(delim)));
+		}
+
+		if (content == Material.POTION || content == Material.LINGERING_POTION || content == Material.SPLASH_POTION) {
+			final PotionMeta meta = (PotionMeta) iframe.getItem().getItemMeta();
+			return translateItemName(itemName, player) + " : " + Utils.capitalizeFully(meta.getBasePotionType().toString());
+		}
+
+		if (content == Material.GOAT_HORN) {
+			MusicInstrumentMeta meta = (MusicInstrumentMeta) iframe.getItem().getItemMeta();
+			String horn = meta.getInstrument().getKey().getKey();
+			String delim = "_goat";
+			return translateItemName(itemName, player) + " : " + Utils.capitalizeFully(horn.substring(0, horn.indexOf(delim)));
+		}
+
+		return translateItemName(itemName, player);
 	}
 }

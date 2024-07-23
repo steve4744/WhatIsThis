@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.steve4744</groupId>
   <artifactId>WhatIsThis</artifactId>
-  <version>5.6.1</version>
+  <version>5.7-SNAPSHOT</version>
   <name>WhatIsThis</name>
   <description>A Minecraft utility plugin which displays block and entity information</description>
   <packaging>jar</packaging>
@@ -62,7 +62,7 @@
     <dependency>
         <groupId>org.spigotmc</groupId>
         <artifactId>spigot-api</artifactId>
-        <version>1.20.6-R0.1-SNAPSHOT</version>
+        <version>1.21-R0.1-SNAPSHOT</version>
         <scope>provided</scope>
     </dependency>
     <!-- bStats -->
