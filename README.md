@@ -43,7 +43,9 @@ PlaceholderAPI is optional and is only required to use this plugin's placeholder
 
 
 ## Support for older versions
-The latest release of this plugin requires Java 21 and Minecraft/Spigot 1.20.6.
+The latest release of this plugin requires Java 21 and Minecraft/Spigot 1.21.
+
+Version 5.6 requires Java 21 and is supported for servers running Minecraft/Spigot 1.20.6.
 
 Version 5.5 requires Java 17 and is supported for servers running Minecraft/Spigot 1.17.1 - 1.20.4.
 
@@ -97,4 +99,4 @@ WhatIsThis can be [downloaded from Spigot](https://www.spigotmc.org/resources/wh
 
 
 
-Updated 1st June 2024 by steve4744
+Updated 23rd July 2024 by steve4744
