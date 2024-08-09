@@ -52,14 +52,14 @@ public class Utils {
 	}
 
 	/**
-	 * Get the block the player is looking at. The BlockIterator method can sometimes
-	 * return an exception, so just ignore it.
+	 * Get the block the player is looking at. Ignore transparent blocks.
+	 * The BlockIterator method can sometimes return an exception, so just ignore it.
 	 *
 	 * @param player
 	 * @return block targeted by player
 	 */
 	public static Block getTargetBlock(Player player) {
-		Set<Material> transparent = Set.of(Material.AIR, Material.CAVE_AIR, Material.VOID_AIR, Material.WATER);
+		Set<Material> transparent = Set.of(Material.AIR, Material.CAVE_AIR, Material.VOID_AIR, Material.WATER, Material.LIGHT);
 		try {
 			Block lastBlock = player.getTargetBlock(transparent, 10);
 			return lastBlock;
