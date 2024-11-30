@@ -48,9 +48,7 @@ import org.bukkit.block.data.type.Beehive;
 import org.bukkit.block.data.type.ChiseledBookshelf;
 import org.bukkit.block.data.type.Sapling;
 import org.bukkit.entity.Axolotl;
-import org.bukkit.entity.Boat;
 import org.bukkit.entity.Cat;
-import org.bukkit.entity.ChestBoat;
 import org.bukkit.entity.ComplexEntityPart;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
@@ -247,7 +245,7 @@ public class DataHandler {
 		}
 		LivingEntity le = (LivingEntity) entity;
 
-		double maxhealth = le.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+		double maxhealth = le.getAttribute(Attribute.MAX_HEALTH).getValue();
 
 		return ((Damageable) entity).getHealth() / maxhealth;
 	}
@@ -530,14 +528,8 @@ public class DataHandler {
 		case "AXOLOTL" -> {
 			yield ((Axolotl)entity).getVariant().toString();
 		}
-		case "BOAT" -> {
-			yield ((Boat)entity).getBoatType().toString();
-		}
 		case "CAT" -> {
 			yield ((Cat)entity).getCatType().getKey().getKey();
-		}
-		case "CHEST_BOAT" -> {
-			yield ((ChestBoat)entity).getBoatType().toString();
 		}
 		case "FOX" -> {
 			yield ((Fox)entity).getFoxType().toString();
