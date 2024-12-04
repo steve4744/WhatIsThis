@@ -700,7 +700,7 @@ public class DataHandler {
 			return translateItemName(itemName, player) + " : " + Utils.capitalizeFully(itemName.substring(11));
 		}
 
-		if (Tag.ITEMS_TRIM_TEMPLATES.isTagged(content)) {
+		if (itemName.contains("SMITHING_TEMPLATE")) {
 			String delim = "_SMITHING";
 			return translateItemName(itemName, player) + " : " + Utils.capitalizeFully(itemName.substring(0, itemName.indexOf(delim)));
 		}
