@@ -81,6 +81,7 @@ import io.github.steve4744.whatisthis.utils.SlimefunHandler;
 import io.github.steve4744.whatisthis.utils.Utils;
 import io.github.steve4744.whatisthis.utils.ItemsAdderHandler;
 import io.github.steve4744.whatisthis.utils.MythicMobsHandler;
+import io.github.steve4744.whatisthis.utils.NexoHandler;
 import io.github.steve4744.whatisthis.utils.NovaHandler;
 
 public class DataHandler {
@@ -90,6 +91,7 @@ public class DataHandler {
 	private boolean slimefun;
 	private boolean itemsadder;
 	private boolean oraxen;
+	private boolean nexo;
 	private boolean mythicmobs;
 
 	private static final double DEFAULT_HEALTH = 1.0;
@@ -98,6 +100,7 @@ public class DataHandler {
 	private static final String NOVA = "Nova";
 	private static final String ITEMSADDER = "ItemsAdder";
 	private static final String ORAXEN = "Oraxen";
+	private static final String NEXO = "Nexo";
 	private static final String MYTHICMOBS = "MythicMobs";
 
 	private Map<String, Integer> itemDrops = new HashMap<>();  // material -> amount
@@ -109,6 +112,7 @@ public class DataHandler {
 		this.nova = pm.isPluginEnabled(NOVA);
 		this.itemsadder = pm.isPluginEnabled(ITEMSADDER);
 		this.oraxen = pm.isPluginEnabled(ORAXEN);
+		this.nexo = pm.isPluginEnabled(NEXO);
 		this.mythicmobs = pm.isPluginEnabled(MYTHICMOBS);
 	}
 
@@ -145,6 +149,12 @@ public class DataHandler {
 		} else if (isOraxenBlock(block) && includePlugin(ORAXEN)) {
 			targetName = ChatColor.stripColor(OraxenHandler.getDisplayName(block));
 			if (plugin.getSettings().getCustomBlacklist(ORAXEN).contains(targetName)) {
+				return "";
+			}
+
+		} else if (isNexoBlock(block) && includePlugin(NEXO)) {
+			targetName = ChatColor.stripColor(NexoHandler.getDisplayName(block));
+			if (plugin.getSettings().getCustomBlacklist(NEXO).contains(targetName)) {
 				return "";
 			}
 
@@ -209,6 +219,12 @@ public class DataHandler {
 		} else if (isOraxenEntity(entity) && includePlugin(ORAXEN)) {
 			targetName = ChatColor.stripColor(OraxenHandler.getEntityDisplayName(entity));
 			if (plugin.getSettings().getCustomBlacklist(ORAXEN).contains(targetName)) {
+				return "";
+			}
+
+		} else if (isNexoEntity(entity) && includePlugin(NEXO)) {
+			targetName = ChatColor.stripColor(NexoHandler.getEntityDisplayName(entity));
+			if (plugin.getSettings().getCustomBlacklist(NEXO).contains(targetName)) {
 				return "";
 			}
 
@@ -301,6 +317,10 @@ public class DataHandler {
 		}
 		if (isOraxenBlock(block)) {
 			itemDrops.put(ChatColor.stripColor(OraxenHandler.getDisplayName(block)), 1);
+			return getItemDropNames();
+		}
+		if (isNexoBlock(block)) {
+			itemDrops.put(ChatColor.stripColor(NexoHandler.getDisplayName(block)), 1);
 			return getItemDropNames();
 		}
 
@@ -408,6 +428,14 @@ public class DataHandler {
 		return oraxen ? OraxenHandler.isOraxen(entity) : false;
 	}
 
+	private boolean isNexoBlock(Block block) {
+		return nexo ? NexoHandler.isNexo(block) : false;
+	}
+
+	private boolean isNexoEntity(Entity entity) {
+		return nexo ? NexoHandler.isNexo(entity) : false;
+	}
+
 	private boolean isMythicMobsEntity(Entity entity) {
 		return mythicmobs ? MythicMobsHandler.isMythicMobs(entity) : false;
 	}
@@ -430,6 +458,9 @@ public class DataHandler {
 
 		} else if (isOraxenBlock(block)) {
 			return ORAXEN;
+
+		} else if (isNexoBlock(block)) {
+			return NEXO;
 		}
 		return "";
 	}
@@ -441,6 +472,8 @@ public class DataHandler {
 			return MYTHICMOBS;
 		} else if (isOraxenEntity(entity)) {
 			return ORAXEN;
+		} else if (isNexoEntity(entity)) {
+			return NEXO;
 		}
 		return "";
 	}

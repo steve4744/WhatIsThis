@@ -37,6 +37,8 @@ The following plugins which provide a number of custom blocks and entities are s
 
 [Oraxen - 1.164.0](https://github.com/oraxen/oraxen/ "Oraxen") by Th0rgal
 
+[Nexo - 0.3](https://docs.nexomc.com/ "Nexo") by Boy0000
+
 [MythicMobs - 5.6.2](https://www.spigotmc.org/resources/mythicmobs-free-version.5702/ "MythicMobs") by Xikage
 
 PlaceholderAPI is optional and is only required to use this plugin's placeholders.

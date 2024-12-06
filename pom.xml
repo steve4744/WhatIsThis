@@ -55,6 +55,12 @@
         <name>Oraxen Repository</name>
         <url>https://repo.oraxen.com/releases</url>
     </repository>
+    <!-- Nexo Repo -->
+    <repository>
+        <id>reposilite-repository-snapshots</id>
+        <name>Reposilite Repository</name>
+        <url>https://repo.nexomc.com/snapshots</url>
+    </repository>
   </repositories>
 
   <dependencies>
@@ -106,6 +112,20 @@
         <artifactId>oraxen</artifactId>
         <version>1.164.0</version>
         <scope>provided</scope>
+        <exclusions>
+          <exclusion>
+              <groupId>*</groupId>
+              <artifactId>*</artifactId>
+          </exclusion>
+        </exclusions>
+    </dependency>
+    <!-- Nexo -->
+    <dependency>
+        <groupId>com.nexomc</groupId>
+        <artifactId>nexo</artifactId>
+        <version>0.3.0-dev.3</version>
+        <scope>provided</scope>
+        <classifier>dev</classifier>
         <exclusions>
           <exclusion>
               <groupId>*</groupId>
