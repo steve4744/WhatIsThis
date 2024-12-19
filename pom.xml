@@ -59,7 +59,7 @@
     <repository>
         <id>reposilite-repository-snapshots</id>
         <name>Reposilite Repository</name>
-        <url>https://repo.nexomc.com/snapshots</url>
+        <url>https://repo.nexomc.com/releases</url>
     </repository>
   </repositories>
 
@@ -123,7 +123,7 @@
     <dependency>
         <groupId>com.nexomc</groupId>
         <artifactId>nexo</artifactId>
-        <version>0.3.0-dev.3</version>
+        <version>0.7.0</version>
         <scope>provided</scope>
         <classifier>dev</classifier>
         <exclusions>
