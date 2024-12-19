@@ -22,7 +22,7 @@ The item used to select the block is also configurable. The default item is a ST
 
 The name and number of items dropped reported by the plugin are those obtained from Block#getDrops(). Where the drops are variable (e.g. the number of SEEDS dropped by WHEAT) it returns the range (e.g. 0 -> 3) of possible values. Using the ActionBar or BossBar, only the name of the block is displayed and not the dropped items.
 
-The text and BossBar colours can be set in the _config.yml_ file.
+The text and BossBar colours can be set in the  _config.yml_  file.
 
 
 ## Suppported Plugins
@@ -37,7 +37,7 @@ The following plugins which provide a number of custom blocks and entities are s
 
 [Oraxen - 1.164.0](https://github.com/oraxen/oraxen/ "Oraxen") by Th0rgal
 
-[Nexo - 0.3](https://docs.nexomc.com/ "Nexo") by Boy0000
+[Nexo - 0.7.0](https://www.spigotmc.org/resources/nexo-custom-blocks-items-furniture-emotes-resourcepack-manager-1-20-4-1-21-4.121103/ "Nexo") by Boy0000
 
 [MythicMobs - 5.6.2](https://www.spigotmc.org/resources/mythicmobs-free-version.5702/ "MythicMobs") by Xikage
 
@@ -45,7 +45,9 @@ PlaceholderAPI is optional and is only required to use this plugin's placeholder
 
 
 ## Support for older versions
-The latest release of this plugin requires Java 21 and Minecraft/Spigot 1.21.
+The latest release of this plugin requires Minecraft/Spigot 1.21.3+
+
+Version 5.7 is supported for servers running Minecraft/Spigot 1.21.1.
 
 Version 5.6 requires Java 21 and is supported for servers running Minecraft/Spigot 1.20.6.
 
@@ -101,4 +103,4 @@ WhatIsThis can be [downloaded from Spigot](https://www.spigotmc.org/resources/wh
 
 
 
-Updated 23rd July 2024 by steve4744
+Updated 19th December 2024 by steve4744
