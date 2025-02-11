@@ -61,6 +61,11 @@
         <name>Reposilite Repository</name>
         <url>https://repo.nexomc.com/releases</url>
     </repository>
+    <!-- Citizens Repo -->
+    <repository>
+        <id>citizens-repo</id>
+        <url>https://maven.citizensnpcs.co/repo</url>
+    </repository>
   </repositories>
 
   <dependencies>
@@ -139,6 +144,13 @@
         <artifactId>Mythic-Dist</artifactId>
         <version>5.6.2</version>
         <scope>provided</scope>
+    </dependency>
+    <dependency>
+	    <groupId>net.citizensnpcs</groupId>
+	    <artifactId>citizensapi</artifactId>
+	    <version>2.0.37-SNAPSHOT</version>
+	    <type>jar</type>
+	    <scope>provided</scope>
     </dependency>
   </dependencies>
 

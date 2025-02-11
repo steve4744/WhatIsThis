@@ -123,10 +123,6 @@ IgnorePlugins: []
 
 # List of common blocks that will be ignored by the plugin.
 # If you want to ignore all blocks, add "all" to the list.
-#IgnoreBlocks:
-#- AIR
-#- GRASS_BLOCK
-
 IgnoreBlocks:
 - AIR
 - CAVE_AIR
@@ -136,10 +132,6 @@ IgnoreBlocks:
 
 # List of common entities that will be ignored by the plugin.
 # If you want to ignore all entities, add "all" to the list.
-#IgnoreEntities:
-#- COW
-#- ARMOUR_STAND
-
 IgnoreEntities:
 - COW
 - PIG

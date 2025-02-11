@@ -4,7 +4,7 @@ author: steve4744
 version: ${project.version}
 api-version: 1.21.3
 description: Displays the name of the block or entity that you are looking at.
-softdepend: [Slimefun, Nova, ItemsAdder, PlaceholderAPI, Oraxen, Nexo, MythicMobs]
+softdepend: [Slimefun, Nova, ItemsAdder, PlaceholderAPI, Oraxen, Nexo, MythicMobs, Citizens]
 
 commands:
   whatisthis:
