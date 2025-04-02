@@ -104,6 +104,7 @@ public enum EnumLang {
 	KO_KR("ko_kr", new HashMap<String, String>()),
 	KSH("ksh", new HashMap<String, String>()),
 	KW_GB("kw_gb", new HashMap<String, String>()),
+	KY_KG("ky_kg", new HashMap<String, String>()),
 	LA_LA("la_la", new HashMap<String, String>()),
 	LB_LU("lb_lu", new HashMap<String, String>()),
 	LI_LI("li_li", new HashMap<String, String>()),
