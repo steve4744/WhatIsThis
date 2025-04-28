@@ -38,6 +38,11 @@
         <name>xenondevs repository</name>
         <url>https://repo.xenondevs.xyz/releases</url>
     </repository>
+    <!-- ItemsAdder Repo -->
+    <repository>
+        <id>matteodev</id>
+        <url>https://maven.devs.beer/</url>
+    </repository>
     <!-- SlimeFun4 & ItemsAdder Repo -->
     <repository>
         <id>jitpack.io</id>
@@ -101,14 +106,14 @@
     <dependency>
         <groupId>xyz.xenondevs.nova</groupId>
         <artifactId>nova-api</artifactId>
-        <version>0.16</version>
+        <version>0.18.1</version>
         <scope>provided</scope>
     </dependency>
     <!-- ItemsAdder -->
     <dependency>
-        <groupId>com.github.LoneDev6</groupId>
+        <groupId>dev.lone</groupId>
         <artifactId>api-itemsadder</artifactId>
-        <version>3.6.3-beta-14</version>
+        <version>4.0.9</version>
         <scope>provided</scope>
     </dependency>
     <!-- Oraxen -->
@@ -128,9 +133,8 @@
     <dependency>
         <groupId>com.nexomc</groupId>
         <artifactId>nexo</artifactId>
-        <version>0.7.0</version>
+        <version>1.4.0</version>
         <scope>provided</scope>
-        <classifier>dev</classifier>
         <exclusions>
           <exclusion>
               <groupId>*</groupId>
@@ -142,13 +146,13 @@
     <dependency>
         <groupId>io.lumine</groupId>
         <artifactId>Mythic-Dist</artifactId>
-        <version>5.6.2</version>
+        <version>5.8.2</version>
         <scope>provided</scope>
     </dependency>
     <dependency>
 	    <groupId>net.citizensnpcs</groupId>
 	    <artifactId>citizensapi</artifactId>
-	    <version>2.0.37-SNAPSHOT</version>
+	    <version>2.0.38-SNAPSHOT</version>
 	    <type>jar</type>
 	    <scope>provided</scope>
     </dependency>
