@@ -84,7 +84,8 @@ Display:
     enabled: true
     prefix: '&7[&f{PREFIX}&7] '
   scoreboard:
-    enabled: true
+    # The use of scoreboards is not currently supported on Folia.
+    enabled: false
     on_sneak: false
     # Maximum number of ticks that scoreboard remains visible (default 60 = 3 seconds)
     timeout: 60

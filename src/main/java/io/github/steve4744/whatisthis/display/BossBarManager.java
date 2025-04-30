@@ -1,7 +1,7 @@
 /*
  * MIT License
 
-Copyright (c) 2023 steve4744
+Copyright (c) 2025 steve4744
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -33,16 +33,16 @@ import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
+import com.cjcrafter.foliascheduler.TaskImplementation;
 
 import io.github.steve4744.whatisthis.WhatIsThis;
 
 public class BossBarManager {
 
 	private WhatIsThis plugin;
-	private static Map<String, BossBar> barmap = new HashMap<String, BossBar>();
-	private static Map<String, BukkitTask> taskmap = new HashMap<String, BukkitTask>();
+	private static Map<String, BossBar> barmap = new HashMap<>();
+	private static Map<String, TaskImplementation<Void>> taskmap = new HashMap<>();
+	private TaskImplementation<Void> bossBarTask;
 
 	public BossBarManager(WhatIsThis plugin) {
 		this.plugin = plugin;
@@ -68,7 +68,7 @@ public class BossBarManager {
 	public void setBar(Player player, String message, String prefix, double progress) {
 		//kill any previous scheduled tasks
 		cancelTask(player.getName());
-		
+
 		if (message.isEmpty()) {
 			removePlayerFromBar(player);
 			return;
@@ -81,20 +81,16 @@ public class BossBarManager {
 		barmap.get(player.getName()).setTitle(prefix + ChatColor.valueOf(colour) + message);
 		barmap.get(player.getName()).setProgress(progress);
 
-		
-		BukkitTask task = new BukkitRunnable() {
-			@Override public void run() {
-				removePlayerFromBar(player);
-			}
-		}.runTaskLater(plugin, plugin.getSettings().getBossBarTimeout());
-		taskmap.put(player.getName(), task);
+		bossBarTask = plugin.getFoliaScheduler().global().runDelayed(() -> {
+			removePlayerFromBar(player);
+		}, plugin.getSettings().getBossBarTimeout());
+
+		taskmap.put(player.getName(), bossBarTask);
 	}
 
 	private void cancelTask(String playername) {
-		BukkitTask task = null;
 		if (taskmap.containsKey(playername)) {
-			task = taskmap.get(playername);
-			task.cancel();
+			taskmap.get(playername).cancel();
 			taskmap.remove(playername);
 		}
 	}

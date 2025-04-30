@@ -1,7 +1,7 @@
 /*
  * MIT License
 
-Copyright (c) 2023 steve4744
+Copyright (c) 2025 steve4744
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -27,17 +27,16 @@ package io.github.steve4744.whatisthis.display;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scoreboard.Criteria;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
+
+import com.cjcrafter.foliascheduler.TaskImplementation;
 
 import io.github.steve4744.whatisthis.WhatIsThis;
 import io.github.steve4744.whatisthis.data.DataHandler;
@@ -49,8 +48,9 @@ public class ScoreboardManager {
 	private DataHandler dataHandler;
 	
 	private Map<String, Scoreboard> scoreboardMap = new HashMap<>();
-	private Map<String, BukkitTask> taskMap = new HashMap<>();
+	private Map<String, TaskImplementation<Void>> taskMap = new HashMap<>();
 	private Map<String, Scoreboard> externalScoreboards = new HashMap<>();
+	private TaskImplementation<Void> scoreboardTask;
 
 	public ScoreboardManager(WhatIsThis plugin) {
 		this.plugin = plugin;
@@ -88,14 +88,12 @@ public class ScoreboardManager {
 		}
 		player.setScoreboard(scoreboard);
 
-		BukkitTask task = new BukkitRunnable() {
-			@Override
-			public void run() {
-				resetScoreboard(player);
-				restoreExternalScoreboard(player);
-			}
-		}.runTaskLater(plugin, plugin.getSettings().getScoreboardTimeout());
-		taskMap.put(player.getName(), task);
+		scoreboardTask = plugin.getFoliaScheduler().global().runDelayed(() -> {
+			resetScoreboard(player);
+			restoreExternalScoreboard(player);
+		}, plugin.getSettings().getScoreboardTimeout());
+
+		taskMap.put(player.getName(), scoreboardTask);
 	}
 
 	private Scoreboard buildScoreboard() {
@@ -114,8 +112,7 @@ public class ScoreboardManager {
 
 	private void cancelTask(String playername) {
 		if (taskMap.containsKey(playername)) {
-			BukkitTask task = taskMap.get(playername);
-			task.cancel();
+			taskMap.get(playername).cancel();
 			taskMap.remove(playername);
 		}
 	}

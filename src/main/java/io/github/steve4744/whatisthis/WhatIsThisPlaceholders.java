@@ -52,12 +52,12 @@ public class WhatIsThisPlaceholders extends PlaceholderExpansion {
 
 	@Override
 	public String getAuthor() {
-		return plugin.getDescription().getAuthors().toString();
+		return plugin.getPluginMeta().getAuthors().toString();
 	}
 
 	@Override
 	public String getVersion() {
-		return plugin.getDescription().getVersion();
+		return plugin.getPluginMeta().getVersion();
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class WhatIsThisPlaceholders extends PlaceholderExpansion {
 			return "";
 		}
 		if (identifier.equals("version")) {
-			return String.valueOf(plugin.getDescription().getVersion());
+			return String.valueOf(plugin.getPluginMeta().getVersion());
 
 		} else if (identifier.equals("blockname")) {
 			return plugin.getDataHandler().getDisplayName(Utils.getTargetBlock(player), player);

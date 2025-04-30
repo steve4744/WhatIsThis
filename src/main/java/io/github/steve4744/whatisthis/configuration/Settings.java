@@ -1,7 +1,7 @@
 /*
  * MIT License
 
-Copyright (c) 2024 steve4744
+Copyright (c) 2025 steve4744
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -104,11 +104,13 @@ public class Settings {
 	}
 
 	public boolean isScoreboardEnabled() {
-		return config.getBoolean("Display.scoreboard.enabled", true);
+		//return config.getBoolean("Display.scoreboard.enabled", true);
+		return false;
 	}
 
 	public boolean isScoreboardOnSneak() {
-		return config.getBoolean("Display.scoreboard.on_sneak");
+		//return config.getBoolean("Display.scoreboard.on_sneak");
+		return false;
 	}
 
 	public boolean isActionBarEnabled() {

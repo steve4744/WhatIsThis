@@ -1,7 +1,7 @@
 /*
  * MIT License
 
-Copyright (c) 2024 steve4744
+Copyright (c) 2025 steve4744
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -31,8 +31,6 @@ import java.net.URISyntaxException;
 import java.util.Scanner;
 import java.util.function.Consumer;
 
-import org.bukkit.Bukkit;
-
 public class VersionChecker {
 
 	private WhatIsThis plugin;
@@ -44,7 +42,7 @@ public class VersionChecker {
 	}
 
 	public void getVersion(final Consumer<String> consumer) {
-		Bukkit.getScheduler().runTaskLaterAsynchronously(this.plugin, () -> {
+	    plugin.getFoliaScheduler().async().runDelayed(task -> {
 			try (InputStream is = new URI("https://api.spigotmc.org/legacy/update.php?resource=" + this.resourceId + "/~").toURL().openStream();
 					Scanner scann = new Scanner(is)) {
 				if (scann.hasNext()) {

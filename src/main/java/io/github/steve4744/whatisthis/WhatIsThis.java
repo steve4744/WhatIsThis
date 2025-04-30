@@ -1,7 +1,7 @@
 /*
  * MIT License
 
-Copyright (c) 2019 steve4744
+Copyright (c) 2025 steve4744
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -29,6 +29,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import com.cjcrafter.foliascheduler.FoliaCompatibility;
+import com.cjcrafter.foliascheduler.ServerImplementation;
+
 import io.github.steve4744.whatisthis.commands.AutoTabCompleter;
 import io.github.steve4744.whatisthis.commands.WhatIsThisCommand;
 import io.github.steve4744.whatisthis.configuration.Settings;
@@ -50,6 +54,7 @@ public class WhatIsThis extends JavaPlugin {
 	private DisplayHandler displayHandler;
 	private CustomData customData;
 	private boolean placeholderapi;
+	private ServerImplementation scheduler;
 	private static final int SPIGOT_ID = 65050;
 	private static final int BSTATS_PLUGIN_ID = 4079;
 
@@ -61,7 +66,7 @@ public class WhatIsThis extends JavaPlugin {
 		getConfig().options().copyDefaults(true);
 		saveConfig();
 
-		version = this.getDescription().getVersion();
+		version = this.getPluginMeta().getVersion();
 		setupPlugin();
 
 		EnumLang.init();
@@ -122,9 +127,11 @@ public class WhatIsThis extends JavaPlugin {
 		Plugin PlaceholderAPI = pm.getPlugin("PlaceholderAPI");
 		if (PlaceholderAPI != null && PlaceholderAPI.isEnabled() && getConfig().getBoolean("PlaceholderAPI.enabled")) {
 			placeholderapi = true;
-			getLogger().info("Successfully linked with PlaceholderAPI, version " + PlaceholderAPI.getDescription().getVersion());
+			getLogger().info("Successfully linked with PlaceholderAPI, version " + PlaceholderAPI.getPluginMeta().getVersion());
 			new WhatIsThisPlaceholders(this).register();
 		}
+
+		scheduler = new FoliaCompatibility(this).getServerImplementation();
 	}
 
 	public void reloadPlugin() {
@@ -149,6 +156,10 @@ public class WhatIsThis extends JavaPlugin {
 
 	public boolean isPlaceholderAPI() {
 		return placeholderapi;
+	}
+
+	public ServerImplementation getFoliaScheduler() {
+		return scheduler;
 	}
 
 	private void checkForUpdate() {
