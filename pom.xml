@@ -113,7 +113,7 @@
     <dependency>
         <groupId>dev.lone</groupId>
         <artifactId>api-itemsadder</artifactId>
-        <version>4.0.9</version>
+        <version>4.0.10</version>
         <scope>provided</scope>
     </dependency>
     <!-- Oraxen -->
