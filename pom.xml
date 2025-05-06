@@ -40,7 +40,7 @@
     </repository>
     <!-- ItemsAdder Repo -->
     <repository>
-        <id>matteodev</id>
+        <id>dev</id>
         <url>https://maven.devs.beer/</url>
     </repository>
     <!-- SlimeFun4 Repo -->
