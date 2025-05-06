@@ -43,7 +43,7 @@
         <id>matteodev</id>
         <url>https://maven.devs.beer/</url>
     </repository>
-    <!-- SlimeFun4 & ItemsAdder Repo -->
+    <!-- SlimeFun4 Repo -->
     <repository>
         <id>jitpack.io</id>
         <url>https://jitpack.io</url>

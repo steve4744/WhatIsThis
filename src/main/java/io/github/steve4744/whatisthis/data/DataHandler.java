@@ -178,6 +178,9 @@ public class DataHandler {
 			}
 
 		} else {
+			if (plugin.getSettings().isIgnoreVanillaBlocks() ) {
+				return "";
+			}
 			if (block.getType() == Material.PLAYER_HEAD || block.getType() == Material.PLAYER_WALL_HEAD) {
 				Skull skull = (Skull) block.getState();
 				if (skull.getOwningPlayer() != null) {
@@ -275,6 +278,9 @@ public class DataHandler {
 			if (plugin.getSettings().getCustomBlacklist(CITIZENS).contains(targetName)) {
 				return "";
 			}
+
+		} else if (plugin.getSettings().isIgnoreVanillaEntities()) {
+			return "";
 
 		} else if (isHybridEntity(entity.getType().toString())) {
 			targetName = getVariant(entity) + " " + vanillaName;

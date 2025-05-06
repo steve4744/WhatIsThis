@@ -85,8 +85,16 @@ public class Settings {
 		return getBlacklist().stream().anyMatch("all"::equalsIgnoreCase);
 	}
 
+	public boolean isIgnoreVanillaBlocks() {
+		return getBlacklist().stream().anyMatch("vanilla"::equalsIgnoreCase);
+	}
+
 	public boolean isIgnoreAllEntities() {
 		return getEntityBlacklist().stream().anyMatch("all"::equalsIgnoreCase);
+	}
+
+	public boolean isIgnoreVanillaEntities() {
+		return getEntityBlacklist().stream().anyMatch("vanilla"::equalsIgnoreCase);
 	}
 
 	public boolean isRightClickEnabled() {
