@@ -27,6 +27,11 @@
         <id>spigot-repo</id>
         <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
     </repository>
+    <!-- ItemsAdder Repo -->
+    <repository>
+        <id>matteodev</id>
+        <url>https://maven.devs.beer/</url>
+    </repository>
     <!-- PlaceholderAPI Repo -->
     <repository>
         <id>placeholderapi-repo</id>
@@ -37,11 +42,6 @@
         <id>xenondevs-releases</id>
         <name>xenondevs repository</name>
         <url>https://repo.xenondevs.xyz/releases</url>
-    </repository>
-    <!-- ItemsAdder Repo -->
-    <repository>
-        <id>dev</id>
-        <url>https://maven.devs.beer/</url>
     </repository>
     <!-- SlimeFun4 Repo -->
     <repository>
@@ -81,6 +81,13 @@
         <version>1.21.5-R0.1-SNAPSHOT</version>
         <scope>provided</scope>
     </dependency>
+    <!-- ItemsAdder -->
+    <dependency>
+        <groupId>dev.lone</groupId>
+        <artifactId>api-itemsadder</artifactId>
+        <version>4.0.10</version>
+        <scope>provided</scope>
+    </dependency>
     <!-- bStats -->
     <dependency>
         <groupId>org.bstats</groupId>
@@ -107,13 +114,6 @@
         <groupId>xyz.xenondevs.nova</groupId>
         <artifactId>nova-api</artifactId>
         <version>0.18.1</version>
-        <scope>provided</scope>
-    </dependency>
-    <!-- ItemsAdder -->
-    <dependency>
-        <groupId>dev.lone</groupId>
-        <artifactId>api-itemsadder</artifactId>
-        <version>4.0.10</version>
         <scope>provided</scope>
     </dependency>
     <!-- Oraxen -->
