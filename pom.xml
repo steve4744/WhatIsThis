@@ -99,7 +99,7 @@
     <dependency>
         <groupId>me.clip</groupId>
         <artifactId>placeholderapi</artifactId>
-        <version>2.11.6</version>
+        <version>2.12.2</version>
         <scope>provided</scope>
     </dependency>
     <!-- Slimefun -->
@@ -113,7 +113,7 @@
     <dependency>
         <groupId>xyz.xenondevs.nova</groupId>
         <artifactId>nova-api</artifactId>
-        <version>0.19</version>
+        <version>0.23.0</version>
         <scope>provided</scope>
     </dependency>
     <!-- Oraxen -->
@@ -133,7 +133,7 @@
     <dependency>
         <groupId>com.nexomc</groupId>
         <artifactId>nexo</artifactId>
-        <version>1.8.0</version>
+        <version>1.23</version>
         <scope>provided</scope>
         <exclusions>
           <exclusion>
@@ -146,13 +146,13 @@
     <dependency>
         <groupId>io.lumine</groupId>
         <artifactId>Mythic-Dist</artifactId>
-        <version>5.9.5</version>
+        <version>5.12.1</version>
         <scope>provided</scope>
     </dependency>
     <dependency>
 	    <groupId>net.citizensnpcs</groupId>
 	    <artifactId>citizensapi</artifactId>
-	    <version>2.0.39-SNAPSHOT</version>
+	    <version>2.0.42-SNAPSHOT</version>
 	    <type>jar</type>
 	    <scope>provided</scope>
     </dependency>
