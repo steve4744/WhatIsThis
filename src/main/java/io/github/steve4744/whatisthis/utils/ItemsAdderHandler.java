@@ -30,7 +30,6 @@ import org.bukkit.entity.Entity;
 import dev.lone.itemsadder.api.CustomBlock;
 import dev.lone.itemsadder.api.CustomEntity;
 import dev.lone.itemsadder.api.CustomFurniture;
-import dev.lone.itemsadder.api.CustomMob;
 
 public class ItemsAdderHandler {
 
@@ -47,10 +46,6 @@ public class ItemsAdderHandler {
 	}
 
 	public static String getEntityDisplayName(Entity entity) {
-		CustomMob customMob = CustomMob.byAlreadySpawned(entity);
-		if (customMob != null) {
-			return customMob.getName();
-		}
 		CustomFurniture customFurn = CustomFurniture.byAlreadySpawned(entity);
 		if (customFurn != null) {
 			return customFurn.getDisplayName();
