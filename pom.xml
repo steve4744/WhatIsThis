@@ -78,28 +78,28 @@
     <dependency>
         <groupId>org.spigotmc</groupId>
         <artifactId>spigot-api</artifactId>
-        <version>26.1.2-R0.1-SNAPSHOT</version>
+        <version>26.3-R0.1-SNAPSHOT</version>
         <scope>provided</scope>
     </dependency>
     <!-- ItemsAdder -->
     <dependency>
-        <groupId>dev.lone</groupId>
-        <artifactId>api-itemsadder</artifactId>
-        <version>4.0.10</version>
+        <groupId>beer.devs</groupId>
+        <artifactId>itemsadder-api</artifactId>
+        <version>4.0.18-beta-10</version>
         <scope>provided</scope>
     </dependency>
     <!-- bStats -->
     <dependency>
         <groupId>org.bstats</groupId>
         <artifactId>bstats-bukkit</artifactId>
-        <version>3.0.2</version>
+        <version>3.2.1</version>
         <scope>compile</scope>
     </dependency>
     <!-- PlaceholderAPI -->
     <dependency>
         <groupId>me.clip</groupId>
         <artifactId>placeholderapi</artifactId>
-        <version>2.12.2</version>
+        <version>2.12.3</version>
         <scope>provided</scope>
     </dependency>
     <!-- Slimefun -->
@@ -113,7 +113,7 @@
     <dependency>
         <groupId>xyz.xenondevs.nova</groupId>
         <artifactId>nova-api</artifactId>
-        <version>0.23.0</version>
+        <version>0.24.0</version>
         <scope>provided</scope>
     </dependency>
     <!-- Oraxen -->
@@ -133,7 +133,7 @@
     <dependency>
         <groupId>com.nexomc</groupId>
         <artifactId>nexo</artifactId>
-        <version>1.23</version>
+        <version>1.29.1</version>
         <scope>provided</scope>
         <exclusions>
           <exclusion>
@@ -146,13 +146,14 @@
     <dependency>
         <groupId>io.lumine</groupId>
         <artifactId>Mythic-Dist</artifactId>
-        <version>5.12.1</version>
+        <version>5.13.0</version>
         <scope>provided</scope>
     </dependency>
+    <!-- Citizens -->
     <dependency>
 	    <groupId>net.citizensnpcs</groupId>
 	    <artifactId>citizensapi</artifactId>
-	    <version>2.0.42-SNAPSHOT</version>
+	    <version>2.0.44-SNAPSHOT</version>
 	    <type>jar</type>
 	    <scope>provided</scope>
     </dependency>
@@ -182,7 +183,7 @@
       <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-assembly-plugin</artifactId>
-          <version>3.7.1</version>
+          <version>3.8.0</version>
           <configuration>
               <descriptorRefs>
                   <descriptorRef>jar-with-dependencies</descriptorRef>
@@ -192,7 +193,7 @@
       <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-shade-plugin</artifactId>
-          <version>3.5.3</version>
+          <version>3.6.2</version>
           <configuration>
               <createDependencyReducedPom>false</createDependencyReducedPom>
                 <artifactSet>
