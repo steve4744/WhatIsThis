@@ -86,6 +86,7 @@ public enum EnumLang {
 	GD_GB("gd_gb", new HashMap<String, String>()),
 	GL_ES("gl_es", new HashMap<String, String>()),
 	GO_FR("go_fr", new HashMap<String, String>()),
+	GOT_DE("got_de", new HashMap<String, String>()),
 	HAL_UA("hal_ua", new HashMap<String, String>()),
 	HAW_US("haw_us", new HashMap<String, String>()),
 	HE_IL("he_il", new HashMap<String, String>()),
