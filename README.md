@@ -12,9 +12,11 @@ By enabling 'auto_display' in the config, the display will automatically update 
 
 The 'auto_display' option is disabled by default, so when the server starts the 'player move' listener is not registered. To enable the 'auto-display' option the server will need to be restarted so that the listener is correctly registered.
 
-A list of blocks and entities to ignore, for example, AIR, WATER, GRASS_BLOCK, NETHERRACK, can be specified in the config. These blocks and entities will not display any information when targeted by the player.
+A list of blocks and entities to ignore, for example, AIR, WATER, GRASS_BLOCK, NETHERRACK, can be specified in the config. These blocks and entities will not display any information when targeted by the player. Similarly worlds can be blacklisted in the config so the plugin does not display in the listed worlds.
 
-You must have a clear view of the block or entity being looked at when running the `/wt` command. The range is currently set to 10 blocks. The plugin can be used under water as well as on land.
+A number of custom block and entity plugins (see below) are supported, displaying the block or entity name prefixed (optionally) with the custom plugin name.
+
+You must have a clear view of the block or entity being looked at when running the `/wt` command. The range is set to 10 blocks but can be changed in the config. The plugin can be used under water as well as on land.
 
 The ability to right-click with an item can be disabled in the _config.yml_, or can be toggled on/off with the `/wt toggleclick` command.
 
@@ -31,15 +33,15 @@ The following plugins which provide a number of custom blocks and entities are s
 
 [Slimefun4 - RC-37](https://github.com/Slimefun/Slimefun4/ "Slimefun4") by TheBusyBiscuit
 
-[Nova - 0.23](https://github.com/xenondevs/Nova/ "Nova") by xenondevs
+[Nova - 0.24.0](https://github.com/xenondevs/Nova/ "Nova") by xenondevs
 
-[ItemsAdder - 4.0.10](https://www.spigotmc.org/resources/%E2%9C%85must-have%E2%9C%85-itemsadder%E2%9C%A8custom-items-huds-guis-mobs-3dmodels-emojis-blocks-wings-hats-liquids.73355/ "ItemsAdder") by LoneDev
+[ItemsAdder - 4.0.18-beta-10](https://www.spigotmc.org/resources/%E2%9C%85must-have%E2%9C%85-itemsadder%E2%9C%A8custom-items-huds-guis-mobs-3dmodels-emojis-blocks-wings-hats-liquids.73355/ "ItemsAdder") by LoneDev
 
-[Nexo - 1.23](https://polymart.org/product/6901/nexo "Nexo") by Boy0000
+[Nexo - 1.29.1](https://polymart.org/product/6901/nexo "Nexo") by Boy0000
 
-[MythicMobs - 5.12.1](https://www.spigotmc.org/resources/mythicmobs-free-version.5702/ "MythicMobs") by Xikage
+[MythicMobs - 5.13.0](https://www.spigotmc.org/resources/mythicmobs-free-version.5702/ "MythicMobs") by Xikage
 
-[Citizens - 2.0.42](https://www.spigotmc.org/resources/citizens.13811/ "Citizens") by fullwall
+[Citizens - 2.0.44](https://www.spigotmc.org/resources/citizens.13811/ "Citizens") by fullwall
 
 [Oraxen - 1.164.0](https://github.com/oraxen/oraxen/ "Oraxen") by Th0rgal
 
@@ -47,7 +49,9 @@ PlaceholderAPI is optional and is only required to use this plugin's placeholder
 
 
 ## Support for older versions
-The latest release of this plugin requires Minecraft/Spigot 1.21.3+.
+The latest release of this plugin requires Java 25 and Minecraft/Spigot 26.3+.
+
+Version 5.11 is supported for servers running Minecraft/Spigot 1.21.3 - 26.1.2.
 
 Version 5.7 is supported for servers running Minecraft/Spigot 1.21.1.
 
@@ -66,6 +70,8 @@ Version 3.4 (legacy version) is available for Minecraft/Spigot 1.13.2 through to
 /wt info - information about the plugin
 /wt reload - reload the config file (requires whatisthis.admin permission)
 /wt toggleclick - enable or disable right-click functionality (requires whatisthis.admin permission)
+/wt off - allows a player to temporarily deactivate the plugin
+/wt on - allows a player to reactivate the plugin
 ```
 ```
 whatisthis.use - default true
@@ -105,4 +111,4 @@ WhatIsThis can be [downloaded from Spigot](https://www.spigotmc.org/resources/wh
 
 
 
-Updated 3rd June 2026 by steve4744
+Updated 20th October 2026
