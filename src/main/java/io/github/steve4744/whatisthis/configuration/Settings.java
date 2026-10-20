@@ -25,8 +25,11 @@ SOFTWARE.
 package io.github.steve4744.whatisthis.configuration;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -46,6 +49,7 @@ public class Settings {
 	private String customPrefix;
 	private FileConfiguration config;
 	private Map<String, List<String>> customBlacklist = new HashMap<>();
+	private static final Set<UUID> disabledPlayers = new HashSet<>();
 
 	public Settings(WhatIsThis plugin) {
 		this.plugin = plugin;
@@ -109,6 +113,18 @@ public class Settings {
 	private void saveToggle() {
 		config.set("use_right_click.enabled", isRightClickEnabled());
 		plugin.saveConfig();
+	}
+
+	public boolean isPluginOff(UUID uuid) {
+		return disabledPlayers.contains(uuid);
+	}
+
+	public void setPluginOff(UUID uuid, boolean state) {
+		if (state) {
+			disabledPlayers.add(uuid);
+			return;
+		}
+		disabledPlayers.remove(uuid);
 	}
 
 	public boolean isScoreboardEnabled() {

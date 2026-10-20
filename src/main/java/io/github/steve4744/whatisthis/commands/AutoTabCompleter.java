@@ -46,6 +46,8 @@ public class AutoTabCompleter implements TabCompleter {
 
 		if (args.length == 1) {
 			list.add("info");
+			list.add("off");
+			list.add("on");
 			if (player.hasPermission("whatisthis.admin")) {
 				list.add("reload");
 				list.add("toggleclick");

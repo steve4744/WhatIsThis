@@ -327,7 +327,7 @@ public class DataHandler {
 	 * @param player
 	 */
 	public void processBlock(Block block, Player player) {
-		if (plugin.getSettings().isIgnoreAllBlocks()) {
+		if (plugin.getSettings().isIgnoreAllBlocks() || plugin.getSettings().isPluginOff(player.getUniqueId())) {
 			return;
 		}
 		if (plugin.getConfig().getStringList("BlacklistedWorlds").contains(player.getWorld().getName())) {
@@ -344,7 +344,7 @@ public class DataHandler {
 	 * @param player
 	 */
 	public void processEntity(Entity entity, Player player) {
-		if (plugin.getSettings().isIgnoreAllEntities()) {
+		if (plugin.getSettings().isIgnoreAllEntities() || plugin.getSettings().isPluginOff(player.getUniqueId())) {
 			return;
 		}
 		if (plugin.getConfig().getStringList("BlacklistedWorlds").contains(player.getWorld().getName())) {

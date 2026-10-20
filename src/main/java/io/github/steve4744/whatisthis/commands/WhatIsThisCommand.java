@@ -24,6 +24,8 @@ SOFTWARE.
  */
 package io.github.steve4744.whatisthis.commands;
 
+import java.util.UUID;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -54,9 +56,11 @@ public class WhatIsThisCommand implements CommandExecutor {
 			return true;
 		}
 		if (args.length > 0) {
-			if (!sender.hasPermission("whatisthis.admin")) {
-				sender.sendMessage(prefix + "You do not have permission to run this command");
-				return false;
+			if (args[0].equalsIgnoreCase("reload") || args[0].equalsIgnoreCase("toggleclick")) {
+				if (!sender.hasPermission("whatisthis.admin")) {
+					sender.sendMessage(prefix + "You do not have permission to run this command");
+					return false;
+				}
 			}
 			if (args[0].equalsIgnoreCase("reload")) {
 				plugin.reloadPlugin();
@@ -71,15 +75,27 @@ public class WhatIsThisCommand implements CommandExecutor {
 				sender.sendMessage(prefix + "Right-click toggled " + ChatColor.AQUA + action);
 				return true;
 			}
-			sender.sendMessage(infoMessage);
-			return true;
 		}
 		if (!(sender instanceof Player)) {
-			sender.sendMessage(infoMessage);
-			return false;
+            sender.sendMessage(infoMessage);
+            return true;
+        }
+		Player player = (Player) sender;
+		if (args.length > 0) {
+			UUID uuid = player.getUniqueId();
+			if (args[0].equalsIgnoreCase("off")) {
+				plugin.getSettings().setPluginOff(uuid, true);
+				player.sendMessage(prefix + "Plugin is now inactive");
+				return true;
+			} else if (args[0].equalsIgnoreCase("on")) {
+				plugin.getSettings().setPluginOff(uuid, false);
+				player.sendMessage(prefix + "Plugin is now active");
+				return true;
+			}
+			player.sendMessage(infoMessage);
+			return true;
 		}
 
-		Player player = (Player) sender;
 		RayTraceResult result = plugin.getDisplayHandler().getRayTraceResult(player);
 
 		if (Utils.isBlock(result)) {
